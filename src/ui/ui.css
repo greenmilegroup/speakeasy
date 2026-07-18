@@ -1,0 +1,45 @@
+:root {
+  --ink: #0b0806;
+  --ink-soft: #171210;
+  --gold: #c9a45c;
+  --gold-bright: #e8c987;
+  --red: #c22026;
+  --red-deep: #7a1216;
+  --cream: #f3e9d6;
+  --cream-dim: #cdbfa5;
+  --serif: Georgia, 'Times New Roman', serif;
+  --deco: 'Limelight', Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--serif);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-root {
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
+  width: 100vw;
+}
+
+.app-root canvas {
+  display: block;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
