@@ -1,5 +1,6 @@
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
+import { PlayerControls } from '../controls/PlayerControls'
 import { DebugTools, VenueApi } from '../debug/DebugTools'
 import { CameraRig } from './CameraRig'
 import { Ceiling } from './Ceiling'
@@ -30,6 +31,7 @@ export function Experience() {
       <ReadyFlag />
       <VenueApi />
       <CameraRig />
+      <PlayerControls />
       <DebugTools />
       <Lighting />
       <Room />
