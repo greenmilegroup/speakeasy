@@ -55,6 +55,34 @@ export function Ceiling() {
           <meshStandardMaterial map={maps.wood} color="#443122" roughness={0.85} />
         </mesh>
       ))}
+
+      {/* recessed colored cove strips glowing between the beams */}
+      {COVES.map((c, i) => (
+        <mesh key={i} position={[c.x, H - 0.05, 0]}>
+          <boxGeometry args={[0.06, 0.04, ROOM.length - 1]} />
+          <meshStandardMaterial
+            color={c.color}
+            emissive={c.color}
+            emissiveIntensity={1.8}
+            toneMapped={false}
+          />
+        </mesh>
+      ))}
+
+      {/* wall speaker boxes */}
+      {[-ROOM.width / 2 + 0.15, ROOM.width / 2 - 0.15].map((x, i) =>
+        [-6, 0, 6].map((z) => (
+          <mesh key={`${i}-${z}`} position={[x, H - 0.5, z]}>
+            <boxGeometry args={[0.18, 0.34, 0.22]} />
+            <meshStandardMaterial color="#0c0a09" roughness={0.6} />
+          </mesh>
+        )),
+      )}
     </group>
   )
 }
+
+const COVES = [
+  { x: -1.5, color: '#c81e6a' },
+  { x: 1.5, color: '#2a4bd0' },
+]

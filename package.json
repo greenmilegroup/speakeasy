@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "screenshot": "node scripts/screenshot.mjs",
-    "build:single": "tsc --noEmit && SINGLE_FILE=1 vite build"
+    "build:single": "tsc --noEmit && SINGLE_FILE=1 vite build",
+    "artifact": "npm run build:single && node scripts/make-artifact.mjs"
   },
   "dependencies": {
     "@fontsource/limelight": "^5.2.7",

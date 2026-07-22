@@ -2,10 +2,13 @@ import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import { PlayerControls } from '../controls/PlayerControls'
 import { DebugTools, VenueApi } from '../debug/DebugTools'
+import { Banquette } from './Banquette'
+import { Bar } from './Bar'
 import { CameraRig } from './CameraRig'
 import { Ceiling } from './Ceiling'
 import { Lighting } from './Lighting'
 import { Room } from './Room'
+import { Stage } from './Stage'
 
 /**
  * Stamps data-ready="1" on <html> once the first frame has rendered, so the
@@ -36,6 +39,9 @@ export function Experience() {
       <Lighting />
       <Room />
       <Ceiling />
+      <Bar />
+      <Stage />
+      <Banquette />
     </>
   )
 }

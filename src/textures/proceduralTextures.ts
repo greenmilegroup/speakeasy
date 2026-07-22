@@ -303,3 +303,149 @@ export function glowTexture(key: string, inner: string, outer = 'rgba(0,0,0,0)')
     ctx.fillRect(0, 0, w, h)
   })
 }
+
+// ---------------------------------------------------------------- signage
+
+function drawSign(ctx: Ctx, w: number, h: number) {
+  ctx.clearRect(0, 0, w, h)
+  ctx.fillStyle = '#000000'
+  ctx.fillRect(0, 0, w, h)
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  // glow halo pass
+  ctx.font = `700 ${Math.round(h * 0.5)}px Limelight, Georgia, serif`
+  ctx.shadowColor = '#ff2a2f'
+  ctx.shadowBlur = 44
+  ctx.fillStyle = '#ff5a4e'
+  ctx.fillText('SPEAKEASY', w / 2, h * 0.42)
+  // bright core
+  ctx.shadowBlur = 10
+  ctx.fillStyle = '#ff8a72'
+  ctx.fillText('SPEAKEASY', w / 2, h * 0.42)
+  ctx.shadowBlur = 0
+  // small tagline
+  ctx.font = `400 ${Math.round(h * 0.13)}px Georgia, serif`
+  ctx.fillStyle = '#d99a5a'
+  ctx.fillText('TAPAS  LOUNGE', w / 2, h * 0.8)
+}
+
+/**
+ * Emissive "SPEAKEASY" sign for above the stage. Redraws once the Limelight
+ * web font finishes loading so the art-deco face isn't missed on first paint.
+ */
+export function signTexture(): CanvasTexture {
+  const key = 'sign'
+  const hit = cache.get(key)
+  if (hit) return hit
+  const canvas = document.createElement('canvas')
+  canvas.width = 1024
+  canvas.height = 256
+  const ctx = canvas.getContext('2d')!
+  drawSign(ctx, canvas.width, canvas.height)
+  const tex = new CanvasTexture(canvas)
+  tex.colorSpace = SRGBColorSpace
+  tex.anisotropy = 4
+  cache.set(key, tex)
+  if (typeof document !== 'undefined' && document.fonts?.ready) {
+    document.fonts.ready.then(() => {
+      drawSign(ctx, canvas.width, canvas.height)
+      tex.needsUpdate = true
+    })
+  }
+  return tex
+}
+
+// ---------------------------------------------------------------- NYC skyline
+
+/** Colorful painted night skyline for the canvas above the back bar. */
+export const skylineTexture = () =>
+  makeTexture('skyline', 512, 384, (ctx, w, h) => {
+    const rng = lcg(2027)
+    // night sky gradient
+    const sky = ctx.createLinearGradient(0, 0, 0, h)
+    sky.addColorStop(0, '#241448')
+    sky.addColorStop(0.5, '#7a2a5a')
+    sky.addColorStop(1, '#e0663c')
+    ctx.fillStyle = sky
+    ctx.fillRect(0, 0, w, h)
+    // moon
+    ctx.fillStyle = 'rgba(255,240,210,0.9)'
+    ctx.beginPath()
+    ctx.arc(w * 0.8, h * 0.22, 26, 0, Math.PI * 2)
+    ctx.fill()
+    // building silhouettes in a few depth bands
+    const bands = [
+      { base: 0.95, color: '#160d24', min: 0.28, max: 0.55 },
+      { base: 1.0, color: '#0d0818', min: 0.4, max: 0.78 },
+    ]
+    for (const band of bands) {
+      let x = 0
+      while (x < w) {
+        const bw = 24 + rng() * 46
+        const bh = h * (band.min + rng() * (band.max - band.min))
+        const by = h * band.base - bh
+        ctx.fillStyle = band.color
+        ctx.fillRect(x, by, bw, bh)
+        // lit windows
+        for (let wy = by + 8; wy < h * band.base - 6; wy += 12) {
+          for (let wx = x + 5; wx < x + bw - 5; wx += 10) {
+            if (rng() < 0.5) {
+              ctx.fillStyle = rng() < 0.5 ? '#ffd36b' : '#ffe9a8'
+              ctx.fillRect(wx, wy, 4, 6)
+            }
+          }
+        }
+        x += bw + 3
+      }
+    }
+    // painted frame border
+    ctx.strokeStyle = '#3a2a1c'
+    ctx.lineWidth = 18
+    ctx.strokeRect(9, 9, w - 18, h - 18)
+    ctx.strokeStyle = '#c9a45c'
+    ctx.lineWidth = 3
+    ctx.strokeRect(20, 20, w - 40, h - 40)
+  })
+
+// ---------------------------------------------------------------- plant wall
+
+/** Stippled foliage panel — reads as a living green wall at distance. */
+export const plantWallTexture = () =>
+  makeTexture('plant', 512, 512, (ctx, w, h) => {
+    const rng = lcg(3313)
+    ctx.fillStyle = '#0d1a0c'
+    ctx.fillRect(0, 0, w, h)
+    const greens = ['#1f4a1c', '#2f6227', '#3c7a30', '#4f9a3a', '#6bad4a', '#12300f']
+    for (let i = 0; i < 4200; i++) {
+      const x = rng() * w
+      const y = rng() * h
+      const r = 4 + rng() * 12
+      ctx.fillStyle = greens[(rng() * greens.length) | 0]
+      ctx.globalAlpha = 0.5 + rng() * 0.5
+      ctx.beginPath()
+      ctx.ellipse(x, y, r, r * (0.5 + rng() * 0.5), rng() * Math.PI, 0, Math.PI * 2)
+      ctx.fill()
+    }
+    ctx.globalAlpha = 1
+  })
+
+// ---------------------------------------------------------------- velvet
+
+/** Vertical AO gradient for the stage curtain folds (top/bottom shading). */
+export const curtainShadeTexture = () =>
+  makeTexture(
+    'curtain-shade',
+    64,
+    512,
+    (ctx, w, h) => {
+      const g = ctx.createLinearGradient(0, 0, 0, h)
+      g.addColorStop(0, '#000000')
+      g.addColorStop(0.14, '#5a0c10')
+      g.addColorStop(0.5, '#7e1418')
+      g.addColorStop(0.9, '#3a080b')
+      g.addColorStop(1, '#000000')
+      ctx.fillStyle = g
+      ctx.fillRect(0, 0, w, h)
+    },
+    { linear: false },
+  )
