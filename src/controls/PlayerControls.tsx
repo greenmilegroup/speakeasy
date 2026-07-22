@@ -1,6 +1,6 @@
 import { PointerLockControls } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
-import { useEffect, useMemo, useRef } from 'react'
+import { type ComponentRef, useEffect, useMemo, useRef } from 'react'
 import { Euler } from 'three'
 import { EYE_HEIGHT, PLAYER_RADIUS, ROOM, STATIC_COLLIDERS } from '../data/floorplan'
 import { LAYOUTS, deriveColliders } from '../data/layouts'
@@ -20,6 +20,13 @@ const BOUNDS = { halfW: ROOM.width / 2, halfL: ROOM.length / 2 }
 const tmpEuler = new Euler(0, 0, 0, 'YXZ')
 
 /**
+ * Bridge so the DOM intro overlay can request pointer lock from within the
+ * user's Enter click (a lock() must happen inside a user gesture), and so the
+ * hotspot system can release the lock when a card opens.
+ */
+export const controlsApi = { lock: () => {}, unlock: () => {} }
+
+/**
  * First-person walking. Look control is either the browser pointer lock
  * (desktop default) or accumulated drag/touch deltas — both funnel into the
  * same movement + collision path here. Disabled entirely when a fixed
@@ -31,6 +38,8 @@ export function PlayerControls() {
   const controlMode = useVenueStore((s) => s.controlMode)
   const setControlMode = useVenueStore((s) => s.setControlMode)
   const layoutId = useVenueStore((s) => s.layoutId)
+  const phase = useVenueStore((s) => s.phase)
+  const lockRef = useRef<ComponentRef<typeof PointerLockControls>>(null)
   const active = !URL_PARAMS.cam && !URL_PARAMS.debug
 
   useKeyboard()
@@ -93,6 +102,19 @@ export function PlayerControls() {
     return () => document.removeEventListener('pointerlockerror', onError)
   }, [setControlMode])
 
+  // Let the intro overlay's Enter button request pointer lock (desktop), and
+  // let the hotspot system release it when opening a card.
+  useEffect(() => {
+    controlsApi.lock = () => {
+      if (controlMode === 'pointer') lockRef.current?.lock()
+    }
+    controlsApi.unlock = () => lockRef.current?.unlock()
+    return () => {
+      controlsApi.lock = () => {}
+      controlsApi.unlock = () => {}
+    }
+  }, [controlMode])
+
   // Drag-look fallback: accumulate pointer deltas while the primary button
   // is held. (Touch look lives in TouchControls with its own zones.)
   useEffect(() => {
@@ -131,7 +153,7 @@ export function PlayerControls() {
   }, [controlMode, gl])
 
   useFrame((_, delta) => {
-    if (!active) return
+    if (!active || phase !== 'exploring') return
     const dt = Math.min(delta, MAX_DT)
 
     // look (drag/touch modes only — pointer lock rotates the camera itself)
@@ -154,5 +176,5 @@ export function PlayerControls() {
   })
 
   if (!active || controlMode !== 'pointer') return null
-  return <PointerLockControls />
+  return <PointerLockControls ref={lockRef} />
 }

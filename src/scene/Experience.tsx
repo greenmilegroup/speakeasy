@@ -7,6 +7,7 @@ import { Bar } from './Bar'
 import { CameraRig } from './CameraRig'
 import { Ceiling } from './Ceiling'
 import { Furniture } from './furniture/Furniture'
+import { Hotspots } from './Hotspots'
 import { Lighting } from './Lighting'
 import { Room } from './Room'
 import { Stage } from './Stage'
@@ -44,6 +45,7 @@ export function Experience() {
       <Stage />
       <Banquette />
       <Furniture />
+      <Hotspots />
     </>
   )
 }

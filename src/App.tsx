@@ -3,7 +3,10 @@ import { TouchControls } from './controls/TouchControls'
 import { isLayoutId } from './data/layouts'
 import { URL_PARAMS } from './debug/urlParams'
 import { Experience } from './scene/Experience'
-import { ControlsHint } from './ui/ControlsHint'
+import { HotspotCard } from './ui/HotspotCard'
+import { Hud } from './ui/Hud'
+import { InteractPrompt } from './ui/InteractPrompt'
+import { IntroOverlay } from './ui/IntroOverlay'
 import { useVenueStore } from './state/store'
 
 // apply deep-link layout (e.g. ?layout=cocktail) before first render
@@ -16,8 +19,15 @@ if (window.matchMedia('(pointer: coarse)').matches) {
   useVenueStore.setState({ controlMode: 'touch' })
 }
 
+// screenshot / deep-link entry skips the intro overlay
+if (URL_PARAMS.autoenter) {
+  useVenueStore.setState({ phase: 'exploring' })
+}
+
 export default function App() {
+  const phase = useVenueStore((s) => s.phase)
   const controlMode = useVenueStore((s) => s.controlMode)
+
   return (
     <div className="app-root">
       <Canvas
@@ -29,8 +39,22 @@ export default function App() {
       >
         <Experience />
       </Canvas>
-      {controlMode === 'touch' && <TouchControls />}
-      <ControlsHint />
+
+      {controlMode === 'touch' && phase === 'exploring' && <TouchControls />}
+
+      {URL_PARAMS.ui && (
+        <div className="overlay-root">
+          {phase === 'intro' ? (
+            <IntroOverlay />
+          ) : (
+            <>
+              <Hud />
+              <InteractPrompt />
+              <HotspotCard />
+            </>
+          )}
+        </div>
+      )}
     </div>
   )
 }
