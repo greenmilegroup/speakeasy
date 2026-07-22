@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import { TouchControls } from './controls/TouchControls'
 import { isLayoutId } from './data/layouts'
 import { URL_PARAMS } from './debug/urlParams'
+import { QUALITY_DPR, pickInitialQuality } from './hooks/useQuality'
 import { Experience } from './scene/Experience'
 import { HotspotCard } from './ui/HotspotCard'
 import { Hud } from './ui/Hud'
@@ -24,6 +25,10 @@ if (URL_PARAMS.autoenter) {
   useVenueStore.setState({ phase: 'exploring' })
 }
 
+// pick the initial quality tier (drives bloom + DPR cap)
+const INITIAL_QUALITY = pickInitialQuality()
+useVenueStore.setState({ quality: INITIAL_QUALITY })
+
 export default function App() {
   const phase = useVenueStore((s) => s.phase)
   const controlMode = useVenueStore((s) => s.controlMode)
@@ -31,6 +36,7 @@ export default function App() {
   return (
     <div className="app-root">
       <Canvas
+        dpr={QUALITY_DPR[INITIAL_QUALITY]}
         gl={{ antialias: true, powerPreference: 'high-performance' }}
         onCreated={({ gl }) => {
           gl.toneMappingExposure = 1.1

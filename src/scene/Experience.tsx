@@ -4,8 +4,10 @@ import { PlayerControls } from '../controls/PlayerControls'
 import { DebugTools, VenueApi } from '../debug/DebugTools'
 import { Banquette } from './Banquette'
 import { Bar } from './Bar'
+import { QualityManager } from '../hooks/useQuality'
 import { CameraRig } from './CameraRig'
 import { Ceiling } from './Ceiling'
+import { Effects } from './Effects'
 import { Furniture } from './furniture/Furniture'
 import { Hotspots } from './Hotspots'
 import { Lighting } from './Lighting'
@@ -46,6 +48,8 @@ export function Experience() {
       <Banquette />
       <Furniture />
       <Hotspots />
+      <QualityManager />
+      <Effects />
     </>
   )
 }
