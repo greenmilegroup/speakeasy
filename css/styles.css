@@ -239,7 +239,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
    ========================================================================= */
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;overflow:hidden;isolation:isolate}
 .hero__bg{position:absolute;inset:-4% -4% -4% -4%;z-index:-2;
-  background:url("assets/img/interior.jpg") center/cover no-repeat;
+  background:url("../assets/img/interior.jpg") center/cover no-repeat;
   animation:kenburns 26s ease-in-out infinite alternate;transform-origin:60% 40%}
 @keyframes kenburns{from{transform:scale(1.05)}to{transform:scale(1.16) translateY(-1.5%)}}
 .hero__scrim{position:absolute;inset:0;z-index:-1;
