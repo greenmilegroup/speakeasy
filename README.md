@@ -1,125 +1,114 @@
 # Speakeasy Tapas Lounge — website
 
-A cinematic one-page site for **Speakeasy Tapas Lounge** · 55 York Street, ByWard Market, Ottawa · ☎ 613-241-6221.
-It opens with the house crest whispering **“Shhh…”**, then a pair of art-deco doors swings open into the room.
+A cinematic, multi-page site for **Speakeasy Tapas Lounge** · 55 York Street, ByWard Market, Ottawa · ☎ 613-241-6221.
+The home page opens with the house crest whispering **“Shhh…”**, then art-deco doors swing open into the room.
 
 > **“This must be the place.”**
 
-Built as a **zero-build static site** — plain HTML, CSS and JavaScript. No frameworks, no bundler, nothing to compile.
-Open `index.html` in a browser, or host the folder anywhere (GitHub Pages, Netlify, any web server).
+Built as a **zero-build static site** — plain HTML, CSS and vanilla-JS ES modules. No framework, no bundler for the
+main site. Host the folder anywhere (GitHub Pages, Netlify, any web server) or open `index.html` directly.
 
 ---
 
-## What’s in the box
+## Pages
+
+| File | What it is |
+|------|------------|
+| `index.html` | Home — “shhh” door intro, hero, about, the six **stamps**, house signatures, 3D-tour teaser, food gallery |
+| `drinks.html` | The Bar — blue-cocktail hero, 13 signature cocktails, wine, local draught |
+| `menu.html` | The Menu — one page, **toggle** between **Shareables · Dinner · Desserts** (also deep-links: `menu.html#dinner`) |
+| `events.html` | Events — **swipe yes/no** on each event, like a dating app; saved nights → call / add-to-calendar |
+| `private.html` | Private Events — the four hosting packages |
+| `tour.html` | **3D Venue Tour** — the walkable 3D room embedded in an iframe |
+| `visit.html` | Visit & Reserve — live open/closed badge, hours, map, contact + newsletter |
+
+The header, footer and ambient layers are injected on every page by `js/site.js`, so there’s one source of truth for nav.
 
 ```
-index.html          The whole site (one page, all content)
-css/styles.css      Design system, layout & every animation
-js/main.js          Intro/doors, nav, menu tabs, gallery + lightbox,
-                    live open/closed hours, 3D tilt, draggable coin,
-                    parallax, forms, and the Three.js ember layer
-js/vendor/          Three.js (self-hosted — no CDN needed)
+css/styles.css      design system + every animation
+js/site.js          shared: header/footer inject, nav, reveals, 3D tilt, menu tabs,
+                    forms, live hours badge, WebGL embers, toast
+js/intro.js         home only: “shhh” doors, draggable crest coin, hero parallax, gallery/lightbox
+js/events.js        events page: the swipe deck (+ .ics export)
+js/vendor/          three.js (self-hosted — no CDN)
 assets/
-  logo.png          Your crest (converted from the supplied PDF)
-  favicon*.png/.ico, apple-touch-icon.png, og-image.jpg
-  fonts/            Self-hosted web fonts + fonts.css
-  img/              Photos (see “Swapping in photos” below)
-.nojekyll           Lets GitHub Pages serve the files as-is
+  logo.png, favicon*, apple-touch-icon.png, og-image.jpg
+  fonts/            self-hosted web fonts + fonts.css
+  img/              photos, and img/stamps/ (the six wax-seal badges)
+tour/               the built, self-contained 3D venue tour (served as-is)
+tour-src/           source for the 3D tour (React + three.js) — only needed to rebuild it
+.nojekyll           lets GitHub Pages serve the files unchanged
 ```
-
-Everything loads locally, so the site works offline and has **no third-party runtime dependencies** except the optional Google Map embed in the “virtual tour”.
 
 ---
 
 ## The interactive bits
 
-- **Intro** — plays once per browser session (`sessionStorage`). “Skip →”, `Esc`/`Enter`, or a tap enters; it auto-opens after ~4 s. Honours `prefers-reduced-motion` (fades instead of the door animation).
-- **Draggable 3D coin** in the hero — grab and flick the crest to spin it.
-- **3D tilt** on cocktail/plate/package cards, **ambient gold embers** (WebGL), **parallax hero**, scroll reveals, neon “LIVE MUSIC” sign and an audio-style equalizer.
-- **Live hours badge** — “Open now / Closed” is calculated in real time for Ottawa (America/Toronto).
-- **Gallery lightbox** — click a photo; arrow keys / swipe to move, `Esc` to close.
+- **Intro** (home) — the crest whispers “Shhh…”, then doors swing open. Plays once per browser session, honours
+  `prefers-reduced-motion`, and is skippable (Skip → / `Esc` / tap). *Timing lives in `css/styles.css` (`.door`
+  transition + `.intro__shh` delays) and `js/intro.js` (auto-open delay).*
+- **Stamps** — the six red seals on the home page link to the matching pages.
+- **Draggable 3D coin** in the hero, **3D tilt** on cards, **ambient gold embers** (WebGL), scroll reveals.
+- **Menu tabs** — Shareables / Dinner / Desserts on one page.
+- **Swipe events** — drag a card (or use ✕ / ♥, or ← → keys). Swipe right saves the night; at the end you can call to
+  reserve or download an `.ics`.
+- **3D tour** — the walkable venue, embedded from `tour/` with `?autoenter`.
+- **Live hours badge** (visit) — “Open now / Closed” computed in real time for Ottawa (America/Toronto).
 - **Easter egg** — click the footer crest three times. 🤫
 
 ---
 
 ## Editing the content
 
-Everything is hand-editable HTML/JS — no database.
+Everything is hand-editable — no database.
 
-### Menus
-All items live in `index.html` under `<section id="menus">`. Each dish/cocktail is a small block:
+- **Menus & cocktails** — edit the item blocks in `drinks.html` / `menu.html`. `<span class="price">18</span>` renders as
+  **$18** automatically.
+- **Events** (the swipe deck) — edit the `EVENTS` array at the top of `js/events.js`. A card shows a photo if it has
+  `img`, or the matching wax-seal stamp if it has `art`.
+- **Business hours & the “Open now” badge** — edit the single `SCHEDULE` object in `js/site.js` (minutes from midnight;
+  `24*60` = midnight; `null` = closed). The badge and the hours table both read from it.
+- **Photos** — drop a JPG into `assets/img/` and point the matching `<img src>` at it. Current photos: `interior.jpg`,
+  `tuna-tartare.jpg`, `rigatoni-bolognese.jpg`, `storefront.jpg`, `blue-lagoon.jpg`, `event-15-first-dates.jpg`.
+- **Fonts** — swap the files in `assets/fonts/` and the `@font-face` rules in `assets/fonts/fonts.css`. The site uses
+  **Cinzel** (display), **Cormorant Garamond** (body) and **Pinyon Script** (accent).
+- **Contact / newsletter forms** — they validate and confirm in the browser (contact also opens a pre-filled email).
+  To capture submissions, wire each `<form>` in `js/site.js` to Formspree / Netlify Forms / Supabase and update the
+  fallback address.
 
-```html
-<article class="ck tilt" data-tilt>
-  <div class="ck__top"><h4>The Capone</h4><span class="price">18</span></div>
-  <p class="ck__ing">Bourbon · sweet vermouth · amaro · orange bitters</p>
-  <p class="ck__note">Bold and brooding…</p>
-</article>
+---
+
+## Rebuilding the 3D tour (only if you change `tour-src/`)
+
+```bash
+cd tour-src
+npm install
+npm run artifact          # → tour-src/dist/index.html (self-contained)
+cp dist/index.html ../tour/index.html
 ```
 
-The `<span class="price">18</span>` renders as **$18** automatically (the `$` is added in CSS).
-
-### Business hours (and the “Open now” badge)
-Edit the single `SCHEDULE` object at the top of the `hours()` function in `js/main.js`.
-Times are **minutes from midnight**; `24*60` means midnight. `null` = closed.
-
-```js
-const SCHEDULE = {
-  0: null,                                   // Sunday closed
-  2: { open: 16*60, close: 22*60 + 30 },     // Tuesday 4:00 PM – 10:30 PM
-  5: { open: 16*60, close: 24*60 },          // Friday 4:00 PM – Midnight
-};
-```
-
-The hours table and the live badge both read from this one object.
-
-### Swapping in photos
-Drop a JPG into `assets/img/` and point the matching `<img src="…">` at it. Current photos:
-
-| File | Used for |
-|------|----------|
-| `assets/img/interior.jpg` | hero background · About · gallery |
-| `assets/img/tuna-tartare.jpg` | Shareables (From the Sea) · gallery |
-| `assets/img/rigatoni-bolognese.jpg` | Dinner feature · gallery |
-| `assets/img/storefront.jpg` | Visit · virtual-tour fallback · gallery |
-
-To add more gallery photos, copy a `<figure class="gcard">…</figure>` block inside
-`<div class="gallery__grid">` and set its `data-full`, `src`, `alt`, `data-caption` and `data-cat`
-(`plates` or `room`).
-
-### Contact & newsletter forms
-The forms validate in the browser and show a confirmation; the contact form also opens a
-pre-filled email as a fallback. To capture submissions properly, wire each `<form>` to a
-service such as **Formspree**, **Netlify Forms**, or your **Supabase** table — add the
-provider’s `action`/handler in the `forms()` function of `js/main.js`. Update the fallback
-address (`hello@speakeasytapas.ca`) to your real inbox.
+The tour build is relocatable (`base: './'`) and inlines everything, so `tour/` works from any host or inside the iframe.
+Deep links: `tour/index.html?layout=cocktail&autoenter`.
 
 ---
 
 ## Notes / assumptions to confirm
 
-The kitchen & bar copy follows the supplied inventory. A few details were filled in to make
-the menus feel complete — please review and adjust:
+Menu/bar copy follows the supplied inventory, with a few details filled in — please review:
 
-- **Cocktails** — the 10 named signatures are listed; three era-appropriate pours
-  (French 75, Boulevardier, Clover Club) round the list to the stated **13**. Ingredients and
-  **prices ($15–18)** are placeholders.
+- **Cocktails** — the 10 named signatures plus three era-appropriate pours (French 75, Boulevardier, Clover Club) to reach
+  the stated **13**. Ingredients and prices ($15–18) are placeholders.
 - **Wine & beer** — representative selections with sample prices (local Ottawa draughts named).
-- **Dish prices** — chosen to sit inside the ranges given (Dinner $26–48, Desserts $12–18).
-- **Hours** — modelled as Tue–Thu 4–10:30 PM, Fri–Sat 4 PM–Midnight, Sun–Mon closed. Adjust in
-  `SCHEDULE` (above) if the room keeps different hours.
+- **Dish prices** — chosen inside the given ranges (Dinner $26–48, Desserts $12–18).
+- **Hours** — modelled as Tue–Thu 4–10:30 PM, Fri–Sat 4 PM–Midnight, Sun–Mon closed. Adjust in `SCHEDULE`.
 - **`interior.jpg`** is used exactly as supplied, including its “AI-generated content” watermark.
-- The **virtual-tour** iframe points at Google Maps for 55 York Street; a photo fallback shows if
-  the embed is blocked.
+- **Events** — the **15 First Dates** night (Jul 26) is real; the recurring nights are placeholders to edit.
 
 ---
 
 ## Running & deploying
 
-**Locally:** any static server, e.g.
-```bash
-python3 -m http.server 8000   # then open http://localhost:8000
-```
+**Locally:** any static server, e.g. `python3 -m http.server 8000` → http://localhost:8000
 
-**GitHub Pages:** push this folder and enable Pages on the branch (the included `.nojekyll`
-keeps the file layout intact). It’s also drop-in ready for Netlify, Vercel, or Cloudflare Pages.
+**GitHub Pages:** push and enable Pages on the branch (the included `.nojekyll` keeps the layout intact). Drop-in ready
+for Netlify, Vercel or Cloudflare Pages too.
