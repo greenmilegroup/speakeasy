@@ -79,6 +79,12 @@ function injectChrome() {
   mob.innerHTML = `<nav class="mobile__nav" aria-label="Mobile">${flat.map(n => `<a href="${n[1]}">${n[2]}</a>`).join('')}<a class="mobile__call" href="tel:${TEL}">Call 613-241-6221</a></nav>`;
   document.body.appendChild(mob);
 
+  // sticky mobile reserve bar
+  const mr = document.createElement('div');
+  mr.className = 'mobile-reserve';
+  mr.innerHTML = `<a href="tel:${TEL}"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.2a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.24 1z"/></svg>Reserve · 613-241-6221</a>`;
+  document.body.appendChild(mr);
+
   const footer = $('.footer');
   if (footer) footer.innerHTML =
     `<div class="footer__inner">
@@ -251,6 +257,16 @@ async function embers() {
   } catch { canvas.style.display = 'none'; }
 }
 
+/* ---------- 3D tour fullscreen ---------- */
+function tourFullscreen() {
+  const btn = $('#tourFullscreen'); if (!btn) return;
+  btn.addEventListener('click', () => {
+    const el = $('.tour-embed'); if (!el) return;
+    if (document.fullscreenElement) document.exitFullscreen?.();
+    else (el.requestFullscreen || el.webkitRequestFullscreen)?.call(el);
+  });
+}
+
 /* ---------- menu tabs (Shareables / Dinner / Desserts) ---------- */
 function tabs() {
   const bar = $('.tabs'); if (!bar) return;
@@ -279,4 +295,4 @@ function tabs() {
 /* ---------- boot ---------- */
 injectAmbient();
 injectChrome();
-nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); embers();
+nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); tourFullscreen(); embers();
