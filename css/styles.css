@@ -995,6 +995,39 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   .page-hero__video{display:none}
 }
 
+/* --- BUTTONS: legible, not yellow. Vermilion primary, cream outline secondary --- */
+.btn--gold,.btn--gold-sm{
+  background:linear-gradient(135deg,#e8241c,#a5121a);color:#fff;font-weight:400;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 12px 30px -14px rgba(224,20,20,.9),inset 0 1px 0 rgba(255,255,255,.18);
+  text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.btn--gold:hover,.btn--gold-sm:hover{filter:brightness(1.09);transform:translateY(-3px)}
+.btn--ghost{border:1px solid rgba(244,236,216,.6);color:#fff;background:rgba(10,10,11,.5);backdrop-filter:blur(6px)}
+.btn--ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);color:#fff}
+.intro__enter{color:#fff;border-color:rgba(244,236,216,.7)}
+.intro__enter::before{background:linear-gradient(135deg,#e8241c,#a5121a)}
+.intro__enter:hover{color:#fff}
+
+/* --- about without the photo --- */
+.about__grid--solo{grid-template-columns:1fr;max-width:760px;margin-inline:auto;text-align:center}
+.about__grid--solo .about__stats{justify-content:center}
+.about__grid--solo .about__actions{justify-content:center}
+
+/* --- upstairs --- */
+.upstairs__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,60px);align-items:center}
+.upstairs__media{margin:0}
+
+/* --- good to know --- */
+.know{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.know__item{padding:26px 24px;border-radius:14px;border:1px solid rgba(244,236,216,.075);
+  background:linear-gradient(168deg,rgba(23,23,25,.72),rgba(12,12,14,.72))}
+.know__item h3{font-family:var(--f-display);font-weight:600;font-size:1.02rem;color:var(--gold-hi);
+  margin:0 0 .5rem;letter-spacing:.04em}
+.know__item p{margin:0;color:var(--cream-2);font-size:1rem;line-height:1.55}
+@media (max-width:960px){.know{grid-template-columns:1fr 1fr}.upstairs__grid{grid-template-columns:1fr}
+  .upstairs__media{max-width:430px;margin-inline:auto}}
+@media (max-width:560px){.know{grid-template-columns:1fr}}
+
 /* --- playable reels (portrait promo / live set) --- */
 .dinner--nofeature{grid-template-columns:1fr}
 .reel__frame{max-width:min(92vw,430px);margin:0 auto;border-radius:16px;overflow:hidden;
