@@ -100,19 +100,9 @@
 
 <section id="gallery" class="section gallery" data-reveal>
   <div class="section__head center"><p class="kicker">A glimpse behind the door</p><h2 class="h-display">The Gallery</h2></div>
-  <div class="gallery__filters" role="tablist" aria-label="Filter gallery">
-    <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
-    <button class="chip" data-filter="room" role="tab" aria-selected="false">The Room</button>
-    <button class="chip" data-filter="team" role="tab" aria-selected="false">The Team</button>
-    <button class="chip" data-filter="plates" role="tab" aria-selected="false">Plates &amp; Pours</button>
-  </div>
-  <div class="gallery__grid" id="galleryGrid">
-    <figure class="gcard gcard--wide" data-cat="room" tabindex="0" role="button" aria-label="View the bar" data-full="assets/img/bar-team.jpg" data-caption="Behind the bar · 55 York Street"><img src="assets/img/bar-team.jpg" alt="Bartender behind the red-lit bar at Speakeasy" loading="lazy"/><figcaption>Behind the Bar</figcaption></figure>
-    <figure class="gcard" data-cat="team" tabindex="0" role="button" aria-label="View the kitchen team" data-full="assets/img/kitchen-team.jpg" data-caption="The kitchen team, mid-service"><img src="assets/img/kitchen-team.jpg" alt="Two chefs in the Speakeasy kitchen" loading="lazy"/><figcaption>The Kitchen</figcaption></figure>
-    <figure class="gcard" data-cat="team" tabindex="0" role="button" aria-label="View the bar team" data-full="assets/img/bar-team.jpg" data-caption="Ready for service"><img src="assets/img/bar-team.jpg" alt="Bartender ready for service" loading="lazy"/><figcaption>Ready for Service</figcaption></figure>
-    <figure class="gcard" data-cat="plates" tabindex="0" role="button" aria-label="View tuna tartare" data-full="assets/img/tuna-tartare.jpg" data-caption="Tuna Tartare"><img src="assets/img/tuna-tartare.jpg" alt="Tuna tartare" loading="lazy"/><figcaption>Tuna Tartare</figcaption></figure>
-    <figure class="gcard" data-cat="plates" tabindex="0" role="button" aria-label="View the Blue Lagoon" data-full="assets/img/blue-lagoon.jpg" data-caption="Speakeasy Blue Lagoon"><img src="assets/img/blue-lagoon.jpg" alt="Blue cocktail" loading="lazy"/><figcaption>Blue Lagoon</figcaption></figure>
-    <figure class="gcard" data-cat="room" tabindex="0" role="button" aria-label="View the door" data-full="assets/img/storefront.jpg" data-caption="Find the door · 55 York Street"><img src="assets/img/storefront.jpg" alt="Speakeasy storefront" loading="lazy"/><figcaption>The Door</figcaption></figure>
+  <div class="gallery__grid gallery__grid--duo" id="galleryGrid">
+    <figure class="gcard" tabindex="0" role="button" aria-label="View: behind the bar" data-full="assets/img/bar-team.jpg" data-caption="Behind the bar · 55 York Street"><img src="assets/img/bar-team.jpg" alt="Bartender behind the red-lit bar at Speakeasy" loading="lazy"/><figcaption>Behind the Bar</figcaption></figure>
+    <figure class="gcard" tabindex="0" role="button" aria-label="View: the kitchen" data-full="assets/img/kitchen-team.jpg" data-caption="The kitchen team, mid-service"><img src="assets/img/kitchen-team.jpg" alt="Two chefs in the Speakeasy kitchen" loading="lazy"/><figcaption>The Kitchen</figcaption></figure>
   </div>
 </section>
 <section class="section reel" data-reveal>
@@ -122,6 +112,35 @@
       <source src="assets/video/room-tour.webm" type="video/webm"/><source src="assets/video/room-tour.mp4" type="video/mp4"/>
     </video>
   </div>
+</section>
+<section class="section reviews" data-reveal>
+  <div class="section__head center"><p class="kicker">Word of mouth</p><h2 class="h-display">What People Say</h2></div>
+  <div class="reviews__summary">
+    <div class="reviews__score"><strong id="gRating">4.6</strong><span class="stars" aria-hidden="true">★★★★★</span><small>on Google</small></div>
+    <div class="reviews__actions">
+      <a class="btn btn--gold" href="https://www.google.com/search?q=Speakeasy+Tapas+Lounge+55+York+Street+Ottawa+reviews" target="_blank" rel="noopener">Read our Google reviews</a>
+      <a class="btn btn--ghost" href="https://search.google.com/local/writereview?placeid=" target="_blank" rel="noopener">Leave a review</a>
+    </div>
+  </div>
+  <div class="quotes">
+    <blockquote class="quote"><p>“Add a real Google review here.”</p><cite>— Guest name</cite></blockquote>
+    <blockquote class="quote"><p>“Add a real Google review here.”</p><cite>— Guest name</cite></blockquote>
+    <blockquote class="quote"><p>“Add a real Google review here.”</p><cite>— Guest name</cite></blockquote>
+  </div>
+  <p class="note" style="text-align:center;margin-top:18px">Rating and quotes are placeholders — paste real ones from your Google Business Profile (see README).</p>
+</section>
+
+<section class="section insta" data-reveal>
+  <div class="section__head center"><p class="kicker">Follow along</p><h2 class="h-display">@speakeasyottawa</h2><p class="section__intro">Nightly sets, new pours and the odd secret. Come find us.</p></div>
+  <div class="insta__grid">
+    <a class="insta__tile" href="https://www.instagram.com/" target="_blank" rel="noopener"><img src="assets/img/bar-team.jpg" alt="Behind the bar" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/" target="_blank" rel="noopener"><img src="assets/img/blue-lagoon.jpg" alt="Speakeasy Blue Lagoon" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/" target="_blank" rel="noopener"><img src="assets/img/tuna-tartare.jpg" alt="Tuna tartare" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/" target="_blank" rel="noopener"><img src="assets/img/kitchen-team.jpg" alt="The kitchen team" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/" target="_blank" rel="noopener"><img src="assets/img/event-15-first-dates.jpg" alt="15 First Dates night" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/" target="_blank" rel="noopener"><img src="assets/img/storefront.jpg" alt="The door at 55 York" loading="lazy"/><span class="insta__ico">↗</span></a>
+  </div>
+  <div style="text-align:center;margin-top:28px"><a class="btn btn--gold" href="https://www.instagram.com/" target="_blank" rel="noopener">Follow on Instagram</a></div>
 </section>
 </main>
 <footer class="footer"></footer>
