@@ -1077,3 +1077,13 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   text-shadow:0 2px 8px rgba(0,0,0,.8)}
 .insta__tile:hover .insta__ico{opacity:1}
 @media (max-width:860px){.insta__grid{grid-template-columns:repeat(3,1fr)}}
+
+/* ---- OpenTable button + 4-up gallery ---- */
+.nav__book{display:inline-flex;align-items:center;padding:9px 16px;border-radius:999px;
+  border:1px solid var(--gold);color:var(--gold-hi);font-family:var(--f-deco);letter-spacing:.16em;
+  text-transform:uppercase;font-size:.7rem;transition:.28s var(--ease);white-space:nowrap}
+.nav__book:hover{background:var(--gold);color:#150e02}
+.mr__book{background:linear-gradient(135deg,#f0dca0,#c9a227)!important;color:#150e02!important;margin-right:10px}
+.gallery__grid--quad{grid-template-columns:repeat(4,1fr);max-width:1100px;margin-inline:auto;gap:14px}
+.gallery__grid--quad .gcard{aspect-ratio:3/4}
+@media (max-width:960px){.gallery__grid--quad{grid-template-columns:repeat(2,1fr)}.nav__book{display:none}}

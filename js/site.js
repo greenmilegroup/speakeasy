@@ -10,6 +10,7 @@ export const finePointer  = matchMedia('(pointer: fine)').matches;
 export const $  = (s, c = document) => c.querySelector(s);
 export const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
 const TEL = '+16132416221';
+const OPENTABLE = 'https://www.opentable.com/r/speakeasy-tapas-lounge-ottawa';
 
 /* pages, in nav order */
 const NAV = [
@@ -65,6 +66,7 @@ function injectChrome() {
         <span class="nav__name">Speakeasy<small>Tapas&nbsp;Lounge</small></span>
       </a>
       <nav class="nav__links" aria-label="Sections">${NAV.map(link).join('')}</nav>
+      <a class="nav__book" href="${OPENTABLE}" target="_blank" rel="noopener">Book</a>
       <a class="nav__call" href="tel:${TEL}">
         <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.2a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.24 1z"/></svg>
         <span>613-241-6221</span></a>
@@ -81,7 +83,7 @@ function injectChrome() {
   // sticky mobile reserve bar
   const mr = document.createElement('div');
   mr.className = 'mobile-reserve';
-  mr.innerHTML = `<a href="tel:${TEL}"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.2a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.24 1z"/></svg>Reserve · 613-241-6221</a>`;
+  mr.innerHTML = `<a class="mr__book" href="${OPENTABLE}" target="_blank" rel="noopener">Book a table</a><a href="tel:${TEL}"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.2a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.24 1z"/></svg>Reserve · 613-241-6221</a>`;
   document.body.appendChild(mr);
 
   const footer = $('.footer');
@@ -96,7 +98,7 @@ function injectChrome() {
       <div class="footer__meta">
         <p>55 York Street, Ottawa · K1N 9B7</p>
         <p><a href="tel:${TEL}">613-241-6221</a></p>
-        <p class="footer__social"><a href="#" aria-label="Instagram">Instagram</a> · <a href="#" aria-label="Facebook">Facebook</a></p>
+        <p class="footer__social"><a href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a> · <a href="#" aria-label="Facebook">Facebook</a></p>
       </div>
     </div>
     <p class="footer__fine">© <span id="year"></span> Speakeasy Tapas Lounge · ByWard Market, Ottawa · Please enjoy responsibly.</p>`;
