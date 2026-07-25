@@ -58,22 +58,16 @@
   <a class="hero__scroll" href="#about" aria-label="Scroll to explore"><span class="hero__scroll-dot"></span><span class="hero__scroll-label">scroll</span></a>
 </section>
 
-<section id="about" class="section about" data-reveal>
+<section id="about" class="section about stamps" data-reveal>
   <div class="about__grid about__grid--solo">
     <div class="about__copy">
       <p class="kicker">The House Rules</p>
-      <h2 class="h-display">A hidden destination for<br><em>food, music &amp; celebrations.</em></h2>
+      <h2 class="h-display">Pull Up a<br><em>Seat.</em></h2>
       <p class="lead">Tucked into Ottawa's ByWard Market, Speakeasy Tapas Lounge is an elegant restaurant and live-music venue where the lights stay low and the night runs long.</p>
       <p>Internationally inspired plates, craft cocktails poured with prohibition-era swagger, live performances every evening, and a candlelit room that feels like a secret worth keeping. Pull up a chair — <em>this must be the place.</em></p>
       <div class="about__stats"><div><strong>Nightly</strong><span>Live music from 7 PM</span></div><div><strong>13</strong><span>Signature cocktails</span></div><div><strong>55 York</strong><span>ByWard Market</span></div></div>
-      <div class="about__actions"><a class="btn btn--gold-sm" href="tel:+16132416221">Reserve by phone</a><a class="link-underline" href="visit.html">Find the door →</a></div>
     </div>
-  </div>
-</section>
-
-<section class="section stamps" data-reveal>
-  <div class="section__head center"><p class="kicker">What you'll find inside</p><h2 class="h-display">Pull Up a Seat</h2></div>
-  <div class="stamps__grid">
+    <div class="stamps__grid">
     <a class="stamp" href="menu.html"><img src="assets/img/stamps/food.png" alt="Food" width="128" height="128"/><span>Food</span></a>
     <a class="stamp" href="events.html"><img src="assets/img/stamps/live-music.png" alt="Live Music" width="128" height="128"/><span>Live Music</span></a>
     <a class="stamp" href="events.html"><img src="assets/img/stamps/comedy.png" alt="Comedy" width="128" height="128"/><span>Comedy</span></a>
@@ -81,6 +75,7 @@
     <a class="stamp" href="drinks.html"><img src="assets/img/stamps/cocktails.png" alt="Cocktails" width="128" height="128"/><span>Cocktails</span></a>
     <a class="stamp" href="private.html"><img src="assets/img/stamps/private-events.png" alt="Private Events" width="128" height="128"/><span>Private Events</span></a>
     
+  </div>
   </div>
 </section>
 
@@ -103,26 +98,29 @@
   </div>
 </section>
 
-<section class="section" data-reveal>
-  <div class="teaser">
-    <div class="teaser__bg" aria-hidden="true"></div>
-    <h2>Walk in before you arrive</h2>
-    <p>Explore the bar, the stage and the dining room in an interactive 3D tour — then picture your night.</p>
-    <a class="btn btn--gold" href="tour.html">Take the 3D tour</a>
-  </div>
-</section>
-
 <section id="gallery" class="section gallery" data-reveal>
   <div class="section__head center"><p class="kicker">A glimpse behind the door</p><h2 class="h-display">The Gallery</h2></div>
-  <div class="gallery__grid" id="galleryGrid"><!-- photos go here — see README --></div>
-  <div class="gallery__empty">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 2v8.6l3.6-3.6 3 3 3.4-3.4L19 14.4V7H5zm3.5 1a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg>
-    <p class="gallery__empty-title">Photographs coming soon</p>
-    <p class="gallery__empty-sub">We're having the room, the plates and the pours shot properly. In the meantime, come see it in person — or walk it in 3D.</p>
-    <div class="gallery__empty-cta">
-      <a class="btn btn--gold" href="tour.html">Take the 3D tour</a>
-      <a class="btn btn--ghost" href="tel:+16132416221">Reserve a table</a>
-    </div>
+  <div class="gallery__filters" role="tablist" aria-label="Filter gallery">
+    <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+    <button class="chip" data-filter="room" role="tab" aria-selected="false">The Room</button>
+    <button class="chip" data-filter="team" role="tab" aria-selected="false">The Team</button>
+    <button class="chip" data-filter="plates" role="tab" aria-selected="false">Plates &amp; Pours</button>
+  </div>
+  <div class="gallery__grid" id="galleryGrid">
+    <figure class="gcard gcard--wide" data-cat="room" tabindex="0" role="button" aria-label="View the bar" data-full="assets/img/bar-team.jpg" data-caption="Behind the bar · 55 York Street"><img src="assets/img/bar-team.jpg" alt="Bartender behind the red-lit bar at Speakeasy" loading="lazy"/><figcaption>Behind the Bar</figcaption></figure>
+    <figure class="gcard" data-cat="team" tabindex="0" role="button" aria-label="View the kitchen team" data-full="assets/img/kitchen-team.jpg" data-caption="The kitchen team, mid-service"><img src="assets/img/kitchen-team.jpg" alt="Two chefs in the Speakeasy kitchen" loading="lazy"/><figcaption>The Kitchen</figcaption></figure>
+    <figure class="gcard" data-cat="team" tabindex="0" role="button" aria-label="View the bar team" data-full="assets/img/bar-team.jpg" data-caption="Ready for service"><img src="assets/img/bar-team.jpg" alt="Bartender ready for service" loading="lazy"/><figcaption>Ready for Service</figcaption></figure>
+    <figure class="gcard" data-cat="plates" tabindex="0" role="button" aria-label="View tuna tartare" data-full="assets/img/tuna-tartare.jpg" data-caption="Tuna Tartare"><img src="assets/img/tuna-tartare.jpg" alt="Tuna tartare" loading="lazy"/><figcaption>Tuna Tartare</figcaption></figure>
+    <figure class="gcard" data-cat="plates" tabindex="0" role="button" aria-label="View the Blue Lagoon" data-full="assets/img/blue-lagoon.jpg" data-caption="Speakeasy Blue Lagoon"><img src="assets/img/blue-lagoon.jpg" alt="Blue cocktail" loading="lazy"/><figcaption>Blue Lagoon</figcaption></figure>
+    <figure class="gcard" data-cat="room" tabindex="0" role="button" aria-label="View the door" data-full="assets/img/storefront.jpg" data-caption="Find the door · 55 York Street"><img src="assets/img/storefront.jpg" alt="Speakeasy storefront" loading="lazy"/><figcaption>The Door</figcaption></figure>
+  </div>
+</section>
+<section class="section reel" data-reveal>
+  <div class="section__head center"><p class="kicker">A look inside</p><h2 class="h-display">Walk the Room</h2><p class="section__intro">Straight through the door, down the red carpet.</p></div>
+  <div class="reel__frame">
+    <video class="reel__video" controls playsinline preload="metadata" poster="assets/img/poster-roomtour.jpg">
+      <source src="assets/video/room-tour.webm" type="video/webm"/><source src="assets/video/room-tour.mp4" type="video/mp4"/>
+    </video>
   </div>
 </section>
 </main>
