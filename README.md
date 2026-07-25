@@ -33,7 +33,8 @@ js/events.js        events page: the swipe deck (+ .ics export)
 assets/
   logo.png, favicon*, apple-touch-icon.png, og-image.jpg
   fonts/            self-hosted web fonts + fonts.css
-  img/              photos, and img/stamps/ (the six wax-seal badges)
+  img/              photos, posters, and img/stamps/ (the six wax-seal badges)
+  video/            real venue footage (webm + mp4) used as page backgrounds
 tour/               the built, self-contained 3D venue tour (served as-is)
 tour-src/           source for the 3D tour (React + three.js) — only needed to rebuild it
 .nojekyll           lets GitHub Pages serve the files unchanged
@@ -52,7 +53,11 @@ tour-src/           source for the 3D tour (React + three.js) — only needed to
 - **Menu tabs** — Shareables / Dinner / Desserts on one page.
 - **Swipe events** — drag a card (or use ✕ / ♥, or ← → keys). Swipe right saves the night; at the end you can call to
   reserve or download an `.ics`.
-- **3D tour** — the walkable venue, embedded from `tour/` with `?autoenter`.
+- **3D tour** — the walkable venue, embedded from `tour/`. The **setup switcher** re-loads the room as
+  Intimate Dining / Cocktail Reception / Artistic Showcase via `?layout=`, and the **booking form** below composes
+  a private-event request.
+- **Video backgrounds** — real footage of the room (home), the stage (events) and the pass (menu). Each is muted,
+  looping, `playsinline`, with a poster fallback and disabled under `prefers-reduced-motion`.
 - **Live hours badge** (visit) — “Open now / Closed” computed in real time for Ottawa (America/Toronto).
 - **Easter egg** — click the footer crest three times. 🤫
 
@@ -106,7 +111,8 @@ Menu/bar copy follows the supplied inventory, with a few details filled in — p
 - **Wine & beer** — representative selections with sample prices (local Ottawa draughts named).
 - **Dish prices** — chosen inside the given ranges (Dinner $26–48, Desserts $12–18).
 - **Hours** — modelled as Tue–Thu 4–10:30 PM, Fri–Sat 4 PM–Midnight, Sun–Mon closed. Adjust in `SCHEDULE`.
-- **`interior.jpg`** is used exactly as supplied, including its “AI-generated content” watermark.
+- **`interior.jpg`** (still used in the About block) is as supplied, including its “AI-generated content”
+  watermark. The hero now uses real video instead.
 - **Events** — the **15 First Dates** night (Jul 26) is real; the recurring nights are placeholders to edit.
 
 ---

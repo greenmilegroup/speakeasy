@@ -230,6 +230,44 @@ function tourFullscreen() {
   });
 }
 
+/* ---------- tour: live setup switcher + booking request ---------- */
+function tourSetups() {
+  const frame = $('.tour-embed iframe');
+  const btns = $$('.tour-setups .setup[data-layout]');
+  if (frame && btns.length) {
+    btns.forEach(b => b.addEventListener('click', () => {
+      btns.forEach(x => x.classList.remove('is-active'));
+      b.classList.add('is-active');
+      frame.src = `tour/index.html?autoenter&layout=${b.dataset.layout}`;
+    }));
+  }
+
+  const form = $('#bookingForm');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const note = $('#bkNote');
+    const get = (id) => $('#' + id);
+    const emailOK = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    const checks = [
+      [get('bk-date'), !!get('bk-date').value],
+      [get('bk-guests'), Number(get('bk-guests').value) > 0],
+      [get('bk-name'), get('bk-name').value.trim().length > 1],
+      [get('bk-email'), emailOK(get('bk-email').value)],
+    ];
+    let ok = true;
+    checks.forEach(([f, valid]) => { f.closest('.field').classList.toggle('invalid', !valid); if (!valid) ok = false; });
+    if (!ok) { note.textContent = 'Please complete the highlighted fields.'; note.classList.add('err'); return; }
+    note.classList.remove('err');
+    note.textContent = 'Request sent — we’ll confirm by email today.';
+    toast('Date requested · we’ll be in touch');
+    const body = encodeURIComponent(
+      `Private event request\n\nDate: ${get('bk-date').value}\nGuests: ${get('bk-guests').value}\n` +
+      `Setup: ${get('bk-setup').value}\n\n${get('bk-notes').value}\n\n— ${get('bk-name').value} (${get('bk-email').value})`);
+    setTimeout(() => { location.href = `mailto:hello@speakeasytapas.ca?subject=Private%20event%20request&body=${body}`; }, 600);
+    form.reset();
+  });
+}
+
 /* ---------- menu tabs (Shareables / Dinner / Desserts) ---------- */
 function tabs() {
   const bar = $('.tabs'); if (!bar) return;
@@ -258,4 +296,4 @@ function tabs() {
 /* ---------- boot ---------- */
 injectAmbient();
 injectChrome();
-nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); tourFullscreen();
+nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); tourFullscreen(); tourSetups();

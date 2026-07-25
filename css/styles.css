@@ -386,10 +386,9 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .plates--lg p{font-size:1.08rem}
 .dinner__feature{position:relative;margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
 .dinner__feature img{width:100%;aspect-ratio:3/4;object-fit:cover}
-.dinner__feature figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 18px 16px;
-  background:linear-gradient(180deg,transparent,rgba(0,0,0,.85))}
-.dinner__feature figcaption h4{font-family:var(--f-serif);font-weight:600;font-size:1.3rem;color:var(--cream);margin:0}
-.dinner__feature figcaption p{margin:.3rem 0 0;color:var(--cream-2);font-size:.95rem}
+.dinner__feature figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 18px 16px;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.88));
+  font-family:var(--f-deco);letter-spacing:.16em;text-transform:uppercase;font-size:.66rem;color:var(--cream-2)}
 
 /* =========================================================================
    GALLERY
@@ -800,9 +799,9 @@ body.menu-open .mobile-reserve{display:none}
   text-shadow:0 1px 3px #000,0 2px 18px rgba(0,0,0,.95),0 0 34px rgba(0,0,0,.8)}
 /* deepen the scrim behind the hero copy so type always reads cleanly */
 .hero__scrim{background:
-  radial-gradient(52% 42% at 50% 62%,rgba(6,6,7,.72),transparent 70%),
-  radial-gradient(70% 60% at 50% 42%,rgba(10,10,11,.3),rgba(6,6,7,.88) 90%),
-  linear-gradient(180deg,rgba(6,6,7,.74) 0%,rgba(6,6,7,.38) 30%,rgba(6,6,7,.62) 70%,var(--noir) 100%)}
+  radial-gradient(50% 40% at 50% 60%,rgba(6,6,7,.55),transparent 72%),
+  radial-gradient(75% 65% at 50% 42%,rgba(10,10,11,.12),rgba(6,6,7,.72) 92%),
+  linear-gradient(180deg,rgba(6,6,7,.6) 0%,rgba(6,6,7,.18) 32%,rgba(6,6,7,.5) 72%,var(--noir) 100%)}
 .hero__title-1{text-shadow:0 4px 40px rgba(0,0,0,.75)}
 .hero__tag{text-shadow:0 2px 16px rgba(0,0,0,.9)}
 .hero__tag{font-family:var(--f-serif);font-style:italic;font-weight:400;
@@ -927,4 +926,72 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 
 @media (max-width:960px){
   .hero__content::before{inset:-3% 0}
+}
+
+/* =========================================================================
+   v6 — the doorman, tour setups, booking
+   ========================================================================= */
+
+/* --- the man in the yellow suit --- */
+.host__grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:clamp(28px,5vw,64px);align-items:center}
+.host__media{position:relative;margin:0;border-radius:var(--radius);overflow:hidden;
+  border:1px solid rgba(201,162,39,.26);box-shadow:var(--shadow)}
+.host__media img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 34%;
+  transition:transform .8s var(--ease)}
+.host__media:hover img{transform:scale(1.04)}
+.host__media figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 18px 15px;
+  font-family:var(--f-deco);letter-spacing:.16em;text-transform:uppercase;font-size:.64rem;color:var(--cream-2);
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.86))}
+.host__copy .lead{margin-bottom:1rem}
+.host__actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:1.8rem}
+
+/* --- tour setup switcher --- */
+.tour-setups{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.setup{display:flex;flex-direction:column;gap:5px;padding:16px 18px;text-align:left;border-radius:12px;
+  border:1px solid rgba(244,236,216,.09);background:linear-gradient(168deg,rgba(23,23,25,.72),rgba(12,12,14,.72));
+  transition:.3s var(--ease);cursor:pointer}
+.setup:hover{border-color:rgba(201,162,39,.45);transform:translateY(-2px)}
+.setup.is-active{border-color:var(--gold);background:linear-gradient(168deg,rgba(201,162,39,.14),rgba(12,12,14,.8))}
+.setup__n{font-family:var(--f-display);font-weight:600;font-size:.88rem;color:var(--cream);letter-spacing:.03em}
+.setup.is-active .setup__n{color:var(--gold-hi)}
+.setup__d{font-family:var(--f-deco);letter-spacing:.12em;text-transform:uppercase;font-size:.58rem;color:var(--muted)}
+.setup--fs{justify-content:center}
+
+/* --- booking --- */
+.booking__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);align-items:start}
+.booking__points{list-style:none;margin:1.6rem 0;padding:0;display:grid;gap:10px}
+.booking__points li{position:relative;padding-left:24px;color:var(--cream-2)}
+.booking__points li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;
+  transform:rotate(45deg);border:1px solid var(--gold);background:rgba(201,162,39,.25)}
+.booking__call{color:var(--muted);margin-top:1.4rem}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field select{width:100%;padding:12px 14px;border-radius:8px;background:rgba(6,6,7,.7);
+  border:1px solid var(--line-soft);color:var(--cream);font-family:var(--f-serif);font-size:1.02rem}
+.field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.15)}
+.field input[type="date"]{color-scheme:dark}
+
+@media (max-width:960px){
+  .host__grid,.booking__grid{grid-template-columns:1fr}
+  .host__media{max-width:440px;margin-inline:auto}
+  .tour-setups{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:520px){
+  .tour-setups{grid-template-columns:1fr}
+  .field-row{grid-template-columns:1fr}
+}
+
+/* =========================================================================
+   v6b — real venue footage as background
+   ========================================================================= */
+.hero__video{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;
+  transform:scale(1.04);filter:saturate(1.05) contrast(1.04)}
+.page-hero.has-video{min-height:62vh;padding-top:170px}
+.page-hero__video{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;
+  filter:saturate(1.02) contrast(1.03)}
+.page-hero.has-video .page-hero__scrim{position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(70% 68% at 50% 46%,rgba(6,6,7,.5),rgba(6,6,7,.9) 92%),
+             linear-gradient(180deg,rgba(6,6,7,.86) 0%,rgba(6,6,7,.5) 40%,var(--noir) 100%)}
+@media (prefers-reduced-motion:reduce){
+  .hero__video,.page-hero__video{display:none}
+  .hero{background:url("../assets/img/poster-room.jpg") center/cover}
 }

@@ -42,7 +42,9 @@
 <header id="nav" class="nav" aria-label="Primary"></header>
 <main id="main">
 <section id="hero" class="hero">
-  <div class="hero__bg" aria-hidden="true"></div>
+  <video class="hero__video" aria-hidden="true" autoplay muted loop playsinline preload="metadata" poster="assets/img/poster-room.jpg">
+    <source src="assets/video/hero-room.webm" type="video/webm"/><source src="assets/video/hero-room.mp4" type="video/mp4"/>
+  </video>
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="hero__content">
     <div class="hero__coin" id="coin" title="Give it a spin">
@@ -95,6 +97,25 @@
     <a class="sig" href="menu.html#shareables"><img src="assets/img/tuna-tartare.jpg" alt="Tuna tartare" loading="lazy"/><span class="sig__cap"><small>From the Sea</small><b>Tuna Tartare</b></span></a>
     <a class="sig" href="menu.html#dinner"><img src="assets/img/rigatoni-bolognese.jpg" alt="Rigatoni bolognese" loading="lazy"/><span class="sig__cap"><small>Dinner</small><b>Rigatoni Bolognese</b></span></a>
     <a class="sig" href="drinks.html"><img src="assets/img/blue-lagoon.jpg" alt="Speakeasy Blue Lagoon cocktail" loading="lazy"/><span class="sig__cap"><small>From the Bar</small><b>Speakeasy Blue Lagoon</b></span></a>
+  </div>
+</section>
+
+<section class="section host" data-reveal>
+  <div class="host__grid">
+    <figure class="host__media">
+      <img src="assets/img/storefront.jpg" alt="The Speakeasy doorman in a yellow suit and green mask, welcoming guests outside 55 York Street" loading="lazy" width="1050" height="1400"/>
+      <figcaption>Most nights, out front · 55 York</figcaption>
+    </figure>
+    <div class="host__copy">
+      <p class="kicker">At the door</p>
+      <h2 class="h-display">The man in the<br><em>yellow suit.</em></h2>
+      <p class="lead">Every speakeasy needs a doorman. Ours doesn't ask for a password — he just grins, holds the door, and points you down the red carpet.</p>
+      <p>If you spot him on York Street, you've found the right place. Say hello, get a photo, and head inside — the candles are already lit.</p>
+      <div class="host__actions">
+        <a class="btn btn--gold-sm" href="visit.html">Find the door</a>
+        <a class="link-underline" href="events.html">See what's on tonight →</a>
+      </div>
+    </div>
   </div>
 </section>
 
