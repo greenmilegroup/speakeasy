@@ -60,12 +60,12 @@ function run() {
     card.className = 'ecard' + (ev.art ? ' ecard--art' : '');
     card.dataset.i = i;
     const media = ev.img
-      ? `<img src="${ev.img}" alt="${ev.title}" draggable="false" />`
-      : `<div class="ecard__art"><img src="assets/img/stamps/${ev.art}.png" alt="" draggable="false" /></div>`;
-    card.innerHTML = media +
+      ? `<div class="ecard__media"><div class="ecard__bg" style="background-image:url('${ev.img}')"></div><img src="${ev.img}" alt="${ev.title}" draggable="false" /></div>`
+      : `<div class="ecard__media"><img src="assets/img/stamps/${ev.art}.png" alt="" draggable="false" /></div>`;
+    card.innerHTML =
       `<div class="ecard__stamp ecard__stamp--yes">Yes</div>
-       <div class="ecard__stamp ecard__stamp--no">Nope</div>
-       <div class="ecard__body">
+       <div class="ecard__stamp ecard__stamp--no">Nope</div>` + media +
+      `<div class="ecard__body">
          <p class="ecard__kicker">${ev.kicker}</p>
          <h3 class="ecard__title">${ev.title}</h3>
          <div class="ecard__meta"><span class="mchip">${ev.when}</span>${ev.meta.map(m => `<span class="mchip">${m}</span>`).join('')}</div>

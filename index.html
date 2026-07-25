@@ -109,17 +109,15 @@
 
 <section id="gallery" class="section gallery" data-reveal>
   <div class="section__head center"><p class="kicker">A glimpse behind the door</p><h2 class="h-display">The Gallery</h2></div>
-  <div class="gallery__filters" role="tablist" aria-label="Filter gallery">
-    <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
-    <button class="chip" data-filter="plates" role="tab" aria-selected="false">Plates</button>
-    <button class="chip" data-filter="room" role="tab" aria-selected="false">The Room</button>
-  </div>
-  <div class="gallery__grid" id="galleryGrid">
-    <figure class="gcard gcard--wide" data-cat="room" tabindex="0" role="button" aria-label="View the dining room" data-full="assets/img/interior.jpg" data-caption="The candlelit room, set for the evening"><img src="assets/img/interior.jpg" alt="Speakeasy dining room" loading="lazy"/><figcaption>The Room</figcaption></figure>
-    <figure class="gcard" data-cat="plates" tabindex="0" role="button" aria-label="View tuna tartare" data-full="assets/img/tuna-tartare.jpg" data-caption="Tuna Tartare · sushi-grade, avocado, wonton crisps"><img src="assets/img/tuna-tartare.jpg" alt="Tuna tartare" loading="lazy"/><figcaption>Tuna Tartare</figcaption></figure>
-    <figure class="gcard" data-cat="plates" tabindex="0" role="button" aria-label="View rigatoni bolognese" data-full="assets/img/rigatoni-bolognese.jpg" data-caption="Rigatoni Bolognese · beef ragù &amp; burrata"><img src="assets/img/rigatoni-bolognese.jpg" alt="Rigatoni bolognese" loading="lazy"/><figcaption>Rigatoni Bolognese</figcaption></figure>
-    <figure class="gcard" data-cat="plates" tabindex="0" role="button" aria-label="View the Speakeasy Blue Lagoon" data-full="assets/img/blue-lagoon.jpg" data-caption="Speakeasy Blue Lagoon · vodka, blue curaçao, lemonade"><img src="assets/img/blue-lagoon.jpg" alt="Blue cocktail" loading="lazy"/><figcaption>Blue Lagoon</figcaption></figure>
-    <figure class="gcard" data-cat="room" tabindex="0" role="button" aria-label="View the door at 55 York" data-full="assets/img/storefront.jpg" data-caption="Find the door · 55 York Street"><img src="assets/img/storefront.jpg" alt="Speakeasy storefront" loading="lazy"/><figcaption>The Door · 55 York</figcaption></figure>
+  <div class="gallery__grid" id="galleryGrid"><!-- photos go here — see README --></div>
+  <div class="gallery__empty">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 2v8.6l3.6-3.6 3 3 3.4-3.4L19 14.4V7H5zm3.5 1a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg>
+    <p class="gallery__empty-title">Photographs coming soon</p>
+    <p class="gallery__empty-sub">We're having the room, the plates and the pours shot properly. In the meantime, come see it in person — or walk it in 3D.</p>
+    <div class="gallery__empty-cta">
+      <a class="btn btn--gold" href="tour.html">Take the 3D tour</a>
+      <a class="btn btn--ghost" href="tel:+16132416221">Reserve a table</a>
+    </div>
   </div>
 </section>
 </main>

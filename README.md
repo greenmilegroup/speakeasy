@@ -14,7 +14,7 @@ main site. Host the folder anywhere (GitHub Pages, Netlify, any web server) or o
 
 | File | What it is |
 |------|------------|
-| `index.html` | Home — “shhh” door intro, hero, about, the six **stamps**, house signatures, 3D-tour teaser, food gallery |
+| `index.html` | Home — “shhh” door intro, hero, about, the six **stamps**, house signatures, 3D-tour teaser, gallery |
 | `drinks.html` | The Bar — blue-cocktail hero, 13 signature cocktails, wine, local draught |
 | `menu.html` | The Menu — one page, **toggle** between **Shareables · Dinner · Desserts** (also deep-links: `menu.html#dinner`) |
 | `events.html` | Events — **swipe yes/no** on each event, like a dating app; saved nights → call / add-to-calendar |
@@ -68,10 +68,15 @@ Everything is hand-editable — no database.
   `img`, or the matching wax-seal stamp if it has `art`.
 - **Business hours & the “Open now” badge** — edit the single `SCHEDULE` object in `js/site.js` (minutes from midnight;
   `24*60` = midnight; `null` = closed). The badge and the hours table both read from it.
+- **Gallery** — currently an empty “photographs coming soon” state. To fill it, drop `<figure class="gcard">` blocks
+  into `<div class="gallery__grid" id="galleryGrid">` in `index.html` (set `data-full`, `src`, `alt`, `data-caption`,
+  `data-cat`); the placeholder hides itself automatically once the grid has children. You may also re-add the
+  filter chips above it.
 - **Photos** — drop a JPG into `assets/img/` and point the matching `<img src>` at it. Current photos: `interior.jpg`,
   `tuna-tartare.jpg`, `rigatoni-bolognese.jpg`, `storefront.jpg`, `blue-lagoon.jpg`, `event-15-first-dates.jpg`.
 - **Fonts** — swap the files in `assets/fonts/` and the `@font-face` rules in `assets/fonts/fonts.css`. The site uses
-  **Cinzel** (display), **Cormorant Garamond** (body) and **Pinyon Script** (accent).
+  **Cinzel** (display) and **Cormorant Garamond** (body/italic accents). No script/cursive faces —
+  the elegance comes from letter-spacing and scale.
 - **Contact / newsletter forms** — they validate and confirm in the browser (contact also opens a pre-filled email).
   To capture submissions, wire each `<form>` in `js/site.js` to Formspree / Netlify Forms / Supabase and update the
   fallback address.
