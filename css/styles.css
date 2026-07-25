@@ -837,3 +837,94 @@ body.menu-open .mobile-reserve{display:none}
   .hero__title-2{letter-spacing:.4em;text-indent:.4em}
   .gallery__empty{padding:36px 22px}
 }
+
+/* =========================================================================
+   v5 — legibility, editorial craft, restraint
+   Sparkles removed. Atmosphere now comes from type, rules and negative space.
+   ========================================================================= */
+
+/* ---- 1. LEGIBILITY: nav, buttons, labels ---- */
+.nav{padding:18px 0}
+.nav.scrolled{background:rgba(7,7,8,.92);backdrop-filter:blur(16px) saturate(1.1);
+  box-shadow:0 1px 0 rgba(201,162,39,.16),0 18px 50px -34px #000;padding:11px 0}
+.nav__links{gap:30px}
+.nav__links a{color:rgba(244,236,216,.82);font-size:.74rem;letter-spacing:.15em;font-weight:400;
+  transition:color .28s var(--ease)}
+.nav__links a:hover{color:#fff}
+.nav__links a.active{color:var(--gold-hi)}
+.nav__links a::after{height:1.5px;background:var(--gold-hi);box-shadow:0 0 10px rgba(233,205,126,.5)}
+.nav__name{font-family:var(--f-display);font-weight:600;letter-spacing:.04em}
+.nav__name small{color:rgba(201,162,39,.9);letter-spacing:.3em}
+.nav__call{background:linear-gradient(135deg,#f02a22,#a5121a);font-weight:400;letter-spacing:.1em;
+  padding:10px 17px;box-shadow:0 10px 26px -12px rgba(224,20,20,.85)}
+.nav__call:hover{filter:brightness(1.08)}
+
+/* buttons: readable at a glance, quiet until touched */
+.btn{font-size:.74rem;letter-spacing:.2em}
+.btn--gold{background:linear-gradient(135deg,#f0dca0,#c9a227 52%,#9c7c22);color:#150e02;font-weight:400;
+  box-shadow:0 12px 34px -14px rgba(201,162,39,.8),inset 0 1px 0 rgba(255,255,255,.55)}
+.btn--ghost{border:1px solid rgba(244,236,216,.42);color:#f4ecd8;background:rgba(10,10,11,.35)}
+.btn--ghost:hover{border-color:var(--gold-hi);color:var(--gold-hi);background:rgba(201,162,39,.09)}
+.kicker,.hero__eyebrow{color:var(--gold-hi)}
+.note{color:rgba(244,236,216,.5)}
+.section__intro{color:rgba(244,236,216,.72)}
+.mchip{color:rgba(244,236,216,.8);border-color:rgba(244,236,216,.2)}
+.hero__scroll{color:rgba(244,236,216,.55)}
+
+/* ---- 2. EDITORIAL: rules, section heads, deco marks ---- */
+.section__head.center .kicker{display:inline-flex;align-items:center;gap:16px}
+.section__head.center .kicker::before,
+.section__head.center .kicker::after{content:"";width:clamp(24px,5vw,58px);height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,162,39,.85))}
+.section__head.center .kicker::after{background:linear-gradient(90deg,rgba(201,162,39,.85),transparent)}
+.h-display{font-weight:700;letter-spacing:.03em}
+
+/* the ❧ glyph rendered poorly — a drawn deco rule instead */
+.deco-divider i{font-size:0;width:9px;height:9px;transform:rotate(45deg);
+  border:1px solid var(--gold);background:rgba(201,162,39,.25)}
+.deco-divider span{background:linear-gradient(90deg,transparent,rgba(201,162,39,.75),transparent)}
+
+/* hairline frame inside the hero — quiet art-deco architecture */
+.hero__content{position:relative}
+.hero__content::before{content:"";position:absolute;inset:-6% -4%;pointer-events:none;
+  border:1px solid rgba(201,162,39,.13);border-radius:2px}
+
+/* ---- 3. MENU TYPOGRAPHY: dotted leaders, tabular figures ---- */
+.price,.leaders .p,.hours td:last-child{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+/* classic menu leader: name · · · · · price, sitting on the baseline */
+.plates li .pl__top{display:flex;align-items:flex-end;gap:10px}
+.plates li .pl__top h4{order:0;flex:0 1 auto}
+.plates li .pl__top::after{content:"";order:1;flex:1 1 auto;min-width:24px;height:0;
+  border-bottom:1px dotted rgba(201,162,39,.32);margin-bottom:.42em}
+.plates li .pl__top .price{order:2;flex:0 0 auto}
+.plates--grid li .pl__top{align-items:baseline}
+.plates--grid li .pl__top::after{display:none}
+.leaders li{padding:.62rem 0;align-items:flex-end}
+.leaders .n{flex:0 1 auto}
+.leaders .d{flex:1 1 auto;min-width:24px;height:0;border-bottom:1px dotted rgba(201,162,39,.3);margin-bottom:.4em}
+.leaders .p{flex:0 0 auto}
+
+/* ---- 4. SURFACES: calmer cards, precise borders ---- */
+.ck,.plates--grid li,.pkg,.form,.events__nights li{
+  background:linear-gradient(168deg,rgba(23,23,25,.72),rgba(12,12,14,.72));
+  border-color:rgba(244,236,216,.075)}
+.ck:hover,.plates--grid li:hover,.pkg:hover{border-color:rgba(201,162,39,.32)}
+.pkg__num{font-family:var(--f-display);color:rgba(201,162,39,.14)}
+.about__media,.dinner__feature,.visit__store,.tour__frame,.tour-embed{border-color:rgba(201,162,39,.24)}
+
+/* ---- 5. DETAILS ---- */
+html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:#0a0a0b}
+::-webkit-scrollbar-thumb{background:#3a3020;border:3px solid #0a0a0b;border-radius:99px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold-lo)}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+.grain{opacity:.03}
+
+/* ---- 6. MOTION: a single, purposeful reveal ---- */
+[data-reveal]{transform:translateY(26px)}
+[data-reveal].is-visible{transform:none}
+
+@media (max-width:960px){
+  .hero__content::before{inset:-3% 0}
+}

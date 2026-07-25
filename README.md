@@ -27,10 +27,9 @@ The header, footer and ambient layers are injected on every page by `js/site.js`
 ```
 css/styles.css      design system + every animation
 js/site.js          shared: header/footer inject, nav, reveals, 3D tilt, menu tabs,
-                    forms, live hours badge, WebGL embers, toast
+                    forms, live hours badge, toast
 js/intro.js         home only: “shhh” doors, draggable crest coin, hero parallax, gallery/lightbox
 js/events.js        events page: the swipe deck (+ .ics export)
-js/vendor/          three.js (self-hosted — no CDN)
 assets/
   logo.png, favicon*, apple-touch-icon.png, og-image.jpg
   fonts/            self-hosted web fonts + fonts.css
@@ -48,7 +47,8 @@ tour-src/           source for the 3D tour (React + three.js) — only needed to
   `prefers-reduced-motion`, and is skippable (Skip → / `Esc` / tap). *Timing lives in `css/styles.css` (`.door`
   transition + `.intro__shh` delays) and `js/intro.js` (auto-open delay).*
 - **Stamps** — the six red seals on the home page link to the matching pages.
-- **Draggable 3D coin** in the hero, **3D tilt** on cards, **ambient gold embers** (WebGL), scroll reveals.
+- **Draggable 3D coin** in the hero, **3D tilt** on cards, restrained scroll reveals. (No particle effects —
+  atmosphere comes from typography, hairline rules and negative space.)
 - **Menu tabs** — Shareables / Dinner / Desserts on one page.
 - **Swipe events** — drag a card (or use ✕ / ♥, or ← → keys). Swipe right saves the night; at the end you can call to
   reserve or download an `.ics`.
