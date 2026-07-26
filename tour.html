@@ -18,7 +18,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-400.woff2" crossorigin/>
 <link rel="stylesheet" href="assets/fonts/fonts.css"/>
 <link rel="stylesheet" href="css/styles.css"/>
-<noscript><style>#intro,#fx{display:none!important}body.locked{overflow:auto!important;height:auto!important}</style></noscript>
+<noscript><style>#intro{display:none!important}body.locked{overflow:auto!important;height:auto!important}</style></noscript>
 </head>
 <body data-page="tour">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -34,12 +34,61 @@
     <button class="tour-fs" id="tourFullscreen" type="button" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button>
     <iframe src="tour/index.html?autoenter" title="Speakeasy Tapas Lounge — 3D venue tour" allow="fullscreen; pointer-lock" allowfullscreen loading="lazy"></iframe>
   </div>
-  <div class="tour-cta">
-    <a class="btn btn--gold" href="tel:+16132416221">Book this venue</a>
-    <a class="btn btn--ghost" href="tour/index.html" target="_blank" rel="noopener">Open full screen ↗</a>
-    <a class="link-underline" href="private.html">See private-event packages →</a>
+  <div class="tour-setups" role="group" aria-label="Room setups">
+    <button class="setup is-active" type="button" data-layout="dinner">
+      <span class="setup__n">Intimate Dining</span><span class="setup__d">Seated · up to 60</span>
+    </button>
+    <button class="setup" type="button" data-layout="cocktail">
+      <span class="setup__n">Cocktail Reception</span><span class="setup__d">Standing · up to 100</span>
+    </button>
+    <button class="setup" type="button" data-layout="showcase">
+      <span class="setup__n">Artistic Showcase</span><span class="setup__d">Gallery · open floor</span>
+    </button>
+    <a class="setup setup--fs" href="tour/index.html" target="_blank" rel="noopener">
+      <span class="setup__n">Full screen ↗</span><span class="setup__d">New tab</span>
+    </a>
   </div>
-  <p class="tour-note">Best on desktop with a mouse. On a phone, use the on-screen joystick to walk and drag to look around.</p>
+  <p class="tour-note">Switch a setup to see the room re-arranged live. Desktop: drag to look, WASD to walk. Phone: joystick to walk, drag to look.</p>
+</section>
+
+<section class="section booking" data-reveal>
+  <div class="booking__grid">
+    <div class="booking__copy">
+      <p class="kicker">Reserve the room</p>
+      <h2 class="h-display">Book it for<br><em>your night.</em></h2>
+      <p class="lead">Tell us the shape of the evening and we'll hold the date. We reply the same day — or call and we'll sort it in a minute.</p>
+      <ul class="booking__points">
+        <li>Full venue or a private section</li>
+        <li>Custom menus &amp; welcome cocktails</li>
+        <li>Live music, DJ or your own programme</li>
+      </ul>
+      <p class="booking__call">Prefer to talk? <a class="tel-lg" href="tel:+16132416221">613-241-6221</a></p>
+    </div>
+
+    <form class="form booking__form" id="bookingForm" novalidate>
+      <h3 class="h-sub">Request a date</h3>
+      <div class="field-row">
+        <div class="field"><label for="bk-date">Date</label><input id="bk-date" name="date" type="date" required/></div>
+        <div class="field"><label for="bk-guests">Guests</label><input id="bk-guests" name="guests" type="number" min="1" max="150" placeholder="40" required/></div>
+      </div>
+      <div class="field">
+        <label for="bk-setup">Setup</label>
+        <select id="bk-setup" name="setup">
+          <option value="Intimate Dining (seated, up to 60)">Intimate Dining — seated, up to 60</option>
+          <option value="Cocktail Reception (standing, up to 100)">Cocktail Reception — standing, up to 100</option>
+          <option value="Artistic Showcase (gallery)">Artistic Showcase — gallery</option>
+          <option value="Not sure yet">Not sure yet</option>
+        </select>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="bk-name">Name</label><input id="bk-name" name="name" type="text" autocomplete="name" required/></div>
+        <div class="field"><label for="bk-email">Email</label><input id="bk-email" name="email" type="email" autocomplete="email" required/></div>
+      </div>
+      <div class="field"><label for="bk-notes">Anything else</label><textarea id="bk-notes" name="notes" rows="3" placeholder="Occasion, timing, music…"></textarea></div>
+      <button class="btn btn--gold" type="submit">Request this date</button>
+      <p class="form__note" id="bkNote" role="status"></p>
+    </form>
+  </div>
 </section>
 </main>
 <footer class="footer"></footer>

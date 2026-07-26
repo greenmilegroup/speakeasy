@@ -1,7 +1,7 @@
 /* =========================================================================
    SPEAKEASY — shared site chrome + behaviour (loaded on every page)
    Injects header/footer/ambient layers, then wires nav, reveals, tilt,
-   embers, forms, hours badge, toast. Page-specific JS lives elsewhere.
+   menu tabs, forms, hours badge, toast. Page-specific JS lives elsewhere.
    ========================================================================= */
 'use strict';
 
@@ -10,6 +10,7 @@ export const finePointer  = matchMedia('(pointer: fine)').matches;
 export const $  = (s, c = document) => c.querySelector(s);
 export const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
 const TEL = '+16132416221';
+const OPENTABLE = 'https://www.opentable.com/r/speakeasy-tapas-lounge-ottawa';
 
 /* pages, in nav order */
 const NAV = [
@@ -39,7 +40,6 @@ export const toast = (() => {
 function injectAmbient() {
   const frag = document.createElement('div');
   frag.innerHTML =
-    '<canvas id="fx" aria-hidden="true"></canvas>' +
     '<div class="grain" aria-hidden="true"></div>' +
     '<div class="vignette" aria-hidden="true"></div>' +
     '<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>';
@@ -66,6 +66,7 @@ function injectChrome() {
         <span class="nav__name">Speakeasy<small>Tapas&nbsp;Lounge</small></span>
       </a>
       <nav class="nav__links" aria-label="Sections">${NAV.map(link).join('')}</nav>
+      <a class="nav__book" href="${OPENTABLE}" target="_blank" rel="noopener">Book</a>
       <a class="nav__call" href="tel:${TEL}">
         <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.2a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.24 1z"/></svg>
         <span>613-241-6221</span></a>
@@ -82,7 +83,7 @@ function injectChrome() {
   // sticky mobile reserve bar
   const mr = document.createElement('div');
   mr.className = 'mobile-reserve';
-  mr.innerHTML = `<a href="tel:${TEL}"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.2a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.24 1z"/></svg>Reserve · 613-241-6221</a>`;
+  mr.innerHTML = `<a class="mr__book" href="${OPENTABLE}" target="_blank" rel="noopener">Book a table</a><a href="tel:${TEL}"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.2a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.24 1z"/></svg>Reserve · 613-241-6221</a>`;
   document.body.appendChild(mr);
 
   const footer = $('.footer');
@@ -97,7 +98,7 @@ function injectChrome() {
       <div class="footer__meta">
         <p>55 York Street, Ottawa · K1N 9B7</p>
         <p><a href="tel:${TEL}">613-241-6221</a></p>
-        <p class="footer__social"><a href="#" aria-label="Instagram">Instagram</a> · <a href="#" aria-label="Facebook">Facebook</a></p>
+        <p class="footer__social"><a href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a> · <a href="#" aria-label="Facebook">Facebook</a></p>
       </div>
     </div>
     <p class="footer__fine">© <span id="year"></span> Speakeasy Tapas Lounge · ByWard Market, Ottawa · Please enjoy responsibly.</p>`;
@@ -221,42 +222,6 @@ function misc() {
   $('#footLogo')?.addEventListener('click', () => { if (++clicks >= 3) { clicks = 0; toast('Password accepted. Tell no one.'); } clearTimeout(t); t = setTimeout(() => (clicks = 0), 1200); });
 }
 
-/* ---------- ambient WebGL embers (progressive) ---------- */
-async function embers() {
-  const canvas = $('#fx');
-  if (!canvas || reduceMotion) return;
-  const test = document.createElement('canvas');
-  if (!(test.getContext('webgl2') || test.getContext('webgl'))) return;
-  let THREE;
-  try { THREE = await import('./vendor/three.module.js'); } catch { return; }
-  try {
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'low-power' });
-    renderer.setClearColor(0x000000, 0);
-    const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 1, 1000); cam.position.z = 340;
-    const COUNT = Math.min(240, Math.floor(innerWidth / 6)), pos = new Float32Array(COUNT * 3), spd = new Float32Array(COUNT), sway = new Float32Array(COUNT), R = 460;
-    for (let i = 0; i < COUNT; i++) { pos[i*3]=(Math.random()-.5)*R*1.6; pos[i*3+1]=(Math.random()-.5)*R; pos[i*3+2]=(Math.random()-.5)*200-40; spd[i]=.15+Math.random()*.5; sway[i]=Math.random()*Math.PI*2; }
-    const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    const c = document.createElement('canvas'); c.width = c.height = 64; const cx = c.getContext('2d');
-    const g = cx.createRadialGradient(32, 32, 0, 32, 32, 32); g.addColorStop(0, 'rgba(255,228,150,1)'); g.addColorStop(.3, 'rgba(226,170,60,.7)'); g.addColorStop(1, 'rgba(226,170,60,0)');
-    cx.fillStyle = g; cx.fillRect(0, 0, 64, 64);
-    const mat = new THREE.PointsMaterial({ size: 7, map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: .9 });
-    const pts = new THREE.Points(geo, mat); scene.add(pts);
-    const resize = () => { renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75)); renderer.setSize(innerWidth, innerHeight); cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); };
-    resize(); addEventListener('resize', resize);
-    let mx = 0, my = 0; addEventListener('pointermove', e => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; }, { passive: true });
-    let running = true, t = 0; const p = geo.attributes.position.array;
-    document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) tick(); });
-    function tick() {
-      if (!running) return; t += .016;
-      for (let i = 0; i < COUNT; i++) { p[i*3+1]+=spd[i]; p[i*3]+=Math.sin(t+sway[i])*.18; if (p[i*3+1]>R/2){p[i*3+1]=-R/2;p[i*3]=(Math.random()-.5)*R*1.6;} }
-      geo.attributes.position.needsUpdate = true; pts.rotation.y = mx * .25;
-      cam.position.x += (mx*60 - cam.position.x)*.03; cam.position.y += (-my*40 - cam.position.y)*.03; cam.lookAt(0,0,0);
-      renderer.render(scene, cam); requestAnimationFrame(tick);
-    }
-    tick();
-  } catch { canvas.style.display = 'none'; }
-}
-
 /* ---------- 3D tour fullscreen ---------- */
 function tourFullscreen() {
   const btn = $('#tourFullscreen'); if (!btn) return;
@@ -264,6 +229,44 @@ function tourFullscreen() {
     const el = $('.tour-embed'); if (!el) return;
     if (document.fullscreenElement) document.exitFullscreen?.();
     else (el.requestFullscreen || el.webkitRequestFullscreen)?.call(el);
+  });
+}
+
+/* ---------- tour: live setup switcher + booking request ---------- */
+function tourSetups() {
+  const frame = $('.tour-embed iframe');
+  const btns = $$('.tour-setups .setup[data-layout]');
+  if (frame && btns.length) {
+    btns.forEach(b => b.addEventListener('click', () => {
+      btns.forEach(x => x.classList.remove('is-active'));
+      b.classList.add('is-active');
+      frame.src = `tour/index.html?autoenter&layout=${b.dataset.layout}`;
+    }));
+  }
+
+  const form = $('#bookingForm');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const note = $('#bkNote');
+    const get = (id) => $('#' + id);
+    const emailOK = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    const checks = [
+      [get('bk-date'), !!get('bk-date').value],
+      [get('bk-guests'), Number(get('bk-guests').value) > 0],
+      [get('bk-name'), get('bk-name').value.trim().length > 1],
+      [get('bk-email'), emailOK(get('bk-email').value)],
+    ];
+    let ok = true;
+    checks.forEach(([f, valid]) => { f.closest('.field').classList.toggle('invalid', !valid); if (!valid) ok = false; });
+    if (!ok) { note.textContent = 'Please complete the highlighted fields.'; note.classList.add('err'); return; }
+    note.classList.remove('err');
+    note.textContent = 'Request sent — we’ll confirm by email today.';
+    toast('Date requested · we’ll be in touch');
+    const body = encodeURIComponent(
+      `Private event request\n\nDate: ${get('bk-date').value}\nGuests: ${get('bk-guests').value}\n` +
+      `Setup: ${get('bk-setup').value}\n\n${get('bk-notes').value}\n\n— ${get('bk-name').value} (${get('bk-email').value})`);
+    setTimeout(() => { location.href = `mailto:hello@speakeasytapas.ca?subject=Private%20event%20request&body=${body}`; }, 600);
+    form.reset();
   });
 }
 
@@ -295,4 +298,4 @@ function tabs() {
 /* ---------- boot ---------- */
 injectAmbient();
 injectChrome();
-nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); tourFullscreen(); embers();
+nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); tourFullscreen(); tourSetups();
