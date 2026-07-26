@@ -1168,3 +1168,17 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .hero__eyebrow{margin-bottom:22px;font-size:.6rem;letter-spacing:.34em;color:rgba(233,205,126,.92)}
 .hero__content{padding-top:104px}
 .hero__eyebrow{text-shadow:0 1px 2px #000,0 2px 16px rgba(0,0,0,.98),0 0 30px rgba(0,0,0,.9)}
+
+/* v8c — mobile bar: one black, one red (not two reds) */
+.mobile-reserve{gap:10px}
+.mr__book{
+  background:#0c0c0e!important;color:#fff!important;
+  border:1px solid rgba(232,36,28,.85)!important;
+  box-shadow:0 8px 22px -12px rgba(0,0,0,.9)!important;
+  margin-right:0}
+.mr__book:active{background:#141416!important}
+/* v8d — mobile bar: no wrapping */
+.mobile-reserve a{white-space:nowrap;font-size:.7rem;letter-spacing:.1em;padding:12px 16px;flex:0 1 auto}
+.mr__book{padding:12px 18px!important}
+.mobile-reserve svg{flex:none}
+@media (max-width:380px){.mobile-reserve a{font-size:.64rem;padding:11px 12px;letter-spacing:.06em}}
