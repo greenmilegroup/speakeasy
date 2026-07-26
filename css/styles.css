@@ -1091,3 +1091,10 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 /* ---- combined @speakeasy_ottawa grid ---- */
 .insta__grid--wide{grid-template-columns:repeat(3,1fr);max-width:1000px;margin-inline:auto;gap:12px}
 @media (max-width:860px){.insta__grid--wide{grid-template-columns:repeat(2,1fr)}}
+
+/* ---- no yellow buttons anywhere: vermilion primary everywhere ---- */
+.mr__book{background:linear-gradient(135deg,#e8241c,#a5121a)!important;color:#fff!important;
+  border:1px solid rgba(255,255,255,.16)}
+.nav__book{border-color:rgba(244,236,216,.5);color:#fff}
+.nav__book:hover{background:#e8241c;border-color:#e8241c;color:#fff}
+.intro__enter::before{background:linear-gradient(135deg,#e8241c,#a5121a)}
