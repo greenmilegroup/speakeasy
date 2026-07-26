@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Events · Speakeasy Tapas Lounge</title>
+<meta name="description" content="Live music nightly plus speed dating, comedy and more at Speakeasy Tapas Lounge. Swipe to save the nights you love."/>
+<meta name="theme-color" content="#0a0a0b"/>
+<meta property="og:type" content="restaurant"/>
+<meta property="og:title" content="Events · Speakeasy Tapas Lounge"/>
+<meta property="og:description" content="Live music nightly plus speed dating, comedy and more at Speakeasy Tapas Lounge. Swipe to save the nights you love."/>
+<meta property="og:image" content="assets/og-image.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="assets/favicon.ico" sizes="any"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cinzel-700.woff2" crossorigin/>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-400.woff2" crossorigin/>
+<link rel="stylesheet" href="assets/fonts/fonts.css"/>
+<link rel="stylesheet" href="css/styles.css"/>
+<noscript><style>#intro{display:none!important}body.locked{overflow:auto!important;height:auto!important}</style></noscript>
+</head>
+<body data-page="events">
+<a class="skip-link" href="#main">Skip to content</a>
+<header id="nav" class="nav" aria-label="Primary"></header>
+<main id="main">
+<section class="page-hero has-video" data-reveal>
+  <video class="page-hero__video" aria-hidden="true" autoplay muted loop playsinline preload="metadata" poster="assets/img/poster-live.jpg"><source src="assets/video/live-music.webm" type="video/webm"/><source src="assets/video/live-music.mp4" type="video/mp4"/></video>
+  <div class="page-hero__scrim"></div>
+  <div class="page-hero__inner"><svg class="page-hero__ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8 12c1-.6 2 .2 2 1-1 .6-2-.2-2-1zm8 0c0 .8-1 1.6-2 1 0-.8 1-1.6 2-1z"/></svg><p class="kicker">Every night on the stage</p><h1>Events</h1><p class="lead">Live music every night from 7 PM — plus special nights worth crossing town for. <strong>Swipe right on the ones you're into.</strong></p></div>
+</section>
+<section class="section" data-reveal>
+  <div class="swipe">
+    <div class="swipe__deck" id="swipeDeck"></div>
+    <div class="swipe__buttons" id="swipeButtons">
+      <button class="swipe__btn swipe__btn--no" id="btnNo" aria-label="Pass">✕</button>
+      <button class="swipe__btn swipe__btn--undo" id="btnUndo" aria-label="Undo">↺</button>
+      <button class="swipe__btn swipe__btn--yes" id="btnYes" aria-label="Interested">♥</button>
+    </div>
+    <p class="swipe__hint">Drag a card — or use ✕ / ♥ (or the ← → arrow keys).</p>
+    <div class="swipe__recap" id="swipeRecap" aria-live="polite"></div>
+  </div>
+</section>
+<section class="section reel" data-reveal>
+  <div class="section__head center"><p class="kicker">On the stage</p><h2 class="h-display">Live, Most Nights</h2><p class="section__intro">A taste of the room when the set starts.</p></div>
+  <div class="reel__frame">
+    <video class="reel__video" controls playsinline preload="metadata" poster="assets/img/poster-liveset.jpg">
+      <source src="assets/video/live-set.webm" type="video/webm"/>
+      <source src="assets/video/live-set.mp4" type="video/mp4"/>
+    </video>
+  </div>
+</section>
+</main>
+<footer class="footer"></footer>
+<script type="module" src="js/site.js"></script>
+<script type="module" src="js/events.js"></script>
+</body>
+</html>

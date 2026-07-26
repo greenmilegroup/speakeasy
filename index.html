@@ -1,39 +1,143 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-    />
-    <meta name="theme-color" content="#0b0806" />
-    <title>Speakeasy Tapas Lounge — 3D Venue Tour</title>
-    <meta
-      name="description"
-      content="Walk through Speakeasy Tapas Lounge in Ottawa's ByWard Market — explore the bar, stage and dining room in 3D and picture your next private event."
-    />
-    <meta property="og:title" content="Speakeasy Tapas Lounge — 3D Venue Tour" />
-    <meta
-      property="og:description"
-      content="Explore the venue in 3D: candlelit dining for 60, cocktail receptions for 100, live-jazz stage. Book it for your next event."
-    />
-    <meta property="og:type" content="website" />
-    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <style>
-      /* Critical shell styles so the first paint is already on-brand black */
-      html,
-      body,
-      #root {
-        height: 100%;
-      }
-      body {
-        margin: 0;
-        background: #0b0806;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Speakeasy Tapas Lounge · ByWard Market, Ottawa</title>
+<meta name="description" content="A hidden destination for food, music & celebrations in Ottawa's ByWard Market. Craft cocktails, tapas & live music nightly. 55 York Street · 613-241-6221."/>
+<meta name="theme-color" content="#0a0a0b"/>
+<meta property="og:type" content="restaurant"/>
+<meta property="og:title" content="Speakeasy Tapas Lounge · ByWard Market, Ottawa"/>
+<meta property="og:description" content="A hidden destination for food, music & celebrations in Ottawa's ByWard Market. Craft cocktails, tapas & live music nightly. 55 York Street · 613-241-6221."/>
+<meta property="og:image" content="assets/og-image.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="assets/favicon.ico" sizes="any"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cinzel-700.woff2" crossorigin/>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-400.woff2" crossorigin/>
+<link rel="stylesheet" href="assets/fonts/fonts.css"/>
+<link rel="stylesheet" href="css/styles.css"/>
+<noscript><style>#intro{display:none!important}body.locked{overflow:auto!important;height:auto!important}</style></noscript>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"Speakeasy Tapas Lounge","image":"assets/og-image.jpg","servesCuisine":["Tapas","International","Cocktail Bar"],"priceRange":"$$","telephone":"+1-613-241-6221","url":"https://speakeasytapas.ca/","address":{"@type":"PostalAddress","streetAddress":"55 York Street","addressLocality":"Ottawa","addressRegion":"ON","postalCode":"K1N 9B7","addressCountry":"CA"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday"],"opens":"16:00","closes":"22:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"16:00","closes":"00:00"}]}
+</script>
+</head>
+<body data-page="home">
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="intro" class="intro" role="dialog" aria-label="Enter the Speakeasy">
+  <div class="doors" aria-hidden="true">
+    <div class="door door--l"><span class="door__knob"></span></div>
+    <div class="door door--r"><span class="door__knob"></span></div>
+    <div class="door__seam"></div>
+  </div>
+  <div class="intro__center">
+    <div class="peephole"><img class="intro__logo" src="assets/logo.png" alt="" width="220" height="220"/><span class="peephole__ring"></span></div>
+    <p class="intro__shh" aria-hidden="true"><span>S</span><span>h</span><span>h</span><span>h</span><span>…</span></p>
+    <p class="intro__word">Keep it between us.</p>
+    <button class="intro__enter" type="button"><span class="intro__enter-inner">tap to enter</span></button>
+  </div>
+  <button class="intro__skip" type="button">Skip&nbsp;→</button>
+</div>
+<header id="nav" class="nav" aria-label="Primary"></header>
+<main id="main">
+<section id="hero" class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="hero__content">
+    <div class="hero__coin" id="coin" title="Give it a spin">
+      <div class="coin__inner"><div class="coin__face coin__face--front"><img src="assets/logo.png" alt="Speakeasy Tapas Lounge crest" width="240" height="240"/></div>
+      <div class="coin__face coin__face--back"><svg viewBox="0 0 200 200" aria-hidden="true" class="coin__deco"><circle cx="100" cy="100" r="94" fill="#0a0a0b" stroke="#c9a227" stroke-width="2"/><circle cx="100" cy="100" r="82" fill="none" stroke="#c9a227" stroke-width="1" opacity=".6"/><g fill="#c9a227"><text x="100" y="128" text-anchor="middle" font-family="Cinzel, serif" font-size="46" font-weight="700">S</text></g></svg></div></div>
+    </div>
+    <p class="hero__eyebrow" data-parallax="0.2">ByWard Market · Ottawa · Est. Prohibition Spirit</p>
+    <h1 class="hero__title" data-parallax="0.35"><span class="hero__title-1">SPEAKEASY</span><span class="hero__title-2">Tapas&nbsp;Lounge</span></h1>
+    <p class="hero__tag" data-parallax="0.5">“ This must be the place ”</p>
+    <div class="hero__cta" data-parallax="0.15"><a class="btn btn--gold" href="https://www.opentable.com/r/speakeasy-tapas-lounge-ottawa" target="_blank" rel="noopener">Reserve a table</a><a class="btn btn--ghost" href="menu.html">Explore the menu</a></div>
+    <div class="deco-divider" aria-hidden="true"><span></span><i>❧</i><span></span></div>
+  </div>
+  <a class="hero__scroll" href="#about" aria-label="Scroll to explore"><span class="hero__scroll-dot"></span><span class="hero__scroll-label">scroll</span></a>
+</section>
+
+<section id="about" class="section about stamps" data-reveal>
+  <div class="about__grid about__grid--solo">
+    <div class="about__copy">
+      <p class="kicker">The House Rules</p>
+      <h2 class="h-display">Pull Up a<br><em>Seat.</em></h2>
+      <p class="lead">Tucked into Ottawa's ByWard Market, Speakeasy Tapas Lounge is an elegant restaurant and live-music venue where the lights stay low and the night runs long.</p>
+      <p>Internationally inspired plates, craft cocktails poured with prohibition-era swagger, live performances every evening, and a candlelit room that feels like a secret worth keeping. Pull up a chair — <em>this must be the place.</em></p>
+      <div class="about__stats"><div><strong>Nightly</strong><span>Live music from 7 PM</span></div><div><strong>13</strong><span>Signature cocktails</span></div><div><strong>55 York</strong><span>ByWard Market</span></div></div>
+    </div>
+    <div class="stamps__grid">
+    <a class="stamp" href="menu.html"><img src="assets/img/stamps/food.png" alt="Food" width="128" height="128"/><span>Food</span></a>
+    <a class="stamp" href="events.html"><img src="assets/img/stamps/live-music.png" alt="Live Music" width="128" height="128"/><span>Live Music</span></a>
+    <a class="stamp" href="events.html"><img src="assets/img/stamps/comedy.png" alt="Comedy" width="128" height="128"/><span>Comedy</span></a>
+    <a class="stamp" href="events.html"><img src="assets/img/stamps/concerts.png" alt="Concerts" width="128" height="128"/><span>Concerts</span></a>
+    <a class="stamp" href="drinks.html"><img src="assets/img/stamps/cocktails.png" alt="Cocktails" width="128" height="128"/><span>Cocktails</span></a>
+    <a class="stamp" href="private.html"><img src="assets/img/stamps/private-events.png" alt="Private Events" width="128" height="128"/><span>Private Events</span></a>
+    
+  </div>
+  </div>
+</section>
+
+<section class="section host" data-reveal>
+  <div class="host__grid">
+    <figure class="host__media">
+      <img src="assets/img/storefront.jpg" alt="The Speakeasy doorman in a yellow suit and green mask outside 55 York Street" loading="lazy" width="1050" height="1400"/>
+      <figcaption>Most nights, out front · 55 York</figcaption>
+    </figure>
+    <div class="host__copy">
+      <p class="kicker">At the door</p>
+      <h2 class="h-display">The man in the<br><em>yellow suit.</em></h2>
+      <p class="lead">Every speakeasy needs a doorman. Ours doesn't ask for a password — he just grins, holds the door, and points you down the red carpet.</p>
+      <p>If you spot him on York Street, you've found the right place. Say hello, get a photo, and head inside — the candles are already lit.</p>
+      <div class="host__actions">
+        <a class="btn btn--gold-sm" href="visit.html">Find the door</a>
+        <a class="link-underline" href="events.html">See what's on tonight →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section reviews" data-reveal>
+  <div class="section__head center"><p class="kicker">Word of mouth</p><h2 class="h-display">What People Say</h2></div>
+  <div class="reviews__summary">
+    <div class="reviews__score"><strong id="gRating">4.6</strong><span class="stars" aria-hidden="true">★★★★★</span><small>on Google</small></div>
+    <div class="reviews__actions">
+      <a class="btn btn--gold" href="https://www.google.com/search?q=Speakeasy+Tapas+Lounge+55+York+Street+Ottawa+reviews" target="_blank" rel="noopener">Read our Google reviews</a>
+      <a class="btn btn--ghost" href="https://search.google.com/local/writereview?placeid=" target="_blank" rel="noopener">Leave a review</a>
+    </div>
+  </div>
+  <div class="quotes">
+    <blockquote class="quote"><p>“Add a real Google review here.”</p><cite>— Guest name</cite></blockquote>
+    <blockquote class="quote"><p>“Add a real Google review here.”</p><cite>— Guest name</cite></blockquote>
+    <blockquote class="quote"><p>“Add a real Google review here.”</p><cite>— Guest name</cite></blockquote>
+  </div>
+  <p class="note" style="text-align:center;margin-top:18px">Rating and quotes are placeholders — paste real ones from your Google Business Profile (see README).</p>
+</section>
+
+<section id="gallery" class="section insta" data-reveal>
+  <div class="section__head center"><p class="kicker">Follow along</p><h2 class="h-display">@speakeasy_ottawa</h2><p class="section__intro">The room, the plates, the people and the nightly set. Come find us.</p></div>
+  <div class="insta__grid insta__grid--wide">
+    <a class="insta__tile" href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener"><img src="assets/img/bar-team.jpg" alt="Behind the bar" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener"><img src="assets/img/ig-singer.jpg" alt="Singer on the Speakeasy stage" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener"><img src="assets/img/kitchen-team.jpg" alt="The kitchen team" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener"><img src="assets/img/ig-sax.jpg" alt="Saxophonist under the Speakeasy sign" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener"><img src="assets/img/stairs-host.jpg" alt="The doorman at the top of the candlelit stairs" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener"><img src="assets/img/ig-spread.jpg" alt="A table full of Speakeasy plates" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener"><img src="assets/img/oysters.jpg" alt="Market oysters and bubbles" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener"><img src="assets/img/ig-cello.jpg" alt="Cellist mid-performance" loading="lazy"/><span class="insta__ico">↗</span></a>
+    <a class="insta__tile" href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener"><img src="assets/img/ig-market.jpg" alt="The Speakeasy sign in the ByWard Market" loading="lazy"/><span class="insta__ico">↗</span></a>
+    </div>
+  <div style="text-align:center;margin-top:30px"><a class="btn btn--gold" href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener">Follow on Instagram</a></div>
+</section>
+</main>
+<footer class="footer"></footer>
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-label="Photo viewer">
+  <button class="lb__close" aria-label="Close">✕</button>
+  <button class="lb__nav lb__prev" aria-label="Previous">‹</button>
+  <figure class="lb__stage"><img id="lbImg" src="" alt=""/><figcaption id="lbCap"></figcaption></figure>
+  <button class="lb__nav lb__next" aria-label="Next">›</button>
+</div>
+<script type="module" src="js/site.js"></script>
+<script type="module" src="js/intro.js"></script>
+</body>
 </html>
