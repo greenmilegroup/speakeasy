@@ -153,7 +153,7 @@ function run() {
       recap.innerHTML = `<h3>You’re into ${liked.length} night${liked.length > 1 ? 's' : ''}.</h3>
         <p class="note">We saved them below. Call to reserve, or drop them in your calendar.</p>
         <ul>${rows}</ul>
-        <a class="btn btn--gold" href="tel:+16132416221">Call to reserve</a>
+        <a class="btn btn--gold" href="https://www.eventbrite.ca/o/speakeasy-tapas-lounge-57744410063" target="_blank" rel="noopener">Get tickets on Eventbrite</a>
         <button class="btn btn--ghost" id="icsBtn">Add to calendar</button>
         <button class="btn btn--ghost" id="reBtn">Start over</button>`;
     }

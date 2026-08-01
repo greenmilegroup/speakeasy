@@ -1091,3 +1091,94 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 /* ---- combined @speakeasy_ottawa grid ---- */
 .insta__grid--wide{grid-template-columns:repeat(3,1fr);max-width:1000px;margin-inline:auto;gap:12px}
 @media (max-width:860px){.insta__grid--wide{grid-template-columns:repeat(2,1fr)}}
+
+/* ---- no yellow buttons anywhere: vermilion primary everywhere ---- */
+.mr__book{background:linear-gradient(135deg,#e8241c,#a5121a)!important;color:#fff!important;
+  border:1px solid rgba(255,255,255,.16)}
+.nav__book{border-color:rgba(244,236,216,.5);color:#fff}
+.nav__book:hover{background:#e8241c;border-color:#e8241c;color:#fff}
+.intro__enter::before{background:linear-gradient(135deg,#e8241c,#a5121a)}
+
+/* =========================================================================
+   v8 — typographic scale: smaller, calmer, less shouty
+   ========================================================================= */
+
+/* hero wordmark: title case, noticeably smaller, tighter tracking */
+.hero__title-1{
+  font-size:clamp(2.5rem,7.2vw,5rem);
+  font-weight:600;
+  letter-spacing:.045em;
+  text-indent:.045em;
+  text-transform:none;
+  text-shadow:0 4px 34px rgba(0,0,0,.7);
+}
+.hero__title-2{
+  font-size:clamp(.7rem,1.35vw,.92rem);
+  letter-spacing:.52em;
+  text-indent:.52em;
+  margin-top:16px;
+}
+.hero__tag{font-size:clamp(1rem,1.5vw,1.16rem);margin:20px 0 28px}
+.hero__eyebrow{font-size:.62rem;letter-spacing:.36em;margin-bottom:20px}
+.hero__coin{width:clamp(104px,14vw,142px);margin-bottom:30px}
+
+/* section headings: dialled back on desktop */
+.h-display{
+  font-size:clamp(1.75rem,3.6vw,2.9rem);
+  font-weight:600;
+  letter-spacing:.022em;
+  line-height:1.12;
+}
+.h-display em{font-size:.95em}
+
+/* interior page titles */
+.page-hero h1{
+  font-size:clamp(1.9rem,4.4vw,3.2rem);
+  font-weight:600;
+  letter-spacing:.03em;
+  text-indent:.03em;
+}
+.page-hero .lead{font-size:1.08em;max-width:56ch}
+.page-hero.has-video{min-height:52vh;padding-top:150px}
+.page-hero.plain{padding-top:150px}
+
+/* supporting type */
+.lead{font-size:1.12em}
+.section__intro{font-size:1.04em}
+.kicker,.hero__eyebrow{font-size:.62rem}
+.menu-cat-head h3{font-size:clamp(1.2rem,2.2vw,1.5rem)}
+.ck__top h4,.pl__top h4{font-size:1.18rem}
+.plates--lg .pl__top h4{font-size:1.28rem}
+.pkg h3{font-size:1.2rem}
+.about__stats strong{font-size:1.28rem}
+.reviews__score strong{font-size:2.4rem}
+.swipe__recap h3{font-size:1.35rem}
+.ecard__title{font-size:clamp(1.15rem,3.6vw,1.4rem)}
+.teaser h2,.gallery__empty-title{font-size:clamp(1.4rem,2.8vw,2rem)}
+.footer__name{font-size:1.12rem}
+.nav__name{font-size:1.02rem}
+
+@media (max-width:560px){
+  .hero__title-2{letter-spacing:.34em;text-indent:.34em}
+}
+
+/* v8b — hero breathing room; drop the boxy hairline frame */
+.hero__content::before{display:none}
+.hero__coin{margin-bottom:44px}
+.hero__eyebrow{margin-bottom:22px;font-size:.6rem;letter-spacing:.34em;color:rgba(233,205,126,.92)}
+.hero__content{padding-top:104px}
+.hero__eyebrow{text-shadow:0 1px 2px #000,0 2px 16px rgba(0,0,0,.98),0 0 30px rgba(0,0,0,.9)}
+
+/* v8c — mobile bar: one black, one red (not two reds) */
+.mobile-reserve{gap:10px}
+.mr__book{
+  background:#0c0c0e!important;color:#fff!important;
+  border:1px solid rgba(232,36,28,.85)!important;
+  box-shadow:0 8px 22px -12px rgba(0,0,0,.9)!important;
+  margin-right:0}
+.mr__book:active{background:#141416!important}
+/* v8d — mobile bar: no wrapping */
+.mobile-reserve a{white-space:nowrap;font-size:.7rem;letter-spacing:.1em;padding:12px 16px;flex:0 1 auto}
+.mr__book{padding:12px 18px!important}
+.mobile-reserve svg{flex:none}
+@media (max-width:380px){.mobile-reserve a{font-size:.64rem;padding:11px 12px;letter-spacing:.06em}}

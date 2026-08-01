@@ -128,10 +128,9 @@ for Netlify, Vercel or Cloudflare Pages too.
 
 Both sections are in `index.html`.
 
-- **Reviews** — the rating (`#gRating`), the star row and the three `<blockquote class="quote">` cards are
-  **placeholders**. Paste your real rating and real review text from your Google Business Profile, and set the
-  `placeid` on the "Leave a review" link (`https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID`).
-  Do not leave the placeholder quotes live — they are marked as such on the page.
+- **Reviews** — three real Google reviews (Valeria Restrepo, Cindy Harbottle, Haneen Darwesh) with dates omitted.
+  Update them in the `<blockquote class="quote">` cards and the rating in `#gRating`. Set your Place ID on the
+  "Leave a review" link (`https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID`).
 - **Instagram** — the six tiles link to your profile. Replace the `https://www.instagram.com/` hrefs with your real
   handle, and swap the tile images for your latest posts. For a live feed, use a widget (Behold, EmbedSocial,
   Elfsight) or the Instagram Basic Display API and render into `.insta__grid`.
