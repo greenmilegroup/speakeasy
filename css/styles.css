@@ -342,6 +342,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .ck__top h4{font-family:var(--f-serif);font-weight:600;font-size:1.35rem;color:var(--cream);margin:0;line-height:1.15}
 .price{font-family:var(--f-deco);color:var(--gold-hi);font-size:1.05rem;letter-spacing:.04em;flex:none}
 .price::before{content:"$"}
+.price--mp::before{content:none}   /* market price — no currency prefix */
 .ck__ing{color:var(--gold);font-size:.86rem;letter-spacing:.02em;margin:.5rem 0 .6rem;font-style:italic}
 .ck__note{color:var(--cream-2);font-size:.98rem;margin:0;line-height:1.45}
 
