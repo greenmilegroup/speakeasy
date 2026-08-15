@@ -16,7 +16,7 @@ const EVENTS = [
     id: 'jazz', kicker: 'On the stage', title: 'Live Jazz Nights',
     when: 'Every night · 7 PM', meta: ['Live music', 'No cover'],
     blurb: 'Brass, keys and a low candlelit hum. The line-up changes with the night and the last set runs late.',
-    img: 'assets/img/interior.jpg', weekly: 5, time: '19:00', durMin: 180,
+    img: 'assets/img/ig-sax.jpg', weekly: 5, time: '19:00', durMin: 180,
   },
   {
     id: 'golden-hour', kicker: 'Aperitivo', title: 'Golden-Hour Cocktails',
@@ -31,10 +31,10 @@ const EVENTS = [
     art: 'comedy', weekly: 4, time: '20:00', durMin: 120,
   },
   {
-    id: 'latin', kicker: 'Weekend', title: 'Latin & Soul Weekends',
+    id: 'latin', kicker: 'Weekend', title: 'Strings & Soul Weekends',
     when: 'Fri – Sat · 9 PM', meta: ['DJ + live', 'Late set'],
     blurb: 'The late set runs hot — soul, funk and Latin rhythm until the candles burn low.',
-    art: 'concerts', weekly: 5, time: '21:00', durMin: 180,
+    img: 'assets/img/ig-cello.jpg', weekly: 5, time: '21:00', durMin: 180,
   },
   {
     id: 'private', kicker: 'Host with us', title: 'Book the Room',
