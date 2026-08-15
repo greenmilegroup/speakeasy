@@ -69,9 +69,12 @@ function renderFeature(ev) {
 
 function renderList(list) {
   const ul = $('#whatsonList');
-  ul.innerHTML = list.map(ev => `
-    <li class="wrow" data-cat="${ev.category}">
+  ul.innerHTML = list.map((ev, i) => `
+    <li class="wrow" data-cat="${ev.category}" style="--i:${i}">
       <div class="wrow__date"><span class="wrow__dow">${DAY[ev.date.getDay()]}</span><strong>${ev.date.getDate()}</strong><span class="wrow__mon">${MON[ev.date.getMonth()]}</span></div>
+      ${ev.imageUrl
+        ? `<div class="wrow__thumb"><img src="${ev.imageUrl}" alt="" loading="lazy"/></div>`
+        : `<div class="wrow__thumb wrow__thumb--none" aria-hidden="true"><span>${(ev.title || '?').trim()[0]}</span></div>`}
       <div class="wrow__main">
         <p class="ecard__kicker">${ev.kicker}</p>
         <h3 class="wrow__title">${ev.title}</h3>

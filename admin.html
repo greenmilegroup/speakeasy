@@ -65,7 +65,26 @@
       </div>
       <div class="field-row">
         <div class="field"><label for="ad-price">Price / note</label><input id="ad-price" type="text" placeholder="No cover"/></div>
-        <div class="field"><label for="ad-img">Image path</label><input id="ad-img" type="text" placeholder="assets/img/ig-sax.jpg"/></div>
+        <div class="field"><label for="ad-ticket">Ticket link</label><input id="ad-ticket" type="url" placeholder="Leave blank to use the Eventbrite page"/></div>
+      </div>
+      <div class="field">
+        <label for="ad-file">Photo</label>
+        <input id="ad-file" type="file" accept="image/*" class="photo__input"/>
+        <div class="photo" id="adDrop" tabindex="0" role="button" aria-controls="adPreview"
+             aria-label="Choose a photo, or drag one here">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="photo__ico"><path fill="currentColor" d="M20 5h-3.2l-1.2-1.7A2 2 0 0 0 14 2.5h-4a2 2 0 0 0-1.6.8L7.2 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm-8 12a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9Z"/></svg>
+          <p class="photo__lead"><strong>Choose a photo</strong> or drag one here</p>
+          <p class="photo__sub">Resized to 1200px and embedded straight into the record — JPG, PNG, WebP or HEIC</p>
+        </div>
+        <figure class="photo__preview" id="adPreview" hidden>
+          <img id="adPreviewImg" alt="Preview of the photo you chose"/>
+          <figcaption><span id="adPreviewMeta"></span>
+            <button class="link-underline" type="button" id="adClear">Remove photo</button></figcaption>
+        </figure>
+        <div class="field field--sub">
+          <label for="ad-img">…or point at an image already on the site</label>
+          <input id="ad-img" type="text" placeholder="assets/img/ig-sax.jpg"/>
+        </div>
       </div>
       <div class="field"><label for="ad-blurb">Blurb</label><textarea id="ad-blurb" rows="3"></textarea></div>
       <button class="btn btn--gold" type="submit">Generate</button>
