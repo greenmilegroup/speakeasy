@@ -19,7 +19,7 @@ const NAV = [
   ['menu', 'menu.html', 'Menu'],
   ['events', 'events.html', 'Events'],
   ['private', 'private.html', 'Private Events'],
-  ['tour', 'tour.html', '3D Tour'],
+  // ['tour', 'tour.html', '3D Tour'],   // hidden for now — uncomment to bring the 3D tour back
   ['visit', 'visit.html', 'Visit'],
 ];
 

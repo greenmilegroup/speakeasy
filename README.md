@@ -19,7 +19,7 @@ main site. Host the folder anywhere (GitHub Pages, Netlify, any web server) or o
 | `menu.html` | The Menu — one page, **toggle** between **Shareables · Dinner · Desserts** (also deep-links: `menu.html#dinner`) |
 | `events.html` | Events — the **“What’s On” board**: next-up feature with countdown, dated list, filters, add-to-calendar. Data-driven ([see below](#events-are-data-driven)) |
 | `private.html` | Private Events — the four hosting packages |
-| `tour.html` | **3D Venue Tour** — the walkable 3D room embedded in an iframe |
+| `tour.html` | **3D Venue Tour** — the walkable 3D room. **Currently hidden** (see below) |
 | `visit.html` | Visit & Reserve — live open/closed badge, hours, map, contact + newsletter |
 
 The header, footer and ambient layers are injected on every page by `js/site.js`, so there’s one source of truth for nav.
@@ -59,11 +59,12 @@ tour-src/           source for the 3D tour (React + three.js) — only needed to
   atmosphere comes from typography, hairline rules and negative space.)
 - **Menu tabs** — Shareables / Dinner / Desserts on one page.
 - **What’s On board** (events) — the soonest event is featured with a live countdown (“in 4 days”); everything else
-  falls into a dated list. Filter by Live Music / Comedy / Special Nights, grab tickets on Eventbrite, or download an
+  falls into a dated list, each row carrying the event’s photo and a category accent (gold for music, red for comedy,
+  cream for special nights). Filter by Live Music / Comedy / Special Nights, grab tickets on Eventbrite, or download an
   `.ics`. Weekly nights auto-roll to their next occurrence, and an on-brand empty state means the page is never blank.
-- **3D tour** — the walkable venue, embedded from `tour/`. The **setup switcher** re-loads the room as
-  Intimate Dining / Cocktail Reception / Artistic Showcase via `?layout=`, and the **booking form** below composes
-  a private-event request.
+- **3D tour** *(hidden for now)* — the walkable venue, embedded from `tour/`. The **setup switcher** re-loads the
+  room as Intimate Dining / Cocktail Reception / Artistic Showcase via `?layout=`, and the **booking form** below
+  composes a private-event request.
 - **Video backgrounds** — real footage of the room (home), the stage (events) and the pass (menu). Each is muted,
   looping, `playsinline`, with a poster fallback and disabled under `prefers-reduced-motion`.
 - **Live hours badge** (visit) — “Open now / Closed” computed in real time for Ottawa (America/Toronto).
@@ -161,12 +162,31 @@ Add an object to `assets/data/events.json`, commit, push:
 ```
 
 **`admin.html`** (linked from nowhere, and `noindex`) is a small console for this: it shows whether you're in
-Supabase or local mode, lists what's currently on the board, and generates a correctly-shaped record from a form and
-copies it to your clipboard — handy for options 2 and 3.
+Supabase or local mode, lists what's currently on the board — each with its photo — and generates a correctly-shaped
+record from a form, copied to your clipboard, ready for options 2 and 3.
+
+**Adding a photo.** Drop a picture on the photo box (or click to pick one). It's resized to 1200px and turned into a
+JPEG data URI right in the browser, so it travels inside the record — no upload, no file to commit, and it renders on
+the board immediately. The output panel abbreviates the photo so the record stays readable; the clipboard gets the
+full thing. If you'd rather point at a picture already in `assets/img/`, there's a field for that instead.
+
+A ~1200px photo lands around 40–80 KB of base64. That's fine for a handful of events; if the line-up ever grows large,
+move to Supabase Storage and put the resulting URL in `image_url` instead.
 
 It is a **read-only convenience page**, not a protected admin area: it holds no keys, writes nothing, and shows only
 the events that are already public. Treat the URL as unlisted rather than secret. Real write access lives behind the
 service-role key, which only the MCP server has.
+
+---
+
+## The 3D tour is hidden
+
+The page and its files are all still here — it's just unlinked. It was taken out of the nav rather than deleted, so
+turning it back on is one line: uncomment the `tour` entry in the `NAV` array in `js/site.js`. Header and footer both
+read from that array.
+
+If you bring it back, also re-add `tour.html` to `sitemap.xml` and drop the `noindex` meta tag from `tour.html`.
+`tour/` and `tour-src/` were left untouched, and `tour.html` still works if you open it directly.
 
 ---
 

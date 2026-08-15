@@ -1239,6 +1239,94 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .admin__status code{font-size:.86em;color:var(--gold-hi)}
 .know__item code{font-size:.86em;color:var(--gold-hi)}
 .admin__gen{margin-top:40px;max-width:760px}
-.admin__out{margin-top:16px;padding:18px;border-radius:10px;overflow-x:auto;
+.admin__out{margin-top:16px;padding:18px;border-radius:10px;overflow:auto;max-height:60vh;
+  white-space:pre-wrap;word-break:break-word;
   background:#08080a;border:1px solid var(--line-soft);color:var(--cream-2);
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;line-height:1.55}
+
+/* =========================================================================
+   v11 — What's On board: more presence
+   Rows carry the event's photo, a category accent and a staggered entrance;
+   the feature card gets depth so the next night reads first.
+   ========================================================================= */
+
+/* --- feature: warmer, deeper, with the light coming off the photo --- */
+.feature{position:relative;overflow:hidden;isolation:isolate}
+.feature::before{content:"";position:absolute;inset:-40% -10% auto -30%;height:150%;z-index:-1;
+  background:radial-gradient(58% 62% at 22% 38%,rgba(232,36,28,.19),transparent 70%);
+  pointer-events:none}
+.feature::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;
+  box-shadow:inset 0 1px 0 rgba(244,236,216,.07)}
+.feature__media{aspect-ratio:5/4;box-shadow:0 26px 54px -26px #000,0 0 0 1px rgba(201,162,39,.22)}
+.feature__media::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(190deg,transparent 58%,rgba(0,0,0,.42))}
+.feature__flag{position:relative;overflow:hidden;box-shadow:0 6px 18px -8px rgba(232,36,28,.9)}
+.feature__flag::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.42) 50%,transparent 62%);
+  transform:translateX(-120%);animation:flagsheen 4.6s var(--ease) 1.4s infinite}
+@keyframes flagsheen{0%{transform:translateX(-120%)}34%,100%{transform:translateX(120%)}}
+
+/* --- rows: photo + category accent + stagger --- */
+.wrow{position:relative;grid-template-columns:74px 168px 1fr auto;overflow:hidden;padding:18px 22px 18px 24px;
+  animation:wrowin .5s var(--ease) both;animation-delay:calc(var(--i,0) * 70ms)}
+@keyframes wrowin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.wrow::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--wrow-accent,var(--gold));opacity:.55;transition:.35s var(--ease)}
+.wrow[data-cat="music"]{--wrow-accent:var(--gold)}
+.wrow[data-cat="comedy"]{--wrow-accent:var(--red)}
+.wrow[data-cat="special"]{--wrow-accent:#d8cfae}
+.wrow:hover{border-color:rgba(201,162,39,.42);transform:translateX(4px);
+  background:linear-gradient(168deg,rgba(31,31,34,.82),rgba(14,14,16,.82));
+  box-shadow:0 22px 44px -30px #000}
+.wrow:hover::before{opacity:1;width:4px}
+.wrow__thumb{position:relative;aspect-ratio:3/2;border-radius:10px;overflow:hidden;
+  background:#0c0c0e;border:1px solid rgba(244,236,216,.09)}
+.wrow__thumb img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .55s var(--ease);transform:scale(1.02)}
+.wrow:hover .wrow__thumb img{transform:scale(1.09)}
+.wrow__thumb--none{display:grid;place-items:center;
+  background:radial-gradient(120% 110% at 50% 10%,rgba(125,15,19,.42),#0c0709)}
+.wrow__thumb--none span{font-family:var(--f-deco);letter-spacing:.14em;text-transform:uppercase;
+  font-size:.58rem;color:rgba(244,236,216,.42);text-align:center;padding:0 8px}
+/* a row with nothing but a message (the "nothing on the board yet" case) */
+.wrow > .wrow__main:only-child{grid-column:1/-1}
+.wrow__date strong{font-size:1.95rem}
+.wrow:hover .wrow__title{color:#fff}
+
+@media (prefers-reduced-motion:reduce){
+  .wrow{animation:none}
+  .feature__flag::after{animation:none;display:none}
+  .wrow__thumb img,.wrow:hover .wrow__thumb img{transition:none;transform:none}
+}
+@media (max-width:960px){
+  .wrow{grid-template-columns:62px 124px 1fr}
+  .wrow__thumb{aspect-ratio:4/3}
+}
+@media (max-width:560px){
+  .wrow{grid-template-columns:56px 1fr}
+  .wrow__thumb{grid-column:1/-1;aspect-ratio:16/9;order:-1;margin-bottom:2px}
+}
+
+/* --- v11b — admin photo picker --- */
+/* visually hidden, but still focusable and clickable.
+   Needs to out-specify `.form input{width:100%}`, hence `.form input.photo__input`. */
+.form input.photo__input,.photo__input{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.photo{display:grid;place-items:center;gap:6px;padding:26px 20px;cursor:pointer;
+  border:1px dashed rgba(201,162,39,.34);border-radius:12px;background:rgba(0,0,0,.24);
+  text-align:center;transition:.28s var(--ease)}
+.photo:hover,.photo:focus-visible{border-color:rgba(201,162,39,.7);background:rgba(201,162,39,.06)}
+.photo.is-over{border-color:var(--gold);background:rgba(201,162,39,.12);transform:scale(1.01)}
+.photo.has-photo{padding:14px 20px}
+.photo__ico{width:26px;height:26px;color:var(--gold);opacity:.8}
+.photo__lead{margin:0;color:var(--cream-2);font-size:.98rem}
+.photo__lead strong{color:var(--cream)}
+.photo__sub{margin:0;color:var(--muted);font-size:.82rem;max-width:44ch}
+.photo__preview{margin:12px 0 0;display:grid;grid-template-columns:132px 1fr;gap:14px;align-items:center}
+.photo__preview img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;
+  border:1px solid rgba(244,236,216,.12);display:block}
+.photo__preview figcaption{display:flex;flex-direction:column;align-items:flex-start;gap:6px;
+  color:var(--muted);font-size:.85rem;word-break:break-word}
+@media (max-width:560px){.photo__preview{grid-template-columns:1fr}}
+.field--sub{margin-top:14px}
+.field--sub label{font-size:.7rem;opacity:.78}
