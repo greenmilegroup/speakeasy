@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Admin · Speakeasy Tapas Lounge</title>
+<meta name="description" content="Internal events admin for Speakeasy Tapas Lounge."/>
+<meta name="theme-color" content="#0a0a0b"/>
+
+
+
+
+
+<link rel="icon" href="assets/favicon.ico" sizes="any"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cinzel-700.woff2" crossorigin/>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-400.woff2" crossorigin/>
+<link rel="stylesheet" href="assets/fonts/fonts.css"/>
+<link rel="stylesheet" href="css/styles.css"/>
+<noscript><style>#intro{display:none!important}body.locked{overflow:auto!important;height:auto!important}</style></noscript>
+<meta name="robots" content="noindex,nofollow"/>
+</head>
+<body data-page="admin">
+<a class="skip-link" href="#main">Skip to content</a>
+<header id="nav" class="nav" aria-label="Primary"></header>
+<main id="main">
+<section class="page-hero plain" data-reveal>
+  <div class="page-hero__inner"><p class="kicker">Back of house</p><h1>Events Admin</h1><p class="lead">Everything currently on the board, and the fastest ways to change it.</p></div>
+</section>
+
+<section class="section" data-reveal>
+  <div class="admin__status" id="adminStatus">Loading…</div>
+
+  <div class="know" style="margin-bottom:34px">
+    <div class="know__item">
+      <h3>1 · Talk to Claude</h3>
+      <p>Fastest. With the MCP server connected, just say <em>"add a jazz night Friday at 8, no cover"</em> and it appears here. Setup: <code>mcp/README.md</code>.</p>
+    </div>
+    <div class="know__item">
+      <h3>2 · Supabase table</h3>
+      <p>Open your project → Table Editor → <code>events</code> → Insert row. Good for bulk edits. Setup: <code>supabase/README.md</code>.</p>
+    </div>
+    <div class="know__item">
+      <h3>3 · Edit the file</h3>
+      <p>Before Supabase exists, events live in <code>assets/data/events.json</code>. Edit, commit, push.</p>
+    </div>
+  </div>
+
+  <div class="section__head center"><p class="kicker">On the board</p><h2 class="h-display">Current Events</h2></div>
+  <ul class="wlist" id="adminList"></ul>
+
+  <div class="admin__gen">
+    <h3 class="h-sub">Draft a new event</h3>
+    <p class="form__hint">Fill this in and copy the result into <code>assets/data/events.json</code>, the Supabase table, or paste it to Claude.</p>
+    <form class="form" id="adminForm" novalidate>
+      <div class="field-row">
+        <div class="field"><label for="ad-title">Title</label><input id="ad-title" type="text" required/></div>
+        <div class="field"><label for="ad-kicker">Kicker</label><input id="ad-kicker" type="text" placeholder="On the stage"/></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="ad-when">Date &amp; time</label><input id="ad-when" type="datetime-local"/></div>
+        <div class="field"><label for="ad-cat">Category</label>
+          <select id="ad-cat"><option value="music">Live Music</option><option value="comedy">Comedy</option><option value="special" selected>Special Night</option></select></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="ad-price">Price / note</label><input id="ad-price" type="text" placeholder="No cover"/></div>
+        <div class="field"><label for="ad-img">Image path</label><input id="ad-img" type="text" placeholder="assets/img/ig-sax.jpg"/></div>
+      </div>
+      <div class="field"><label for="ad-blurb">Blurb</label><textarea id="ad-blurb" rows="3"></textarea></div>
+      <button class="btn btn--gold" type="submit">Generate</button>
+      <p class="form__note" id="adNote" role="status"></p>
+      <pre class="admin__out" id="adminOut" hidden></pre>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="footer"></footer>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script type="module" src="js/site.js"></script>
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>
