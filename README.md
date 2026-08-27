@@ -1,6 +1,6 @@
-# Speakeasy Tapas Lounge — website
+# Speakeasy Ottawa — website
 
-A cinematic, multi-page site for **Speakeasy Tapas Lounge** · 55 York Street, ByWard Market, Ottawa · ☎ 613-241-6221.
+A cinematic, multi-page site for **Speakeasy Ottawa** · 55 York Street, ByWard Market, Ottawa · ☎ 613-241-6221.
 The home page opens with the house crest whispering **“Shhh…”**, then art-deco doors swing open into the room.
 
 > **“This must be the place.”**

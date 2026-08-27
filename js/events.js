@@ -166,7 +166,7 @@ function run() {
     const pad = n => String(n).padStart(2, '0');
     const fmt = d => `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z`;
     const nextWeekly = (wd, time) => { const [h, m] = time.split(':').map(Number); const d = new Date(); d.setHours(h, m, 0, 0); let add = (wd - d.getDay() + 7) % 7; if (add === 0 && d < new Date()) add = 7; d.setDate(d.getDate() + add); return d; };
-    let ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Speakeasy Tapas Lounge//EN\r\n';
+    let ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Speakeasy Ottawa//EN\r\n';
     liked.forEach(e => {
       let start;
       if (e.startISO) start = new Date(e.startISO);
@@ -177,7 +177,7 @@ function run() {
         `UID:${e.id}-${start.getTime()}@speakeasytapas.ca\r\nDTSTAMP:${fmt(new Date())}\r\n` +
         `DTSTART:${fmt(start)}\r\nDTEND:${fmt(endD)}\r\n` +
         (e.weekly != null ? 'RRULE:FREQ=WEEKLY\r\n' : '') +
-        `SUMMARY:${e.title} — Speakeasy Tapas Lounge\r\nLOCATION:55 York Street, Ottawa, ON\r\n` +
+        `SUMMARY:${e.title} — Speakeasy Ottawa\r\nLOCATION:55 York Street, Ottawa, ON\r\n` +
         `DESCRIPTION:${e.blurb.replace(/,/g, '\\,')}\r\nEND:VEVENT\r\n`;
     });
     ics += 'END:VCALENDAR';

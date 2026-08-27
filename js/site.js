@@ -61,9 +61,9 @@ function injectChrome() {
   const header = $('#nav');
   if (header) header.innerHTML =
     `<div class="nav__inner">
-      <a class="nav__brand" href="index.html" aria-label="Speakeasy Tapas Lounge — home">
+      <a class="nav__brand" href="index.html" aria-label="Speakeasy Ottawa — home">
         <img src="assets/logo.png" alt="" width="44" height="44" class="nav__logo" />
-        <span class="nav__name">Speakeasy<small>Tapas&nbsp;Lounge</small></span>
+        <span class="nav__name">Speakeasy<small>Ottawa</small></span>
       </a>
       <nav class="nav__links" aria-label="Sections">${NAV.map(link).join('')}</nav>
       <a class="nav__book" href="${OPENTABLE}" target="_blank" rel="noopener">Book</a>
@@ -91,7 +91,7 @@ function injectChrome() {
     `<div class="footer__inner">
       <div class="footer__brand">
         <img src="assets/logo.png" alt="" width="72" height="72" id="footLogo" />
-        <p class="footer__name">Speakeasy <span>Tapas Lounge</span></p>
+        <p class="footer__name">Speakeasy <span>Ottawa</span></p>
         <p class="footer__tag">“ This must be the place ”</p>
       </div>
       <nav class="footer__links" aria-label="Footer">${flat.map(n => `<a href="${n[1]}">${n[2]}</a>`).join('')}</nav>
@@ -101,7 +101,7 @@ function injectChrome() {
         <p class="footer__social"><a href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a> · <a href="#" aria-label="Facebook">Facebook</a></p>
       </div>
     </div>
-    <p class="footer__fine">© <span id="year"></span> Speakeasy Tapas Lounge · ByWard Market, Ottawa · Please enjoy responsibly.</p>`;
+    <p class="footer__fine">© <span id="year"></span> Speakeasy Ottawa · ByWard Market · Please enjoy responsibly.</p>`;
 }
 
 /* ---------- nav behaviour ---------- */

@@ -1,6 +1,6 @@
-# Speakeasy Tapas Lounge — Walkable 3D Venue Tour
+# Speakeasy Ottawa — Walkable 3D Venue Tour
 
-A first-person, walkable 3D tour of **Speakeasy Tapas Lounge** (55 York St, ByWard
+A first-person, walkable 3D tour of **Speakeasy Ottawa** (55 York St, ByWard
 Market, Ottawa), built to help prospective customers picture the space for a
 private event and send them to the booking page.
 
@@ -68,7 +68,7 @@ Add the tour to any page with an iframe (point `src` at wherever you hosted it):
 ```html
 <iframe
   src="https://YOUR-HOST/tour/"
-  title="Speakeasy Tapas Lounge — 3D Venue Tour"
+  title="Speakeasy Ottawa — 3D Venue Tour"
   allow="fullscreen; pointer-lock"
   allowfullscreen
   style="width:100%;height:80vh;border:0;border-radius:12px"
