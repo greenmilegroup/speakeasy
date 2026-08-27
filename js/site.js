@@ -18,9 +18,9 @@ const NAV = [
   ['drinks', 'drinks.html', 'Drinks'],
   ['menu', 'menu.html', 'Menu'],
   ['events', 'events.html', 'Events'],
-  ['private', 'private.html', 'Private Events'],
-  ['tour', 'tour.html', '3D Tour'],
+  ['private', 'private.html', 'Host Your Event'],
   ['visit', 'visit.html', 'Visit'],
+  ['careers', 'careers.html', 'Careers'],
 ];
 
 /* ---------- toast (exported) ---------- */
@@ -175,6 +175,28 @@ function forms() {
     setTimeout(() => { location.href = `mailto:hello@speakeasytapas.ca?subject=Website%20enquiry&body=${body}`; }, 600);
     contact.reset();
   });
+  const job = $('#careersForm');
+  job?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const note = $('#jbNote'), get = (id) => $('#' + id);
+    const checks = [
+      [get('jb-name'), get('jb-name').value.trim().length > 1],
+      [get('jb-email'), emailOK(get('jb-email').value)],
+      [get('jb-msg'), get('jb-msg').value.trim().length > 3],
+    ];
+    let ok = true;
+    checks.forEach(([f, v]) => { f.closest('.field').classList.toggle('invalid', !v); if (!v) ok = false; });
+    if (!ok) { note.textContent = 'Please complete the highlighted fields.'; note.classList.add('err'); return; }
+    note.classList.remove('err');
+    note.textContent = 'Thanks — your email is opening. Attach your résumé before you send.';
+    toast('Application ready · attach your résumé');
+    const body = encodeURIComponent(
+      `Role: ${get('jb-role').value}\nExperience: ${get('jb-exp').value}\n` +
+      `Availability: ${get('jb-avail').value}\nPhone: ${get('jb-phone').value}\n\n` +
+      `${get('jb-msg').value}\n\n— ${get('jb-name').value} (${get('jb-email').value})`);
+    setTimeout(() => { location.href = `mailto:info@speakeasyottawa.com?subject=Job%20application&body=${body}`; }, 600);
+  });
+
   const news = $('#newsForm');
   news?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -215,59 +237,21 @@ function hours() {
     `<tr class="${[d === day ? 'today' : '', SCHEDULE[d] ? '' : 'closed'].filter(Boolean).join(' ')}"><td>${NAMES[d]}</td><td>${label(d)}</td></tr>`).join('');
 }
 
+/* ---------- expandable package cards ---------- */
+function packages() {
+  $$('.pkg__more').forEach(btn => btn.addEventListener('click', () => {
+    const panel = btn.nextElementSibling;
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    panel?.classList.toggle('open', !open);
+  }));
+}
+
 /* ---------- misc: year + easter egg ---------- */
 function misc() {
   const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
   let clicks = 0, t;
   $('#footLogo')?.addEventListener('click', () => { if (++clicks >= 3) { clicks = 0; toast('Password accepted. Tell no one.'); } clearTimeout(t); t = setTimeout(() => (clicks = 0), 1200); });
-}
-
-/* ---------- 3D tour fullscreen ---------- */
-function tourFullscreen() {
-  const btn = $('#tourFullscreen'); if (!btn) return;
-  btn.addEventListener('click', () => {
-    const el = $('.tour-embed'); if (!el) return;
-    if (document.fullscreenElement) document.exitFullscreen?.();
-    else (el.requestFullscreen || el.webkitRequestFullscreen)?.call(el);
-  });
-}
-
-/* ---------- tour: live setup switcher + booking request ---------- */
-function tourSetups() {
-  const frame = $('.tour-embed iframe');
-  const btns = $$('.tour-setups .setup[data-layout]');
-  if (frame && btns.length) {
-    btns.forEach(b => b.addEventListener('click', () => {
-      btns.forEach(x => x.classList.remove('is-active'));
-      b.classList.add('is-active');
-      frame.src = `tour/index.html?autoenter&layout=${b.dataset.layout}`;
-    }));
-  }
-
-  const form = $('#bookingForm');
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const note = $('#bkNote');
-    const get = (id) => $('#' + id);
-    const emailOK = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-    const checks = [
-      [get('bk-date'), !!get('bk-date').value],
-      [get('bk-guests'), Number(get('bk-guests').value) > 0],
-      [get('bk-name'), get('bk-name').value.trim().length > 1],
-      [get('bk-email'), emailOK(get('bk-email').value)],
-    ];
-    let ok = true;
-    checks.forEach(([f, valid]) => { f.closest('.field').classList.toggle('invalid', !valid); if (!valid) ok = false; });
-    if (!ok) { note.textContent = 'Please complete the highlighted fields.'; note.classList.add('err'); return; }
-    note.classList.remove('err');
-    note.textContent = 'Request sent — we’ll confirm by email today.';
-    toast('Date requested · we’ll be in touch');
-    const body = encodeURIComponent(
-      `Private event request\n\nDate: ${get('bk-date').value}\nGuests: ${get('bk-guests').value}\n` +
-      `Setup: ${get('bk-setup').value}\n\n${get('bk-notes').value}\n\n— ${get('bk-name').value} (${get('bk-email').value})`);
-    setTimeout(() => { location.href = `mailto:hello@speakeasytapas.ca?subject=Private%20event%20request&body=${body}`; }, 600);
-    form.reset();
-  });
 }
 
 /* ---------- menu tabs (Shareables / Dinner / Desserts) ---------- */
@@ -298,4 +282,4 @@ function tabs() {
 /* ---------- boot ---------- */
 injectAmbient();
 injectChrome();
-nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); tourFullscreen(); tourSetups();
+nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); packages();
