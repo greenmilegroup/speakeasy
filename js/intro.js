@@ -4,6 +4,13 @@
 import { $, $$, reduceMotion, finePointer } from './site.js';
 
 /* ---------- INTRO (slower) ---------- */
+const heroVideo = $('#heroVideo');
+const playHero = () => {
+  if (!heroVideo || reduceMotion) return;
+  heroVideo.currentTime = 0;
+  heroVideo.play().then(() => heroVideo.classList.add('is-playing')).catch(() => {});
+};
+
 (function intro() {
   const el = $('#intro');
   if (!el) return;
@@ -12,7 +19,7 @@ import { $, $$, reduceMotion, finePointer } from './site.js';
   let done = false;
   const unlock = () => body.classList.remove('locked');
 
-  if (seen) { el.classList.add('is-gone'); unlock(); return; }
+  if (seen) { el.classList.add('is-gone'); unlock(); playHero(); return; }
   body.classList.add('locked');
 
   const finish = () => {
@@ -20,9 +27,9 @@ import { $, $$, reduceMotion, finePointer } from './site.js';
     sessionStorage.setItem('se_seen', '1');
     if (reduceMotion) {
       el.style.transition = 'opacity .5s ease'; el.style.opacity = '0';
-      setTimeout(() => { el.classList.add('is-gone'); unlock(); }, 520); return;
+      setTimeout(() => { el.classList.add('is-gone'); unlock(); playHero(); }, 520); return;
     }
-    el.classList.add('is-open'); unlock();
+    el.classList.add('is-open'); unlock(); playHero();
     setTimeout(() => el.classList.add('is-gone'), 3000);   // matches slower door swing
   };
 
