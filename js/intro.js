@@ -4,11 +4,13 @@
 import { $, $$, reduceMotion, finePointer } from './site.js';
 
 /* ---------- INTRO (slower) ---------- */
-const heroVideo = $('#heroVideo');
+const heroVideos = $$('.hero__video');
 const playHero = () => {
-  if (!heroVideo || reduceMotion) return;
-  heroVideo.currentTime = 0;
-  heroVideo.play().then(() => heroVideo.classList.add('is-playing')).catch(() => {});
+  if (reduceMotion) return;
+  heroVideos.forEach(v => {
+    v.currentTime = 0;
+    v.play().then(() => v.classList.add('is-playing')).catch(() => {});
+  });
 };
 
 (function intro() {

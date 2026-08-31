@@ -239,7 +239,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
    HERO
    ========================================================================= */
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;overflow:hidden;isolation:isolate}
-.hero__bg{position:absolute;inset:-4% -4% -4% -4%;z-index:-3;
+.hero__bg{position:absolute;inset:-4% -4% -4% -4%;z-index:-4;
   background:url("../assets/img/interior.jpg") center/cover no-repeat;
   animation:kenburns 26s ease-in-out infinite alternate;transform-origin:60% 40%}
 @keyframes kenburns{from{transform:scale(1.05)}to{transform:scale(1.16) translateY(-1.5%)}}
@@ -1184,8 +1184,23 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .mobile-reserve svg{flex:none}
 @media (max-width:380px){.mobile-reserve a{font-size:.64rem;padding:11px 12px;letter-spacing:.06em}}
 
-/* ---- hero vibe reel: plays when the doors open ---- */
-.hero__video{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;
-  opacity:0;transition:opacity 1.2s ease}
+/* ---- hero vibe reel: plays when the doors open ----
+   The footage is vertical. On wide screens the whole frame is shown centred,
+   with a blurred copy of itself filling the space either side, so nothing is
+   cropped. On portrait screens it simply fills the viewport. */
+.hero__video{position:absolute;opacity:0;transition:opacity 1.2s ease;pointer-events:none}
 .hero__video.is-playing{opacity:1}
+
+.hero__video--blur{inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;
+  filter:blur(34px) saturate(1.15) brightness(.5);transform:scale(1.15)}
+.hero__video--main{inset:0;margin:auto;height:100%;width:auto;max-width:100%;
+  object-fit:contain;z-index:-2;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%)}
+
+@media (max-aspect-ratio:3/4){
+  .hero__video--blur{display:none}
+  .hero__video--main{width:100%;height:100%;object-fit:cover;
+    -webkit-mask-image:none;mask-image:none}
+}
 @media (prefers-reduced-motion:reduce){.hero__video{display:none}}
