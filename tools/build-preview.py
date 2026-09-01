@@ -90,18 +90,22 @@ MAIN_RE = re.compile(r'<main id="main">(.*)</main>', re.S)
 def inline_media(html):
     def video(m):
         block = m.group(0)
-        stem = re.search(r'<source src="assets/video/([^"/]+)\.(?:mp4|webm)"', block)
-        if not stem:
+        srcs = re.findall(r'<source src="assets/video/([^"/]+\.(?:mp4|webm))"', block)
+        keep = [k for k in srcs if k.rsplit(".", 1)[1] in VIDEO_FORMATS
+                and os.path.exists(os.path.join(ROOT, "assets/video", k))]
+        if not keep:
             return block
-        name = stem.group(1)
-        for ext in VIDEO_FORMATS:
-            key = f"{name}.{ext}"
-            path = os.path.join(ROOT, "assets/video", key)
-            if key not in VIDEOS and os.path.exists(path):
-                with open(path, "rb") as f:
-                    VIDEOS[key] = base64.b64encode(f.read()).decode("ascii")
-        open_tag = re.match(r"<video[^>]*>", block).group(0)
-        return open_tag.rstrip(">") + f' data-vid="{name}">' + "</video>"
+        open_tag = re.match(r"<video[^>]*>", block).group(0).rstrip(">")
+        name = keep[0].rsplit(".", 1)[0]
+        # The hero shows the same clip twice (sharp + blurred backdrop). Embed the
+        # payload once and let the duplicate copy the source at runtime.
+        if name in VIDEOS:
+            return open_tag + f' data-copy-src="{name}">' + "</video>"
+        VIDEOS[name] = keep
+        sources = "".join(
+            f'<source src="{data_uri("assets/video/" + k)}" type="{MIME[k.rsplit(".", 1)[1]]}"/>'
+            for k in keep)
+        return open_tag + f' data-vid-name="{name}">' + sources + "</video>"
 
     html = re.sub(r"<video[^>]*>.*?</video>", video, html, flags=re.S)
     return re.sub(r'(src|poster)="(assets/[^"]+)"',
@@ -182,25 +186,16 @@ const SEhash = (h) => { try { history.replaceState(null, '', h); } catch (e) {} 
 """
 
 router_js = """
-/* ---------- video: base64 payload -> Blob URL (data: URIs stall in Chromium) ---------- */
-const b64bytes = (b64) => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-const VIDEO_FORMATS = %%VIDEO_FORMATS%%;
-function mountVideos(root) {
-  $$('video[data-vid]', root).forEach(v => {
-    if (v.dataset.mounted) return;
-    v.dataset.mounted = '1';
-    let added = 0;
-    VIDEO_FORMATS.forEach(([ext, mime]) => {
-      const payload = document.getElementById(`vid-${v.dataset.vid}.${ext}`);
-      if (!payload || !v.canPlayType(mime)) return;
-      const blob = new Blob([b64bytes(payload.textContent.trim())], { type: mime });
-      const s = document.createElement('source');
-      s.src = URL.createObjectURL(blob); s.type = mime;
-      v.appendChild(s); added++;
-    });
-    if (!added) return;
-    v.load();
-    if (v.autoplay) v.play().catch(() => {});
+/* ---------- video: the hero's blurred backdrop reuses the sharp copy ---------- */
+function shareVideoSources(root = document) {
+  $$('video[data-copy-src]', root).forEach(v => {
+    if (v.dataset.copied) return;
+    const src = document.querySelector(`video[data-vid-name="${v.dataset.copySrc}"] source`);
+    if (!src) return;
+    v.dataset.copied = '1';
+    const s = document.createElement('source');
+    s.src = src.src; s.type = src.type;
+    v.appendChild(s); v.load();
   });
 }
 
@@ -224,7 +219,6 @@ function showRoute(page, hash) {
   const view = all.find(r => r.dataset.route === page);
   if (!started.has(page)) {
     started.add(page);
-    mountVideos(view);
     if (page === 'menu')   tabs();
     if (page === 'events') initEvents();
   }
@@ -252,6 +246,7 @@ document.addEventListener('click', (e) => {
 /* ---------- boot ---------- */
 CSS_IMG_VARS.forEach(i => document.documentElement.style.setProperty('--img-' + i, `url("${IMG[i]}")`));
 hydrateImages();
+shareVideoSources();
 injectAmbient();
 injectChrome();
 nav(); misc(); forms(); hours(); packages();
@@ -284,7 +279,6 @@ html = f"""<title>Speakeasy Ottawa</title>
 </main>
 <footer class="footer"></footer>
 {lightbox}
-{chr(10).join(f'<script type="text/plain" id="vid-{k}">{v}</script>' for k, v in VIDEOS.items())}
 <script>
 {combined_js}
 </script>
@@ -294,5 +288,5 @@ with open(OUT, "w", encoding="utf-8") as f:
     f.write(html)
 
 print("routes:", [r for r, _ in PAGES])
-print("videos:", sorted(VIDEOS))
+print("videos: inlined as data: URIs")
 print(f"size:   {os.path.getsize(OUT)/1048576:.2f} MB  ->  {OUT}")
