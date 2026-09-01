@@ -279,7 +279,65 @@ function tabs() {
   addEventListener('resize', () => { const a = $('.tab.is-active', bar); if (a) moveInk(a); });
 }
 
+/* ---------- video sound ----------
+   Browsers only let a clip start with its sound up after the visitor has
+   interacted with the page. So we ask for sound first and, if we're turned
+   down, run the picture silently and lift the mute on the first gesture that
+   comes along. A visitor who reaches for the mute button keeps it muted. */
+const waitingForGesture = new Set();
+const weSet = new WeakMap();                 // what *we* last asked muted to be
+const GESTURES = ['pointerdown', 'keydown', 'touchend', 'wheel'];
+
+const setMuted = (v, m) => { weSet.set(v, m); v.muted = m; };
+
+function liftMute() {
+  GESTURES.forEach(t => removeEventListener(t, liftMute, true));
+  waitingForGesture.forEach(v => {
+    waitingForGesture.delete(v);
+    if (v.dataset.userMuted === '1' || v.paused) return;
+    setMuted(v, false);
+    v.play().catch(() => {});
+  });
+}
+
+export function playWithSound(video) {
+  if (!video) return Promise.resolve();
+  if (!video.dataset.soundWired) {
+    video.dataset.soundWired = '1';
+    video.addEventListener('volumechange', () => {
+      if (weSet.get(video) === video.muted) return;      // our own doing
+      video.dataset.userMuted = video.muted ? '1' : '';  // the visitor's
+    });
+  }
+  if (video.dataset.userMuted === '1') return video.play().catch(() => {});
+
+  setMuted(video, false);
+  return video.play().catch(() => {
+    setMuted(video, true);                  // sound was blocked — keep the picture
+    if (!waitingForGesture.size) GESTURES.forEach(t => addEventListener(t, liftMute, { capture: true, passive: true }));
+    waitingForGesture.add(video);
+    return video.play().catch(() => {});
+  });
+}
+
+/* ---------- reels: roll, with sound, once they're on screen ---------- */
+function reels() {
+  const vids = $$('.reel__video');
+  if (!vids.length || reduceMotion) return;
+  const wePaused = new WeakSet();
+  vids.forEach(v => {
+    v.addEventListener('pause', () => { if (!wePaused.delete(v)) v.dataset.userPaused = '1'; });
+    v.addEventListener('play', () => (v.dataset.userPaused = ''));
+  });
+  const io = new IntersectionObserver(ents => ents.forEach(en => {
+    const v = en.target;
+    if (en.isIntersecting) { if (v.dataset.userPaused !== '1') playWithSound(v); }
+    else if (!v.paused) { wePaused.add(v); v.pause(); }
+  }), { threshold: 0.6 });
+  vids.forEach(v => io.observe(v));
+}
+
 /* ---------- boot ---------- */
 injectAmbient();
 injectChrome();
-nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); packages();
+nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); packages(); reels();

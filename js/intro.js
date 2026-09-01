@@ -1,7 +1,7 @@
 /* =========================================================================
    SPEAKEASY — home page only: "shhh" door intro, hero coin, hero parallax
    ========================================================================= */
-import { $, $$, reduceMotion, finePointer } from './site.js';
+import { $, $$, reduceMotion, finePointer, playWithSound } from './site.js';
 
 /* ---------- INTRO (slower) ---------- */
 const heroVideos = $$('.hero__video');
@@ -12,7 +12,10 @@ const playHero = () => {
     v.addEventListener('playing', show, { once: true });   // belt and braces:
     v.addEventListener('loadeddata', show, { once: true }); // reveal even if play() never resolves
     v.currentTime = 0;
-    v.play().then(show).catch(() => {});
+    // Both layers are the same clip, so only the front one carries the sound —
+    // the blurred backdrop stays silent or we'd hear it twice.
+    if (v.classList.contains('hero__video--main')) playWithSound(v).then(show, () => {});
+    else v.play().then(show).catch(() => {});
   });
 };
 
