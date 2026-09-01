@@ -254,7 +254,7 @@ CSS_IMG_VARS.forEach(i => document.documentElement.style.setProperty('--img-' + 
 hydrateImages();
 injectAmbient();
 injectChrome();
-nav(); misc(); forms(); hours(); packages(); stepSound();
+nav(); misc(); forms(); hours(); packages();
 showRoute('home');
 """
 router_js = router_js.replace("%%HREF2ROUTE%%", json.dumps(sorted(HREF2ROUTE.items())))

@@ -254,21 +254,6 @@ function misc() {
   $('#footLogo')?.addEventListener('click', () => { if (++clicks >= 3) { clicks = 0; toast('Password accepted. Tell no one.'); } clearTimeout(t); t = setTimeout(() => (clicks = 0), 1200); });
 }
 
-/* ---------- featured video: sound toggle (autoplay requires muted start) ---------- */
-function stepSound() {
-  const btn = $('#stepSound'), v = $('.stepin__video');
-  if (!btn || !v) return;
-  const paint = () => {
-    btn.textContent = v.muted ? '🔇 Sound off' : '🔊 Sound on';
-    btn.setAttribute('aria-pressed', String(!v.muted));
-    btn.setAttribute('aria-label', v.muted ? 'Turn sound on' : 'Turn sound off');
-    btn.classList.toggle('is-on', !v.muted);
-  };
-  btn.addEventListener('click', () => { v.muted = !v.muted; if (!v.muted) v.play().catch(() => {}); paint(); });
-  v.addEventListener('volumechange', paint);
-  paint();
-}
-
 /* ---------- menu tabs (Shareables / Dinner / Desserts) ---------- */
 function tabs() {
   const bar = $('.tabs'); if (!bar) return;
@@ -297,4 +282,4 @@ function tabs() {
 /* ---------- boot ---------- */
 injectAmbient();
 injectChrome();
-nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); packages(); stepSound();
+nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); packages();
