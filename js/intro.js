@@ -8,8 +8,11 @@ const heroVideos = $$('.hero__video');
 const playHero = () => {
   if (reduceMotion) return;
   heroVideos.forEach(v => {
+    const show = () => v.classList.add('is-playing');
+    v.addEventListener('playing', show, { once: true });   // belt and braces:
+    v.addEventListener('loadeddata', show, { once: true }); // reveal even if play() never resolves
     v.currentTime = 0;
-    v.play().then(() => v.classList.add('is-playing')).catch(() => {});
+    v.play().then(show).catch(() => {});
   });
 };
 
