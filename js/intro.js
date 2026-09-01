@@ -1,5 +1,5 @@
 /* =========================================================================
-   SPEAKEASY — home page only: "shhh" door intro, hero coin, hero parallax
+   SPEAKEASY — home page only: "shhh" door intro, hero parallax
    ========================================================================= */
 import { $, $$, reduceMotion, finePointer } from './site.js';
 
@@ -75,26 +75,6 @@ paintSound();
   el.addEventListener('click', (e) => { if (e.target === el) finish(true); });
   addEventListener('keydown', (e) => { if ((e.key === 'Escape' || e.key === 'Enter') && !done && !el.classList.contains('is-gone')) finish(true); });
   setTimeout(() => finish(false), reduceMotion ? 1600 : 7000);  // no gesture: stays muted          // slower auto-enter
-})();
-
-/* ---------- HERO 3D COIN ---------- */
-(function coin() {
-  const coin = $('#coin'); if (!coin || reduceMotion) return;
-  const inner = $('.coin__inner', coin);
-  let angle = 0, vel = 0.15, dragging = false, lastX = 0, lastT = 0;
-  const IDLE = 0.15, FRICTION = 0.94;
-  const loop = () => { if (!dragging) { vel = IDLE + (vel - IDLE) * FRICTION; angle += vel; } inner.style.setProperty('--spin', (angle % 360) + 'deg'); requestAnimationFrame(loop); };
-  requestAnimationFrame(loop);
-  coin.addEventListener('pointerdown', (e) => { dragging = true; lastX = e.clientX; lastT = performance.now(); coin.setPointerCapture?.(e.pointerId); });
-  coin.addEventListener('pointermove', (e) => {
-    if (!dragging) return;
-    const dx = e.clientX - lastX, dt = Math.max(1, performance.now() - lastT);
-    angle += dx * 0.6; vel = (dx * 0.6) / dt * 16; lastX = e.clientX; lastT = performance.now();
-    inner.style.setProperty('--spin', (angle % 360) + 'deg');
-  });
-  const end = () => (dragging = false);
-  coin.addEventListener('pointerup', end); coin.addEventListener('pointercancel', end);
-  coin.addEventListener('pointerleave', () => { if (dragging) dragging = false; });
 })();
 
 /* ---------- HERO PARALLAX ---------- */
