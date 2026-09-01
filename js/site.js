@@ -172,7 +172,7 @@ function forms() {
     note.classList.remove('err'); note.textContent = 'Thank you — we’ll be in touch soon.';
     toast('Message sent · tell no one');
     const body = encodeURIComponent(`${msg.value}\n\n— ${name.value} (${email.value})`);
-    setTimeout(() => { location.href = `mailto:hello@speakeasytapas.ca?subject=Website%20enquiry&body=${body}`; }, 600);
+    setTimeout(() => { location.href = `mailto:info@speakeasyottawa.com?subject=Website%20enquiry&body=${body}`; }, 600);
     contact.reset();
   });
   const job = $('#careersForm');

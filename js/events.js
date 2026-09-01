@@ -32,7 +32,7 @@ function icsFor(ev) {
   const z = d => `${d.getUTCFullYear()}${pad(d.getUTCMonth()+1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z`;
   const end = new Date(ev.date.getTime() + ev.durationMin * 60000);
   return 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Speakeasy Ottawa//EN\r\nBEGIN:VEVENT\r\n'
-    + `UID:${ev.id}@speakeasytapas.ca\r\nDTSTAMP:${z(new Date())}\r\nDTSTART:${z(ev.date)}\r\nDTEND:${z(end)}\r\n`
+    + `UID:${ev.id}@speakeasyottawa.com\r\nDTSTAMP:${z(new Date())}\r\nDTSTART:${z(ev.date)}\r\nDTEND:${z(end)}\r\n`
     + (ev.recurrence === 'weekly' ? 'RRULE:FREQ=WEEKLY\r\n' : '')
     + `SUMMARY:${ev.title} — Speakeasy Ottawa\r\nLOCATION:55 York Street, Ottawa, ON\r\n`
     + `DESCRIPTION:${(ev.blurb || '').replace(/,/g, '\\,')}\r\nEND:VEVENT\r\nEND:VCALENDAR`;
