@@ -5,16 +5,48 @@ import { $, $$, reduceMotion, finePointer } from './site.js';
 
 /* ---------- INTRO (slower) ---------- */
 const heroVideos = $$('.hero__video');
-const playHero = () => {
+const heroMain = $('#heroVideo');
+const heroBg = $('#heroVideoBg');
+const heroSound = $('#heroSound');
+
+const paintSound = () => {
+  if (!heroSound || !heroMain) return;
+  const on = !heroMain.muted;
+  heroSound.textContent = on ? '🔊 Sound on' : '🔇 Sound off';
+  heroSound.setAttribute('aria-pressed', String(on));
+  heroSound.setAttribute('aria-label', on ? 'Turn sound off' : 'Turn sound on');
+  heroSound.classList.toggle('is-on', on);
+};
+
+/* Autoplay with sound is only permitted off a user gesture. Entering through
+   the doors is one, so that path gets audio; the 7s auto-open and returning
+   visitors do not, and fall back to muted with the toggle offered. */
+const playHero = (withSound = false) => {
   if (reduceMotion) return;
   heroVideos.forEach(v => {
     const show = () => v.classList.add('is-playing');
-    v.addEventListener('playing', show, { once: true });   // belt and braces:
-    v.addEventListener('loadeddata', show, { once: true }); // reveal even if play() never resolves
+    v.addEventListener('playing', show, { once: true });
+    v.addEventListener('loadeddata', show, { once: true });
     v.currentTime = 0;
-    v.play().then(show).catch(() => {});
+  });
+  if (heroBg) { heroBg.muted = true; heroBg.play().catch(() => {}); }  // backdrop stays silent
+  if (!heroMain) return;
+  heroMain.muted = !withSound;
+  heroMain.play().then(paintSound).catch(() => {
+    heroMain.muted = true;                     // blocked without a gesture
+    heroMain.play().catch(() => {});
+    paintSound();
   });
 };
+
+heroSound?.addEventListener('click', () => {
+  if (!heroMain) return;
+  heroMain.muted = !heroMain.muted;
+  if (!heroMain.muted) heroMain.play().catch(() => {});
+  paintSound();
+});
+heroMain?.addEventListener('volumechange', paintSound);
+paintSound();
 
 (function intro() {
   const el = $('#intro');
@@ -27,22 +59,22 @@ const playHero = () => {
   if (seen) { el.classList.add('is-gone'); unlock(); playHero(); return; }
   body.classList.add('locked');
 
-  const finish = () => {
+  const finish = (withSound = false) => {
     if (done) return; done = true;
     sessionStorage.setItem('se_seen', '1');
     if (reduceMotion) {
       el.style.transition = 'opacity .5s ease'; el.style.opacity = '0';
-      setTimeout(() => { el.classList.add('is-gone'); unlock(); playHero(); }, 520); return;
+      setTimeout(() => { el.classList.add('is-gone'); unlock(); playHero(withSound); }, 520); return;
     }
-    el.classList.add('is-open'); unlock(); playHero();
+    el.classList.add('is-open'); unlock(); playHero(withSound);
     setTimeout(() => el.classList.add('is-gone'), 3000);   // matches slower door swing
   };
 
-  $('.intro__enter', el)?.addEventListener('click', finish);
-  $('.intro__skip', el)?.addEventListener('click', finish);
-  el.addEventListener('click', (e) => { if (e.target === el) finish(); });
-  addEventListener('keydown', (e) => { if ((e.key === 'Escape' || e.key === 'Enter') && !done && !el.classList.contains('is-gone')) finish(); });
-  setTimeout(finish, reduceMotion ? 1600 : 7000);          // slower auto-enter
+  $('.intro__enter', el)?.addEventListener('click', () => finish(true));
+  $('.intro__skip', el)?.addEventListener('click', () => finish(true));
+  el.addEventListener('click', (e) => { if (e.target === el) finish(true); });
+  addEventListener('keydown', (e) => { if ((e.key === 'Escape' || e.key === 'Enter') && !done && !el.classList.contains('is-gone')) finish(true); });
+  setTimeout(() => finish(false), reduceMotion ? 1600 : 7000);  // no gesture: stays muted          // slower auto-enter
 })();
 
 /* ---------- HERO 3D COIN ---------- */
