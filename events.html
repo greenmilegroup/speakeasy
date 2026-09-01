@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>Events · Speakeasy Tapas Lounge</title>
-<meta name="description" content="Live music nightly plus speed dating, comedy and more at Speakeasy Tapas Lounge. Swipe to save the nights you love."/>
+<title>Events · Speakeasy Ottawa</title>
+<meta name="description" content="Live music nightly plus speed dating, comedy and more at Speakeasy Ottawa. See what's on and book your table."/>
 <meta name="theme-color" content="#0a0a0b"/>
 <meta property="og:type" content="restaurant"/>
-<meta property="og:title" content="Events · Speakeasy Tapas Lounge"/>
-<meta property="og:description" content="Live music nightly plus speed dating, comedy and more at Speakeasy Tapas Lounge. Swipe to save the nights you love."/>
+<meta property="og:title" content="Events · Speakeasy Ottawa"/>
+<meta property="og:description" content="Live music nightly plus speed dating, comedy and more at Speakeasy Ottawa. See what's on and book your table."/>
 <meta property="og:image" content="assets/og-image.jpg"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" href="assets/favicon.ico" sizes="any"/>
@@ -27,18 +27,24 @@
 <section class="page-hero has-video" data-reveal>
   <video class="page-hero__video" aria-hidden="true" autoplay muted loop playsinline preload="metadata" poster="assets/img/poster-live.jpg"><source src="assets/video/live-music.webm" type="video/webm"/><source src="assets/video/live-music.mp4" type="video/mp4"/></video>
   <div class="page-hero__scrim"></div>
-  <div class="page-hero__inner"><svg class="page-hero__ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8 12c1-.6 2 .2 2 1-1 .6-2-.2-2-1zm8 0c0 .8-1 1.6-2 1 0-.8 1-1.6 2-1z"/></svg><p class="kicker">Every night on the stage</p><h1>Events</h1><p class="lead">Live music every night from 7 PM — plus special nights worth crossing town for. <strong>Swipe right on the ones you're into.</strong></p></div>
+  <div class="page-hero__inner"><svg class="page-hero__ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8 12c1-.6 2 .2 2 1-1 .6-2-.2-2-1zm8 0c0 .8-1 1.6-2 1 0-.8 1-1.6 2-1z"/></svg><p class="kicker">Every night on the stage</p><h1>Events</h1><p class="lead">Live music every night from 7 PM — plus special nights worth crossing town for. <strong>Here's what's on.</strong></p></div>
 </section>
-<section class="section" data-reveal>
-  <div class="swipe">
-    <div class="swipe__deck" id="swipeDeck"></div>
-    <div class="swipe__buttons" id="swipeButtons">
-      <button class="swipe__btn swipe__btn--no" id="btnNo" aria-label="Pass">✕</button>
-      <button class="swipe__btn swipe__btn--undo" id="btnUndo" aria-label="Undo">↺</button>
-      <button class="swipe__btn swipe__btn--yes" id="btnYes" aria-label="Interested">♥</button>
+<section class="section whatson" data-reveal>
+  <div class="whatson__filters" role="tablist" aria-label="Filter events">
+    <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+    <button class="chip" data-filter="music" role="tab" aria-selected="false">Live Music</button>
+    <button class="chip" data-filter="comedy" role="tab" aria-selected="false">Comedy</button>
+    <button class="chip" data-filter="special" role="tab" aria-selected="false">Special Nights</button>
+  </div>
+  <div id="whatsonFeature" class="feature" aria-live="polite"></div>
+  <ul id="whatsonList" class="wlist"></ul>
+  <div id="whatsonEmpty" class="whatson__empty" hidden>
+    <p class="whatson__empty-title">Live music every night from 7 PM</p>
+    <p class="whatson__empty-sub">Nothing else on the books just yet — call for tonight's line-up, or see everything we've listed.</p>
+    <div class="gallery__empty-cta">
+      <a class="btn btn--gold" href="tel:+16132416221">Call 613-241-6221</a>
+      <a class="btn btn--ghost" href="https://www.eventbrite.ca/o/speakeasy-tapas-lounge-57744410063" target="_blank" rel="noopener">All events on Eventbrite</a>
     </div>
-    <p class="swipe__hint">Drag a card — or use ✕ / ♥ (or the ← → arrow keys).</p>
-    <div class="swipe__recap" id="swipeRecap" aria-live="polite"></div>
   </div>
 </section>
 <section class="section reel" data-reveal>

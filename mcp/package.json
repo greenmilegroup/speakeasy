@@ -1,0 +1,9 @@
+{
+  "name": "speakeasy-events-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server so Claude can manage Speakeasy Tapas Lounge events",
+  "bin": { "speakeasy-events": "server.js" },
+  "dependencies": { "@modelcontextprotocol/sdk": "^1.0.0" }
+}
