@@ -122,26 +122,46 @@ for route, fname in PAGES:
 
 # ------------------------------------------------------------------ JS
 site_js = re.sub(r"^export\s+", "", read("js/site.js"), flags=re.M)
-site_js = site_js.replace(
-    "nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); packages();", "")
+site_js = re.sub(r"^nav\(\); reveal\(\);.*?$", "", site_js, flags=re.M)
 site_js = site_js.replace('src="assets/logo.png"',
                           f'src="${{IMG[{img_ref("assets/logo.png")}]}}"')
 # history.replaceState throws inside a sandboxed frame
 site_js = site_js.replace("history.replaceState(null, '', '#' + t.id.replace('tab-', ''));",
                           "SEhash('#' + t.id.replace('tab-', ''));")
 
-events_js = re.sub(r"^import\s*\{[^}]*\}\s*from\s*'\./site\.js';\n", "", read("js/events.js"), flags=re.M)
-events_js = events_js.replace("background-image:url('${ev.img}')", "background-image:url('${SE_ASSETS[ev.img]}')")
-events_js = events_js.replace('src="${ev.img}"', 'src="${SE_ASSETS[ev.img]}"')
-events_js = events_js.replace('src="assets/img/stamps/${ev.art}.png"',
-                              'src="${SE_ASSETS["assets/img/stamps/" + ev.art + ".png"]}"')
-events_js = events_js.replace("const deck = $('#swipeDeck');\nif (deck) run();",
-                              "function initEvents(){ const deck = $('#swipeDeck'); if (deck) run(deck); }")
-events_js = events_js.replace("function run() {\n  const recap", "function run(deck) {\n  const recap")
-events_js = events_js.replace(
-    "$('#reBtn')?.addEventListener('click', () => location.reload());",
-    "$('#reBtn')?.addEventListener('click', () => { deck.innerHTML=''; deck.style.display='';"
-    " buttons.style.display=''; recap.classList.remove('show'); recap.innerHTML=''; run(deck); });")
+# --- events: the What's On board is data-driven and fetches its seed JSON.
+# There is no network inside a single-file preview, so the data is inlined and
+# the fetch short-circuited.
+def strip_mod(t):
+    t = re.sub(r"^import\s[^\n]*\n", "", t, flags=re.M)
+    return re.sub(r"^export\s+(?=const|function|async|let|var)", "", t, flags=re.M)
+
+config_js = strip_mod(read("js/config.js"))
+# site.js and config.js both declare TEL; concatenating them into one scope
+# would be a duplicate declaration, so drop the later copy (same value).
+for name in re.findall(r"^const (\w+)", site_js, flags=re.M):
+    config_js = re.sub(rf"^const {name}\s*=.*$", "", config_js, flags=re.M)
+events_data_js = strip_mod(read("js/events-data.js"))
+events_data_js = events_data_js.replace(
+    "  const res = await fetch('assets/data/events.json', { cache: 'no-store' });\n"
+    "  if (!res.ok) throw new Error('events.json ' + res.status);\n"
+    "  return res.json();",
+    "  return EVENTS_SEED;")
+seed = json.loads(read("assets/data/events.json"))
+for row in seed:
+    u = row.get("image_url")
+    if u and u.startswith("assets/"):
+        row["image_url"] = f"@@IMG{img_ref(u)}@@"
+seed_js = re.sub(r'"@@IMG(\d+)@@"', r"IMG[\1]", json.dumps(seed, ensure_ascii=False))
+events_data_js = "const EVENTS_SEED = " + seed_js + ";\n" + events_data_js
+
+events_js = strip_mod(read("js/events.js"))
+# run on demand rather than at import time
+# `feature` is referenced throughout the module, so keep the binding and only
+# defer the call until the events route is first shown.
+events_js = events_js.replace("const feature = $('#whatsonFeature');\nif (feature) start();",
+                              "let feature = null;\n"
+                              "function initEvents(){ feature = $('#whatsonFeature'); if (feature) start(); }")
 
 intro_js = re.sub(r"^import\s*\{[^}]*\}\s*from\s*'\./site\.js';\n", "", read("js/intro.js"), flags=re.M)
 intro_js = intro_js.replace("sessionStorage.getItem('se_seen') === '1'", "SEstore.get('se_seen') === '1'")
@@ -234,7 +254,7 @@ CSS_IMG_VARS.forEach(i => document.documentElement.style.setProperty('--img-' + 
 hydrateImages();
 injectAmbient();
 injectChrome();
-nav(); misc(); forms(); hours(); packages();
+nav(); misc(); forms(); hours(); packages(); stepSound();
 showRoute('home');
 """
 router_js = router_js.replace("%%HREF2ROUTE%%", json.dumps(sorted(HREF2ROUTE.items())))
@@ -249,7 +269,8 @@ lightbox = re.search(r'<div class="lightbox".*?</div>\s*(?=<script)', body, re.S
 # built last: every stage above registers into IMG_PATHS as it rewrites references
 img_js = ("const IMG = " + json.dumps([data_uri(p) for p in IMG_PATHS]) + ";\n"
           "const CSS_IMG_VARS = " + json.dumps(sorted(CSS_IMG_VARS)) + ";")
-combined_js = "\n".join([img_js, prelude, assets_js, site_js, events_js, intro_js, router_js])
+combined_js = "\n".join([img_js, prelude, assets_js, site_js,
+                         config_js, events_data_js, events_js, intro_js, router_js])
 
 html = f"""<title>Speakeasy Ottawa</title>
 <style>

@@ -1,0 +1,27 @@
+[
+  { "id": "first-dates", "title": "15 First Dates", "kicker": "Ottawa Speed Dating", "category": "special",
+    "blurb": "Meet local singles over real conversations and real connections — in the most charming hideaway in the ByWard Market.",
+    "starts_at": "2026-08-23T13:00:00-04:00", "duration_min": 180, "recurrence": "none",
+    "price_text": "Ages 35–45", "image_url": "assets/img/event-15-first-dates.jpg",
+    "ticket_url": "https://www.eventbrite.ca/o/speakeasy-tapas-lounge-57744410063", "published": true },
+
+  { "id": "jazz", "title": "Live Jazz Nights", "kicker": "On the stage", "category": "music",
+    "blurb": "Brass, keys and a low candlelit hum. The line-up changes with the night and the last set runs late.",
+    "starts_at": null, "recurrence": "weekly", "weekday": 5, "time": "19:00", "duration_min": 180,
+    "price_text": "No cover", "image_url": "assets/img/ig-sax.jpg", "ticket_url": "", "published": true },
+
+  { "id": "golden-hour", "title": "Golden-Hour Cocktails", "kicker": "Aperitivo", "category": "special",
+    "blurb": "Signature cocktails poured with prohibition swagger while the sun goes down over York Street.",
+    "starts_at": null, "recurrence": "weekly", "weekday": 4, "time": "16:00", "duration_min": 120,
+    "price_text": "Feature pours", "image_url": "assets/img/blue-lagoon.jpg", "ticket_url": "", "published": true },
+
+  { "id": "comedy", "title": "Comedy Night", "kicker": "Comedy", "category": "comedy",
+    "blurb": "Laugh in the dark. A rotating bill of Ottawa's funniest, close enough to heckle (politely).",
+    "starts_at": null, "recurrence": "weekly", "weekday": 4, "time": "20:00", "duration_min": 120,
+    "price_text": "Local line-up", "image_url": "assets/img/stamps/comedy.png", "ticket_url": "", "published": true },
+
+  { "id": "strings-soul", "title": "Strings & Soul Weekends", "kicker": "Weekend", "category": "music",
+    "blurb": "The late set runs hot — soul, funk and strings until the candles burn low.",
+    "starts_at": null, "recurrence": "weekly", "weekday": 6, "time": "21:00", "duration_min": 180,
+    "price_text": "Late set", "image_url": "assets/img/ig-cello.jpg", "ticket_url": "", "published": true }
+]
