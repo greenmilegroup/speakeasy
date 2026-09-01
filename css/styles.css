@@ -239,7 +239,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
    HERO
    ========================================================================= */
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;overflow:hidden;isolation:isolate}
-.hero__bg{position:absolute;inset:-4% -4% -4% -4%;z-index:-2;
+.hero__bg{position:absolute;inset:-4% -4% -4% -4%;z-index:-4;
   background:url("../assets/img/interior.jpg") center/cover no-repeat;
   animation:kenburns 26s ease-in-out infinite alternate;transform-origin:60% 40%}
 @keyframes kenburns{from{transform:scale(1.05)}to{transform:scale(1.16) translateY(-1.5%)}}
@@ -342,6 +342,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .ck__top h4{font-family:var(--f-serif);font-weight:600;font-size:1.35rem;color:var(--cream);margin:0;line-height:1.15}
 .price{font-family:var(--f-deco);color:var(--gold-hi);font-size:1.05rem;letter-spacing:.04em;flex:none}
 .price::before{content:"$"}
+.price--mp::before{content:none}   /* market price — no currency prefix */
 .ck__ing{color:var(--gold);font-size:.86rem;letter-spacing:.02em;margin:.5rem 0 .6rem;font-style:italic}
 .ck__note{color:var(--cream-2);font-size:.98rem;margin:0;line-height:1.45}
 
@@ -1131,24 +1132,6 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .mobile-reserve svg{flex:none}
 @media (max-width:380px){.mobile-reserve a{font-size:.64rem;padding:11px 12px;letter-spacing:.06em}}
 
-/* =========================================================================
-   v9 — "Step inside" featured arrival video
-   ========================================================================= */
-.stepin__inner{display:grid;grid-template-columns:1fr .82fr;gap:clamp(30px,5vw,68px);align-items:center}
-.stepin__copy .lead{margin-bottom:1.6rem}
-.stepin__player{position:relative;justify-self:center;width:min(84vw,340px);border-radius:26px;overflow:hidden;
-  border:1px solid rgba(201,162,39,.34);background:#0a0a0b;line-height:0;
-  box-shadow:0 40px 80px -30px #000,0 0 0 8px rgba(255,255,255,.02)}
-.stepin__video{width:100%;height:auto;display:block;background:#0a0a0b}
-.stepin__glow{position:absolute;inset:-32%;z-index:-1;pointer-events:none;
-  background:radial-gradient(closest-side,rgba(232,36,28,.32),transparent 72%);filter:blur(28px)}
-.stepin{position:relative}
-.stepin::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(60% 60% at 72% 50%,rgba(125,15,19,.2),transparent 70%)}
-@media (max-width:960px){
-  .stepin__inner{grid-template-columns:1fr;text-align:center}
-  .stepin__copy .btn{margin-inline:auto}
-}
 
 /* v9b — optical centring: letter-spacing adds a trailing space, so centred
    lines sit left of true centre. Compensate by half the tracking. */
@@ -1158,12 +1141,6 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .page-hero h1{text-indent:.015em}
 
 /* v9c — sound toggle on the featured video */
-.stepin__sound{position:absolute;left:12px;bottom:12px;z-index:4;padding:8px 14px;border-radius:999px;
-  background:rgba(6,6,7,.72);backdrop-filter:blur(8px);border:1px solid rgba(244,236,216,.28);color:#fff;
-  font-family:var(--f-deco);letter-spacing:.12em;text-transform:uppercase;font-size:.6rem;cursor:pointer;
-  transition:.25s var(--ease)}
-.stepin__sound:hover{border-color:var(--gold);color:var(--gold-hi)}
-.stepin__sound.is-on{border-color:rgba(232,36,28,.8);background:rgba(120,12,14,.6)}
 
 /* =========================================================================
    v10 — "What's On" board (replaces the swipe deck)
@@ -1330,3 +1307,24 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 @media (max-width:560px){.photo__preview{grid-template-columns:1fr}}
 .field--sub{margin-top:14px}
 .field--sub label{font-size:.7rem;opacity:.78}
+
+/* ---- hero vibe reel: plays when the doors open ----
+   The footage is vertical. On wide screens the whole frame is shown centred,
+   with a blurred copy of itself filling the space either side, so nothing is
+   cropped. On portrait screens it simply fills the viewport. */
+.hero__video{position:absolute;opacity:0;transition:opacity 1.2s ease;pointer-events:none}
+.hero__video.is-playing{opacity:1}
+
+.hero__video--blur{inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;
+  filter:blur(34px) saturate(1.15) brightness(.5);transform:scale(1.15)}
+.hero__video--main{inset:0;margin:auto;height:100%;width:auto;max-width:100%;
+  object-fit:contain;z-index:-2;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%)}
+
+@media (max-aspect-ratio:3/4){
+  .hero__video--blur{display:none}
+  .hero__video--main{width:100%;height:100%;object-fit:cover;
+    -webkit-mask-image:none;mask-image:none}
+}
+@media (prefers-reduced-motion:reduce){.hero__video{display:none}}

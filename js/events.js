@@ -31,10 +31,10 @@ function countdown(d) {
 function icsFor(ev) {
   const z = d => `${d.getUTCFullYear()}${pad(d.getUTCMonth()+1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z`;
   const end = new Date(ev.date.getTime() + ev.durationMin * 60000);
-  return 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Speakeasy Tapas Lounge//EN\r\nBEGIN:VEVENT\r\n'
+  return 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Speakeasy Ottawa//EN\r\nBEGIN:VEVENT\r\n'
     + `UID:${ev.id}@speakeasytapas.ca\r\nDTSTAMP:${z(new Date())}\r\nDTSTART:${z(ev.date)}\r\nDTEND:${z(end)}\r\n`
     + (ev.recurrence === 'weekly' ? 'RRULE:FREQ=WEEKLY\r\n' : '')
-    + `SUMMARY:${ev.title} — Speakeasy Tapas Lounge\r\nLOCATION:55 York Street, Ottawa, ON\r\n`
+    + `SUMMARY:${ev.title} — Speakeasy Ottawa\r\nLOCATION:55 York Street, Ottawa, ON\r\n`
     + `DESCRIPTION:${(ev.blurb || '').replace(/,/g, '\\,')}\r\nEND:VEVENT\r\nEND:VCALENDAR`;
 }
 
@@ -97,7 +97,7 @@ function schema(list) {
     startDate: ev.date.toISOString(), description: ev.blurb,
     ...(ev.imageUrl ? { image: new URL(ev.imageUrl, location.href).href } : {}),
     eventStatus: 'https://schema.org/EventScheduled',
-    location: { '@type': 'Place', name: 'Speakeasy Tapas Lounge',
+    location: { '@type': 'Place', name: 'Speakeasy Ottawa',
       address: { '@type': 'PostalAddress', streetAddress: '55 York Street', addressLocality: 'Ottawa', addressRegion: 'ON', postalCode: 'K1N 9B7', addressCountry: 'CA' } },
     ...(ev.ticketUrl ? { offers: { '@type': 'Offer', url: ev.ticketUrl } } : {}),
   }));
