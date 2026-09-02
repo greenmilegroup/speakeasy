@@ -1315,3 +1315,51 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .hero__sound:hover{color:var(--cream);border-color:rgba(244,236,216,.55)}
 .hero__sound.is-on{color:#fff;border-color:rgba(232,36,28,.85);background:rgba(120,12,14,.6)}
 @media (prefers-reduced-motion:reduce){.hero__sound{display:none}}
+
+/* ---- the hero hands the screen over to the reel ----
+   Two stages, so nothing competes for attention at once. First the writing
+   goes: the wordmark and tagline lift, dissolve and blur away while the scrim
+   eases back, leaving the room on screen. Then the buttons leave the frame.
+   On wide screens the reel is a tall column with blurred margins either side,
+   so they cross-fade into the left margin, where they never cover the
+   footage — a row where there is room, a stack where there is not, and out of
+   sight when neither fits. Nothing leaves the DOM; the h1 still reads for
+   search and screen readers. */
+.hero__title,.hero__tag,.hero .deco-divider{
+  transition:opacity 1.5s ease,transform 1.5s ease,filter 1.5s ease}
+.hero__scrim{transition:opacity 1.8s ease}
+
+.hero.is-reel .hero__title,
+.hero.is-reel .hero__tag,
+.hero.is-reel .deco-divider{
+  opacity:0;transform:translateY(-24px);filter:blur(8px);pointer-events:none}
+.hero.is-reel .hero__scrim{opacity:.4}
+/* the ghost button loses the scrim's help against bright footage */
+.hero.is-reel .btn--ghost{background:rgba(10,10,11,.45);backdrop-filter:blur(5px)}
+
+/* stage two — the buttons dissolve where they stand and return in the corner */
+.hero__cta{transition:opacity .55s ease}
+.hero__cta.is-moving{opacity:0}
+@media (min-width:961px){
+  /* the copy block is the CTA's offset parent until now — hand it to the hero
+     so "bottom left" means the corner of the screen, not the corner of the copy */
+  .hero.is-docked .hero__content{position:static}
+  .hero.is-docked .hero__cta{position:absolute;margin:0;z-index:3;
+    left:clamp(16px,3vw,30px);bottom:clamp(16px,3vw,30px);justify-content:flex-start}
+  .hero.is-stacked .hero__cta{flex-direction:column;align-items:flex-start;gap:10px}
+}
+/* no room beside the reel, or a phone where the fixed bar at the foot of the
+   screen already carries both of these actions — either way, the reel gets
+   the whole frame rather than a second set of buttons */
+.hero.is-tucked .hero__cta{opacity:0;pointer-events:none}
+
+/* the reel never plays here, so nothing needs to step aside */
+@media (prefers-reduced-motion:reduce){
+  .hero__title,.hero__tag,.hero .deco-divider,.hero__cta,.hero__scrim{transition:none}
+  .hero.is-reel .hero__title,
+  .hero.is-reel .hero__tag,
+  .hero.is-reel .deco-divider{opacity:1;transform:none;filter:none}
+  .hero.is-reel .hero__scrim{opacity:1}
+  .hero.is-docked .hero__cta{position:static}
+  .hero.is-tucked .hero__cta{opacity:1;pointer-events:auto}
+}
