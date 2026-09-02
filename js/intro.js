@@ -43,19 +43,49 @@ const playHero = (withSound = false) => {
 };
 
 /* ---------- hand the screen over to the reel ----------
-   The wordmark has had its moment; a few seconds in it lifts away so the room
-   can be seen, and the buttons settle lower down. One-way: once the reel has
-   the screen, it keeps it. */
-const REEL_HOLD = 5200;
+   Staged so nothing competes: the writing dissolves first, then the buttons
+   leave the frame for the corner. One-way — once the reel has the screen it
+   keeps it. */
+const REEL_HOLD = 5200;   // the wordmark's moment before the reel takes over
+const COPY_FADE = 1500;   // matches the CSS fade, so the buttons wait their turn
+const CTA_FADE  = 550;    // matches .hero__cta's transition
+const WIDE = '(min-width:961px)';
+const REEL_CLEARANCE = 18;
 let retireTimer = 0;
+
+/* On wide screens the reel is a tall column with blurred margins either side.
+   The buttons are only welcome in that margin if they clear the footage — the
+   reel's edges sit under an 8% mask, so that much overlap costs nothing. */
+const clearsReel = () => {
+  const reel = $('#heroVideo'), cta = $('.hero__cta');
+  if (!reel || !cta) return false;
+  const r = reel.getBoundingClientRect(), c = cta.getBoundingClientRect();
+  return c.right + REEL_CLEARANCE <= r.left + r.width * 0.08;
+};
+
+const dockCta = () => {
+  const hero = $('#hero'), cta = $('.hero__cta');
+  if (!hero || !cta || hero.classList.contains('is-docked')) return;
+  cta.classList.add('is-moving');                    // dissolve where it stands
+  setTimeout(() => {
+    hero.classList.add('is-docked');                 // ...and return in the corner
+    if (!matchMedia(WIDE).matches) hero.classList.add('is-tucked');
+    else if (!clearsReel()) {
+      hero.classList.add('is-stacked');              // a row will not fit; try a column
+      if (!clearsReel()) hero.classList.add('is-tucked');
+    }
+    cta.classList.remove('is-moving');
+  }, CTA_FADE);
+};
 
 const retireCopy = () => {
   const hero = $('#hero');
   if (!hero || reduceMotion || hero.classList.contains('is-reel')) return;
-  // parallax writes inline transforms, which would outrank the stylesheet and
-  // pin the copy where it stands — hand these elements back to the CSS first
+  // parallax writes inline transforms, which outrank the stylesheet and would
+  // pin these elements where they stand — hand them back to CSS first
   $$('[data-parallax]', hero).forEach(l => (l.style.transform = ''));
   hero.classList.add('is-reel');
+  setTimeout(dockCta, COPY_FADE);
 };
 
 const scheduleRetire = () => {
