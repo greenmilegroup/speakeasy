@@ -31,12 +31,36 @@ const playHero = (withSound = false) => {
   });
   if (heroBg) { heroBg.muted = true; heroBg.play().catch(() => {}); }  // backdrop stays silent
   if (!heroMain) return;
+  // only once there is picture to look at — if the reel never loads, the copy stays
+  heroMain.addEventListener('playing', scheduleRetire, { once: true });
+  heroMain.addEventListener('loadeddata', scheduleRetire, { once: true });
   heroMain.muted = !withSound;
   heroMain.play().then(paintSound).catch(() => {
     heroMain.muted = true;                     // blocked without a gesture
     heroMain.play().catch(() => {});
     paintSound();
   });
+};
+
+/* ---------- hand the screen over to the reel ----------
+   The wordmark has had its moment; a few seconds in it lifts away so the room
+   can be seen, and the buttons settle lower down. One-way: once the reel has
+   the screen, it keeps it. */
+const REEL_HOLD = 5200;
+let retireTimer = 0;
+
+const retireCopy = () => {
+  const hero = $('#hero');
+  if (!hero || reduceMotion || hero.classList.contains('is-reel')) return;
+  // parallax writes inline transforms, which would outrank the stylesheet and
+  // pin the copy where it stands — hand these elements back to the CSS first
+  $$('[data-parallax]', hero).forEach(l => (l.style.transform = ''));
+  hero.classList.add('is-reel');
+};
+
+const scheduleRetire = () => {
+  if (retireTimer || reduceMotion) return;
+  retireTimer = setTimeout(retireCopy, REEL_HOLD);
 };
 
 heroSound?.addEventListener('click', () => {
@@ -84,6 +108,7 @@ paintSound();
   const layers = $$('[data-parallax]', hero); if (!layers.length) return;
   let raf = 0;
   hero.addEventListener('pointermove', (e) => {
+    if (hero.classList.contains('is-reel')) return;   // the copy is gone; leave the buttons where CSS put them
     const r = hero.getBoundingClientRect();
     const dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5;
     cancelAnimationFrame(raf);

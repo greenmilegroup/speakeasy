@@ -1315,3 +1315,32 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .hero__sound:hover{color:var(--cream);border-color:rgba(244,236,216,.55)}
 .hero__sound.is-on{color:#fff;border-color:rgba(232,36,28,.85);background:rgba(120,12,14,.6)}
 @media (prefers-reduced-motion:reduce){.hero__sound{display:none}}
+
+/* ---- the hero hands the screen over to the reel ----
+   The wordmark gets its moment, then lifts away and dissolves so the room
+   behind it can be seen. The buttons stay — they just settle into the lower
+   third — and the scrim eases back so the footage reads clearly. Nothing
+   leaves the DOM, so the h1 is still there for search and screen readers. */
+.hero__title,.hero__tag,.hero .deco-divider{
+  transition:opacity 1.5s ease,transform 1.5s ease,filter 1.5s ease}
+.hero__cta{transition:transform 1.5s cubic-bezier(.22,.61,.36,1)}
+.hero__scrim{transition:opacity 1.8s ease}
+
+.hero.is-reel .hero__title,
+.hero.is-reel .hero__tag,
+.hero.is-reel .deco-divider{
+  opacity:0;transform:translateY(-24px);filter:blur(8px);pointer-events:none}
+.hero.is-reel .hero__cta{transform:translateY(clamp(84px,16svh,180px))}
+.hero.is-reel .hero__scrim{opacity:.4}
+/* the ghost button loses the scrim's help, so give it its own footing */
+.hero.is-reel .btn--ghost{background:rgba(10,10,11,.42);backdrop-filter:blur(5px)}
+
+/* the reel never plays here, so the copy has no reason to step aside */
+@media (prefers-reduced-motion:reduce){
+  .hero__title,.hero__tag,.hero .deco-divider,.hero__cta,.hero__scrim{transition:none}
+  .hero.is-reel .hero__title,
+  .hero.is-reel .hero__tag,
+  .hero.is-reel .deco-divider{opacity:1;transform:none;filter:none}
+  .hero.is-reel .hero__cta{transform:none}
+  .hero.is-reel .hero__scrim{opacity:1}
+}
