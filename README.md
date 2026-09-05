@@ -18,7 +18,7 @@ main site. Host the folder anywhere (GitHub Pages, Netlify, any web server) or o
 | `drinks.html` | The Bar — blue-cocktail hero, 13 signature cocktails, wine, local draught |
 | `menu.html` | The Menu — one page, **toggle** between **Shareables · Dinner · Desserts** (also deep-links: `menu.html#dinner`) |
 | `events.html` | Events — the **“What’s On” board**: next-up feature with countdown, dated list, filters, add-to-calendar. Data-driven ([see below](#events-are-data-driven)) |
-| `private.html` | Private Events — the four hosting packages |
+| `private.html` | Private Events — phone-call-first hosting page: the room, per-guest package pricing, the Concert Experience, upstairs |
 | `tour.html` | **3D Venue Tour** — the walkable 3D room. **Currently hidden** (see below) |
 | `visit.html` | Visit & Reserve — live open/closed badge, hours, map, contact + newsletter |
 
@@ -87,9 +87,14 @@ Everything is hand-editable — no database.
   filter chips above it.
 - **Photos** — drop a JPG into `assets/img/` and point the matching `<img src>` at it. Current photos: `interior.jpg`,
   `tuna-tartare.jpg`, `rigatoni-bolognese.jpg`, `storefront.jpg`, `blue-lagoon.jpg`, `event-15-first-dates.jpg`.
-- **Fonts** — swap the files in `assets/fonts/` and the `@font-face` rules in `assets/fonts/fonts.css`. The site uses
-  **Cinzel** (display) and **Cormorant Garamond** (body/italic accents). No script/cursive faces —
-  the elegance comes from letter-spacing and scale.
+- **Fonts** — swap the files in `assets/fonts/` and the `@font-face` rules in `assets/fonts/fonts.css`. Two families
+  only: **Cinzel** sets display headings *and* every label (nav, buttons, kickers, tabs, prices) at weight 700 via
+  `--w-deco`; **Cormorant Garamond** at 500 sets body copy and italic accents. Poiret One was retired as the label
+  face — a single-weight hairline, it had no stroke left to read at 11px reversed out of dark or video. It is still
+  declared in `fonts.css` but nothing references it, so it never downloads. No script/cursive faces.
+- **Legibility** — the `v6 — READABILITY` block at the foot of `css/styles.css` holds the contrast and weight pass:
+  the header carries its own gradient scrim (`.nav::before`) so links stay readable over the hero video, and every
+  page passes WCAG AA. If you add a label, use `var(--f-deco)` with `font-weight:var(--w-deco)`.
 - **Contact / newsletter forms** — they validate and confirm in the browser (contact also opens a pre-filled email).
   To capture submissions, wire each `<form>` in `js/site.js` to Formspree / Netlify Forms / Supabase and update the
   fallback address.
@@ -215,6 +220,10 @@ Menu/bar copy follows the supplied inventory, with a few details filled in — p
 - **Hours** — modelled as Tue–Thu 4–10:30 PM, Fri–Sat 4 PM–Midnight, Sun–Mon closed. Adjust in `SCHEDULE`.
 - **`interior.jpg`** (still used in the About block) is as supplied, including its “AI-generated content”
   watermark. The hero now uses real video instead.
+- **Private events** — `private.html` is reconciled against the **Speakeasy Event Brochure 2026**: package and bar
+  pricing, package combinations, venue minimums by day, the $1,000 deposit and the resident singers all come from
+  that brochure. Update them together. The page deliberately leads with the phone call and keeps the fine print
+  (minimums, 18% gratuity, taxes) quiet rather than absent.
 - **Events** — the **15 First Dates** night is real; the recurring nights are placeholders. They now live in
   `assets/data/events.json` (or Supabase), so they can be edited without touching code.
 
