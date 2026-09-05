@@ -87,9 +87,14 @@ Everything is hand-editable — no database.
   filter chips above it.
 - **Photos** — drop a JPG into `assets/img/` and point the matching `<img src>` at it. Current photos: `interior.jpg`,
   `tuna-tartare.jpg`, `rigatoni-bolognese.jpg`, `storefront.jpg`, `blue-lagoon.jpg`, `event-15-first-dates.jpg`.
-- **Fonts** — swap the files in `assets/fonts/` and the `@font-face` rules in `assets/fonts/fonts.css`. The site uses
-  **Cinzel** (display) and **Cormorant Garamond** (body/italic accents). No script/cursive faces —
-  the elegance comes from letter-spacing and scale.
+- **Fonts** — swap the files in `assets/fonts/` and the `@font-face` rules in `assets/fonts/fonts.css`. Two families
+  only: **Cinzel** sets display headings *and* every label (nav, buttons, kickers, tabs, prices) at weight 700 via
+  `--w-deco`; **Cormorant Garamond** at 500 sets body copy and italic accents. Poiret One was retired as the label
+  face — a single-weight hairline, it had no stroke left to read at 11px reversed out of dark or video. It is still
+  declared in `fonts.css` but nothing references it, so it never downloads. No script/cursive faces.
+- **Legibility** — the `v6 — READABILITY` block at the foot of `css/styles.css` holds the contrast and weight pass:
+  the header carries its own gradient scrim (`.nav::before`) so links stay readable over the hero video, and every
+  page passes WCAG AA. If you add a label, use `var(--f-deco)` with `font-weight:var(--w-deco)`.
 - **Contact / newsletter forms** — they validate and confirm in the browser (contact also opens a pre-filled email).
   To capture submissions, wire each `<form>` in `js/site.js` to Formspree / Netlify Forms / Supabase and update the
   fallback address.

@@ -1,5 +1,7 @@
 /* Self-hosted fonts (subset: latin). Swap files in assets/fonts/ to change type.
-   Display: Cinzel · Text: Cormorant Garamond · Labels: Poiret One. No script faces. */
+   Display + labels: Cinzel · Text: Cormorant Garamond. No script faces.
+   Poiret One is kept declared but unused — it is a hairline single-weight face and was
+   unreadable at label sizes reversed out of dark. Nothing references it, so it never loads. */
 @font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:400;font-display:swap;src:url('cormorant-400.woff2') format('woff2');}
 @font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:500;font-display:swap;src:url('cormorant-500.woff2') format('woff2');}
 @font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:600;font-display:swap;src:url('cormorant-600.woff2') format('woff2');}
