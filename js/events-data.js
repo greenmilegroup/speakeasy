@@ -19,6 +19,35 @@ export function nextWeekly(weekday, time = '19:00') {
   return d;
 }
 
+/**
+ * Every occurrence of an event that falls inside [from, to].
+ * Weekly events repeat; one-offs yield at most one. Used by the events page
+ * to show the same recurring night across a week or a month.
+ */
+export function occurrencesBetween(ev, from, to) {
+  const out = [];
+  if (ev.recurrence === 'weekly') {
+    const [h, m] = String(ev.time || '19:00').split(':').map(Number);
+    const d = new Date(from);
+    d.setHours(h, m, 0, 0);
+    d.setDate(d.getDate() + ((ev.weekday - d.getDay() + 7) % 7));
+    while (d <= to) {
+      if (d >= from) out.push(new Date(d));
+      d.setDate(d.getDate() + 7);
+    }
+  } else if (ev.date && ev.date >= from && ev.date <= to) {
+    out.push(new Date(ev.date));
+  }
+  return out;
+}
+
+/** Flatten a list into one entry per occurrence in range, soonest first. */
+export function expand(list, from, to) {
+  return list
+    .flatMap(ev => occurrencesBetween(ev, from, to).map(date => ({ ...ev, date })))
+    .sort((a, b) => a.date - b.date);
+}
+
 /** One shape for both sources; `date` is a real Date used for sorting. */
 function normalise(row) {
   const rec = row.recurrence || 'none';
@@ -31,7 +60,12 @@ function normalise(row) {
     kicker: row.kicker || '',
     blurb: row.blurb || '',
     category: row.category || 'special',
+    // Which band the event belongs to. Set `ticketed` in the data to be
+    // explicit; otherwise a real ticket link or a comedy bill implies it.
+    ticketed: row.ticketed ?? (Boolean(row.ticket_url) || row.category === 'comedy'),
     recurrence: rec,
+    weekday: Number(row.weekday ?? 5),
+    time: row.time || '19:00',
     date,
     durationMin: Number(row.duration_min ?? 120),
     priceText: row.price_text || '',

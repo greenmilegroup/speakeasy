@@ -17,7 +17,7 @@ main site. Host the folder anywhere (GitHub Pages, Netlify, any web server) or o
 | `index.html` | Home — “shhh” door intro, hero, about, the six **stamps**, house signatures, 3D-tour teaser, gallery |
 | `drinks.html` | The Bar — blue-cocktail hero, 13 signature cocktails, wine, local draught |
 | `menu.html` | The Menu — one page, **toggle** between **Shareables · Dinner · Desserts** (also deep-links: `menu.html#dinner`) |
-| `events.html` | Events — the **“What’s On” board**: next-up feature with countdown, dated list, filters, add-to-calendar. Data-driven ([see below](#events-are-data-driven)) |
+| `events.html` | Events — three bands: **Tonight**, **The Main Event** (ticketed) and **Live Music** (this week / this month). Data-driven ([see below](#events-are-data-driven)) |
 | `private.html` | Private Events — phone-call-first hosting page: the room, per-guest package pricing, the Concert Experience, upstairs |
 | `tour.html` | **3D Venue Tour** — the walkable 3D room. **Currently hidden** (see below) |
 | `visit.html` | Visit & Reserve — live open/closed badge, hours, map, contact + newsletter |
@@ -58,10 +58,15 @@ tour-src/           source for the 3D tour (React + three.js) — only needed to
 - **Draggable 3D coin** in the hero, **3D tilt** on cards, restrained scroll reveals. (No particle effects —
   atmosphere comes from typography, hairline rules and negative space.)
 - **Menu tabs** — Shareables / Dinner / Desserts on one page.
-- **What’s On board** (events) — the soonest event is featured with a live countdown (“in 4 days”); everything else
-  falls into a dated list, each row carrying the event’s photo and a category accent (gold for music, red for comedy,
-  cream for special nights). Filter by Live Music / Comedy / Special Nights, grab tickets on Eventbrite, or download an
-  `.ics`. Weekly nights auto-roll to their next occurrence, and an on-brand empty state means the page is never blank.
+- **Events page** — three bands, in the order a guest asks the questions:
+  1. **Tonight** — a slim band showing what’s on today with times, or the next night if today is quiet.
+  2. **The Main Event** — ticketed shows. The soonest is featured large with its photo, a live countdown
+     (“in 5 days”), *Get tickets* and *Add to calendar*; the rest follow as dated rows.
+  3. **Live Music** — the recurring nights, with a **This week / This month** toggle. Weekly events are expanded to
+     *every* occurrence in the chosen range (not just the next one) and grouped by night, with tonight marked.
+
+  Every band has an on-brand empty state, so the page is never blank. `.ics` export covers both one-offs and
+  weekly nights (the latter carry an `RRULE`).
 - **3D tour** *(hidden for now)* — the walkable venue, embedded from `tour/`. The **setup switcher** re-loads the
   room as Intimate Dining / Cocktail Reception / Artistic Showcase via `?layout=`, and the **booking form** below
   composes a private-event request.
@@ -162,6 +167,8 @@ Add an object to `assets/data/events.json`, commit, push:
   "price_text": "No cover",
   "image_url": "assets/img/ig-sax.jpg",
   "ticket_url": "",                 // blank falls back to the venue Eventbrite page
+  "ticketed": false,                // true → "The Main Event"; false → the live-music schedule.
+                                    // Omit it and it's inferred: true if ticket_url is set or category is "comedy".
   "published": true
 }
 ```
