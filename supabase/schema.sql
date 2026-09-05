@@ -16,6 +16,7 @@ create table if not exists public.events (
   price_text    text default '',
   image_url     text default '',
   ticket_url    text default '',
+  ticketed      boolean,                 -- null = infer (ticket_url set, or category 'comedy')
   published     boolean not null default true,
   created_at    timestamptz not null default now()
 );

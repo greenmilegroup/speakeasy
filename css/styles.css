@@ -1434,3 +1434,65 @@ body{font-weight:500;font-size:clamp(17.5px,1.2vw,19.5px);line-height:1.62}
 .whatson__filters{gap:12px;margin-bottom:38px}
 .tab{font-size:.86rem;letter-spacing:.11em;color:var(--cream-2)}
 .tab:hover{color:#fff}
+
+/* =========================================================================
+   v7 — EVENTS: tonight band and the live-music schedule
+   The ticketed feature card (.feature) and its list (.wrow) are unchanged —
+   they were the part that worked. These are the two bands around them.
+   ========================================================================= */
+
+/* ---- tonight: the first question a guest actually asks ---- */
+.tonight{display:flex;align-items:center;gap:clamp(18px,3vw,38px);flex-wrap:wrap;
+  padding:clamp(20px,2.6vw,30px) clamp(22px,3vw,36px);border-radius:var(--radius);
+  border:1px solid var(--line);background:linear-gradient(120deg,rgba(28,22,10,.72),rgba(13,13,15,.85));
+  box-shadow:var(--shadow)}
+.section.tonight-sec{padding-top:clamp(30px,4vw,48px);padding-bottom:0}
+.tonight__loading{margin:0;color:var(--cream-2);font-style:italic}
+.tonight__mark{display:flex;align-items:center;gap:11px;flex:none}
+.tonight__mark .kicker{margin:0;white-space:nowrap}
+.tonight__dot{width:9px;height:9px;border-radius:50%;background:#3fbf6a;box-shadow:0 0 12px #3fbf6a;
+  animation:pulseDot 2s infinite;flex:none}
+.tonight__dot--quiet{background:var(--muted);box-shadow:none;animation:none}
+.tonight__list{list-style:none;margin:0;padding:0;flex:1 1 340px;display:grid;gap:8px;min-width:0}
+.tonight>.btn{margin-left:auto;flex:none}
+.tonight__list li{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.tonight__time{font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.06em;
+  color:var(--gold-hi);font-size:.84rem;flex:none;min-width:5.5em}
+.tonight__name{color:var(--cream);font-size:1.1rem}
+
+/* ---- live music: grouped by night, over a week or a month ---- */
+.mus__range{text-align:center;margin:-16px 0 30px;color:var(--cream-2);font-style:italic}
+.mus{display:grid;gap:12px}
+.mus__day{display:grid;grid-template-columns:118px 1fr;gap:clamp(16px,2.4vw,30px);align-items:start;
+  padding:22px clamp(18px,2.4vw,28px);border-radius:14px;border:1px solid var(--line-soft);
+  background:linear-gradient(165deg,rgba(24,24,26,.78),rgba(12,12,14,.78));transition:border-color .3s}
+.mus__day:hover{border-color:rgba(201,162,39,.34)}
+.mus__day.is-today{border-color:var(--line);background:linear-gradient(165deg,rgba(34,27,12,.85),rgba(13,13,15,.85))}
+.mus__when{text-align:center;border-right:1px solid var(--line-soft);padding-right:clamp(12px,2vw,22px);align-self:stretch}
+.mus__when strong{display:block;font-family:var(--f-display);font-weight:600;font-size:2.1rem;
+  line-height:1;color:var(--cream);font-variant-numeric:tabular-nums}
+.mus__dow,.mus__mon{display:block;font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.14em;
+  text-transform:uppercase;font-size:.62rem;color:var(--gold)}
+.mus__dow{margin-bottom:5px}
+.mus__mon{margin-top:5px}
+.mus__today{display:inline-block;margin-top:9px;padding:3px 10px;border-radius:999px;
+  background:linear-gradient(135deg,#f0dca0,#c9a227 55%,#9c7c22);color:#150e02;
+  font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.1em;text-transform:uppercase;font-size:.66rem}
+.mus__sets{list-style:none;margin:0;padding:0;display:grid;gap:16px;min-width:0}
+.mus__sets li{display:flex;align-items:baseline;gap:clamp(12px,2vw,20px);flex-wrap:wrap}
+.mus__time{font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.06em;color:var(--gold-hi);
+  font-size:.86rem;flex:none;min-width:5em}
+.mus__what{flex:1 1 260px;min-width:0}
+.mus__what h3{font-family:var(--f-display);font-weight:600;font-size:1.18rem;color:var(--cream);margin:0 0 .25rem}
+.mus__what p{margin:0;color:var(--cream-2);font-size:.98rem;line-height:1.5}
+
+@media (max-width:640px){
+  .mus__day{grid-template-columns:1fr;gap:14px}
+  .mus__when{display:flex;align-items:baseline;gap:10px;text-align:left;border-right:0;padding-right:0;
+    border-bottom:1px solid var(--line-soft);padding-bottom:12px}
+  .mus__when strong{font-size:1.5rem}
+  .mus__dow,.mus__mon{margin:0}
+  .mus__today{margin-top:0}
+  .tonight{gap:16px}
+  .tonight__time{min-width:0}
+}

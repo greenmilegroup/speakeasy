@@ -142,6 +142,7 @@ const TOOLS = [
       price_text: { type: 'string', description: 'e.g. "No cover", "$10", "Ages 35–45"' },
       image_url: { type: 'string', description: 'e.g. "assets/img/ig-sax.jpg" or a full URL' },
       ticket_url: { type: 'string', description: 'Defaults to the venue Eventbrite page' },
+      ticketed: { type: 'boolean', description: 'Put it under "The Main Event" (true) or the live-music schedule (false). Omit to infer from ticket_url/category.' },
       duration_min: { type: 'integer' } } } },
 
   { name: 'update_event',
@@ -153,7 +154,7 @@ const TOOLS = [
       ticket_url: { type: 'string' }, category: { type: 'string', enum: CATEGORIES },
       recurrence: { type: 'string', enum: ['none', 'weekly'] },
       weekday: { type: 'integer', minimum: 0, maximum: 6 }, time: { type: 'string' },
-      duration_min: { type: 'integer' } } } },
+      ticketed: { type: 'boolean' }, duration_min: { type: 'integer' } } } },
 
   { name: 'delete_event',
     description: 'Permanently remove an event. To hide one temporarily use set_published instead.',
@@ -198,6 +199,7 @@ server.setRequestHandler(CallToolRequestSchema, async (req) => {
         price_text: a.price_text || '',
         image_url: a.image_url || '',
         ticket_url: a.ticket_url || '',
+        ticketed: a.ticketed ?? null,
         published: true,
       };
 
@@ -213,7 +215,7 @@ server.setRequestHandler(CallToolRequestSchema, async (req) => {
       const found = await findOne(a.event);
       if (!found) throw new Error(`No event matching "${a.event}". Run list_events first.`);
       const patch = {};
-      for (const k of ['title', 'kicker', 'blurb', 'price_text', 'image_url', 'ticket_url', 'duration_min']) if (a[k] !== undefined) patch[k] = a[k];
+      for (const k of ['title', 'kicker', 'blurb', 'price_text', 'image_url', 'ticket_url', 'ticketed', 'duration_min']) if (a[k] !== undefined) patch[k] = a[k];
       if (a.category && CATEGORIES.includes(a.category)) patch.category = a.category;
       if (a.recurrence) patch.recurrence = a.recurrence;
       if (a.weekday !== undefined) patch.weekday = a.weekday;

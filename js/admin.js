@@ -124,6 +124,7 @@ $('#adminForm')?.addEventListener('submit', (ev) => {
     price_text: v('ad-price'),
     image_url: photoData || v('ad-img'),
     ticket_url: v('ad-ticket'),
+    ticketed: $('#ad-ticketed')?.checked ?? false,
     published: true,
   };
   const full = JSON.stringify(rec, null, 2);
