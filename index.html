@@ -43,7 +43,7 @@
 <main id="main">
 <section id="hero" class="hero">
   <div class="hero__bg" aria-hidden="true"></div>
-  <video class="hero__video hero__video--blur" id="heroVideoBg" aria-hidden="true" muted loop playsinline preload="auto" poster="assets/img/poster-hero-vibe.jpg"><source src="assets/video/hero-vibe.mp4" type="video/mp4"/></video>
+  <div class="hero__backdrop" aria-hidden="true"></div>
   <video class="hero__video hero__video--main" id="heroVideo" aria-hidden="true" muted loop playsinline preload="auto" poster="assets/img/poster-hero-vibe.jpg"><source src="assets/video/hero-vibe.mp4" type="video/mp4"/></video>
   <div class="hero__scrim" aria-hidden="true"></div>
   <button class="hero__sound" id="heroSound" type="button" aria-pressed="false" aria-label="Turn sound on">🔇 Sound off</button>
@@ -63,7 +63,7 @@
       <p class="kicker">The House Rules</p>
       <h2 class="h-display">Pull Up a<br><em>Seat.</em></h2>
       <p class="lead">Tucked into Ottawa's ByWard Market, Speakeasy is an elegant restaurant and live-music venue where the lights stay low and the night runs long.</p>
-      <p>Internationally inspired plates, craft cocktails poured with prohibition-era swagger, live performances every evening, and a candlelit room that feels like a secret worth keeping. Pull up a chair — <em>this must be the place.</em></p>
+      <p>Internationally inspired plates, craft cocktails poured with prohibition-era swagger, live performances every evening, and a candlelit room that feels like a secret worth keeping. Pull up a chair. <em>This must be the place.</em></p>
       <div class="about__stats"><div><strong>Nightly</strong><span>Live music from 7 PM</span></div><div><strong>13</strong><span>Signature cocktails</span></div><div><strong>55 York</strong><span>ByWard Market</span></div></div>
     </div>
     <div class="stamps__grid">
@@ -87,8 +87,8 @@
     <div class="host__copy">
       <p class="kicker">At the door</p>
       <h2 class="h-display">The man in the<br><em>yellow suit.</em></h2>
-      <p class="lead">Every speakeasy needs a doorman. Ours doesn't ask for a password — he just grins, holds the door, and points you down the red carpet.</p>
-      <p>If you spot him on York Street, you've found the right place. Say hello, get a photo, and head inside — the candles are already lit.</p>
+      <p class="lead">Every speakeasy needs a doorman. Ours doesn't ask for a password. He just grins, holds the door, and points you down the red carpet.</p>
+      <p>If you spot him on York Street, you've found the right place. Say hello, get a photo, and head inside. The candles are already lit.</p>
       <div class="host__actions">
         <a class="btn btn--gold-sm" href="visit.html">Find the door</a>
         <a class="link-underline" href="events.html">See what's on tonight →</a>
@@ -102,13 +102,16 @@
     <div class="reviews__score"><strong id="gRating">5.0</strong><span class="stars" aria-hidden="true">★★★★★</span><small>on Google</small></div>
     <div class="reviews__actions">
       <a class="btn btn--gold" href="https://www.google.com/search?q=Speakeasy+55+York+Street+Ottawa+reviews" target="_blank" rel="noopener">Read our Google reviews</a>
-      <a class="btn btn--ghost" href="https://search.google.com/local/writereview?placeid=" target="_blank" rel="noopener">Leave a review</a>
+      <!-- Direct one-tap review needs the Place ID: swap this for
+           https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID
+           Until then this opens the Maps listing, where "Write a review" is one tap. -->
+      <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Speakeasy+Tapas+Lounge+55+York+Street+Ottawa" target="_blank" rel="noopener">Leave a review</a>
     </div>
   </div>
   <div class="quotes">
-    <blockquote class="quote"><p>“Kyle was a 10/10 server — so patient, so nice. The food and drinks were great and the vibe in here is unforgettable. Love it.”</p><cite>— Valeria Restrepo</cite></blockquote>
-    <blockquote class="quote"><p>“Hosted my son's 30th birthday here and it was seamless from start to finish. The whole thing was arranged long distance, too. The food was excellent as was the service. Highly recommended!”</p><cite>— Cindy Harbottle</cite></blockquote>
-    <blockquote class="quote"><p>“Beautiful place to go on a fancy date, they have lovely events going on as well. The staff is kind and helpful.”</p><cite>— Haneen Darwesh</cite></blockquote>
+    <blockquote class="quote"><p>“Kyle was a 10/10 server, so patient, so nice. The food and drinks were great and the vibe in here is unforgettable. Love it.”</p><cite>Valeria Restrepo</cite></blockquote>
+    <blockquote class="quote"><p>“Hosted my son's 30th birthday here and it was seamless from start to finish. The whole thing was arranged long distance, too. The food was excellent as was the service. Highly recommended!”</p><cite>Cindy Harbottle</cite></blockquote>
+    <blockquote class="quote"><p>“Beautiful place to go on a fancy date, they have lovely events going on as well. The staff is kind and helpful.”</p><cite>Haneen Darwesh</cite></blockquote>
     </div>
 </section>
 

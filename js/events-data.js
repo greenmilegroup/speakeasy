@@ -1,5 +1,5 @@
 /* =========================================================================
-   SPEAKEASY — event loading
+   SPEAKEASY event loading
    Reads from Supabase when js/config.js is filled in, otherwise from
    assets/data/events.json. Any failure falls back to the JSON so the page
    is never empty. Weekly events are expanded to their next occurrence.
@@ -90,7 +90,7 @@ async function fromSupabase() {
   return res.json();
 }
 
-/** Published, upcoming-first, sorted. Never rejects — falls back to JSON. */
+/** Published, upcoming-first, sorted. Never rejects; falls back to JSON. */
 export async function loadEvents() {
   let rows = [];
   if (configured()) {

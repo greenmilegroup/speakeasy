@@ -1,12 +1,11 @@
 /* =========================================================================
-   SPEAKEASY — home page only: "shhh" door intro, hero parallax
+   SPEAKEASY home page only: "shhh" door intro, hero parallax
    ========================================================================= */
 import { $, $$, reduceMotion, finePointer } from './site.js';
 
 /* ---------- INTRO (slower) ---------- */
 const heroVideos = $$('.hero__video');
 const heroMain = $('#heroVideo');
-const heroBg = $('#heroVideoBg');
 const heroSound = $('#heroSound');
 
 const paintSound = () => {
@@ -29,9 +28,8 @@ const playHero = (withSound = false) => {
     v.addEventListener('loadeddata', show, { once: true });
     v.currentTime = 0;
   });
-  if (heroBg) { heroBg.muted = true; heroBg.play().catch(() => {}); }  // backdrop stays silent
   if (!heroMain) return;
-  // only once there is picture to look at — if the reel never loads, the copy stays
+  // only once there is picture to look at; if the reel never loads, the copy stays
   heroMain.addEventListener('playing', scheduleRetire, { once: true });
   heroMain.addEventListener('loadeddata', scheduleRetire, { once: true });
   heroMain.muted = !withSound;
@@ -44,7 +42,7 @@ const playHero = (withSound = false) => {
 
 /* ---------- hand the screen over to the reel ----------
    Staged so nothing competes: the writing dissolves first, then the buttons
-   leave the frame for the corner. One-way — once the reel has the screen it
+   leave the frame for the corner. One-way: once the reel has the screen it
    keeps it. */
 const REEL_HOLD = 5200;   // the wordmark's moment before the reel takes over
 const COPY_FADE = 1500;   // matches the CSS fade, so the buttons wait their turn
@@ -54,7 +52,7 @@ const REEL_CLEARANCE = 18;
 let retireTimer = 0;
 
 /* On wide screens the reel is a tall column with blurred margins either side.
-   The buttons are only welcome in that margin if they clear the footage — the
+   The buttons are only welcome in that margin if they clear the footage. The
    reel's edges sit under an 8% mask, so that much overlap costs nothing. */
 const clearsReel = () => {
   const reel = $('#heroVideo'), cta = $('.hero__cta');
@@ -82,7 +80,7 @@ const retireCopy = () => {
   const hero = $('#hero');
   if (!hero || reduceMotion || hero.classList.contains('is-reel')) return;
   // parallax writes inline transforms, which outrank the stylesheet and would
-  // pin these elements where they stand — hand them back to CSS first
+  // pin these elements where they stand; hand them back to CSS first
   $$('[data-parallax]', hero).forEach(l => (l.style.transform = ''));
   hero.classList.add('is-reel');
   setTimeout(dockCta, COPY_FADE);

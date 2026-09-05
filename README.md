@@ -216,6 +216,17 @@ Deep links: `tour/index.html?layout=cocktail&autoenter`.
 
 ---
 
+## House style
+
+- **No long dashes.** The site uses no em dashes and no en dashes, anywhere in copy: rewrite the
+  sentence, or use a colon, comma or full stop. Ranges read as "Tue to Thu", "4 PM to Midnight".
+  A quick check before committing: `grep -rn "—\|–" *.html js/*.js css/*.css assets/data/*.json`
+  should return nothing.
+- **Private events carry no prices on the site.** Packages describe what is served; the number lives
+  in the written estimate after the call. Keep it that way unless asked.
+- **Events split two ways.** Ticketed shows are sold through Eventbrite; live music runs during dinner
+  service, is free to anyone dining, and needs no ticket. Say so plainly wherever events are described.
+
 ## Notes / assumptions to confirm
 
 Menu/bar copy follows the supplied inventory, with a few details filled in — please review:

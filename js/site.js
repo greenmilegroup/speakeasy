@@ -1,5 +1,5 @@
 /* =========================================================================
-   SPEAKEASY — shared site chrome + behaviour (loaded on every page)
+   SPEAKEASY shared site chrome + behaviour (loaded on every page)
    Injects header/footer/ambient layers, then wires nav, reveals, tilt,
    menu tabs, forms, hours badge, toast. Page-specific JS lives elsewhere.
    ========================================================================= */
@@ -61,7 +61,7 @@ function injectChrome() {
   const header = $('#nav');
   if (header) header.innerHTML =
     `<div class="nav__inner">
-      <a class="nav__brand" href="index.html" aria-label="Speakeasy Ottawa — home">
+      <a class="nav__brand" href="index.html" aria-label="Speakeasy Ottawa home">
         <img src="assets/logo.png" alt="" width="44" height="44" class="nav__logo" />
         <span class="nav__name">Speakeasy<small>Ottawa</small></span>
       </a>
@@ -169,9 +169,9 @@ function forms() {
     [[name, name.value.trim().length > 1], [email, emailOK(email.value)], [msg, msg.value.trim().length > 3]]
       .forEach(([f, v]) => { f.closest('.field').classList.toggle('invalid', !v); if (!v) ok = false; });
     if (!ok) { note.textContent = 'Please complete the highlighted fields.'; note.classList.add('err'); return; }
-    note.classList.remove('err'); note.textContent = 'Thank you — we’ll be in touch soon.';
+    note.classList.remove('err'); note.textContent = 'Thank you, we’ll be in touch soon.';
     toast('Message sent · tell no one');
-    const body = encodeURIComponent(`${msg.value}\n\n— ${name.value} (${email.value})`);
+    const body = encodeURIComponent(`${msg.value}\n\nFrom ${name.value} (${email.value})`);
     setTimeout(() => { location.href = `mailto:info@speakeasyottawa.com?subject=Website%20enquiry&body=${body}`; }, 600);
     contact.reset();
   });
@@ -188,12 +188,12 @@ function forms() {
     checks.forEach(([f, v]) => { f.closest('.field').classList.toggle('invalid', !v); if (!v) ok = false; });
     if (!ok) { note.textContent = 'Please complete the highlighted fields.'; note.classList.add('err'); return; }
     note.classList.remove('err');
-    note.textContent = 'Thanks — your email is opening. Attach your résumé before you send.';
+    note.textContent = 'Thanks, your email is opening. Attach your résumé before you send.';
     toast('Application ready · attach your résumé');
     const body = encodeURIComponent(
       `Role: ${get('jb-role').value}\nExperience: ${get('jb-exp').value}\n` +
       `Availability: ${get('jb-avail').value}\nPhone: ${get('jb-phone').value}\n\n` +
-      `${get('jb-msg').value}\n\n— ${get('jb-name').value} (${get('jb-email').value})`);
+      `${get('jb-msg').value}\n\nFrom ${get('jb-name').value} (${get('jb-email').value})`);
     setTimeout(() => { location.href = `mailto:info@speakeasyottawa.com?subject=Job%20application&body=${body}`; }, 600);
   });
 
@@ -219,7 +219,7 @@ function hours() {
   if (!status && !tbody) return;
   const NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const fmt = (m) => { m %= 1440; let h = (m / 60) | 0, mm = m % 60, ap = h >= 12 ? 'PM' : 'AM', hh = h % 12 || 12; return mm ? `${hh}:${String(mm).padStart(2, '0')} ${ap}` : `${hh} ${ap}`; };
-  const label = (d) => { const s = SCHEDULE[d]; return s ? `${fmt(s.open)} – ${s.close >= 1440 ? 'Midnight' : fmt(s.close)}` : 'Closed'; };
+  const label = (d) => { const s = SCHEDULE[d]; return s ? `${fmt(s.open)} to ${s.close >= 1440 ? 'Midnight' : fmt(s.close)}` : 'Closed'; };
   const tor = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' }));
   const day = tor.getDay(), mins = tor.getHours() * 60 + tor.getMinutes(), s = SCHEDULE[day];
   const isOpen = !!s && mins >= s.open && mins < s.close;
