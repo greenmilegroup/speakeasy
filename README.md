@@ -18,7 +18,7 @@ main site. Host the folder anywhere (GitHub Pages, Netlify, any web server) or o
 | `drinks.html` | The Bar — blue-cocktail hero, 13 signature cocktails, wine, local draught |
 | `menu.html` | The Menu — one page, **toggle** between **Shareables · Dinner · Desserts** (also deep-links: `menu.html#dinner`) |
 | `events.html` | Events — the **“What’s On” board**: next-up feature with countdown, dated list, filters, add-to-calendar. Data-driven ([see below](#events-are-data-driven)) |
-| `private.html` | Private Events — the four hosting packages |
+| `private.html` | Private Events — phone-call-first hosting page: the room, per-guest package pricing, the Concert Experience, upstairs |
 | `tour.html` | **3D Venue Tour** — the walkable 3D room. **Currently hidden** (see below) |
 | `visit.html` | Visit & Reserve — live open/closed badge, hours, map, contact + newsletter |
 
@@ -215,6 +215,10 @@ Menu/bar copy follows the supplied inventory, with a few details filled in — p
 - **Hours** — modelled as Tue–Thu 4–10:30 PM, Fri–Sat 4 PM–Midnight, Sun–Mon closed. Adjust in `SCHEDULE`.
 - **`interior.jpg`** (still used in the About block) is as supplied, including its “AI-generated content”
   watermark. The hero now uses real video instead.
+- **Private events** — `private.html` is reconciled against the **Speakeasy Event Brochure 2026**: package and bar
+  pricing, package combinations, venue minimums by day, the $1,000 deposit and the resident singers all come from
+  that brochure. Update them together. The page deliberately leads with the phone call and keeps the fine print
+  (minimums, 18% gratuity, taxes) quiet rather than absent.
 - **Events** — the **15 First Dates** night is real; the recurring nights are placeholders. They now live in
   `assets/data/events.json` (or Supabase), so they can be edited without touching code.
 
