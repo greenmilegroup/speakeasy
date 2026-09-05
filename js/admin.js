@@ -1,4 +1,4 @@
-/* Speakeasy — events admin: shows what's live and drafts new event records. */
+/* Speakeasy events admin: shows what's live and drafts new event records. */
 import { $, $$, toast } from './site.js';
 import { loadEvents, source } from './events-data.js';
 
@@ -12,7 +12,7 @@ const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,
   const live = source() === 'supabase';
   status.innerHTML = live
     ? '<strong>Supabase connected.</strong> Changes appear on the site immediately.'
-    : '<strong>Local mode.</strong> Events come from <code>assets/data/events.json</code> — add Supabase keys in <code>js/config.js</code> to go live without redeploying.';
+    : '<strong>Local mode.</strong> Events come from <code>assets/data/events.json</code>. Add Supabase keys in <code>js/config.js</code> to go live without redeploying.';
   status.classList.add(live ? 'is-live' : 'is-local');
 
   const ul = $('#adminList');
@@ -24,7 +24,7 @@ const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,
         ? `<div class="wrow__thumb"><img src="${e.imageUrl}" alt="" loading="lazy"/></div>`
         : `<div class="wrow__thumb wrow__thumb--none" aria-hidden="true"><span>no photo</span></div>`}
       <div class="wrow__main">
-        <p class="ecard__kicker">${e.kicker || '—'}</p>
+        <p class="ecard__kicker">${e.kicker || ''}</p>
         <h3 class="wrow__title">${e.title}</h3>
         <p class="wrow__blurb">${e.blurb}</p>
         <div class="ecard__meta"><span class="mchip">${e.category}</span>${e.recurrence==='weekly'?'<span class="mchip">Weekly</span>':''}${e.priceText?`<span class="mchip">${e.priceText}</span>`:''}<span class="mchip">id: ${e.id}</span></div>
@@ -72,7 +72,7 @@ async function usePhoto(file) {
     $('#adPreview').hidden = false;
     $('#adDrop').classList.add('has-photo');
     note.textContent = uri.length * 0.75 > 500 * 1024
-      ? 'Photo added — it is on the large side, so consider a smaller original.'
+      ? 'Photo added. It is on the large side, so consider a smaller original.'
       : 'Photo added.';
   } catch (err) {
     note.textContent = err.message; note.classList.add('err');
@@ -137,10 +137,10 @@ $('#adminForm')?.addEventListener('submit', (ev) => {
   out.hidden = false;
   out.textContent = shown;
   note.textContent = photoData
-    ? 'The photo is embedded in the copied record — paste it straight into events.json or the Supabase row.'
+    ? 'The photo is embedded in the copied record. Paste it straight into events.json or the Supabase row.'
     : '';
 
   navigator.clipboard?.writeText(full).then(
-    () => toast(photoData ? 'Copied — photo included' : 'Copied to clipboard'),
+    () => toast(photoData ? 'Copied, photo included' : 'Copied to clipboard'),
     () => toast('Generated below'));
 });

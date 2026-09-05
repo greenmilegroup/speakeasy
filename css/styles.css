@@ -1,5 +1,5 @@
 /* =========================================================================
-   SPEAKEASY TAPAS LOUNGE — styles
+   SPEAKEASY TAPAS LOUNGE, styles
    Palette sampled from the house crest: noir · vermilion · cream · gold.
    ========================================================================= */
 
@@ -22,7 +22,7 @@
   --line:rgba(201,162,39,.22);
   --line-soft:rgba(244,236,216,.10);
 
-  /* type — Cinzel (engraved deco caps) leads; Cormorant Garamond sets the text.
+  /* type, Cinzel (engraved deco caps) leads; Cormorant Garamond sets the text.
      No script/cursive faces: the elegance comes from tracking and scale. */
   --f-display:'Cinzel', 'Cormorant Garamond', serif;
   --f-display-deco:'Cinzel Decorative', 'Cinzel', serif;
@@ -117,7 +117,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .center-head{text-align:center}
 
 /* =========================================================================
-   INTRO — "shhh" then the doors swing open
+   INTRO, "shhh" then the doors swing open
    ========================================================================= */
 .intro{position:fixed;inset:0;z-index:9999;overflow:hidden;perspective:1600px;
   background:radial-gradient(80% 60% at 50% 42%,#161011 0%,#070708 60%,#000 100%)}
@@ -330,7 +330,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .ck__top h4{font-family:var(--f-serif);font-weight:600;font-size:1.35rem;color:var(--cream);margin:0;line-height:1.15}
 .price{font-family:var(--f-deco);font-weight:var(--w-deco);color:var(--gold-hi);font-size:1.05rem;letter-spacing:.04em;flex:none}
 .price::before{content:"$"}
-.price--mp::before{content:none}   /* market price — no currency prefix */
+.price--mp::before{content:none}   /* market price, no currency prefix */
 .ck__ing{color:var(--gold);font-size:.86rem;letter-spacing:.02em;margin:.5rem 0 .6rem;font-style:italic}
 .ck__note{color:var(--cream-2);font-size:.98rem;margin:0;line-height:1.45}
 
@@ -464,7 +464,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .pkg__more{margin-top:1.2rem;font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-hi);
   display:inline-flex;align-items:center;gap:6px}
 .pkg__more::after{content:"+";font-size:1rem}
-.pkg__more[aria-expanded="true"]::after{content:"–"}
+.pkg__more[aria-expanded="true"]::after{content:"\2212"}   /* true minus, not a dash */
 .pkg__extra{max-height:0;overflow:hidden;transition:max-height .45s var(--ease),margin .45s var(--ease),opacity .4s}
 .pkg__extra p{margin:0;color:var(--cream-2);font-style:italic}
 .pkg__extra.open{max-height:200px;margin-top:14px}
@@ -602,7 +602,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 }
 
 /* =========================================================================
-   v2 — typography polish, multi-page chrome, stamps, swipe deck, tour
+   v2: typography polish, multi-page chrome, stamps, swipe deck, tour
    ========================================================================= */
 .hero__title-1{font-family:var(--f-display);font-weight:800;letter-spacing:.05em}
 .h-display{letter-spacing:.015em;text-wrap:balance}
@@ -657,7 +657,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .sig__cap b{display:block;font-family:var(--f-display);font-weight:600;font-size:1.15rem;color:var(--cream);margin-top:4px}
 
 /* --- events: swipe deck --- */
-/* (swipe deck removed — replaced by the What's On board, see v10) */
+/* (swipe deck removed, replaced by the What's On board, see v10) */
 
 /* --- tour embed --- */
 .tour-embed{position:relative;width:100%;height:min(80vh,780px);border-radius:16px;overflow:hidden;
@@ -693,7 +693,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 }
 
 /* =========================================================================
-   v3 polish — page transition, mobile reserve bar, tour fullscreen
+   v3 polish, page transition, mobile reserve bar, tour fullscreen
    ========================================================================= */
 main#main{animation:pageIn .55s var(--ease) both}
 @keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -715,7 +715,7 @@ body.menu-open .mobile-reserve{display:none}
 @media (prefers-reduced-motion:reduce){main#main{animation:none}}
 
 /* =========================================================================
-   v4 — refined typography, empty gallery, card craft
+   v4: refined typography, empty gallery, card craft
    ========================================================================= */
 
 /* --- empty gallery state --- */
@@ -772,7 +772,7 @@ body.menu-open .mobile-reserve{display:none}
 }
 
 /* =========================================================================
-   v5 — legibility, editorial craft, restraint
+   v5: legibility, editorial craft, restraint
    Sparkles removed. Atmosphere now comes from type, rules and negative space.
    ========================================================================= */
 
@@ -812,12 +812,12 @@ body.menu-open .mobile-reserve{display:none}
 .section__head.center .kicker::after{background:linear-gradient(90deg,rgba(201,162,39,.85),transparent)}
 .h-display{font-weight:700;letter-spacing:.03em}
 
-/* the ❧ glyph rendered poorly — a drawn deco rule instead */
+/* the ❧ glyph rendered poorly, a drawn deco rule instead */
 .deco-divider i{font-size:0;width:9px;height:9px;transform:rotate(45deg);
   border:1px solid var(--gold);background:rgba(201,162,39,.25)}
 .deco-divider span{background:linear-gradient(90deg,transparent,rgba(201,162,39,.75),transparent)}
 
-/* hairline frame inside the hero — quiet art-deco architecture */
+/* hairline frame inside the hero, quiet art-deco architecture */
 .hero__content{position:relative}
 .hero__content::before{content:"";position:absolute;inset:-6% -4%;pointer-events:none;
   border:1px solid rgba(201,162,39,.13);border-radius:2px}
@@ -863,7 +863,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 }
 
 /* =========================================================================
-   v6 — the doorman, tour setups, booking
+   v6: the doorman, tour setups, booking
    ========================================================================= */
 
 /* --- the man in the yellow suit --- */
@@ -915,7 +915,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 }
 
 /* =========================================================================
-   v6b — real venue footage as background
+   v6b: real venue footage as background
    ========================================================================= */
 .hero__video{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;
   transform:scale(1.04);filter:saturate(1.05) contrast(1.04)}
@@ -969,7 +969,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .reel__video{width:100%;height:auto;display:block;background:#0a0a0b}
 
 /* =========================================================================
-   v7 — merged about+stamps, gallery tabs
+   v7: merged about+stamps, gallery tabs
    ========================================================================= */
 .about.stamps .about__grid--solo{max-width:1000px}
 .about.stamps .stamps__grid{margin-top:clamp(34px,5vw,56px)}
@@ -1034,7 +1034,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .intro__enter::before{background:linear-gradient(135deg,#e8241c,#a5121a)}
 
 /* =========================================================================
-   v8 — typographic scale: smaller, calmer, less shouty
+   v8: typographic scale: smaller, calmer, less shouty
    ========================================================================= */
 
 /* hero wordmark: title case, noticeably smaller, tighter tracking */
@@ -1093,11 +1093,11 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   .hero__title-2{letter-spacing:.34em;text-indent:.34em}
 }
 
-/* v8b — hero breathing room; drop the boxy hairline frame */
+/* v8b: hero breathing room; drop the boxy hairline frame */
 .hero__content::before{display:none}
 .hero__content{padding-top:104px}
 
-/* v8c — mobile bar: one black, one red (not two reds) */
+/* v8c: mobile bar: one black, one red (not two reds) */
 .mobile-reserve{gap:10px}
 .mr__book{
   background:#0c0c0e!important;color:#fff!important;
@@ -1105,23 +1105,23 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   box-shadow:0 8px 22px -12px rgba(0,0,0,.9)!important;
   margin-right:0}
 .mr__book:active{background:#141416!important}
-/* v8d — mobile bar: no wrapping */
+/* v8d: mobile bar: no wrapping */
 .mobile-reserve a{white-space:nowrap;font-size:.7rem;letter-spacing:.1em;padding:12px 16px;flex:0 1 auto}
 .mr__book{padding:12px 18px!important}
 .mobile-reserve svg{flex:none}
 @media (max-width:380px){.mobile-reserve a{font-size:.64rem;padding:11px 12px;letter-spacing:.06em}}
 
 
-/* v9b — optical centring: letter-spacing adds a trailing space, so centred
+/* v9b: optical centring: letter-spacing adds a trailing space, so centred
    lines sit left of true centre. Compensate by half the tracking. */
 .hero__title-1{text-indent:.022em}
 .hero__title-2{text-indent:.26em}
 .page-hero h1{text-indent:.015em}
 
-/* v9c — sound toggle on the featured video */
+/* v9c: sound toggle on the featured video */
 
 /* =========================================================================
-   v10 — "What's On" board (replaces the swipe deck)
+   v10: "What's On" board (replaces the swipe deck)
    ========================================================================= */
 .whatson__filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:34px}
 
@@ -1178,7 +1178,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
     border-top:1px solid var(--line-soft);padding-top:14px;margin-top:4px}
 }
 
-/* v10b — small type reused by the board (was defined in the removed swipe block) */
+/* v10b: small type reused by the board (was defined in the removed swipe block) */
 .ecard__kicker{font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.2em;text-transform:uppercase;font-size:.6rem;
   color:var(--gold-hi);margin:0}
 .ecard__meta{display:flex;flex-wrap:wrap;gap:7px;margin:.3rem 0 .1rem}
@@ -1186,7 +1186,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   border:1px solid rgba(244,236,216,.2);font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.08em;
   text-transform:uppercase;font-size:.58rem;color:rgba(244,236,216,.8);background:rgba(0,0,0,.3)}
 
-/* v10c — admin portal */
+/* v10c: admin portal */
 .admin__status{padding:16px 20px;border-radius:12px;border:1px solid var(--line-soft);margin-bottom:26px;
   background:linear-gradient(168deg,rgba(23,23,25,.72),rgba(12,12,14,.72));color:var(--cream-2);font-size:.98rem}
 .admin__status.is-live{border-color:rgba(63,191,106,.45)}
@@ -1200,7 +1200,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;line-height:1.55}
 
 /* =========================================================================
-   v11 — What's On board: more presence
+   v11: What's On board: more presence
    Rows carry the event's photo, a category accent and a staggered entrance;
    the feature card gets depth so the next night reads first.
    ========================================================================= */
@@ -1262,7 +1262,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   .wrow__thumb{grid-column:1/-1;aspect-ratio:16/9;order:-1;margin-bottom:2px}
 }
 
-/* --- v11b — admin photo picker --- */
+/* --- v11b: admin photo picker --- */
 /* visually hidden, but still focusable and clickable.
    Needs to out-specify `.form input{width:100%}`, hence `.form input.photo__input`. */
 .form input.photo__input,.photo__input{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
@@ -1293,7 +1293,12 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .hero__video{position:absolute;opacity:0;transition:opacity 1.2s ease;pointer-events:none}
 .hero__video.is-playing{opacity:1}
 
-.hero__video--blur{inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;
+/* The backdrop is a blurred still, not a second copy of the hero video.
+   At 34px blur and half brightness it is an ambient wash, so motion buys
+   nothing, and the old <video> re-downloaded the whole file (2.8MB) even on
+   phones, where this layer is display:none. The poster is already cached. */
+.hero__backdrop{position:absolute;inset:0;z-index:-3;pointer-events:none;
+  background:url('../assets/img/poster-hero-vibe.jpg') center/cover no-repeat;
   filter:blur(34px) saturate(1.15) brightness(.5);transform:scale(1.15)}
 .hero__video--main{inset:0;margin:auto;height:100%;width:auto;max-width:100%;
   object-fit:contain;z-index:-2;
@@ -1301,7 +1306,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
           mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%)}
 
 @media (max-aspect-ratio:3/4){
-  .hero__video--blur{display:none}
+  .hero__backdrop{display:none}
   .hero__video--main{width:100%;height:100%;object-fit:cover;
     -webkit-mask-image:none;mask-image:none}
 }
@@ -1323,7 +1328,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
    eases back, leaving the room on screen. Then the buttons leave the frame.
    On wide screens the reel is a tall column with blurred margins either side,
    so they cross-fade into the left margin, where they never cover the
-   footage — a row where there is room, a stack where there is not, and out of
+   footage, a row where there is room, a stack where there is not, and out of
    sight when neither fits. Nothing leaves the DOM; the h1 still reads for
    search and screen readers. */
 .hero__title,.hero__tag,.hero .deco-divider{
@@ -1338,11 +1343,11 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 /* the ghost button loses the scrim's help against bright footage */
 .hero.is-reel .btn--ghost{background:rgba(10,10,11,.45);backdrop-filter:blur(5px)}
 
-/* stage two — the buttons dissolve where they stand and return in the corner */
+/* stage two, the buttons dissolve where they stand and return in the corner */
 .hero__cta{transition:opacity .55s ease}
 .hero__cta.is-moving{opacity:0}
 @media (min-width:961px){
-  /* the copy block is the CTA's offset parent until now — hand it to the hero
+  /* the copy block is the CTA's offset parent until now, hand it to the hero
      so "bottom left" means the corner of the screen, not the corner of the copy */
   .hero.is-docked .hero__content{position:static}
   .hero.is-docked .hero__cta{position:absolute;margin:0;z-index:3;
@@ -1350,7 +1355,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   .hero.is-stacked .hero__cta{flex-direction:column;align-items:flex-start;gap:10px}
 }
 /* no room beside the reel, or a phone where the fixed bar at the foot of the
-   screen already carries both of these actions — either way, the reel gets
+   screen already carries both of these actions, either way, the reel gets
    the whole frame rather than a second set of buttons */
 .hero.is-tucked .hero__cta{opacity:0;pointer-events:none}
 
@@ -1366,11 +1371,11 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 }
 
 /* =========================================================================
-   v6 — READABILITY
+   v6: READABILITY
    Poiret One (a single-weight hairline face) has been retired as the label
    font: at 12px, uppercase, letter-spaced and reversed out of dark or video,
    it had almost no stroke left to read. Cinzel 700 now carries every label,
-   which also drops the site to two families — engraved caps and Cormorant.
+   which also drops the site to two families, engraved caps and Cormorant.
    Cinzel's caps are wider than Poiret's, so tracking comes in to compensate.
    ========================================================================= */
 
@@ -1436,8 +1441,8 @@ body{font-weight:500;font-size:clamp(17.5px,1.2vw,19.5px);line-height:1.62}
 .tab:hover{color:#fff}
 
 /* =========================================================================
-   v7 — EVENTS: tonight band and the live-music schedule
-   The ticketed feature card (.feature) and its list (.wrow) are unchanged —
+   v7: EVENTS: tonight band and the live-music schedule
+   The ticketed feature card (.feature) and its list (.wrow) are unchanged 
    they were the part that worked. These are the two bands around them.
    ========================================================================= */
 
@@ -1496,3 +1501,7 @@ body{font-weight:500;font-size:clamp(17.5px,1.2vw,19.5px);line-height:1.62}
   .tonight{gap:16px}
   .tonight__time{min-width:0}
 }
+
+/* A leaders list with no price column: keep the rule, drop the dangling dots. */
+.leaders--plain li{display:block}
+.leaders--plain .n{display:block}

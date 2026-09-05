@@ -1,10 +1,10 @@
 /* =========================================================================
-   SPEAKEASY — events page.
+   SPEAKEASY events page.
 
    Three bands, in the order a guest actually asks the questions:
-     1. Tonight       — what's on today, or the next night we're open.
-     2. The Main Event — ticketed shows: one featured, the rest listed.
-     3. Live Music    — the recurring nights, over a week or a month.
+     1. Tonight        what's on today, or the next night we're open.
+     2. The Main Event ticketed shows: one featured, the rest listed.
+     3. Live Music     the recurring nights, over a week or a month.
 
    Data comes from js/events-data.js (Supabase, else assets/data/events.json).
    To add an event: talk to Claude via the MCP server, use the Supabase table
@@ -50,7 +50,7 @@ function icsFor(ev) {
   return 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Speakeasy Ottawa//EN\r\nBEGIN:VEVENT\r\n'
     + `UID:${ev.id}-${dayKey(ev.date)}@speakeasyottawa.com\r\nDTSTAMP:${z(new Date())}\r\nDTSTART:${z(ev.date)}\r\nDTEND:${z(end)}\r\n`
     + (ev.recurrence === 'weekly' ? 'RRULE:FREQ=WEEKLY\r\n' : '')
-    + `SUMMARY:${ev.title} — Speakeasy Ottawa\r\nLOCATION:55 York Street, Ottawa, ON\r\n`
+    + `SUMMARY:${ev.title} at Speakeasy Ottawa\r\nLOCATION:55 York Street, Ottawa, ON\r\n`
     + `DESCRIPTION:${(ev.blurb || '').replace(/,/g, '\\,')}\r\nEND:VEVENT\r\nEND:VCALENDAR`;
 }
 
@@ -86,10 +86,10 @@ function renderTonight(all) {
   const next = soon[0];
   band.innerHTML = next
     ? `<div class="tonight__mark"><span class="tonight__dot tonight__dot--quiet" aria-hidden="true"></span><p class="kicker">Nothing on tonight</p></div>
-       <ul class="tonight__list"><li><span class="tonight__time">${fmtShort(next.date)}</span><span class="tonight__name">Next up — ${esc(next.title)}, ${fmtTime(next.date)}</span></li></ul>
+       <ul class="tonight__list"><li><span class="tonight__time">${fmtShort(next.date)}</span><span class="tonight__name">Next up: ${esc(next.title)}, ${fmtTime(next.date)}</span></li></ul>
        <a class="btn btn--gold-sm" href="tel:+16132416221">Book a table</a>`
     : `<div class="tonight__mark"><span class="tonight__dot tonight__dot--quiet" aria-hidden="true"></span><p class="kicker">Tonight</p></div>
-       <ul class="tonight__list"><li><span class="tonight__name">Call for tonight’s line-up — the stage is rarely empty.</span></li></ul>
+       <ul class="tonight__list"><li><span class="tonight__name">Call for tonight’s line-up. The stage is rarely empty.</span></li></ul>
        <a class="btn btn--gold-sm" href="tel:+16132416221">Call 613-241-6221</a>`;
 }
 
@@ -109,7 +109,7 @@ function renderFeature(ev) {
       <div class="ecard__meta"><span class="mchip">${fmtFull(ev.date)}</span>${ev.priceText ? `<span class="mchip">${esc(ev.priceText)}</span>` : ''}${ev.recurrence === 'weekly' ? '<span class="mchip">Every week</span>' : ''}</div>
       <p class="feature__blurb">${esc(ev.blurb)}</p>
       <div class="feature__cta">
-        <a class="btn btn--gold" href="${esc(tickets(ev))}" target="_blank" rel="noopener">Get tickets</a>
+        <a class="btn btn--gold" href="${esc(tickets(ev))}" target="_blank" rel="noopener">Get tickets on Eventbrite</a>
         <button class="btn btn--ghost" type="button" data-ics>Add to calendar</button>
       </div>
     </div>`;
@@ -148,7 +148,7 @@ function renderMusic(music, range) {
   const nights = expand(music, from, to);
 
   label.textContent = nights.length
-    ? `${fmtShort(from)} – ${fmtShort(to)} · ${nights.length} night${nights.length > 1 ? 's' : ''} on the stage`
+    ? `${fmtShort(from)} to ${fmtShort(to)} · ${nights.length} night${nights.length > 1 ? 's' : ''} on the stage`
     : '';
   empty.hidden = Boolean(nights.length);
   list.hidden = !nights.length;

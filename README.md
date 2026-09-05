@@ -216,6 +216,17 @@ Deep links: `tour/index.html?layout=cocktail&autoenter`.
 
 ---
 
+## House style
+
+- **No long dashes.** The site uses no em dashes and no en dashes, anywhere in copy: rewrite the
+  sentence, or use a colon, comma or full stop. Ranges read as "Tue to Thu", "4 PM to Midnight".
+  A quick check before committing: `grep -rn "—\|–" *.html js/*.js css/*.css assets/data/*.json`
+  should return nothing.
+- **Private events carry no prices on the site.** Packages describe what is served; the number lives
+  in the written estimate after the call. Keep it that way unless asked.
+- **Events split two ways.** Ticketed shows are sold through Eventbrite; live music runs during dinner
+  service, is free to anyone dining, and needs no ticket. Say so plainly wherever events are described.
+
 ## Notes / assumptions to confirm
 
 Menu/bar copy follows the supplied inventory, with a few details filled in — please review:
@@ -228,7 +239,7 @@ Menu/bar copy follows the supplied inventory, with a few details filled in — p
 - **`interior.jpg`** (still used in the About block) is as supplied, including its “AI-generated content”
   watermark. The hero now uses real video instead.
 - **Private events** — `private.html` is reconciled against the **Speakeasy Event Brochure 2026**: package and bar
-  pricing, package combinations, venue minimums by day, the $1,000 deposit and the resident singers all come from
+  pricing, package combinations, venue minimums by day, the $1,000 deposit and the resident artists all come from
   that brochure. Update them together. The page deliberately leads with the phone call and keeps the fine print
   (minimums, 18% gratuity, taxes) quiet rather than absent.
 - **Events** — the **15 First Dates** night is real; the recurring nights are placeholders. They now live in
