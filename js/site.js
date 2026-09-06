@@ -22,7 +22,6 @@ const NAV = [
   ['events', 'events.html', 'On Stage'],
   ['private', 'private.html', 'Host Your Event'],
   ['visit', 'visit.html', 'Reservations'],
-  ['careers', 'careers.html', 'Careers'],
 ];
 
 /* ---------- toast (exported) ---------- */
@@ -182,28 +181,6 @@ function forms() {
     setTimeout(() => { location.href = `mailto:info@speakeasyottawa.com?subject=Website%20enquiry&body=${body}`; }, 600);
     contact.reset();
   });
-  const job = $('#careersForm');
-  job?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const note = $('#jbNote'), get = (id) => $('#' + id);
-    const checks = [
-      [get('jb-name'), get('jb-name').value.trim().length > 1],
-      [get('jb-email'), emailOK(get('jb-email').value)],
-      [get('jb-msg'), get('jb-msg').value.trim().length > 3],
-    ];
-    let ok = true;
-    checks.forEach(([f, v]) => { f.closest('.field').classList.toggle('invalid', !v); if (!v) ok = false; });
-    if (!ok) { note.textContent = 'Please complete the highlighted fields.'; note.classList.add('err'); return; }
-    note.classList.remove('err');
-    note.textContent = 'Thanks, your email is opening. Attach your résumé before you send.';
-    toast('Application ready · attach your résumé');
-    const body = encodeURIComponent(
-      `Role: ${get('jb-role').value}\nExperience: ${get('jb-exp').value}\n` +
-      `Availability: ${get('jb-avail').value}\nPhone: ${get('jb-phone').value}\n\n` +
-      `${get('jb-msg').value}\n\nFrom ${get('jb-name').value} (${get('jb-email').value})`);
-    setTimeout(() => { location.href = `mailto:info@speakeasyottawa.com?subject=Job%20application&body=${body}`; }, 600);
-  });
-
   const news = $('#newsForm');
   news?.addEventListener('submit', (e) => {
     e.preventDefault();
