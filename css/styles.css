@@ -1824,3 +1824,16 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 @media (min-width:900px){
   .page-hero.has-video{min-height:min(72vh,720px)}
 }
+
+/* Upstairs carries no photograph, so its panel is copy only and should not
+   sit in half a grid with nothing beside it. */
+.rooms__grid--copy{grid-template-columns:1fr;max-width:760px;margin-inline:auto;text-align:center}
+.rooms__grid--copy .booking__points{display:inline-block;text-align:left}
+.rooms__grid--copy .host__actions{justify-content:center}
+
+/* The event film sits between the rooms and what every buyout includes. The
+   source is 960x540, so the frame is capped near its own width rather than
+   stretched, where it would upscale and soften. */
+.rooms__film{max-width:min(94vw,1000px);margin:clamp(30px,4vw,48px) auto 0}
+.rooms__film .reel__video{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
+  border-radius:16px;border:1px solid rgba(201,162,39,.26);box-shadow:var(--shadow);background:#0a0a0b}
