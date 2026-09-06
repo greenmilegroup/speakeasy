@@ -1505,3 +1505,109 @@ body{font-weight:500;font-size:clamp(17.5px,1.2vw,19.5px);line-height:1.62}
 /* A leaders list with no price column: keep the rule, drop the dangling dots. */
 .leaders--plain li{display:block}
 .leaders--plain .n{display:block}
+
+/* =========================================================================
+   v8: TYPE SCALE
+   Measured pass. Before this, 28 distinct pieces of text rendered under 13px
+   on a 390px phone, including form labels (10.9px), the event date and time
+   chips (9.3px) and the mobile booking button (11.2px). Almost nothing
+   scaled between phone and desktop either: the same px at 390 and 1440.
+
+   Rules applied here:
+     - nothing readable renders below 12.5px, on any screen;
+     - anything a guest acts on (button, link, control, form label) is 13px+;
+     - sizes are clamped so they grow with the viewport instead of sitting
+       still, phone value first, desktop value as the ceiling.
+   ========================================================================= */
+
+/* body: larger on a phone, and it now grows on a desktop */
+body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
+
+/* the wordmark, asked to carry more presence */
+.nav__name{font-size:clamp(1.38rem,1.15vw + 1.05rem,1.72rem);line-height:1.05}
+.nav__name small{font-size:clamp(.68rem,.2vw + .62rem,.75rem);letter-spacing:.22em}
+
+/* navigation and the actions beside it */
+.nav__links a{font-size:clamp(.84rem,.18vw + .79rem,.9rem);letter-spacing:.08em}
+.nav__call{font-size:clamp(.85rem,.15vw + .81rem,.9rem)}
+.nav__book{font-size:clamp(.82rem,.15vw + .78rem,.88rem)}
+
+/* every button and inline action */
+.btn{font-size:clamp(.85rem,.16vw + .81rem,.91rem);letter-spacing:.11em}
+.link-underline{font-size:clamp(.83rem,.14vw + .79rem,.88rem)}
+.chip{font-size:clamp(.84rem,.14vw + .8rem,.89rem)}
+.mr__book,.mr__call{font-size:clamp(.86rem,.16vw + .82rem,.92rem)}
+
+/* labels and small caps: the old floor was 8.8px, which is not text */
+.kicker{font-size:clamp(.78rem,.14vw + .74rem,.84rem);letter-spacing:.22em}
+.mchip{font-size:.79rem;letter-spacing:.07em}
+.feature__flag{font-size:.79rem;letter-spacing:.14em}
+.ecard__kicker,.pl__tag,.ea{font-size:.78rem}
+.mus__dow,.mus__mon,.wrow__dow,.wrow__mon{font-size:.78rem;letter-spacing:.12em}
+.status{font-size:.79rem}
+.hero__scroll-label{font-size:.75rem;letter-spacing:.26em}
+.hero__sound{font-size:.79rem}
+.hero__title-2{font-size:clamp(.88rem,.5vw + .72rem,1.05rem)}
+.field label{font-size:.82rem;letter-spacing:.09em}
+.about__stats span,.footer__name span{font-size:.76rem}
+.footer__links a{font-size:clamp(.83rem,.14vw + .79rem,.88rem)}
+.footer__fine{font-size:.86rem}
+.menu-cat-head p,.gcard figcaption,.about__media figcaption,
+.visit__store figcaption,.sig__cap small{font-size:.79rem}
+
+/* the guest reviews carry more weight than a caption */
+.quote p{font-size:clamp(1.16rem,.55vw + 1.02rem,1.32rem);line-height:1.55}
+.quote cite{font-size:.81rem;letter-spacing:.12em}
+
+/* reading matter that was a shade tight */
+.ck__ing{font-size:.9rem;line-height:1.5}
+.ck__note{font-size:1rem}
+.leaders .n em{font-size:.86em}
+.mus__what p,.wrow__blurb{font-size:1rem}
+.note{font-size:.95rem}
+
+/* headings: h1 was set 35px on 32px leading, so two lines would collide */
+.page-hero h1{line-height:1.08}
+.h-display{line-height:1.1}
+
+/* Stragglers: these carried a more specific rule than the block above, so the
+   sizes there never applied. Matched at the same specificity here. */
+.mobile-reserve a{font-size:clamp(.86rem,.16vw + .82rem,.92rem)}
+.menu-cat-head .ea{font-size:.79rem}
+.host__media figcaption,.dinner__feature figcaption{font-size:.79rem}
+.about__stats span{font-size:.8rem}
+.nav__name small{font-size:clamp(.78rem,.18vw + .73rem,.85rem)}
+.hero__scroll-label{font-size:.79rem}
+
+/* The nav runs full-width down to 961px, where it becomes the burger. Between
+   there and about 1300px, "Host Your Event" used to wrap onto a second line
+   and the phone number collapsed into a red disc. Nothing in the bar may wrap;
+   instead the links tighten as the room runs out. */
+.nav__links a,.nav__call,.nav__book,.nav__name{white-space:nowrap}
+@media (max-width:1300px){
+  .nav__links{gap:20px}
+  .nav__links a{font-size:.82rem;letter-spacing:.05em}
+}
+@media (max-width:1140px){
+  .nav__links{gap:15px}
+  .nav__links a{font-size:.78rem;letter-spacing:.02em}
+  .nav__name{font-size:1.3rem}
+  .nav__call{font-size:.8rem;padding:9px 13px}
+  .nav__book{font-size:.78rem}
+}
+/* nowrap text overflows a shrunken flex box, so the wordmark was riding into
+   the first nav link. The brand keeps its width; the links tighten instead. */
+.nav__brand{flex:none}
+.nav__links{min-width:0}
+@media (max-width:1080px){
+  .nav__inner{gap:14px}
+  .nav__links{gap:12px}
+  .nav__links a{font-size:.74rem;letter-spacing:0}
+}
+/* Below ~1000px the full bar can only fit by squeezing the links against the
+   Book button. The burger takes over a little earlier instead. This is the nav
+   only; the 960px breakpoint still governs the rest of the layout. */
+@media (max-width:1000px){
+  .nav__links,.nav__call{display:none}
+  .nav__toggle{display:flex}
+}

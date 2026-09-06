@@ -15,7 +15,7 @@ main site. Host the folder anywhere (GitHub Pages, Netlify, any web server) or o
 | File | What it is |
 |------|------------|
 | `index.html` | Home — “shhh” door intro, hero, about, the six **stamps**, house signatures, 3D-tour teaser, gallery |
-| `drinks.html` | The Bar — blue-cocktail hero, 13 signature cocktails, wine, local draught |
+| `drinks.html` | The Bar: blue-cocktail hero, 13 signature cocktails, wine, bottled beer and cider |
 | `menu.html` | The Menu — one page, **toggle** between **Shareables · Dinner · Desserts** (also deep-links: `menu.html#dinner`) |
 | `events.html` | Events — three bands: **Tonight**, **The Main Event** (ticketed) and **Live Music** (this week / this month). Data-driven ([see below](#events-are-data-driven)) |
 | `private.html` | Private Events — phone-call-first hosting page: the room, per-guest package pricing, the Concert Experience, upstairs |
@@ -233,7 +233,7 @@ Menu/bar copy follows the supplied inventory, with a few details filled in — p
 
 - **Cocktails** — the 10 named signatures plus three era-appropriate pours (French 75, Boulevardier, Clover Club) to reach
   the stated **13**. Ingredients and prices ($15–18) are placeholders.
-- **Wine & beer** — representative selections with sample prices (local Ottawa draughts named).
+- **Wine & beer** — representative selections with sample prices. **The bar has no draught**: beer and cider are bottles and cans only, so do not reintroduce tap/draught wording.
 - **Dish prices** — chosen inside the given ranges (Dinner $26–48, Desserts $12–18).
 - **Hours** — modelled as Tue–Thu 4–10:30 PM, Fri–Sat 4 PM–Midnight, Sun–Mon closed. Adjust in `SCHEDULE`.
 - **`interior.jpg`** (still used in the About block) is as supplied, including its “AI-generated content”

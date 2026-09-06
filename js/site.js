@@ -101,7 +101,7 @@ function injectChrome() {
         <p class="footer__social"><a href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a> · <a href="#" aria-label="Facebook">Facebook</a></p>
       </div>
     </div>
-    <p class="footer__fine">© <span id="year"></span> Speakeasy Ottawa · ByWard Market · Please enjoy responsibly.</p>`;
+    <p class="footer__fine">© 2022 Speakeasy Ottawa · ByWard Market · Please enjoy responsibly.</p>`;
 }
 
 /* ---------- nav behaviour ---------- */
@@ -249,7 +249,6 @@ function packages() {
 
 /* ---------- misc: year + easter egg ---------- */
 function misc() {
-  const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
   let clicks = 0, t;
   $('#footLogo')?.addEventListener('click', () => { if (++clicks >= 3) { clicks = 0; toast('Password accepted. Tell no one.'); } clearTimeout(t); t = setTimeout(() => (clicks = 0), 1200); });
 }
