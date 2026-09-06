@@ -90,6 +90,11 @@ Everything is hand-editable — no database.
   into `<div class="gallery__grid" id="galleryGrid">` in `index.html` (set `data-full`, `src`, `alt`, `data-caption`,
   `data-cat`); the placeholder hides itself automatically once the grid has children. You may also re-add the
   filter chips above it.
+- **Video** — the menu hero is `assets/video/the-plate.*` (a 360x470 crop of a phone clip, brightened at
+  encode time and silent, since the hero is muted). Footage is lifted in CSS by the `v9` block: the videos
+  carry a `brightness()` filter and the hero scrims are far lighter than they were, with the headline
+  protected by a text shadow instead of a blanket of black. If you add a hero video, keep it landscape and
+  at least 1280px wide; anything narrower is upscaled and goes soft on a desktop.
 - **Photos** — drop a JPG into `assets/img/` and point the matching `<img src>` at it. Current photos: `interior.jpg`,
   `tuna-tartare.jpg`, `rigatoni-bolognese.jpg`, `storefront.jpg`, `blue-lagoon.jpg`, `event-15-first-dates.jpg`.
 - **Fonts** — swap the files in `assets/fonts/` and the `@font-face` rules in `assets/fonts/fonts.css`. Two families
