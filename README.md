@@ -293,8 +293,8 @@ Menu/bar copy follows the supplied inventory, with a few details filled in — p
 
 **Locally:** any static server, e.g. `python3 -m http.server 8000` → http://localhost:8000
 
-**GoDaddy:** pushes to `main` publish themselves over FTPS — see [DEPLOY.md](DEPLOY.md) for the four
-secrets it needs.
+**Live:** every push to `main` republishes speakeasyottawa.com automatically. `tools/build-site.sh`
+assembles the publishable files into `dist/`, which is what the host serves. See [DEPLOY.md](DEPLOY.md).
 
 **GitHub Pages:** push and enable Pages on the branch (the included `.nojekyll` keeps the layout intact). Drop-in ready
 for Netlify, Vercel or Cloudflare Pages too.

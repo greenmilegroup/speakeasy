@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://speakeasytapas.ca/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://speakeasytapas.ca/drinks.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://speakeasytapas.ca/menu.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://speakeasytapas.ca/events.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://speakeasytapas.ca/private.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://speakeasytapas.ca/visit.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://speakeasytapas.ca/careers.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://speakeasyottawa.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://speakeasyottawa.com/drinks.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://speakeasyottawa.com/menu.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://speakeasyottawa.com/events.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://speakeasyottawa.com/private.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://speakeasyottawa.com/visit.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://speakeasyottawa.com/careers.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 </urlset>

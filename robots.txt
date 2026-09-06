@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
-Sitemap: https://speakeasytapas.ca/sitemap.xml
+Sitemap: https://speakeasyottawa.com/sitemap.xml

@@ -1,66 +1,74 @@
-# Publishing to GoDaddy
+# Publishing the site
 
-The site is plain HTML, CSS and JavaScript — there is nothing to build. Deploying
-means copying the files onto the GoDaddy account. `.github/workflows/deploy-godaddy.yml`
-does that over FTPS on every push to `main`, and uploads only the files that
-actually changed.
+The site is plain HTML, CSS and JavaScript. `tools/build-site.sh` copies the
+publishable files into `dist/` — every page, `css/`, `js/`, `assets/` — and
+leaves the development folders (`mcp/`, `supabase/`, `tools/`) off the public
+web. A host runs that script on every push to `main` and serves `dist/`.
 
-## One-time setup
+The live domain is **speakeasyottawa.com**.
 
-### 1. Get the FTP details from GoDaddy
+## Why not GoDaddy
 
-In your GoDaddy account: **My Products → Web Hosting → Manage → cPanel Admin →
-Files → FTP Accounts**. Create an account (or use the existing one) and note:
+The GoDaddy account is on **Websites + Marketing**, their site builder. It has
+no FTP and no file access, so nothing can be deployed to it from GitHub. The
+domain still lives at GoDaddy — only the DNS records change, and the hosting
+happens elsewhere.
 
-- **Server** — the hostname, e.g. `ftp.speakeasytapas.ca` or the server IP
-- **Username** — the full FTP username, usually `something@speakeasytapas.ca`
-- **Password** — the one you set
-- **Directory** — where the site is served from. For a primary domain that is
-  `public_html/`. For an add-on domain it is `public_html/speakeasytapas.ca/`.
+## Setting up Cloudflare Pages
 
-### 2. Put them in GitHub as secrets
+1. Sign up free at https://dash.cloudflare.com/sign-up
+2. **Workers & Pages → Create → Pages → Connect to Git**, authorise GitHub and
+   pick `greenmilegroup/speakeasy`.
+3. Set the build settings:
 
-In this repo: **Settings → Secrets and variables → Actions → New repository
-secret**. Add four:
+   | Field | Value |
+   | --- | --- |
+   | Production branch | `main` |
+   | Build command | `bash tools/build-site.sh` |
+   | Build output directory | `dist` |
 
-| Secret name | Value |
+4. **Save and Deploy.** In about a minute the site is live on a
+   `speakeasy-xxx.pages.dev` URL. Check it there before pointing the domain.
+5. **Custom domains → Set up a domain →** `speakeasyottawa.com`. Cloudflare
+   shows the DNS records to create.
+6. In GoDaddy: **Domain → speakeasyottawa.com → Manage DNS**, and add the
+   records Cloudflare gave you. Propagation is usually minutes, up to a few
+   hours. HTTPS is issued automatically once the domain resolves.
+
+From then on, every push to `main` republishes the site on its own.
+
+## Setting up Vercel instead
+
+Same shape, different dashboard. **Add New → Project → Import** the repo, then:
+
+| Field | Value |
 | --- | --- |
-| `FTP_SERVER` | the hostname from above |
-| `FTP_USERNAME` | the full FTP username |
-| `FTP_PASSWORD` | the FTP password |
-| `FTP_SERVER_DIR` | `public_html/` (with the trailing slash) |
+| Framework Preset | Other |
+| Build Command | `bash tools/build-site.sh` |
+| Output Directory | `dist` |
 
-They are write-only — GitHub never shows them again, and they never appear in
-the build logs.
+Then **Settings → Domains** to add `speakeasyottawa.com`, and create the records
+it gives you in GoDaddy's Manage DNS.
 
-### 3. Run it
+Note that Vercel's free Hobby plan is licensed for non-commercial use only, and
+caps bandwidth at 100 GB/month. A restaurant site is commercial, and the video
+on this site pushes it past that cap — see below. Vercel means the Pro plan.
 
-**Actions → Deploy to GoDaddy → Run workflow.** The first run uploads everything
-(a minute or two, mostly the video and fonts). After that, every push to `main`
-uploads only what changed, in a few seconds.
+## Bandwidth
 
-## What gets uploaded
+The site is about 30 MB, of which 24 MB is the video in `assets/video/`. A
+visitor does not pull all of it — the videos load per page — but a typical visit
+still runs a few MB.
 
-Everything the browser needs: the HTML pages, `css/`, `js/`, `assets/`. Left
-behind: `mcp/`, `supabase/`, `tools/`, `README.md` and the repo plumbing — those
-are development files that do not belong on a public web server.
+At roughly 50,000 visitors a month that is well over 100 GB. Cloudflare Pages
+does not meter bandwidth on any plan. Vercel's Pro plan includes 1 TB.
 
-## If a deploy fails
+If the bill or the load times ever become a concern, the fix is the video: move
+`assets/video/` to a video host, or re-encode it smaller. That is where nearly
+all the weight is.
 
-- **530 Login authentication failed** — the username usually needs to be the
-  full `user@domain` form, not just the short name.
-- **Connection timeout** — GoDaddy blocks FTP from unknown IPs on some plans.
-  In cPanel, check **Security → IP Blocker**, or switch the workflow's
-  `protocol:` from `ftps` to `ftp` if the plan does not offer FTPS.
-- **Files upload but the site does not change** — `FTP_SERVER_DIR` is pointing at
-  the wrong folder. Log in over FTP by hand and find the folder that already
-  holds the live `index.html`.
+## Local preview
 
-## A note on GoDaddy plans
+    ./tools/build-site.sh && cd dist && python3 -m http.server 8000
 
-This works on **cPanel Web Hosting** (shared, business or dedicated), which is
-what gives you FTP access. It does **not** work on **GoDaddy Website Builder**
-— that product has no file access at all, so a site built there can only be
-edited in their editor. If that is the plan you are on, the move is either to
-switch to Web Hosting, or to point the domain at a free static host like
-Cloudflare Pages or Netlify, which deploy from GitHub with no FTP at all.
+Then open http://localhost:8000.
