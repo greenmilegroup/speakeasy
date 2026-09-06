@@ -1,82 +1,81 @@
 ---
 name: sync-events
-description: Refresh the Speakeasy events board from the Google Sheet line-up and from an Eventbrite screenshot. Use when asked to update the events, add the month's performers, sync the line-up, or when an Eventbrite screenshot is pasted.
+description: Refresh the Speakeasy events board from the owner's Google Drive booking tracker. Use when asked to update the events, add the month's performers, sync the line-up, or when an Eventbrite screenshot is pasted.
 ---
 
 # Refresh the events board
 
-Two sources feed `assets/data/events.json`. Keep both in one pass.
+## The source of truth
 
-## 1. Live music, from the Google Sheet
+Google Drive folder `1Y8iN8-lc29C-FgUzlM7pKqpGtozKXDOW` →
+**Speakeasy_Ottawa_Live_Music_Events_Calendar.xlsx**
+(file id `1EU0nb-bMFKOroicQSaEYIYCcDXTerJJw`).
 
-**Sheet:** "Speakeasy Music/Event Schedule", Drive id
-`19k3ODwFoV3hIuhB-8TyMbwYrpdws9lRkTpOjjxAipFI` (owner andrewculbert04@gmail.com,
-shared with the account). Read it with `mcp__Google_Drive__read_file_content`.
+Read it with `mcp__Google_Drive__read_file_content`. List the folder first with
+`search_files` and `parentId = '1Y8iN8-lc29C-FgUzlM7pKqpGtozKXDOW'`, in case the
+owner has added a newer workbook.
 
-The sheet has one tab per month. Each tab repeats the same shape:
+The **Events Calendar** sheet has one row per event. The columns that matter:
 
-- The authoritative data is the **`Date | Event`** column pair on the left, one
-  row per night, e.g. `Oct 2 | Claudia Caird - Singer`. Use this.
-- The calendar grid to its right is a **duplicate view** of the same rows. Do
-  not read both or every night is counted twice.
-- Rows carry no year. Months before the current one belong to the next year.
-- Tabs overlap at the edges (a tab often repeats the last week of the previous
-  month), so de-duplicate on date plus title.
+| Column | Use |
+| --- | --- |
+| Booking Status | Publish `Confirmed` only. Holds, tentatives and inquiries are not public. |
+| Event Date, Start Time, End Time | `starts_at` and `duration_min`. |
+| Artist / Vendor | `title`. |
+| Production / Setup | `kicker` — this is where the instrument lives. |
+| Ticket / Event Link | Present means `ticketed: true` and `ticket_url`. |
+| Notes | Ticket prices and door times. Read, do not paraphrase loosely. |
 
-**Times** come from the sheet's own day-of-week header, not from guesswork:
+This workbook **replaces** the older "Speakeasy Music/Event Schedule" sheet
+(`19k3ODwFoV3hIuhB-8TyMbwYrpdws9lRkTpOjjxAipFI`). That one ran behind: it was
+missing every September Thursday and was wrong on the 6th and the 12th. Do not
+fall back to it without asking.
 
-| Days | Header | Use |
-| --- | --- | --- |
-| Sun, Tue, Wed, Thu | Live Music 7-8pm | starts 19:00, 60 min |
-| Fri, Sat | Live Music 7-8 & 9-10 | starts 19:00, 180 min, note the second set |
+## Rules that have already been broken once
 
-A row may override this inline: `Raphaelle Cello Event 6pm`,
-`Darya DJ event 11pm`, `Peter Woods and Kyle Jordan 4-7 pm`. Inline wins.
+- **Write no prose the tracker does not state.** `blurb` stays empty for the
+  no-cover nights. Descriptions invented to fill the field ("a voice, the low
+  light and the room leaning in") shipped once and had to be pulled.
+- **Start time is 7 PM** unless the tracker gives one (owner, 6 Sep 2026:
+  "no covers aside from martin start time is 7pm").
+- **A month with no confirmed rows is not an error.** The page shows
+  "coming soon" for any month inside its three-month window. Do not pad it.
 
-**Mapping a row**
-
-- `Claudia Caird - Singer` splits into title `Claudia Caird`, kicker `Singer`.
-- `category` is `music`; `ticketed` is `false`; `price_text` is `No cover`.
-  Live music runs during dinner service and needs no ticket.
-- A row naming an event rather than a performer (`Speed Dating`,
-  `Nat King Cole Tribute Event`, `Gee Gethiga Comedy Show`, `Candlelit Concert`)
-  is **not** live music: `ticketed: true`, and `category` `comedy` or `special`.
-- Skip private bookings (`Bachlorette Party Upstairs`, `Upstairs B-Day Dinner`)
-  and blank rows. They are not public events.
-- Drop anything already past.
-
-## 2. Ticketed shows, from an Eventbrite screenshot
+## Ticketed shows
 
 Eventbrite cannot be reached from this environment: the egress proxy answers
-403 to CONNECT for `eventbrite.ca` and `eventbriteapi.com`. So the owner pastes
-a screenshot of the organiser page instead. Read each tile and take:
+403 to CONNECT for `eventbrite.ca` and `eventbriteapi.com`. The tracker's
+Ticket / Event Link column is the normal route. If the owner pastes a
+screenshot of the organiser page for a show the tracker does not carry yet,
+take title, date, start time and price from the tile, and say in your reply
+that it is not in the tracker.
 
-title · date · start time · price · the event image if identifiable.
+Note that Eventbrite tiles show the **fee-inclusive** price ("From $43.63")
+while the tracker records the **face** price (GA $35). Prefer the tracker's
+figure and state the options in the blurb.
 
-Set `ticketed: true`, `category` `comedy` or `special`, and leave `ticket_url`
-empty so it falls back to `EVENTBRITE_URL` in `js/config.js`. If a tile is
-ambiguous, ask rather than guess: a wrong date on a ticketed show is worse than
-a missing one.
-
-## Writing the file
-
-`assets/data/events.json` is an array of records shaped like:
+## The record shape
 
 ```json
-{ "id": "claudia-caird-2026-10-02", "title": "Claudia Caird", "kicker": "Singer",
-  "category": "music", "blurb": "...", "starts_at": "2026-10-02T19:00:00-04:00",
-  "recurrence": "none", "duration_min": 180, "price_text": "No cover",
+{ "id": "claudia-caird-2026-09-18", "title": "Claudia Caird", "kicker": "Vocals",
+  "category": "music", "blurb": "", "starts_at": "2026-09-18T19:00:00-04:00",
+  "recurrence": "none", "duration_min": 60, "price_text": "No cover",
   "image_url": "", "ticket_url": "", "ticketed": false, "published": true }
 ```
 
 - `id` is `slug(title)-YYYY-MM-DD`, so re-running is idempotent.
-- Dated nights use `recurrence: "none"` with a real `starts_at`. Only use
-  `weekly` for a genuinely standing night with no end.
-- Offsets: `-04:00` during EDT, `-05:00` from early November.
+- Offsets: `-04:00` on EDT, `-05:00` from the first Sunday in November.
+- Event artwork lives in `assets/img/events/`, named `<id>.jpg`, 1600px wide.
+
+## Timezone
+
+`js/events.js` renders every date part through `America/Toronto`, so a 7 PM set
+reads 7 PM from any country. Never reintroduce `getHours()`, `getDate()` or
+`getDay()` on an event date; use the `vp()` helper.
 
 ## After writing
 
 1. `python3 -c "import json;json.load(open('assets/data/events.json'))"`
-2. Serve and load `events.html`; check the calendar month, the dot count and
-   the listed nights agree.
+2. Serve and load `events.html`; check the calendar dots, the night count and
+   the listed nights agree, and that the ticketed shows carry their artwork.
 3. Confirm no console errors and no horizontal overflow at 1440 and 390.

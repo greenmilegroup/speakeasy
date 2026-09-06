@@ -22,11 +22,36 @@ const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct
 const pad = n => String(n).padStart(2, '0');
 const DAY_MS = 864e5;
 
-const fmtTime = d => { let h = d.getHours(); const m = d.getMinutes(), ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12; return m ? `${h}:${pad(m)} ${ap}` : `${h} ${ap}`; };
-const fmtFull = d => `${DAY[d.getDay()]} · ${MON[d.getMonth()]} ${d.getDate()} · ${fmtTime(d)}`;
-const fmtShort = d => `${DAY[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`;
-const midnight = d => { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; };
-const dayKey = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+/* ---------- venue time ----------
+   A show at 7 PM in Ottawa is at 7 PM for everyone reading about it. Dates
+   parsed from an ISO string carry a real instant, so getHours() and friends
+   answer in the *reader's* zone: from Vancouver a 7 PM set reads 4 PM, and
+   from Tokyo it lands on the following day. Every date part shown on this
+   page is therefore read in the venue's own zone, never the browser's. */
+const VENUE_TZ = 'America/Toronto';
+const VENUE_FMT = new Intl.DateTimeFormat('en-CA', {
+  timeZone: VENUE_TZ, hourCycle: 'h23',
+  year: 'numeric', month: 'numeric', day: 'numeric',
+  hour: 'numeric', minute: 'numeric', weekday: 'short',
+});
+const DOW_INDEX = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+
+/** Calendar parts of an instant as they read at 55 York Street. */
+function vp(d) {
+  const p = Object.fromEntries(VENUE_FMT.formatToParts(d).map(x => [x.type, x.value]));
+  return {
+    y: Number(p.year), m: Number(p.month) - 1, d: Number(p.day),
+    h: Number(p.hour) % 24, min: Number(p.minute),
+    dow: DOW_INDEX[p.weekday] ?? 0,
+  };
+}
+
+const fmtTime = d => { const { h, min } = vp(d); const ap = h >= 12 ? 'PM' : 'AM'; const hh = h % 12 || 12; return min ? `${hh}:${pad(min)} ${ap}` : `${hh} ${ap}`; };
+const fmtFull = d => { const v = vp(d); return `${DAY[v.dow]} · ${MON[v.m]} ${v.d} · ${fmtTime(d)}`; };
+const fmtShort = d => { const v = vp(d); return `${DAY[v.dow]} ${v.d} ${MON[v.m]}`; };
+const dayKey = d => { const v = vp(d); return `${v.y}-${pad(v.m + 1)}-${pad(v.d)}`; };
+/** Whole days from one instant to another, counted by venue calendar day. */
+const daysBetween = (a, b) => Math.round((Date.parse(`${dayKey(b)}T00:00:00Z`) - Date.parse(`${dayKey(a)}T00:00:00Z`)) / DAY_MS);
 
 /** Ticketed shows are the ones you make plans for; the rest is the house programme. */
 const isTicketed = ev => Boolean(ev.ticketed);
@@ -34,7 +59,7 @@ const isTicketed = ev => Boolean(ev.ticketed);
 function countdown(d) {
   const ms = d - Date.now();
   if (ms < 0) return 'On now';
-  const days = Math.floor((midnight(d) - midnight(new Date())) / DAY_MS);
+  const days = daysBetween(new Date(), d);
   if (days === 0) return 'Tonight';
   if (days === 1) return 'Tomorrow';
   if (days < 7) return `In ${days} days`;
@@ -70,13 +95,14 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 function renderTonight(all) {
   const band = $('#tonightBand');
   const now = new Date();
-  const end = midnight(now); end.setDate(end.getDate() + 1);
+  const today = dayKey(now);
   const soon = expand(all, new Date(now - 3 * 3600e3), new Date(now.getTime() + 30 * DAY_MS));
-  const tonight = soon.filter(e => e.date < end);
+  const tonight = soon.filter(e => dayKey(e.date) === today);
 
+  const vNow = vp(now);
   if (tonight.length) {
     band.innerHTML = `
-      <div class="tonight__mark"><span class="tonight__dot" aria-hidden="true"></span><p class="kicker">Tonight · ${DAY_LONG[now.getDay()]} ${now.getDate()} ${MON[now.getMonth()]}</p></div>
+      <div class="tonight__mark"><span class="tonight__dot" aria-hidden="true"></span><p class="kicker">Tonight · ${DAY_LONG[vNow.dow]} ${vNow.d} ${MON[vNow.m]}</p></div>
       <ul class="tonight__list">${tonight.map(e => `
         <li><span class="tonight__time">${fmtTime(e.date)}</span><span class="tonight__name">${esc(e.title)}</span>${e.priceText ? `<span class="mchip">${esc(e.priceText)}</span>` : ''}</li>`).join('')}</ul>
       <a class="btn btn--gold-sm" href="tel:+16132416221">Book a table</a>`;
@@ -107,7 +133,7 @@ function renderFeature(ev) {
       <p class="ecard__kicker">${esc(ev.kicker)}</p>
       <h3 class="feature__title">${esc(ev.title)}</h3>
       <div class="ecard__meta"><span class="mchip">${fmtFull(ev.date)}</span>${ev.priceText ? `<span class="mchip">${esc(ev.priceText)}</span>` : ''}${ev.recurrence === 'weekly' ? '<span class="mchip">Every week</span>' : ''}</div>
-      <p class="feature__blurb">${esc(ev.blurb)}</p>
+      ${ev.blurb ? `<p class="feature__blurb">${esc(ev.blurb)}</p>` : ''}
       <div class="feature__cta">
         <a class="btn btn--gold" href="${esc(tickets(ev))}" target="_blank" rel="noopener">Get tickets on Eventbrite</a>
         <button class="btn btn--ghost" type="button" data-ics>Add to calendar</button>
@@ -120,14 +146,14 @@ function renderTicketList(list) {
   const ul = $('#ticketList');
   ul.innerHTML = list.map((ev, i) => `
     <li class="wrow" data-cat="${esc(ev.category)}" style="--i:${i}">
-      <div class="wrow__date"><span class="wrow__dow">${DAY[ev.date.getDay()]}</span><strong>${ev.date.getDate()}</strong><span class="wrow__mon">${MON[ev.date.getMonth()]}</span></div>
+      <div class="wrow__date"><span class="wrow__dow">${DAY[vp(ev.date).dow]}</span><strong>${vp(ev.date).d}</strong><span class="wrow__mon">${MON[vp(ev.date).m]}</span></div>
       ${ev.imageUrl
         ? `<div class="wrow__thumb"><img src="${esc(ev.imageUrl)}" alt="" loading="lazy"/></div>`
         : `<div class="wrow__thumb wrow__thumb--none" aria-hidden="true"><span>${esc((ev.title || '?').trim()[0])}</span></div>`}
       <div class="wrow__main">
         <p class="ecard__kicker">${esc(ev.kicker)}</p>
         <h3 class="wrow__title">${esc(ev.title)}</h3>
-        <p class="wrow__blurb">${esc(ev.blurb)}</p>
+        ${ev.blurb ? `<p class="wrow__blurb">${esc(ev.blurb)}</p>` : ''}
         <div class="ecard__meta"><span class="mchip">${fmtTime(ev.date)}</span>${ev.priceText ? `<span class="mchip">${esc(ev.priceText)}</span>` : ''}${ev.recurrence === 'weekly' ? '<span class="mchip">Weekly</span>' : ''}</div>
       </div>
       <div class="wrow__act">
@@ -145,15 +171,34 @@ const MON_LONG = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
 
 /** The month currently on show, always the 1st at midnight. */
-let calMonth = (() => { const d = new Date(); d.setDate(1); d.setHours(0, 0, 0, 0); return d; })();
+let calMonth = (() => { const v = vp(new Date()); return new Date(v.y, v.m, 1); })();
+
+/* The board looks three months ahead: this month and the two after it. Further
+   out the line-up is not settled, so a month with nothing in it says so rather
+   than reading as a mistake, and stepping past the window is closed off. */
+const MONTHS_AHEAD = 2;
+const monthStart = (y, m) => new Date(y, m, 1);
+const CAL_FIRST = (() => { const v = vp(new Date()); return monthStart(v.y, v.m); })();
+const CAL_LAST = monthStart(CAL_FIRST.getFullYear(), CAL_FIRST.getMonth() + MONTHS_AHEAD);
+const inWindow = m => m >= CAL_FIRST && m <= CAL_LAST;
+
+/* A month's edges are venue-calendar edges, not the reader's. Expanding a
+   couple of days wide and then filtering on the venue month stops a set on the
+   30th from sliding into the next month for someone reading from Tokyo. */
+function nightsIn(house, month) {
+  const from = new Date(month.getFullYear(), month.getMonth(), 1);
+  const to = new Date(month.getFullYear(), month.getMonth() + 1, 1);
+  from.setDate(from.getDate() - 2);
+  to.setDate(to.getDate() + 2);
+  return expand(house, from, to)
+    .filter(ev => { const v = vp(ev.date); return v.y === month.getFullYear() && v.m === month.getMonth(); });
+}
 
 /** Every night in the given month, keyed by day-of-month. */
 function nightsByDay(house, month) {
-  const from = new Date(month);
-  const to = new Date(month.getFullYear(), month.getMonth() + 1, 0, 23, 59, 59);
   const map = new Map();
-  for (const ev of expand(house, from, to)) {
-    const d = ev.date.getDate();
+  for (const ev of nightsIn(house, month)) {
+    const d = vp(ev.date).d;
     if (!map.has(d)) map.set(d, []);
     map.get(d).push(ev);
   }
@@ -164,12 +209,17 @@ function renderCalendar(house, selectedDay) {
   const grid = $('#calGrid'), label = $('#calMonth');
   if (!grid) return;
   label.textContent = `${MON_LONG[calMonth.getMonth()]} ${calMonth.getFullYear()}`;
+  // Close off the arrows at the edges of the three-month window.
+  $$('#musCal .cal__nav').forEach(btn => {
+    const to = monthStart(calMonth.getFullYear(), calMonth.getMonth() + Number(btn.dataset.step));
+    btn.disabled = !inWindow(to);
+  });
 
   const byDay = nightsByDay(house, calMonth);
   const first = new Date(calMonth.getFullYear(), calMonth.getMonth(), 1).getDay();
   const days = new Date(calMonth.getFullYear(), calMonth.getMonth() + 1, 0).getDate();
-  const today = new Date();
-  const isThisMonth = today.getMonth() === calMonth.getMonth() && today.getFullYear() === calMonth.getFullYear();
+  const today = vp(new Date());
+  const isThisMonth = today.m === calMonth.getMonth() && today.y === calMonth.getFullYear();
 
   let cells = '';
   for (let i = 0; i < first; i++) cells += '<span class="cal__pad" aria-hidden="true"></span>';
@@ -177,7 +227,7 @@ function renderCalendar(house, selectedDay) {
     const on = byDay.get(d);
     const cls = ['cal__day'];
     if (on) cls.push('has-event');
-    if (isThisMonth && d === today.getDate()) cls.push('is-today');
+    if (isThisMonth && d === today.d) cls.push('is-today');
     if (selectedDay === d) cls.push('is-picked');
     const who = on ? on.map(e => e.title).join(', ') : '';
     cells += on
@@ -193,19 +243,8 @@ function renderCalendar(house, selectedDay) {
 
 function renderMusic(house, selectedDay) {
   const list = $('#musList'), empty = $('#musEmpty'), label = $('#musRange');
-  const from = new Date(calMonth);
-  const to = new Date(calMonth.getFullYear(), calMonth.getMonth() + 1, 0, 23, 59, 59);
-  let nights = expand(house, from, to);
-  if (selectedDay) nights = nights.filter(e => e.date.getDate() === selectedDay);
-
-  label.textContent = nights.length
-    ? (selectedDay
-        ? `${DAY[nights[0].date.getDay()]} ${selectedDay} ${MON[calMonth.getMonth()]} · ${nights.length} on the stage`
-        : `${nights.length} night${nights.length > 1 ? 's' : ''} on the stage in ${MON_LONG[calMonth.getMonth()]}`)
-    : '';
-  empty.hidden = Boolean(nights.length);
-  list.hidden = !nights.length;
-  if (!nights.length) { list.innerHTML = ''; return; }
+  let nights = nightsIn(house, calMonth);
+  if (selectedDay) nights = nights.filter(e => vp(e.date).d === selectedDay);
 
   const days = new Map();
   for (const ev of nights) {
@@ -214,15 +253,35 @@ function renderMusic(house, selectedDay) {
     days.get(k).push(ev);
   }
 
+  // A Friday runs two sets, so count nights rather than records.
+  const n = days.size;
+  label.textContent = n
+    ? (selectedDay
+        ? `${DAY[vp(nights[0].date).dow]} ${selectedDay} ${MON[calMonth.getMonth()]} · ${nights.length} set${nights.length > 1 ? 's' : ''} on the stage`
+        : `${n} night${n > 1 ? 's' : ''} on the stage in ${MON_LONG[calMonth.getMonth()]}`)
+    : '';
+  empty.hidden = Boolean(n);
+  list.hidden = !n;
+  if (!n) {
+    list.innerHTML = '';
+    // Inside the window an empty month is simply not booked yet; say that
+    // rather than implying the guest looked in the wrong place.
+    $('.whatson__empty-title', empty).textContent =
+      `${MON_LONG[calMonth.getMonth()]} · coming soon`;
+    $('.whatson__empty-sub', empty).textContent =
+      'The line-up for this month is still being booked. Call and we will tell you what is taking shape.';
+    return;
+  }
+
   list.innerHTML = [...days.values()].map((evs, i) => {
-    const d = evs[0].date;
+    const d = evs[0].date, v = vp(d);
     const today = dayKey(d) === dayKey(new Date());
     return `
       <div class="mus__day${today ? ' is-today' : ''}" id="day-${dayKey(d)}" style="--i:${i}">
         <div class="mus__when">
-          <span class="mus__dow">${DAY[d.getDay()]}</span>
-          <strong>${d.getDate()}</strong>
-          <span class="mus__mon">${MON[d.getMonth()]}</span>
+          <span class="mus__dow">${DAY[v.dow]}</span>
+          <strong>${v.d}</strong>
+          <span class="mus__mon">${MON[v.m]}</span>
           ${today ? '<span class="mus__today">Tonight</span>' : ''}
         </div>
         <ul class="mus__sets">${evs.map(ev => `
@@ -230,7 +289,7 @@ function renderMusic(house, selectedDay) {
             <span class="mus__time">${fmtTime(ev.date)}</span>
             <div class="mus__what">
               <h3>${esc(ev.title)}</h3>
-              <p>${esc(ev.blurb)}</p>
+              ${ev.kicker ? `<p>${esc(ev.kicker)}</p>` : ''}
             </div>
             ${ev.priceText ? `<span class="mchip">${esc(ev.priceText)}</span>` : ''}
           </li>`).join('')}</ul>
@@ -274,22 +333,21 @@ async function start() {
 
   renderTonight(all);
 
-  const noTickets = !ticketed.length;
-  $('#ticketEmpty').hidden = !noTickets;
-  $('#whatsonFeature').hidden = noTickets;
-  $('#ticketList').hidden = noTickets;
-  if (!noTickets) {
-    renderFeature(ticketed[0]);
-    renderTicketList(ticketed.slice(1));
-  }
+  // The Main Event is the Eventbrite board: whatever is still to come, with the
+  // soonest featured. A show that has already happened is not news, and the
+  // section never announces its own emptiness.
+  const upcomingTickets = expand(ticketed, new Date(), new Date(Date.now() + 400 * DAY_MS));
+  $('#whatsonFeature').hidden = !upcomingTickets.length;
+  $('#ticketList').hidden = upcomingTickets.length < 2;
+  renderFeature(upcomingTickets[0]);
+  renderTicketList(upcomingTickets.slice(1));
 
-  // open on the first month that actually has something on
-  const upcoming = expand(house, new Date(), new Date(Date.now() + 400 * DAY_MS))[0];
-  if (upcoming) { calMonth = new Date(upcoming.date.getFullYear(), upcoming.date.getMonth(), 1); }
   paintMusic(house);
 
   $$('#musCal .cal__nav').forEach(btn => btn.addEventListener('click', () => {
-    calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() + Number(btn.dataset.step), 1);
+    const to = monthStart(calMonth.getFullYear(), calMonth.getMonth() + Number(btn.dataset.step));
+    if (!inWindow(to)) return;
+    calMonth = to;
     paintMusic(house);
   }));
 
