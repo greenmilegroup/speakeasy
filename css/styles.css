@@ -1632,19 +1632,35 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 .openhours .hours td{font-size:1.05rem;padding:.62rem 0}
 @media (max-width:820px){.openhours__inner{grid-template-columns:1fr;gap:26px}}
 
-/* ---- past clients: a wordmark wall, not trademark files ---- */
-.clients__row{list-style:none;margin:0;padding:0;display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;align-items:stretch}
-.clients__row li{display:flex;align-items:center;justify-content:center;min-height:92px;padding:18px 14px;
-  border-radius:12px;border:1px solid var(--line-soft);
-  background:linear-gradient(165deg,rgba(24,24,26,.72),rgba(12,12,14,.72));
-  transition:border-color .3s,transform .3s var(--ease)}
-.clients__row li:hover{border-color:rgba(201,162,39,.36);transform:translateY(-2px)}
-.clients__row span{font-family:var(--f-display);font-weight:600;font-size:clamp(1rem,1.1vw,1.16rem);
-  letter-spacing:.06em;color:var(--cream);text-align:center;line-height:1.25}
-.clients__row img{max-height:44px;width:auto;object-fit:contain;filter:grayscale(1) brightness(1.7);opacity:.85;
-  transition:opacity .3s,filter .3s}
-.clients__row li:hover img{opacity:1;filter:grayscale(0) brightness(1)}
+/* ---- past clients: official single-colour marks, inlined ----
+   Each mark is fill="currentColor", so colour comes from here: cream at rest,
+   gold on hover. Heights are per-logo (from the supplied set) so a tall mark
+   like Apple and a wide one like Maison Birks carry the same optical weight. */
+.clients__row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:clamp(22px,3vw,36px) clamp(26px,3.5vw,50px);color:var(--cream);
+  padding:clamp(18px,2.4vw,30px) 0}
+.clients__row svg{width:auto;display:block;opacity:.8;flex:none;
+  transition:opacity .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.clients__row svg:hover{opacity:1;color:var(--gold-hi);transform:translateY(-2px)}
+
+.clients__row .apple{height:44.9px}
+.clients__row .amazon{height:33.4px}
+.clients__row .google{height:36.2px}
+.clients__row .goldman-sachs{height:38.8px}
+.clients__row .rbc{height:43.7px}
+.clients__row .morguard{height:28.1px}
+.clients__row .maison-birks{height:19px}
+
+@media (max-width:720px){
+  .clients__row{gap:22px 30px}
+  .clients__row .apple{height:34px}
+  .clients__row .amazon{height:25px}
+  .clients__row .google{height:27px}
+  .clients__row .goldman-sachs{height:29px}
+  .clients__row .rbc{height:33px}
+  .clients__row .morguard{height:21px}
+  .clients__row .maison-birks{height:14px}
+}
 
 /* ---- EN / FR toggle, first thing in the bar ---- */
 .lang{display:inline-flex;align-items:center;gap:7px;flex:none;padding:5px 11px;border-radius:999px;

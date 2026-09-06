@@ -290,23 +290,5 @@ injectAmbient();
 injectChrome();
 nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); packages();
 
-/* ---------- past-client logos ----------
-   Each entry renders its wordmark until a real logo file exists at its
-   data-logo path. We probe for the file and only swap once it actually
-   loads, so a missing logo is simply the name, never a broken image. */
-function clientLogos() {
-  $$('.clients__row img[data-logo]').forEach((img) => {
-    const src = img.dataset.logo;
-    const probe = new Image();
-    probe.onload = () => {
-      img.src = src;
-      img.hidden = false;
-      img.closest('li')?.querySelector('span')?.setAttribute('hidden', '');
-    };
-    probe.src = src;
-  });
-}
-clientLogos();
-
 /* ---------- language ---------- */
 initLang();

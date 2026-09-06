@@ -238,10 +238,14 @@ original so switching back is exact. Anything missing simply stays English, so a
 
 ## Past clients (Host Your Event)
 
-The client wall renders each company as a **wordmark** until a real logo file exists. `js/site.js` probes each
-`data-logo` path and swaps in the image only once it actually loads, so a missing file is the company name,
-never a broken image. Drop cleared artwork into `assets/img/clients/` (see the README there) and it appears
-on the next load with no code change.
+Seven official single-colour marks (Apple, Amazon, Google, Goldman Sachs, RBC, Morguard, Maison Birks),
+**inlined** into `private.html` rather than loaded through `<img>`. Each is `fill="currentColor"`, and inside
+an `<img>` an SVG is its own document, so `currentColor` would resolve to black and the marks would vanish on
+the dark ground. Inline, they take the cream from CSS and go gold on hover, in one rule, with no extra requests.
+
+Aspect ratios run from 0.82:1 (Apple) to 11.6:1 (Maison Birks), so each carries its own height in
+`css/styles.css` under `.clients__row`, normalised to equal optical weight. Source files and fuller notes are
+in `assets/img/clients/`.
 
 Using a company's logo to advertise them as a client normally needs that company's written permission.
 Confirm each is both a real past client and cleared for use before publishing.
