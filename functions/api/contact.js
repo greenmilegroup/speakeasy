@@ -42,21 +42,6 @@ function compose(form, data) {
   const message = clean(data.message, LIMITS.message);
   if (message.length < 4) return { error: 'Please add a message.' };
 
-  if (form === 'careers') {
-    return {
-      subject: `Job application — ${name}`,
-      replyTo: email,
-      rows: [
-        ['Name', name], ['Email', email],
-        ['Phone', clean(data.phone, LIMITS.short)],
-        ['Role', clean(data.role, LIMITS.short)],
-        ['Experience', clean(data.experience, LIMITS.short)],
-        ['Availability', clean(data.availability, LIMITS.short)],
-        ['About', message],
-      ],
-    };
-  }
-
   return {
     subject: `Website enquiry — ${name}`,
     replyTo: email,
@@ -86,7 +71,7 @@ export async function onRequestPost({ request, env }) {
   // Bots fill in every field they find; people never see this one.
   if (clean(data.company, LIMITS.short)) return json(200, { ok: true });
 
-  const form = ['contact', 'careers', 'newsletter'].includes(data.form) ? data.form : 'contact';
+  const form = ['contact', 'newsletter'].includes(data.form) ? data.form : 'contact';
   const { error, subject, replyTo, rows } = compose(form, data);
   if (error) return json(400, { error });
 

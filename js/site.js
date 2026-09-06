@@ -22,7 +22,6 @@ const NAV = [
   ['events', 'events.html', 'On Stage'],
   ['private', 'private.html', 'Host Your Event'],
   ['visit', 'visit.html', 'Reservations'],
-  ['careers', 'careers.html', 'Careers'],
 ];
 
 /* ---------- toast (exported) ---------- */
@@ -216,26 +215,6 @@ function forms() {
       company: contact.querySelector('[name="company"]')?.value,
     }, note, 'Thank you, we\u2019ll be in touch soon.');
   });
-
-  const job = $('#careersForm');
-  job?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const note = $('#jbNote'), get = (id) => $('#' + id);
-    const ok = mark([
-      [get('jb-name'), get('jb-name').value.trim().length > 1],
-      [get('jb-email'), emailOK(get('jb-email').value)],
-      [get('jb-msg'), get('jb-msg').value.trim().length > 3],
-    ]);
-    if (!ok) { note.textContent = 'Please complete the highlighted fields.'; note.classList.add('err'); return; }
-    send(job, {
-      form: 'careers',
-      name: get('jb-name').value, email: get('jb-email').value, phone: get('jb-phone').value,
-      role: get('jb-role').value, experience: get('jb-exp').value,
-      availability: get('jb-avail').value, message: get('jb-msg').value,
-      company: job.querySelector('[name="company"]')?.value,
-    }, note, 'Thanks \u2014 we have your application. Email your r\u00e9sum\u00e9 to info@speakeasyottawa.com and we will match them up.');
-  });
-
   const news = $('#newsForm');
   news?.addEventListener('submit', (e) => {
     e.preventDefault();

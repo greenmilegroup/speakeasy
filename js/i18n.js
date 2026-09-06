@@ -25,7 +25,6 @@ const FR = {
   'On Stage': 'Sur Scène',
   'Host Your Event': 'Événements Privés',
   'Reservations': 'Réservations',
-  'Careers': 'Carrières',
   'Book': 'Réserver',
   'Book a table': 'Réserver une table',
   'Reserve a table': 'Réserver une table',
