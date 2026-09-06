@@ -1818,3 +1818,32 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
    step outside that window reads as unavailable rather than silently doing
    nothing. */
 .cal__nav:disabled{opacity:.22;cursor:default;pointer-events:none}
+
+/* =========================================================================
+   v12: TICKETED NIGHTS ON THE MONTH CALENDAR
+   The board shows every night now, not only the free ones. A gold dot has
+   always meant "walk in, no cover", so a ticketed night cannot wear the same
+   mark: it gets the house vermilion and a ring, and the row carries its price
+   and a way to buy.
+   ========================================================================= */
+.cal__day.has-ticket i{background:var(--red-hi);
+  box-shadow:0 0 0 2px rgba(255,42,36,.28)}
+.cal__day.has-ticket{border-color:rgba(255,42,36,.42)}
+.cal__day.has-ticket:hover{border-color:var(--red-hi);background:rgba(255,42,36,.14)}
+.cal__day.is-picked.has-ticket i{background:#3a0a0c;box-shadow:none}
+
+.mus__sets li.is-ticketed{align-items:center}
+.mchip--ticket{color:#ffd9d0;border-color:rgba(255,42,36,.55);background:rgba(255,42,36,.14)}
+.mus__tickets{margin-left:auto;flex:none}
+@media (max-width:640px){.mus__tickets{margin-left:0}}
+
+/* The legend under the calendar: two marks, said once, so the colours are not
+   a puzzle the visitor has to solve. */
+.cal__key{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;
+  margin:18px auto 0;font-family:var(--f-serif);font-size:.95rem;color:var(--cream-2)}
+/* The count line sets its own top margin against the calendar; with the legend
+   between them it needs to space off the legend instead, or the two collide. */
+.cal__key + .mus__range{margin-top:6px}
+.cal__key span{display:inline-flex;align-items:center;gap:8px}
+.cal__key i{width:6px;height:6px;border-radius:50%;display:block;background:var(--gold-hi)}
+.cal__key .is-ticket i{background:var(--red-hi);box-shadow:0 0 0 2px rgba(255,42,36,.28)}

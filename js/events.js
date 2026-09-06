@@ -230,6 +230,9 @@ function renderCalendar(house, selectedDay) {
     const on = byDay.get(d);
     const cls = ['cal__day'];
     if (on) cls.push('has-event');
+    // A ticketed night gets its own mark: the gold dot means "walk in", and
+    // these do not, so they must not look the same.
+    if (on && on.some(isTicketed)) cls.push('has-ticket');
     if (isThisMonth && d === today.d) cls.push('is-today');
     if (selectedDay === d) cls.push('is-picked');
     const who = on ? on.map(e => e.title).join(', ') : '';
@@ -289,13 +292,14 @@ function renderMusic(house, selectedDay) {
           ${today ? '<span class="mus__today">Tonight</span>' : ''}
         </div>
         <ul class="mus__sets">${evs.map(ev => `
-          <li>
+          <li${isTicketed(ev) ? ' class="is-ticketed"' : ''}>
             <span class="mus__time">${fmtTime(ev.date)}</span>
             <div class="mus__what">
               <h3>${esc(ev.title)}</h3>
               ${ev.kicker ? `<p>${esc(ev.kicker)}</p>` : ''}
             </div>
-            ${ev.priceText ? `<span class="mchip">${esc(ev.priceText)}</span>` : ''}
+            ${ev.priceText ? `<span class="mchip${isTicketed(ev) ? ' mchip--ticket' : ''}">${esc(ev.priceText)}</span>` : ''}
+            ${isTicketed(ev) ? `<a class="btn btn--gold-sm mus__tickets" href="${esc(tickets(ev))}" target="_blank" rel="noopener">Tickets</a>` : ''}
           </li>`).join('')}</ul>
       </div>`;
   }).join('');
@@ -346,7 +350,6 @@ const setHidden = (sel, hidden) => { const el = $(sel); if (el) el.hidden = hidd
 async function start() {
   const all = await loadEvents();
   const ticketed = all.filter(isTicketed);
-  const house = all.filter(ev => !isTicketed(ev));
 
   safely('tonight', () => renderTonight(all));
 
@@ -362,12 +365,12 @@ async function start() {
   });
 
   safely('live music', () => {
-    paintMusic(house);
+    paintMusic(all);
     $$('#musCal .cal__nav').forEach(btn => btn.addEventListener('click', () => {
       const to = monthStart(calMonth.getFullYear(), calMonth.getMonth() + Number(btn.dataset.step));
       if (!inWindow(to)) return;
       calMonth = to;
-      paintMusic(house);
+      paintMusic(all);
     }));
   });
 

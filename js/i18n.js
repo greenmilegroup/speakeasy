@@ -371,6 +371,10 @@ const FR = {
   "btl 280": "bout. 280",
   "btl 380": "bout. 380",
   "btl 750": "bout. 750",
+  "Night by night": "Soir après soir",
+  "Someone on the stage most nights during dinner service, free to anyone dining with us: no ticket, no cover, no list. Ticketed concerts sit on the same calendar, marked in red.": "Quelqu'un sur scène presque tous les soirs pendant le service du souper, gratuit pour toute personne qui soupe avec nous : sans billet, sans frais d'entrée, sans liste. Les concerts à billets figurent au même calendrier, en rouge.",
+  "Live music needs no ticket, just a table. The nights marked in red are sold on Eventbrite.": "La musique live ne demande aucun billet, seulement une table. Les soirées en rouge sont vendues sur Eventbrite.",
+  "Ticketed": "À billets",
 };
 
 /* The live open/closed badge and the hours table are composed at runtime from
