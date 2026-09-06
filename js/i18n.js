@@ -375,6 +375,12 @@ const FR = {
   "Someone on the stage most nights during dinner service, free to anyone dining with us: no ticket, no cover, no list. Ticketed concerts sit on the same calendar, marked in red.": "Quelqu'un sur scène presque tous les soirs pendant le service du souper, gratuit pour toute personne qui soupe avec nous : sans billet, sans frais d'entrée, sans liste. Les concerts à billets figurent au même calendrier, en rouge.",
   "Live music needs no ticket, just a table. The nights marked in red are sold on Eventbrite.": "La musique live ne demande aucun billet, seulement une table. Les soirées en rouge sont vendues sur Eventbrite.",
   "Ticketed": "À billets",
+  "On Stage": "Sur Scène",
+  "Reservations": "Réservations",
+  "Most nights on the stage": "Presque tous les soirs sur scène",
+  "Sets most nights, new pours and the odd secret. Come find us.": "Des spectacles presque tous les soirs, de nouveaux services et quelques secrets. Venez nous trouver.",
+  "Six nights a week, usually from 7 PM, no cover. Call for tonight's line-up.": "Six soirs par semaine, généralement dès 19 h, sans frais d'entrée. Appelez pour la programmation du soir.",
+  "Signature cocktails": "Cocktails signature",
 };
 
 /* The live open/closed badge and the hours table are composed at runtime from
@@ -429,6 +435,11 @@ const PATTERNS = [
   [/^Open now · until (.+)$/i, (m) => `Ouvert · jusqu'à ${timeFr(m[1])}`],
   // the whole week's hours, however many days it happens to cover
   [/·/, (m) => (/\d|closed/i.test(m.input) ? hoursFr(m.input) : undefined)],
+  // a bare "Six nights" stat, whatever the count happens to be
+  [/^(zero|one|two|three|four|five|six|seven) nights?$/i, (m) => {
+    const w = NIGHTS_FR[m[1].toLowerCase()] || m[1];
+    return `${/^[A-Z]/.test(m[1]) ? w[0].toUpperCase() + w.slice(1) : w} soirs`;
+  }],
   // "Kitchen and bar, six nights a week. Live music from 7 PM."
   [/^Kitchen and bar, (\w+) nights? a week\. Live music from 7 PM\.$/i,
     (m) => `Cuisine et bar, ${NIGHTS_FR[m[1].toLowerCase()] || m[1]} soirs par semaine. Musique live dès 19 h.`],
