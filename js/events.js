@@ -139,22 +139,74 @@ function renderTicketList(list) {
     btn.addEventListener('click', () => download(list[Number(btn.dataset.i)])));
 }
 
-/* ---------- 3. live music, by week or by month ---------- */
+/* ---------- 3. live music, browsed a month at a time ---------- */
 
-function renderMusic(music, range) {
+const MON_LONG = ['January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'];
+
+/** The month currently on show, always the 1st at midnight. */
+let calMonth = (() => { const d = new Date(); d.setDate(1); d.setHours(0, 0, 0, 0); return d; })();
+
+/** Every night in the given month, keyed by day-of-month. */
+function nightsByDay(house, month) {
+  const from = new Date(month);
+  const to = new Date(month.getFullYear(), month.getMonth() + 1, 0, 23, 59, 59);
+  const map = new Map();
+  for (const ev of expand(house, from, to)) {
+    const d = ev.date.getDate();
+    if (!map.has(d)) map.set(d, []);
+    map.get(d).push(ev);
+  }
+  return map;
+}
+
+function renderCalendar(house, selectedDay) {
+  const grid = $('#calGrid'), label = $('#calMonth');
+  if (!grid) return;
+  label.textContent = `${MON_LONG[calMonth.getMonth()]} ${calMonth.getFullYear()}`;
+
+  const byDay = nightsByDay(house, calMonth);
+  const first = new Date(calMonth.getFullYear(), calMonth.getMonth(), 1).getDay();
+  const days = new Date(calMonth.getFullYear(), calMonth.getMonth() + 1, 0).getDate();
+  const today = new Date();
+  const isThisMonth = today.getMonth() === calMonth.getMonth() && today.getFullYear() === calMonth.getFullYear();
+
+  let cells = '';
+  for (let i = 0; i < first; i++) cells += '<span class="cal__pad" aria-hidden="true"></span>';
+  for (let d = 1; d <= days; d++) {
+    const on = byDay.get(d);
+    const cls = ['cal__day'];
+    if (on) cls.push('has-event');
+    if (isThisMonth && d === today.getDate()) cls.push('is-today');
+    if (selectedDay === d) cls.push('is-picked');
+    const who = on ? on.map(e => e.title).join(', ') : '';
+    cells += on
+      ? `<button class="${cls.join(' ')}" type="button" data-day="${d}" aria-label="${d} ${MON_LONG[calMonth.getMonth()]}: ${esc(who)}"><span>${d}</span><i aria-hidden="true"></i></button>`
+      : `<span class="${cls.join(' ')}" aria-hidden="true"><span>${d}</span></span>`;
+  }
+  grid.innerHTML = cells;
+  grid.querySelectorAll('[data-day]').forEach(btn => btn.addEventListener('click', () => {
+    const day = Number(btn.dataset.day);
+    paintMusic(house, day === selectedDay ? null : day);   // click again to clear
+  }));
+}
+
+function renderMusic(house, selectedDay) {
   const list = $('#musList'), empty = $('#musEmpty'), label = $('#musRange');
-  const from = new Date();
-  const to = new Date(from.getTime() + (range === 'month' ? 30 : 7) * DAY_MS);
-  const nights = expand(music, from, to);
+  const from = new Date(calMonth);
+  const to = new Date(calMonth.getFullYear(), calMonth.getMonth() + 1, 0, 23, 59, 59);
+  let nights = expand(house, from, to);
+  if (selectedDay) nights = nights.filter(e => e.date.getDate() === selectedDay);
 
   label.textContent = nights.length
-    ? `${fmtShort(from)} to ${fmtShort(to)} · ${nights.length} night${nights.length > 1 ? 's' : ''} on the stage`
+    ? (selectedDay
+        ? `${DAY[nights[0].date.getDay()]} ${selectedDay} ${MON[calMonth.getMonth()]} · ${nights.length} on the stage`
+        : `${nights.length} night${nights.length > 1 ? 's' : ''} on the stage in ${MON_LONG[calMonth.getMonth()]}`)
     : '';
   empty.hidden = Boolean(nights.length);
   list.hidden = !nights.length;
   if (!nights.length) { list.innerHTML = ''; return; }
 
-  // group by calendar day so a night reads as one entry with its sets under it
   const days = new Map();
   for (const ev of nights) {
     const k = dayKey(ev.date);
@@ -166,7 +218,7 @@ function renderMusic(music, range) {
     const d = evs[0].date;
     const today = dayKey(d) === dayKey(new Date());
     return `
-      <div class="mus__day${today ? ' is-today' : ''}" style="--i:${i}">
+      <div class="mus__day${today ? ' is-today' : ''}" id="day-${dayKey(d)}" style="--i:${i}">
         <div class="mus__when">
           <span class="mus__dow">${DAY[d.getDay()]}</span>
           <strong>${d.getDate()}</strong>
@@ -184,6 +236,12 @@ function renderMusic(music, range) {
           </li>`).join('')}</ul>
       </div>`;
   }).join('');
+}
+
+/** Repaint the calendar and the list together; they share one selection. */
+function paintMusic(house, selectedDay = null) {
+  renderCalendar(house, selectedDay);
+  renderMusic(house, selectedDay);
 }
 
 /* ---------- structured data ---------- */
@@ -225,11 +283,14 @@ async function start() {
     renderTicketList(ticketed.slice(1));
   }
 
-  renderMusic(house, 'week');
-  $$('.whatson__filters .chip').forEach(chip => chip.addEventListener('click', () => {
-    $$('.whatson__filters .chip').forEach(c => { c.classList.remove('is-active'); c.setAttribute('aria-selected', 'false'); });
-    chip.classList.add('is-active'); chip.setAttribute('aria-selected', 'true');
-    renderMusic(house, chip.dataset.range);
+  // open on the first month that actually has something on
+  const upcoming = expand(house, new Date(), new Date(Date.now() + 400 * DAY_MS))[0];
+  if (upcoming) { calMonth = new Date(upcoming.date.getFullYear(), upcoming.date.getMonth(), 1); }
+  paintMusic(house);
+
+  $$('#musCal .cal__nav').forEach(btn => btn.addEventListener('click', () => {
+    calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() + Number(btn.dataset.step), 1);
+    paintMusic(house);
   }));
 
   schema(all);

@@ -229,6 +229,20 @@ Deep links: `tour/index.html?layout=cocktail&autoenter`.
 
 ---
 
+## Where the line-up comes from
+
+Live music is kept in a Google Sheet, **"Speakeasy Music/Event Schedule"** (Drive id
+`19k3ODwFoV3hIuhB-8TyMbwYrpdws9lRkTpOjjxAipFI`), one tab per month with a `Date | Event` column.
+`.claude/skills/sync-events/SKILL.md` documents how to read it and write `assets/data/events.json`:
+which column is authoritative, how set times come from the sheet's own day-of-week header, and the
+traps (the calendar grid duplicates the list; tabs overlap at month edges; rows carry no year).
+
+**Eventbrite cannot be reached from the Claude environment** — the egress proxy answers 403 to CONNECT
+for `eventbrite.ca` and `eventbriteapi.com`, so a scheduled agent running there cannot fetch it either.
+Ticketed shows are added from a screenshot of the organiser page instead; the skill covers that too.
+If real automation is wanted later, the options are to allow `eventbrite.ca` in the environment's
+network policy, or run the fetch from GitHub Actions, which is not network-restricted.
+
 ## Bilingual (EN / FR)
 
 A toggle sits at the top left of the header. `js/i18n.js` holds a French dictionary keyed on the **exact
