@@ -238,7 +238,13 @@ function hoursCopy() {
   const WORD = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven'];
   $$('[data-hours-nights]').forEach((el) => {
     el.textContent = el.textContent.replace(/\b(zero|one|two|three|four|five|six|seven) nights?\b/i,
-      `${WORD[n]} night${n === 1 ? '' : 's'}`);
+      (whole) => {
+        const word = WORD[n];
+        // "Six nights" is a headline stat and "six nights a week" is prose;
+        // keep whichever case the page already used.
+        const cased = /^[A-Z]/.test(whole) ? word[0].toUpperCase() + word.slice(1) : word;
+        return `${cased} night${n === 1 ? '' : 's'}`;
+      });
   });
   $$('[data-hours-line]').forEach((el) => { el.textContent = hoursSentence(); });
 }

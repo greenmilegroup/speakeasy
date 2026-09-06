@@ -34,15 +34,20 @@ check('menu.html', menu && menu[1] === line,
    or a wrong closing time here sends people to a locked door, or loses the
    last two hours of a Friday. Compare every day's opening AND closing. */
 const hhmm = (m) => `${String(Math.floor((m % 1440) / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
-const spec = JSON.parse(read('visit.html').match(/"openingHoursSpecification":(\[.*?\}\])/s)[1]);
-const schema = new Map();
-for (const r of spec) for (const d of r.dayOfWeek) schema.set(d, `${r.opens}-${r.closes}`);
-for (const [d, name] of DAY_NAMES.entries()) {
-  const s = SCHEDULE[d];
-  const want = s ? `${hhmm(s.open)}-${hhmm(s.close)}` : null;
-  const got = schema.get(name) ?? null;
-  check('visit.html', want === got,
-    `Restaurant schema has ${name} as ${got ?? 'closed'}, schedule says ${want ?? 'closed'}`);
+/* Every page carrying the schema, not just one: index.html has its own copy,
+   and it sat on the old hours after visit.html was corrected. */
+for (const f of ['index.html', 'visit.html']) {
+  const m = read(f).match(/"openingHoursSpecification":(\[.*?\}\])/s);
+  if (!m) continue;
+  const schema = new Map();
+  for (const r of JSON.parse(m[1])) for (const d of r.dayOfWeek) schema.set(d, `${r.opens}-${r.closes}`);
+  for (const [d, name] of DAY_NAMES.entries()) {
+    const s = SCHEDULE[d];
+    const want = s ? `${hhmm(s.open)}-${hhmm(s.close)}` : null;
+    const got = schema.get(name) ?? null;
+    check(f, want === got,
+      `Restaurant schema has ${name} as ${got ?? 'closed'}, schedule says ${want ?? 'closed'}`);
+  }
 }
 
 if (fails.length) {
