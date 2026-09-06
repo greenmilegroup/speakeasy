@@ -1796,3 +1796,31 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
   .rooms__shots--one{grid-template-columns:1fr}
 }
 @media (max-width:560px){.rooms__shots{grid-template-columns:1fr}}
+
+/* =========================================================================
+   v11: THE BAR HEADER AND THE EVENT FILM
+   ========================================================================= */
+
+/* A plain cover hero keeps its still sharp: the still is the stand-in when the
+   video is suppressed (reduced motion) or has not decoded, so it must be
+   framed exactly like the video rather than blurred the way the letterboxed
+   --whole variant needs. */
+.page-hero.has-video:not(.has-video--whole) .page-hero__still{
+  filter:none;transform:none;background-size:cover}
+
+/* The event film. The source is 960x540, so the frame is capped near its own
+   width: shown any wider it would upscale and soften, which is the one thing
+   footage of a dark room cannot afford. Sized to read as a deliberate frame. */
+.reel--wide .reel__frame{max-width:min(94vw,1000px);aspect-ratio:16/9}
+.reel--wide .reel__video{width:100%;height:100%;object-fit:cover}
+.reel__cap{max-width:min(94vw,1000px);margin:14px auto 0;text-align:center;
+  font-family:var(--f-serif);font-size:1.02rem;color:var(--cream-2)}
+
+/* A 16:9 clip in a 3.1:1 band is cropped to a sliver, which zooms the shot
+   about 1.9x and turns a bar into an abstraction. Measured: at 1440x900 the
+   band was 1440x468. Giving the hero real height on anything desktop-sized
+   brings it to roughly 2.2:1, so cover barely crops and the room reads as a
+   room. Capped so a tall monitor does not get a wall of video. */
+@media (min-width:900px){
+  .page-hero.has-video{min-height:min(72vh,720px)}
+}
