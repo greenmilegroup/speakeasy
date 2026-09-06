@@ -404,8 +404,34 @@ function timeFr(t) {
    key to look up: "Sun · Sep 27 · 6 PM", "10 nights on the stage in September",
    "Next up · In 3 weeks". These rules translate those shapes, and the
    MutationObserver below catches the board when it repaints on a month change. */
+/* The hours sentence is composed from the schedule, so it changes whenever the
+   hours do and no fixed key can reach it. Translate it a segment at a time:
+   "Fri and Sat, 4 PM to Midnight" -> "ven et sam, 16 h à minuit". */
+function hoursFr(sentence) {
+  const day = (d) => DAY_ABBR_FR[d] || d;
+  const out = sentence.split(' · ').map((seg) => {
+    const m = seg.match(/^(\w{3})(?: (to|and) (\w{3}))?, (closed|.+)$/i);
+    if (!m) return null;
+    const days = m[2]
+      ? `${day(m[1])} ${/to/i.test(m[2]) ? 'au' : 'et'} ${day(m[3])}`
+      : day(m[1]);
+    if (/^closed$/i.test(m[4])) return `${days}, fermé`;
+    const t = m[4].match(/^(.+?) to (.+)$/i);
+    return t ? `${days}, ${timeFr(t[1])} à ${timeFr(t[2])}` : null;
+  });
+  return out.every(Boolean) ? out.join(' · ') : undefined;
+}
+
+const NIGHTS_FR = { zero: 'zéro', one: 'un', two: 'deux', three: 'trois',
+  four: 'quatre', five: 'cinq', six: 'six', seven: 'sept' };
+
 const PATTERNS = [
   [/^Open now · until (.+)$/i, (m) => `Ouvert · jusqu'à ${timeFr(m[1])}`],
+  // the whole week's hours, however many days it happens to cover
+  [/·/, (m) => (/\d|closed/i.test(m.input) ? hoursFr(m.input) : undefined)],
+  // "Kitchen and bar, six nights a week. Live music from 7 PM."
+  [/^Kitchen and bar, (\w+) nights? a week\. Live music from 7 PM\.$/i,
+    (m) => `Cuisine et bar, ${NIGHTS_FR[m[1].toLowerCase()] || m[1]} soirs par semaine. Musique live dès 19 h.`],
   /* --- the events board --- */
   // "Sun · Sep 27 · 6 PM"
   [/^(\w{3}) · (\w{3}) (\d{1,2}) · (.+)$/,
