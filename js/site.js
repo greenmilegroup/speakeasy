@@ -10,7 +10,7 @@ export const finePointer  = matchMedia('(pointer: fine)').matches;
 export const $  = (s, c = document) => c.querySelector(s);
 export const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
 import { initLang } from './i18n.js';
-import { SCHEDULE, DAY_NAMES, clock, span, nightsOpen, hoursSentence } from './hours.js';
+import { SCHEDULE, DAY_NAMES, clock, span, closeLabel, openSession, nightsOpen, hoursSentence } from './hours.js';
 
 const TEL = '+16132416221';
 const OPENTABLE = 'https://www.opentable.com/r/speakeasy-tapas-lounge-ottawa';
@@ -251,10 +251,12 @@ function hours() {
   const label = (d) => { const s = SCHEDULE[d]; return s ? span(s, true) : 'Closed'; };
   const tor = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' }));
   const day = tor.getDay(), mins = tor.getHours() * 60 + tor.getMinutes(), s = SCHEDULE[day];
-  const isOpen = !!s && mins >= s.open && mins < s.close;
+  // Not simply SCHEDULE[today]: a Friday that runs to 1 AM is still open at
+  // half past midnight on Saturday.
+  const session = openSession(day, mins);
   if (status) {
     const txt = $('.status__text', status);
-    if (isOpen) { status.classList.add('open'); txt.textContent = `Open now · until ${s.close >= 1440 ? 'midnight' : fmt(s.close)}`; }
+    if (session) { status.classList.add('open'); txt.textContent = `Open now · until ${closeLabel(session.until)}`; }
     else {
       status.classList.add('closed');
       let next = (s && mins < s.open) ? { d: day, m: s.open } : null;
