@@ -1,28 +1,19 @@
 # Cloudflare Pages cache rules.
 #
-# The site is a set of ES modules that import each other, so a query-string
-# cache buster on the <script> tag would not reach js/i18n.js or js/events-data.js.
-# The fix is revalidation: code and data carry no-cache, which does not mean
-# "do not cache" — the browser keeps its copy and asks with an ETag, so an
-# unchanged file costs a 304 and a changed one is picked up immediately.
+# Every path revalidates by default, and only the media directories are allowed
+# a long cache. "no-cache" does not mean "do not cache": the browser keeps its
+# copy and asks with an ETag, so an unchanged file costs a 304 and a changed one
+# is picked up at once.
+#
+# The default is /* rather than /*.html because Pages serves extensionless URLs:
+# the page people actually visit is /events, and a /*.html rule never matches it.
+# Later rules override earlier ones, so the media overrides below still win.
 #
 # This exists because a stale js/events.js was left running against fresh HTML
 # after an element it referenced was deleted. It threw, and took the whole
 # events calendar down with it while the page looked fine above the fold.
 
-/*.html
-  Cache-Control: no-cache
-
-/js/*
-  Cache-Control: no-cache
-
-/version.txt
-  Cache-Control: no-cache
-
-/css/*
-  Cache-Control: no-cache
-
-/assets/data/*
+/*
   Cache-Control: no-cache
 
 # Media is content-addressed by name in practice: a changed photograph or clip
