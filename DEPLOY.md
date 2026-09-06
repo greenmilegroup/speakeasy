@@ -72,3 +72,53 @@ all the weight is.
     ./tools/build-site.sh && cd dist && python3 -m http.server 8000
 
 Then open http://localhost:8000.
+
+## The contact forms
+
+The three forms — enquiry and newsletter on `visit.html`, applications on
+`careers.html` — post to `/api/contact`, a Cloudflare Pages Function in
+`functions/api/contact.js` that emails the venue through Resend.
+
+They used to open the visitor's mail client with a `mailto:` link, which did
+nothing at all on a phone or a machine with no mail client configured, while
+still telling the visitor the message had been sent.
+
+The Resend API key lives in the Pages environment and is only ever read
+server-side, so the page itself carries no credential. `functions/` sits at the
+repository root, not in `dist/` — Pages compiles it from there.
+
+### Setting it up
+
+**1. Verify the domain in Resend.** At https://resend.com/domains add
+`send.speakeasyottawa.com` — a subdomain, so its SPF cannot collide with the
+Microsoft 365 records on the main domain. Resend gives you DNS records; add them
+in Cloudflare under **DNS → Records**, each one **DNS only** (grey cloud).
+
+**2. Add the environment variables.** In Cloudflare: **Workers & Pages → your
+project → Settings → Environment variables**, for Production *and* Preview:
+
+| Name | Value | Type |
+| --- | --- | --- |
+| `RESEND_API_KEY` | the key from resend.com/api-keys | **Secret** (Encrypt) |
+| `CONTACT_TO` | `info@speakeasyottawa.com` | Plaintext |
+| `CONTACT_FROM` | `Speakeasy Website <website@send.speakeasyottawa.com>` | Plaintext |
+
+`RESEND_API_KEY` must be added with **Encrypt**. The other two are optional —
+the defaults in the code match the values above.
+
+**3. Redeploy** so the function picks the variables up, then send yourself a
+test through the form on `/visit.html`.
+
+### Spam
+
+Each form carries a honeypot field named `company`, hidden off-screen and out of
+the tab order. A submission that fills it in is accepted and silently discarded,
+so the bot sees success and does not retry. If real spam still arrives, add a
+Cloudflare Turnstile widget — free, and it works without asking visitors to
+identify traffic lights.
+
+### Résumés
+
+The application form sends the applicant's details but cannot carry a file. The
+confirmation asks them to email the résumé to `info@speakeasyottawa.com`
+separately. Resend can take attachments if a proper upload is wanted later.
