@@ -1824,3 +1824,7 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 @media (min-width:900px){
   .page-hero.has-video{min-height:min(72vh,720px)}
 }
+
+/* Honeypot: a field only a bot will fill in. Kept out of the layout and out
+   of the tab order rather than display:none, which some bots detect. */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
