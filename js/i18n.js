@@ -413,7 +413,7 @@ const FR = {
   "$5": "5 $",
   "$49": "49 $",
   "On offer": "Nos offres",
-  "Set Dinner &": "Menu Table &",
+  "Prix Fixe &": "Prix fixe &",
   "Happy Hour.": "Happy Hour.",
 };
 
