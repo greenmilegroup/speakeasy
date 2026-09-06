@@ -25,6 +25,35 @@ for f in ./*.html; do
 done
 cp robots.txt sitemap.xml .nojekyll _headers dist/
 
+# Stamp each sitemap entry with the date that page last actually changed, taken
+# from git. A hand-maintained lastmod goes stale the first time nobody
+# remembers to touch it, and a wrong one is worse than none: it tells search
+# engines not to bother recrawling a page that has been rewritten.
+python3 - <<'PY'
+import re, subprocess, sys, io
+p = 'dist/sitemap.xml'
+s = io.open(p, encoding='utf-8').read()
+
+def changed(page):
+    out = subprocess.run(['git', 'log', '-1', '--format=%cs', '--', page],
+                         capture_output=True, text=True).stdout.strip()
+    return out or None
+
+def stamp(m):
+    url = m.group(0)
+    tail = m.group(1).rstrip('/').split('/')[-1]
+    # the root URL ends in the domain, not a filename
+    page = tail if tail.endswith('.html') else 'index.html'
+    when = changed(page)
+    if not when or '<lastmod>' in url:
+        return url
+    return url.replace('<changefreq>', f'<lastmod>{when}</lastmod><changefreq>')
+
+s = re.sub(r'<url><loc>([^<]+)</loc>.*?</url>', stamp, s)
+io.open(p, 'w', encoding='utf-8').write(s)
+print('  sitemap lastmod stamped from git')
+PY
+
 # Pages Functions are compiled from functions/ at the repo root, so they are
 # not copied here — dist/ holds static files only.
 
