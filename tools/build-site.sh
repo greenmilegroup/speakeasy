@@ -11,6 +11,7 @@ cd "$(dirname "$0")/.."
 # Opening hours live in js/hours.js. Refuse to ship pages that contradict them.
 node tools/check-hours.mjs
 node tools/check-counts.mjs
+node tools/check-links.mjs
 
 rm -rf dist
 mkdir -p dist
