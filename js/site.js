@@ -165,21 +165,55 @@ export function tilt(scope = document) {
 }
 
 /* ---------- forms ---------- */
+/* Submissions go to /api/contact, which emails the venue through Resend.
+   Before this they opened the visitor's mail client, which quietly did
+   nothing on any device without one configured. */
 function forms() {
   const emailOK = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+  async function send(form, payload, note, done) {
+    const btn = form.querySelector('button[type="submit"]');
+    const label = btn?.textContent;
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+    note.classList.remove('err');
+    note.textContent = 'Sending…';
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || 'That did not send.');
+      note.textContent = done;
+      toast('Message sent · tell no one');
+      form.reset();
+    } catch (err) {
+      note.classList.add('err');
+      note.textContent = err.message === 'Failed to fetch'
+        ? 'No connection. Please try again, or call 613-241-6221.'
+        : err.message;
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = label; }
+    }
+  }
+
+  const mark = (checks) => {
+    let ok = true;
+    checks.forEach(([f, v]) => { f.closest('.field').classList.toggle('invalid', !v); if (!v) ok = false; });
+    return ok;
+  };
+
   const contact = $('#contactForm');
   contact?.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = $('#cf-name'), email = $('#cf-email'), msg = $('#cf-msg'), note = $('#cfNote');
-    let ok = true;
-    [[name, name.value.trim().length > 1], [email, emailOK(email.value)], [msg, msg.value.trim().length > 3]]
-      .forEach(([f, v]) => { f.closest('.field').classList.toggle('invalid', !v); if (!v) ok = false; });
+    const ok = mark([[name, name.value.trim().length > 1], [email, emailOK(email.value)], [msg, msg.value.trim().length > 3]]);
     if (!ok) { note.textContent = 'Please complete the highlighted fields.'; note.classList.add('err'); return; }
-    note.classList.remove('err'); note.textContent = 'Thank you, we’ll be in touch soon.';
-    toast('Message sent · tell no one');
-    const body = encodeURIComponent(`${msg.value}\n\nFrom ${name.value} (${email.value})`);
-    setTimeout(() => { location.href = `mailto:info@speakeasyottawa.com?subject=Website%20enquiry&body=${body}`; }, 600);
-    contact.reset();
+    send(contact, {
+      form: 'contact', name: name.value, email: email.value, message: msg.value,
+      company: contact.querySelector('[name="company"]')?.value,
+    }, note, 'Thank you, we\u2019ll be in touch soon.');
   });
   const news = $('#newsForm');
   news?.addEventListener('submit', (e) => {
@@ -187,8 +221,10 @@ function forms() {
     const email = $('#nf-email'), note = $('#nfNote'), v = emailOK(email.value);
     email.closest('.field').classList.toggle('invalid', !v);
     if (!v) { note.textContent = 'A valid email, please.'; note.classList.add('err'); return; }
-    note.classList.remove('err'); note.textContent = 'You’re on the list. Welcome to the inner circle.';
-    toast('Subscribed · welcome in'); news.reset();
+    send(news, {
+      form: 'newsletter', email: email.value,
+      company: news.querySelector('[name="company"]')?.value,
+    }, note, 'You\u2019re on the list. Welcome to the inner circle.');
   });
 }
 

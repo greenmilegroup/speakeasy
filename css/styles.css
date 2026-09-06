@@ -1,5 +1,4 @@
-/* =========================================================================
-   SPEAKEASY TAPAS LOUNGE, styles
+/* ==================================================================   SPEAKEASY TAPAS LOUNGE, styles
    Palette sampled from the house crest: noir · vermilion · cream · gold.
    ========================================================================= */
 
@@ -81,8 +80,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 /* keep content above ambience */
 .nav,main,.footer{position:relative;z-index:2}
 
-/* =========================================================================
-   BUTTONS · DECO · HEADINGS
+/* ==================================================================   BUTTONS · DECO · HEADINGS
    ========================================================================= */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;
   padding:.92em 1.7em;border-radius:999px;font-family:var(--f-deco);font-weight:var(--w-deco);
@@ -119,8 +117,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .section__intro{color:var(--cream-2);font-size:1.2em}
 .center-head{text-align:center}
 
-/* =========================================================================
-   INTRO, "shhh" then the doors swing open
+/* ==================================================================   INTRO, "shhh" then the doors swing open
    ========================================================================= */
 .intro{position:fixed;inset:0;z-index:9999;overflow:hidden;perspective:1600px;
   background:radial-gradient(80% 60% at 50% 42%,#161011 0%,#070708 60%,#000 100%)}
@@ -199,8 +196,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .intro__skip:hover{color:var(--cream)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
-/* =========================================================================
-   NAV
+/* ==================================================================   NAV
    ========================================================================= */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,backdrop-filter .4s,box-shadow .4s,padding .4s;
   padding:14px 0}
@@ -239,8 +235,7 @@ body.menu-open .nav__toggle span:nth-child(1){transform:translateY(7px) rotate(4
 body.menu-open .nav__toggle span:nth-child(2){opacity:0}
 body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* =========================================================================
-   HERO
+/* ==================================================================   HERO
    ========================================================================= */
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;overflow:hidden;isolation:isolate}
 .hero__bg{position:absolute;inset:-4% -4% -4% -4%;z-index:-4;
@@ -270,8 +265,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 @keyframes scrolldot{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}70%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
 .hero__scroll-label{font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.3em;text-transform:uppercase;font-size:.6rem}
 
-/* =========================================================================
-   ABOUT
+/* ==================================================================   ABOUT
    ========================================================================= */
 .about__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
 .about__copy .lead{margin-bottom:1rem}
@@ -298,8 +292,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .tour__fallback a{color:var(--gold-hi);border-bottom:1px solid var(--line)}
 .tour__frame::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 90px rgba(0,0,0,.6);border-radius:var(--radius)}
 
-/* =========================================================================
-   MENUS
+/* ==================================================================   MENUS
    ========================================================================= */
 .menus{scroll-margin-top:80px}
 .tabs{position:relative;display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin-bottom:clamp(32px,5vw,54px);
@@ -382,8 +375,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
   background:linear-gradient(180deg,transparent,rgba(0,0,0,.88));
   font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.16em;text-transform:uppercase;font-size:.66rem;color:var(--cream-2)}
 
-/* =========================================================================
-   GALLERY
+/* ==================================================================   GALLERY
    ========================================================================= */
 .gallery__filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:28px}
 .chip{padding:8px 18px;border-radius:999px;border:1px solid var(--line);color:var(--cream-2);
@@ -421,8 +413,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .lb__nav:hover{color:var(--gold-hi);opacity:1}
 .lb__prev{left:14px}.lb__next{right:14px}
 
-/* =========================================================================
-   EVENTS
+/* ==================================================================   EVENTS
    ========================================================================= */
 .events{position:relative;max-width:none;margin:0;overflow:hidden;
   background:radial-gradient(80% 120% at 50% 0%,rgba(125,15,19,.35),transparent 60%),linear-gradient(180deg,var(--noir),#0c0608 60%,var(--noir))}
@@ -450,8 +441,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .events__nights span{font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.16em;text-transform:uppercase;font-size:.62rem;color:var(--gold)}
 .events__nights strong{font-family:var(--f-serif);font-weight:600;font-size:1.25rem;color:var(--cream)}
 
-/* =========================================================================
-   PRIVATE EVENTS
+/* ==================================================================   PRIVATE EVENTS
    ========================================================================= */
 .packages{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .pkg{position:relative;padding:34px 30px;border-radius:var(--radius);overflow:hidden;
@@ -473,8 +463,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .pkg__extra.open{max-height:200px;margin-top:14px}
 .private__cta{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:38px}
 
-/* =========================================================================
-   VISIT / CONTACT
+/* ==================================================================   VISIT / CONTACT
    ========================================================================= */
 .visit__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px)}
 .status{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);
@@ -520,8 +509,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
   letter-spacing:.12em;text-transform:uppercase;font-size:.72rem;color:var(--cream);
   background:linear-gradient(180deg,transparent,rgba(0,0,0,.82))}
 
-/* =========================================================================
-   FOOTER
+/* ==================================================================   FOOTER
    ========================================================================= */
 .footer{border-top:1px solid var(--line);background:var(--ink);padding:clamp(48px,7vw,80px) var(--gutter) 30px;margin-top:40px}
 .footer__inner{max-width:var(--maxw);margin-inline:auto;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px;align-items:start}
@@ -539,8 +527,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .footer__fine{max-width:var(--maxw);margin:40px auto 0;padding-top:20px;border-top:1px solid var(--line-soft);
   color:var(--muted);font-size:.82rem;text-align:center;letter-spacing:.02em}
 
-/* =========================================================================
-   TILT / GLARE · REVEAL · TOAST
+/* ==================================================================   TILT / GLARE · REVEAL · TOAST
    ========================================================================= */
 .tilt{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
   transform-style:preserve-3d;transition:transform .4s var(--ease);will-change:transform}
@@ -567,8 +554,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .toast[hidden]{display:none}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
-/* =========================================================================
-   RESPONSIVE
+/* ==================================================================   RESPONSIVE
    ========================================================================= */
 @media (max-width:960px){
   .nav__links,.nav__call{display:none}
@@ -591,8 +577,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
   .lb__nav{width:44px;height:44px;font-size:1.8rem}
 }
 
-/* =========================================================================
-   REDUCED MOTION
+/* ==================================================================   REDUCED MOTION
    ========================================================================= */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
@@ -604,8 +589,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
   .intro .door{transition:opacity .4s ease}
 }
 
-/* =========================================================================
-   v2: typography polish, multi-page chrome, stamps, swipe deck, tour
+/* ==================================================================   v2: typography polish, multi-page chrome, stamps, swipe deck, tour
    ========================================================================= */
 .hero__title-1{font-family:var(--f-display);font-weight:800;letter-spacing:.05em}
 .h-display{letter-spacing:.015em;text-wrap:balance}
@@ -695,8 +679,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
   .stamp img,.sig img{transition:none}
 }
 
-/* =========================================================================
-   v3 polish, page transition, mobile reserve bar, tour fullscreen
+/* ==================================================================   v3 polish, page transition, mobile reserve bar, tour fullscreen
    ========================================================================= */
 main#main{animation:pageIn .55s var(--ease) both}
 @keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -717,8 +700,7 @@ body.menu-open .mobile-reserve{display:none}
 .tour-fs:hover{border-color:var(--gold);color:var(--gold-hi);transform:translateY(-2px)}
 @media (prefers-reduced-motion:reduce){main#main{animation:none}}
 
-/* =========================================================================
-   v4: refined typography, empty gallery, card craft
+/* ==================================================================   v4: refined typography, empty gallery, card craft
    ========================================================================= */
 
 /* --- empty gallery state --- */
@@ -774,8 +756,7 @@ body.menu-open .mobile-reserve{display:none}
   .gallery__empty{padding:36px 22px}
 }
 
-/* =========================================================================
-   v5: legibility, editorial craft, restraint
+/* ==================================================================   v5: legibility, editorial craft, restraint
    Sparkles removed. Atmosphere now comes from type, rules and negative space.
    ========================================================================= */
 
@@ -865,8 +846,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   .hero__content::before{inset:-3% 0}
 }
 
-/* =========================================================================
-   v6: the doorman, tour setups, booking
+/* ==================================================================   v6: the doorman, tour setups, booking
    ========================================================================= */
 
 /* --- the man in the yellow suit --- */
@@ -917,8 +897,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   .field-row{grid-template-columns:1fr}
 }
 
-/* =========================================================================
-   v6b: real venue footage as background
+/* ==================================================================   v6b: real venue footage as background
    ========================================================================= */
 .hero__video{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;
   transform:scale(1.04);filter:saturate(1.05) contrast(1.04)}
@@ -971,8 +950,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   border:1px solid rgba(201,162,39,.26);box-shadow:var(--shadow);background:#0a0a0b;line-height:0}
 .reel__video{width:100%;height:auto;display:block;background:#0a0a0b}
 
-/* =========================================================================
-   v7: merged about+stamps, gallery tabs
+/* ==================================================================   v7: merged about+stamps, gallery tabs
    ========================================================================= */
 .about.stamps .about__grid--solo{max-width:1000px}
 .about.stamps .stamps__grid{margin-top:clamp(34px,5vw,56px)}
@@ -1036,8 +1014,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .nav__book:hover{background:#e8241c;border-color:#e8241c;color:#fff}
 .intro__enter::before{background:linear-gradient(135deg,#e8241c,#a5121a)}
 
-/* =========================================================================
-   v8: typographic scale: smaller, calmer, less shouty
+/* ==================================================================   v8: typographic scale: smaller, calmer, less shouty
    ========================================================================= */
 
 /* hero wordmark: title case, noticeably smaller, tighter tracking */
@@ -1123,8 +1100,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 
 /* v9c: sound toggle on the featured video */
 
-/* =========================================================================
-   v10: "What's On" board (replaces the swipe deck)
+/* ==================================================================   v10: "What's On" board (replaces the swipe deck)
    ========================================================================= */
 .whatson__filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:34px}
 
@@ -1202,8 +1178,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   background:#08080a;border:1px solid var(--line-soft);color:var(--cream-2);
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;line-height:1.55}
 
-/* =========================================================================
-   v11: What's On board: more presence
+/* ==================================================================   v11: What's On board: more presence
    Rows carry the event's photo, a category accent and a staggered entrance;
    the feature card gets depth so the next night reads first.
    ========================================================================= */
@@ -1373,8 +1348,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   .hero.is-tucked .hero__cta{opacity:1;pointer-events:auto}
 }
 
-/* =========================================================================
-   v6: READABILITY
+/* ==================================================================   v6: READABILITY
    Poiret One (a single-weight hairline face) has been retired as the label
    font: at 12px, uppercase, letter-spaced and reversed out of dark or video,
    it had almost no stroke left to read. Cinzel 700 now carries every label,
@@ -1443,8 +1417,7 @@ body{font-weight:500;font-size:clamp(17.5px,1.2vw,19.5px);line-height:1.62}
 .tab{font-size:.86rem;letter-spacing:.11em;color:var(--cream-2)}
 .tab:hover{color:#fff}
 
-/* =========================================================================
-   v7: EVENTS: tonight band and the live-music schedule
+/* ==================================================================   v7: EVENTS: tonight band and the live-music schedule
    The ticketed feature card (.feature) and its list (.wrow) are unchanged 
    they were the part that worked. These are the two bands around them.
    ========================================================================= */
@@ -1509,8 +1482,7 @@ body{font-weight:500;font-size:clamp(17.5px,1.2vw,19.5px);line-height:1.62}
 .leaders--plain li{display:block}
 .leaders--plain .n{display:block}
 
-/* =========================================================================
-   v8: TYPE SCALE
+/* ==================================================================   v8: TYPE SCALE
    Measured pass. Before this, 28 distinct pieces of text rendered under 13px
    on a 390px phone, including form labels (10.9px), the event date and time
    chips (9.3px) and the mobile booking button (11.2px). Almost nothing
@@ -1595,8 +1567,7 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
    Book button. The burger takes over a little earlier instead. This is the nav
    only; the 960px breakpoint still governs the rest of the layout. */
 
-/* =========================================================================
-   v9: THE FOOTAGE, MADE VISIBLE
+/* ==================================================================   v9: THE FOOTAGE, MADE VISIBLE
    The room was being hidden by its own scrim: the page-hero wash ran to 0.9
    opacity black at the edges and 0.5 dead centre, which left the video as a
    dark smear. Lifting the video and easing the scrim, then protecting the
@@ -1739,8 +1710,7 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
             mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
 }
 
-/* =========================================================================
-   v10: THE MONTH CALENDAR
+/* ==================================================================   v10: THE MONTH CALENDAR
    Replaces the This week / This month chips. Nights with something on carry a
    gold dot and are clickable; clicking one filters the list below to that
    night, clicking it again clears. Empty days are inert spans, not buttons,
@@ -1801,8 +1771,7 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 }
 @media (max-width:560px){.rooms__shots{grid-template-columns:1fr}}
 
-/* =========================================================================
-   v11: THE BAR HEADER AND THE EVENT FILM
+/* ==================================================================   v11: THE BAR HEADER AND THE EVENT FILM
    ========================================================================= */
 
 /* A plain cover hero keeps its still sharp: the still is the stand-in when the
@@ -1829,6 +1798,9 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
   .page-hero.has-video{min-height:min(72vh,720px)}
 }
 
+/* Honeypot: a field only a bot will fill in. Kept out of the layout and out
+   of the tab order rather than display:none, which some bots detect. */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 /* Upstairs carries no photograph, so its panel is copy only and should not
    sit in half a grid with nothing beside it. */
 .rooms__grid--copy{grid-template-columns:1fr;max-width:760px;margin-inline:auto;text-align:center}
@@ -1841,3 +1813,8 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 .rooms__film{max-width:min(94vw,1000px);margin:clamp(30px,4vw,48px) auto 0}
 .rooms__film .reel__video{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
   border-radius:16px;border:1px solid rgba(201,162,39,.26);box-shadow:var(--shadow);background:#0a0a0b}
+
+/* The calendar looks three months ahead and no further; the arrow that would
+   step outside that window reads as unavailable rather than silently doing
+   nothing. */
+.cal__nav:disabled{opacity:.22;cursor:default;pointer-events:none}
