@@ -1841,3 +1841,8 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 .rooms__film{max-width:min(94vw,1000px);margin:clamp(30px,4vw,48px) auto 0}
 .rooms__film .reel__video{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
   border-radius:16px;border:1px solid rgba(201,162,39,.26);box-shadow:var(--shadow);background:#0a0a0b}
+
+/* The calendar looks three months ahead and no further; the arrow that would
+   step outside that window reads as unavailable rather than silently doing
+   nothing. */
+.cal__nav:disabled{opacity:.22;cursor:default;pointer-events:none}

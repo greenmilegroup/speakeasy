@@ -5,7 +5,28 @@ description: Refresh the Speakeasy events board from the Google Sheet line-up an
 
 # Refresh the events board
 
-Two sources feed `assets/data/events.json`. Keep both in one pass.
+Sources feed `assets/data/events.json`, in this order of authority:
+
+1. **Anything the owner hands over directly** — a photographed handwritten
+   line-up, a correction in chat. This beats the spreadsheet, which runs behind.
+   The September 2026 note, for instance, carried Thursdays the sheet omitted
+   and contradicted it on two dates.
+2. The Google Sheet, for months the owner has not sent directly.
+3. The Eventbrite screenshot, for ticketed shows.
+
+**Write no prose that a source does not state.** The sheet gives a date, a name
+and an instrument, so `blurb` stays empty and the instrument goes in `kicker`.
+Descriptions invented to fill the field ("a voice, the low light and the room
+leaning in") were shipped once and had to be pulled; do not write them again.
+
+**Times.** Every no-cover show starts at 7 PM unless a source says otherwise
+(owner, 6 Sep 2026). Inline notes win: `Martin Leblanc 5:30pm Patio`,
+`Darya DJ event 11pm`, `Peter Woods and Kyle Jordan 4-7 pm`.
+
+**Timezone.** `starts_at` carries an explicit offset, `-04:00` on EDT and
+`-05:00` from the first Sunday in November. `js/events.js` renders every date
+part in `America/Toronto`, so a 7 PM set reads 7 PM from any country. Never
+reintroduce `getHours()`/`getDate()` on an event date.
 
 ## 1. Live music, from the Google Sheet
 
