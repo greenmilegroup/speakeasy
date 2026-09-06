@@ -94,7 +94,15 @@ Everything is hand-editable — no database.
   encode time and silent, since the hero is muted). Footage is lifted in CSS by the `v9` block: the videos
   carry a `brightness()` filter and the hero scrims are far lighter than they were, with the headline
   protected by a text shadow instead of a blanket of black. If you add a hero video, keep it landscape and
-  at least 1280px wide; anything narrower is upscaled and goes soft on a desktop.
+  at least 1280px wide. The plate clip is 360px wide and vertical, so covering the banner with it showed
+  only 26% of the frame at 4x upscale: a slice of the dish, unidentifiable. That hero therefore carries
+  `has-video--whole`, which contains the video instead of covering, and puts a blurred still of the same
+  frame behind it (`.page-hero__still`) so the band is a warm field rather than black bars. The dish plays
+  close to native size, whole and sharp. A landscape source of 1280px or more would let it fill the banner
+  properly and the class could come off.
+  Note: `.page-hero__still` takes its `background-image` **inline in the HTML**. A `url()` inside a CSS
+  custom property resolves against the stylesheet, not the document, so a path passed that way is looked
+  for under `/css/`.
 - **Photos** — drop a JPG into `assets/img/` and point the matching `<img src>` at it. Current photos: `interior.jpg`,
   `tuna-tartare.jpg`, `rigatoni-bolognese.jpg`, `storefront.jpg`, `blue-lagoon.jpg`, `event-15-first-dates.jpg`.
 - **Fonts** — swap the files in `assets/fonts/` and the `@font-face` rules in `assets/fonts/fonts.css`. Two families
