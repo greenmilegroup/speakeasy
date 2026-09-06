@@ -1485,7 +1485,7 @@ body{font-weight:500;font-size:clamp(17.5px,1.2vw,19.5px);line-height:1.62}
 .mus__mon{margin-top:5px}
 .mus__today{display:inline-block;margin-top:9px;padding:3px 10px;border-radius:999px;
   background:linear-gradient(135deg,#f0dca0,#c9a227 55%,#9c7c22);color:#150e02;
-  font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.1em;text-transform:uppercase;font-size:.66rem}
+  font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.1em;text-transform:uppercase;font-size:.78rem}
 .mus__sets{list-style:none;margin:0;padding:0;display:grid;gap:16px;min-width:0}
 .mus__sets li{display:flex;align-items:baseline;gap:clamp(12px,2vw,20px);flex-wrap:wrap}
 .mus__time{font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.06em;color:var(--gold-hi);
@@ -1670,8 +1670,8 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 .lang__opt:hover{color:#fff}
 .lang__opt.is-on{color:var(--gold-hi)}
 .lang__sep{width:1px;height:13px;background:var(--line-soft)}
-@media (max-width:1140px){.lang{padding:4px 9px}.lang__opt{font-size:.74rem}}
-@media (max-width:520px){.lang{padding:3px 8px;gap:5px}.lang__opt{font-size:.72rem}}
+@media (max-width:1140px){.lang{padding:4px 9px}.lang__opt{font-size:.78rem}}
+@media (max-width:520px){.lang{padding:3px 8px;gap:5px}.lang__opt{font-size:.78rem}}
 
 /* ---- the bar has to hold: toggle, wordmark, seven links, Book and the phone,
    in two languages. Measured, French needs about 100px more than English.
@@ -1733,4 +1733,94 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
     background-size:contain;filter:none;transform:none;
     -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);
             mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
+}
+
+/* =========================================================================
+   v10: THE MONTH CALENDAR
+   Replaces the This week / This month chips. Nights with something on carry a
+   gold dot and are clickable; clicking one filters the list below to that
+   night, clicking it again clears. Empty days are inert spans, not buttons,
+   so a keyboard never lands on a night with nothing on it.
+   ========================================================================= */
+.cal{max-width:440px;margin:0 auto clamp(24px,3vw,34px);padding:clamp(16px,2vw,22px);
+  border-radius:var(--radius);border:1px solid var(--line-soft);
+  background:linear-gradient(165deg,rgba(24,24,26,.72),rgba(12,12,14,.72))}
+.cal__bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.cal__month{font-family:var(--f-display);font-weight:600;font-size:1.12rem;color:var(--cream);
+  margin:0;letter-spacing:.03em;text-align:center;flex:1}
+.cal__nav{width:34px;height:34px;border-radius:50%;border:1px solid var(--line-soft);
+  color:var(--cream-2);font-size:1.3rem;line-height:1;display:flex;align-items:center;justify-content:center;
+  transition:border-color .25s,color .25s,background .25s;flex:none}
+.cal__nav:hover{border-color:var(--gold);color:var(--gold-hi);background:rgba(201,162,39,.1)}
+.cal__dow,.cal__grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal__dow{margin-bottom:6px}
+.cal__dow span{text-align:center;font-family:var(--f-deco);font-weight:var(--w-deco);
+  font-size:.72rem;letter-spacing:.06em;color:var(--gold)}
+.cal__day,.cal__pad{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:3px;border-radius:9px;font-size:.9rem;color:var(--muted)}
+.cal__day.has-event{color:var(--cream);border:1px solid var(--line-soft);cursor:pointer;
+  transition:border-color .25s,background .25s,color .25s}
+.cal__day.has-event:hover{border-color:var(--gold);background:rgba(201,162,39,.12);color:#fff}
+.cal__day i{width:5px;height:5px;border-radius:50%;background:var(--gold-hi);display:block}
+.cal__day.is-today{color:var(--gold-hi)}
+.cal__day.is-today.has-event{border-color:rgba(201,162,39,.5)}
+.cal__day.is-picked{background:linear-gradient(135deg,#f0dca0,#c9a227 55%,#9c7c22);
+  color:#150e02;border-color:transparent}
+.cal__day.is-picked i{background:#150e02}
+@media (max-width:420px){.cal__day,.cal__pad{font-size:.84rem;border-radius:7px}}
+
+/* ---- the two rooms, as tabs ---- */
+.rooms .tabs{justify-content:center;margin-bottom:clamp(22px,3vw,34px)}
+.rooms__panel{padding-top:6px}
+.rooms__grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(26px,4.4vw,58px);align-items:center}
+.rooms__title{font-size:clamp(1.6rem,3vw,2.3rem);margin:0 0 1rem}
+.rooms__copy .lead{margin-bottom:1rem}
+.rooms__shots{display:grid;gap:14px}
+.rooms__shots figure{margin:0;position:relative;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--line-soft);box-shadow:var(--shadow)}
+.rooms__shots img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;
+  transition:transform .6s var(--ease)}
+.rooms__shots figure:hover img{transform:scale(1.03)}
+.rooms__shots figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 16px 12px;
+  font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.12em;text-transform:uppercase;
+  font-size:.72rem;color:var(--cream);background:linear-gradient(180deg,transparent,rgba(0,0,0,.8))}
+.rooms__shots--one img{aspect-ratio:4/3}
+.rooms__included{margin-top:clamp(30px,4vw,48px);padding-top:clamp(26px,3vw,36px);
+  border-top:1px solid var(--line-soft);max-width:78ch;margin-inline:auto;text-align:center}
+.rooms__included .kicker{margin-bottom:1.2rem}
+.booking__points--wide{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:10px 26px;text-align:left;margin-bottom:1.6rem}
+@media (max-width:860px){
+  .rooms__grid{grid-template-columns:1fr;gap:24px}
+  .rooms__shots{grid-template-columns:1fr 1fr}
+  .rooms__shots--one{grid-template-columns:1fr}
+}
+@media (max-width:560px){.rooms__shots{grid-template-columns:1fr}}
+
+/* =========================================================================
+   v11: THE BAR HEADER AND THE EVENT FILM
+   ========================================================================= */
+
+/* A plain cover hero keeps its still sharp: the still is the stand-in when the
+   video is suppressed (reduced motion) or has not decoded, so it must be
+   framed exactly like the video rather than blurred the way the letterboxed
+   --whole variant needs. */
+.page-hero.has-video:not(.has-video--whole) .page-hero__still{
+  filter:none;transform:none;background-size:cover}
+
+/* The event film. The source is 960x540, so the frame is capped near its own
+   width: shown any wider it would upscale and soften, which is the one thing
+   footage of a dark room cannot afford. Sized to read as a deliberate frame. */
+.reel--wide .reel__frame{max-width:min(94vw,1000px);aspect-ratio:16/9}
+.reel--wide .reel__video{width:100%;height:100%;object-fit:cover}
+.reel__cap{max-width:min(94vw,1000px);margin:14px auto 0;text-align:center;
+  font-family:var(--f-serif);font-size:1.02rem;color:var(--cream-2)}
+
+/* A 16:9 clip in a 3.1:1 band is cropped to a sliver, which zooms the shot
+   about 1.9x and turns a bar into an abstraction. Measured: at 1440x900 the
+   band was 1440x468. Giving the hero real height on anything desktop-sized
+   brings it to roughly 2.2:1, so cover barely crops and the room reads as a
+   room. Capped so a tall monitor does not get a wall of video. */
+@media (min-width:900px){
+  .page-hero.has-video{min-height:min(72vh,720px)}
 }
