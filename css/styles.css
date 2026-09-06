@@ -1706,3 +1706,31 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 
 /* The only word set in CSS content, so the text walker cannot reach it. */
 :root[lang="fr-CA"] .hours tr.today td:first-child::after{content:" · aujourd’hui"}
+
+/* ---- a hero video that is narrower than the banner ----
+   The plate clip is a 360px-wide vertical phone video. Covering a 1440px
+   banner with it showed 26% of the frame at 4x upscale: a slice of the dish,
+   unreadable. Contained instead, it plays at close to native size, whole and
+   sharp, and a blurred still of the same frame fills the rest of the band. */
+.page-hero.has-video--whole .page-hero__video{object-fit:contain;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
+/* the band reads as one field rather than a plate floating on black */
+.page-hero.has-video--whole .page-hero__scrim{
+  background:radial-gradient(58% 62% at 50% 52%,rgba(6,6,7,.34),rgba(6,6,7,.6) 88%),
+             linear-gradient(180deg,rgba(6,6,7,.68) 0%,rgba(6,6,7,.2) 40%,var(--noir) 100%)}
+/* background-image is set inline in the HTML on purpose: a url() inside a CSS
+   custom property resolves against the stylesheet, not the document, so a path
+   passed that way would be looked for under /css/. Longhands here so the
+   inline background-image is not clobbered by a shorthand. */
+.page-hero__still{position:absolute;inset:0;z-index:-3;pointer-events:none;
+  background-position:center;background-size:cover;background-repeat:no-repeat;
+  filter:blur(34px) saturate(1.15) brightness(.6);transform:scale(1.18)}
+/* Reduced motion hides the video, so the still stands in for it: sharp,
+   contained and masked the same way, so the dish is still identifiable. */
+@media (prefers-reduced-motion:reduce){
+  .page-hero.has-video--whole .page-hero__still{
+    background-size:contain;filter:none;transform:none;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);
+            mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
+}
