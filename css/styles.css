@@ -1673,7 +1673,7 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 @media (max-width:1140px){.lang{padding:4px 9px}.lang__opt{font-size:.78rem}}
 @media (max-width:520px){.lang{padding:3px 8px;gap:5px}.lang__opt{font-size:.78rem}}
 
-/* ---- the bar has to hold: toggle, wordmark, seven links, Book and the phone,
+/* ---- the bar has to hold: toggle, wordmark, six links, Book and the phone,
    in two languages. Measured, French needs about 100px more than English.
    The container gets more room on wide screens, the links step down through
    two tiers, and the burger takes over before anything can collide. ---- */
@@ -1698,8 +1698,12 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
   .nav__book{font-size:.78rem;padding:8px 14px}
   .nav__call{font-size:.79rem;padding:8px 12px}
 }
-/* below this the full bar cannot hold both languages without crowding */
-@media (max-width:1180px){
+/* Below this the full bar cannot hold both languages without crowding.
+   Measured after Careers came out: the bar needs 992px in English and 1027px
+   in French, so 1080 keeps a margin over the wider language. It sat at 1180
+   while there were seven links, which handed people the burger on screens
+   the full nav now fits on. */
+@media (max-width:1080px){
   .nav__links,.nav__call{display:none}
   .nav__toggle{display:flex}
 }
