@@ -57,15 +57,20 @@
     <h2 class="h-display">Live <em>Music.</em></h2>
     <p class="section__intro">Someone on the stage most nights during dinner service. No ticket, no cover, no list: it is free to anyone dining with us. Book a table and stay for the set.</p>
   </div>
-  <div class="whatson__filters" role="tablist" aria-label="How far ahead to look">
-    <button class="chip is-active" data-range="week" role="tab" aria-selected="true">This week</button>
-    <button class="chip" data-range="month" role="tab" aria-selected="false">This month</button>
+  <div class="cal" id="musCal">
+    <div class="cal__bar">
+      <button class="cal__nav" type="button" data-step="-1" aria-label="Previous month">&lsaquo;</button>
+      <h3 class="cal__month" id="calMonth" aria-live="polite">&nbsp;</h3>
+      <button class="cal__nav" type="button" data-step="1" aria-label="Next month">&rsaquo;</button>
+    </div>
+    <div class="cal__dow" aria-hidden="true"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+    <div class="cal__grid" id="calGrid" role="grid" aria-labelledby="calMonth"></div>
   </div>
   <p id="musRange" class="mus__range" role="status" aria-live="polite"></p>
   <div id="musList" class="mus"></div>
   <div id="musEmpty" class="whatson__empty" hidden>
     <p class="whatson__empty-title">Nothing listed in this stretch</p>
-    <p class="whatson__empty-sub">Try the month, or call for tonight’s line-up.</p>
+    <p class="whatson__empty-sub">Try another month, or call for tonight’s line-up.</p>
     <div class="gallery__empty-cta"><a class="btn btn--gold" href="tel:+16132416221">Call 613-241-6221</a></div>
   </div>
   <div class="private__cta">
