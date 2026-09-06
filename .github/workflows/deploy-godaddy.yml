@@ -1,0 +1,39 @@
+name: Deploy to GoDaddy
+
+# Publishes the site to GoDaddy hosting over FTPS every time main moves.
+# Run it by hand from the Actions tab with "Run workflow" too.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-godaddy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload changed files to GoDaddy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          # Where the site lives on the GoDaddy account. Usually public_html/
+          # for the primary domain, or public_html/<domain>/ for an add-on domain.
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # Only the site itself goes up — no repo plumbing, no server-side code.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .github/**
+            mcp/**
+            supabase/**
+            tools/**
+            README.md
