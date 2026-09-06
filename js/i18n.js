@@ -412,6 +412,9 @@ const FR = {
   "$1": "1 $",
   "$5": "5 $",
   "$49": "49 $",
+  "On offer": "Nos offres",
+  "Set Dinner &": "Menu Table &",
+  "Happy Hour.": "Happy Hour.",
 };
 
 /* The live open/closed badge and the hours table are composed at runtime from
