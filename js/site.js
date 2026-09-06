@@ -105,7 +105,7 @@ function injectChrome() {
       <div class="footer__meta">
         <p>55 York Street, Ottawa · K1N 9B7</p>
         <p><a href="tel:${TEL}">613-241-6221</a></p>
-        <p class="footer__social"><a href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a> · <a href="#" aria-label="Facebook">Facebook</a></p>
+        <p class="footer__social"><a href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a> · <a href="https://www.facebook.com/speakeasyottawa" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a></p>
       </div>
     </div>
     <p class="footer__fine">© 2022 Speakeasy Ottawa · ByWard Market · Please enjoy responsibly.</p>`;
