@@ -57,6 +57,9 @@ body{
 body.locked{overflow:hidden;height:100dvh}
 
 img{max-width:100%;height:auto;display:block}
+/* the img rule above out-specifies the UA [hidden] rule, so hidden images
+   would otherwise still render. Keep this after any display: declaration. */
+[hidden]{display:none!important}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 ::selection{background:var(--red);color:#fff}
@@ -1584,33 +1587,13 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
    and the phone number collapsed into a red disc. Nothing in the bar may wrap;
    instead the links tighten as the room runs out. */
 .nav__links a,.nav__call,.nav__book,.nav__name{white-space:nowrap}
-@media (max-width:1300px){
-  .nav__links{gap:20px}
-  .nav__links a{font-size:.82rem;letter-spacing:.05em}
-}
-@media (max-width:1140px){
-  .nav__links{gap:15px}
-  .nav__links a{font-size:.78rem;letter-spacing:.02em}
-  .nav__name{font-size:1.3rem}
-  .nav__call{font-size:.8rem;padding:9px 13px}
-  .nav__book{font-size:.78rem}
-}
 /* nowrap text overflows a shrunken flex box, so the wordmark was riding into
    the first nav link. The brand keeps its width; the links tighten instead. */
 .nav__brand{flex:none}
 .nav__links{min-width:0}
-@media (max-width:1080px){
-  .nav__inner{gap:14px}
-  .nav__links{gap:12px}
-  .nav__links a{font-size:.74rem;letter-spacing:0}
-}
 /* Below ~1000px the full bar can only fit by squeezing the links against the
    Book button. The burger takes over a little earlier instead. This is the nav
    only; the 960px breakpoint still governs the rest of the layout. */
-@media (max-width:1000px){
-  .nav__links,.nav__call{display:none}
-  .nav__toggle{display:flex}
-}
 
 /* =========================================================================
    v9: THE FOOTAGE, MADE VISIBLE
@@ -1636,3 +1619,74 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 .page-hero.has-video .page-hero__inner .lead,
 .page-hero.has-video .page-hero__inner .kicker{text-shadow:0 1px 16px rgba(0,0,0,.95),0 1px 4px rgba(0,0,0,.8)}
 .page-hero.has-video .page-hero__ico{filter:drop-shadow(0 2px 10px rgba(0,0,0,.85))}
+
+/* ---- hours on the home page: the question every guest asks first ---- */
+.openhours__inner{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(26px,5vw,64px);align-items:center;
+  padding:clamp(26px,3.4vw,42px) clamp(24px,3.4vw,44px);border-radius:var(--radius);
+  border:1px solid var(--line);background:linear-gradient(120deg,rgba(28,22,10,.6),rgba(13,13,15,.85));
+  box-shadow:var(--shadow)}
+.openhours__now .status{margin:.5rem 0 1rem}
+.openhours__note{color:var(--cream-2);margin:0 0 1.3rem}
+.openhours__cta{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.openhours .hours{max-width:none;width:100%}
+.openhours .hours td{font-size:1.05rem;padding:.62rem 0}
+@media (max-width:820px){.openhours__inner{grid-template-columns:1fr;gap:26px}}
+
+/* ---- past clients: a wordmark wall, not trademark files ---- */
+.clients__row{list-style:none;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;align-items:stretch}
+.clients__row li{display:flex;align-items:center;justify-content:center;min-height:92px;padding:18px 14px;
+  border-radius:12px;border:1px solid var(--line-soft);
+  background:linear-gradient(165deg,rgba(24,24,26,.72),rgba(12,12,14,.72));
+  transition:border-color .3s,transform .3s var(--ease)}
+.clients__row li:hover{border-color:rgba(201,162,39,.36);transform:translateY(-2px)}
+.clients__row span{font-family:var(--f-display);font-weight:600;font-size:clamp(1rem,1.1vw,1.16rem);
+  letter-spacing:.06em;color:var(--cream);text-align:center;line-height:1.25}
+.clients__row img{max-height:44px;width:auto;object-fit:contain;filter:grayscale(1) brightness(1.7);opacity:.85;
+  transition:opacity .3s,filter .3s}
+.clients__row li:hover img{opacity:1;filter:grayscale(0) brightness(1)}
+
+/* ---- EN / FR toggle, first thing in the bar ---- */
+.lang{display:inline-flex;align-items:center;gap:7px;flex:none;padding:5px 11px;border-radius:999px;
+  border:1px solid var(--line-soft);background:rgba(8,8,9,.45)}
+.lang__opt{font-family:var(--f-deco);font-weight:var(--w-deco);font-size:.78rem;letter-spacing:.08em;
+  color:var(--cream-2);padding:2px 3px;border-radius:4px;transition:color .25s;line-height:1.1}
+.lang__opt:hover{color:#fff}
+.lang__opt.is-on{color:var(--gold-hi)}
+.lang__sep{width:1px;height:13px;background:var(--line-soft)}
+@media (max-width:1140px){.lang{padding:4px 9px}.lang__opt{font-size:.74rem}}
+@media (max-width:520px){.lang{padding:3px 8px;gap:5px}.lang__opt{font-size:.72rem}}
+
+/* ---- the bar has to hold: toggle, wordmark, seven links, Book and the phone,
+   in two languages. Measured, French needs about 100px more than English.
+   The container gets more room on wide screens, the links step down through
+   two tiers, and the burger takes over before anything can collide. ---- */
+.nav__inner{max-width:1560px}
+.nav__links{flex:none;margin-left:auto}
+
+@media (min-width:1501px){
+  .nav__links{gap:22px}
+  .nav__links a{font-size:.9rem;letter-spacing:.07em}
+}
+@media (max-width:1500px){
+  .nav__links{gap:15px}
+  .nav__links a{font-size:.83rem;letter-spacing:.025em}
+  .nav__inner{gap:16px}
+  .nav__call{padding:9px 14px}
+}
+@media (max-width:1320px){
+  .nav__links{gap:11px}
+  .nav__links a{font-size:.79rem;letter-spacing:.01em}
+  .nav__name{font-size:1.34rem}
+  .nav__inner{gap:12px}
+  .nav__book{font-size:.78rem;padding:8px 14px}
+  .nav__call{font-size:.79rem;padding:8px 12px}
+}
+/* below this the full bar cannot hold both languages without crowding */
+@media (max-width:1180px){
+  .nav__links,.nav__call{display:none}
+  .nav__toggle{display:flex}
+}
+
+/* The only word set in CSS content, so the text walker cannot reach it. */
+:root[lang="fr-CA"] .hours tr.today td:first-child::after{content:" · aujourd’hui"}

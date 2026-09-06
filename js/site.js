@@ -9,6 +9,8 @@ export const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').match
 export const finePointer  = matchMedia('(pointer: fine)').matches;
 export const $  = (s, c = document) => c.querySelector(s);
 export const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+import { initLang } from './i18n.js';
+
 const TEL = '+16132416221';
 const OPENTABLE = 'https://www.opentable.com/r/speakeasy-tapas-lounge-ottawa';
 
@@ -17,9 +19,9 @@ const NAV = [
   ['home', 'index.html', 'Home'],
   ['drinks', 'drinks.html', 'Drinks'],
   ['menu', 'menu.html', 'Menu'],
-  ['events', 'events.html', 'Events'],
+  ['events', 'events.html', 'On Stage'],
   ['private', 'private.html', 'Host Your Event'],
-  ['visit', 'visit.html', 'Visit'],
+  ['visit', 'visit.html', 'Reservations'],
   ['careers', 'careers.html', 'Careers'],
 ];
 
@@ -61,6 +63,11 @@ function injectChrome() {
   const header = $('#nav');
   if (header) header.innerHTML =
     `<div class="nav__inner">
+      <div class="lang" role="group" aria-label="Language / Langue">
+        <button class="lang__opt is-on" type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+        <span class="lang__sep" aria-hidden="true"></span>
+        <button class="lang__opt" type="button" data-lang="fr" aria-pressed="false" lang="fr">FR</button>
+      </div>
       <a class="nav__brand" href="index.html" aria-label="Speakeasy Ottawa home">
         <img src="assets/logo.png" alt="" width="44" height="44" class="nav__logo" />
         <span class="nav__name">Speakeasy<small>Ottawa</small></span>
@@ -282,3 +289,24 @@ function tabs() {
 injectAmbient();
 injectChrome();
 nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); packages();
+
+/* ---------- past-client logos ----------
+   Each entry renders its wordmark until a real logo file exists at its
+   data-logo path. We probe for the file and only swap once it actually
+   loads, so a missing logo is simply the name, never a broken image. */
+function clientLogos() {
+  $$('.clients__row img[data-logo]').forEach((img) => {
+    const src = img.dataset.logo;
+    const probe = new Image();
+    probe.onload = () => {
+      img.src = src;
+      img.hidden = false;
+      img.closest('li')?.querySelector('span')?.setAttribute('hidden', '');
+    };
+    probe.src = src;
+  });
+}
+clientLogos();
+
+/* ---------- language ---------- */
+initLang();

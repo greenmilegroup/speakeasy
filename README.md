@@ -221,6 +221,31 @@ Deep links: `tour/index.html?layout=cocktail&autoenter`.
 
 ---
 
+## Bilingual (EN / FR)
+
+A toggle sits at the top left of the header. `js/i18n.js` holds a French dictionary keyed on the **exact
+English string**; switching walks the text nodes and swaps what it finds, keeping each node's English
+original so switching back is exact. Anything missing simply stays English, so a gap is never a broken page.
+
+- **Covered today:** the whole chrome (header, footer, mobile menu, buttons) and the entire home page,
+  including the live open/closed badge and the hours table, which convert to 24-hour French (`16 h à 22 h 30`).
+- **Not yet covered:** the interior pages. They fall back to English with the toggle still working.
+- **To translate more:** add entries to `FR` in `js/i18n.js`. Keys must match the rendered text exactly
+  (whitespace collapsed). Runtime-composed strings such as the hours badge go in `PATTERNS` instead.
+- The choice is stored in `localStorage` and sets `<html lang>` to `fr-CA` or `en`.
+- **Before launch, have a native francophone review the copy.** Ottawa is bilingual and the French is
+  currently unreviewed.
+
+## Past clients (Host Your Event)
+
+The client wall renders each company as a **wordmark** until a real logo file exists. `js/site.js` probes each
+`data-logo` path and swaps in the image only once it actually loads, so a missing file is the company name,
+never a broken image. Drop cleared artwork into `assets/img/clients/` (see the README there) and it appears
+on the next load with no code change.
+
+Using a company's logo to advertise them as a client normally needs that company's written permission.
+Confirm each is both a real past client and cleared for use before publishing.
+
 ## House style
 
 - **No long dashes.** The site uses no em dashes and no en dashes, anywhere in copy: rewrite the
