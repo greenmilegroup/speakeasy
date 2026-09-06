@@ -9,6 +9,8 @@ export const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').match
 export const finePointer  = matchMedia('(pointer: fine)').matches;
 export const $  = (s, c = document) => c.querySelector(s);
 export const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+import { initLang } from './i18n.js';
+
 const TEL = '+16132416221';
 const OPENTABLE = 'https://www.opentable.com/r/speakeasy-tapas-lounge-ottawa';
 
@@ -17,9 +19,9 @@ const NAV = [
   ['home', 'index.html', 'Home'],
   ['drinks', 'drinks.html', 'Drinks'],
   ['menu', 'menu.html', 'Menu'],
-  ['events', 'events.html', 'Events'],
+  ['events', 'events.html', 'On Stage'],
   ['private', 'private.html', 'Host Your Event'],
-  ['visit', 'visit.html', 'Visit'],
+  ['visit', 'visit.html', 'Reservations'],
   ['careers', 'careers.html', 'Careers'],
 ];
 
@@ -61,6 +63,11 @@ function injectChrome() {
   const header = $('#nav');
   if (header) header.innerHTML =
     `<div class="nav__inner">
+      <div class="lang" role="group" aria-label="Language / Langue">
+        <button class="lang__opt is-on" type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+        <span class="lang__sep" aria-hidden="true"></span>
+        <button class="lang__opt" type="button" data-lang="fr" aria-pressed="false" lang="fr">FR</button>
+      </div>
       <a class="nav__brand" href="index.html" aria-label="Speakeasy Ottawa home">
         <img src="assets/logo.png" alt="" width="44" height="44" class="nav__logo" />
         <span class="nav__name">Speakeasy<small>Ottawa</small></span>
@@ -101,7 +108,7 @@ function injectChrome() {
         <p class="footer__social"><a href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a> · <a href="#" aria-label="Facebook">Facebook</a></p>
       </div>
     </div>
-    <p class="footer__fine">© <span id="year"></span> Speakeasy Ottawa · ByWard Market · Please enjoy responsibly.</p>`;
+    <p class="footer__fine">© 2022 Speakeasy Ottawa · ByWard Market · Please enjoy responsibly.</p>`;
 }
 
 /* ---------- nav behaviour ---------- */
@@ -249,7 +256,6 @@ function packages() {
 
 /* ---------- misc: year + easter egg ---------- */
 function misc() {
-  const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
   let clicks = 0, t;
   $('#footLogo')?.addEventListener('click', () => { if (++clicks >= 3) { clicks = 0; toast('Password accepted. Tell no one.'); } clearTimeout(t); t = setTimeout(() => (clicks = 0), 1200); });
 }
@@ -283,3 +289,6 @@ function tabs() {
 injectAmbient();
 injectChrome();
 nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); packages();
+
+/* ---------- language ---------- */
+initLang();

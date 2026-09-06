@@ -57,6 +57,9 @@ body{
 body.locked{overflow:hidden;height:100dvh}
 
 img{max-width:100%;height:auto;display:block}
+/* the img rule above out-specifies the UA [hidden] rule, so hidden images
+   would otherwise still render. Keep this after any display: declaration. */
+[hidden]{display:none!important}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 ::selection{background:var(--red);color:#fff}
@@ -1505,3 +1508,201 @@ body{font-weight:500;font-size:clamp(17.5px,1.2vw,19.5px);line-height:1.62}
 /* A leaders list with no price column: keep the rule, drop the dangling dots. */
 .leaders--plain li{display:block}
 .leaders--plain .n{display:block}
+
+/* =========================================================================
+   v8: TYPE SCALE
+   Measured pass. Before this, 28 distinct pieces of text rendered under 13px
+   on a 390px phone, including form labels (10.9px), the event date and time
+   chips (9.3px) and the mobile booking button (11.2px). Almost nothing
+   scaled between phone and desktop either: the same px at 390 and 1440.
+
+   Rules applied here:
+     - nothing readable renders below 12.5px, on any screen;
+     - anything a guest acts on (button, link, control, form label) is 13px+;
+     - sizes are clamped so they grow with the viewport instead of sitting
+       still, phone value first, desktop value as the ceiling.
+   ========================================================================= */
+
+/* body: larger on a phone, and it now grows on a desktop */
+body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
+
+/* the wordmark, asked to carry more presence */
+.nav__name{font-size:clamp(1.38rem,1.15vw + 1.05rem,1.72rem);line-height:1.05}
+.nav__name small{font-size:clamp(.68rem,.2vw + .62rem,.75rem);letter-spacing:.22em}
+
+/* navigation and the actions beside it */
+.nav__links a{font-size:clamp(.84rem,.18vw + .79rem,.9rem);letter-spacing:.08em}
+.nav__call{font-size:clamp(.85rem,.15vw + .81rem,.9rem)}
+.nav__book{font-size:clamp(.82rem,.15vw + .78rem,.88rem)}
+
+/* every button and inline action */
+.btn{font-size:clamp(.85rem,.16vw + .81rem,.91rem);letter-spacing:.11em}
+.link-underline{font-size:clamp(.83rem,.14vw + .79rem,.88rem)}
+.chip{font-size:clamp(.84rem,.14vw + .8rem,.89rem)}
+.mr__book,.mr__call{font-size:clamp(.86rem,.16vw + .82rem,.92rem)}
+
+/* labels and small caps: the old floor was 8.8px, which is not text */
+.kicker{font-size:clamp(.78rem,.14vw + .74rem,.84rem);letter-spacing:.22em}
+.mchip{font-size:.79rem;letter-spacing:.07em}
+.feature__flag{font-size:.79rem;letter-spacing:.14em}
+.ecard__kicker,.pl__tag,.ea{font-size:.78rem}
+.mus__dow,.mus__mon,.wrow__dow,.wrow__mon{font-size:.78rem;letter-spacing:.12em}
+.status{font-size:.79rem}
+.hero__scroll-label{font-size:.75rem;letter-spacing:.26em}
+.hero__sound{font-size:.79rem}
+.hero__title-2{font-size:clamp(.88rem,.5vw + .72rem,1.05rem)}
+.field label{font-size:.82rem;letter-spacing:.09em}
+.about__stats span,.footer__name span{font-size:.76rem}
+.footer__links a{font-size:clamp(.83rem,.14vw + .79rem,.88rem)}
+.footer__fine{font-size:.86rem}
+.menu-cat-head p,.gcard figcaption,.about__media figcaption,
+.visit__store figcaption,.sig__cap small{font-size:.79rem}
+
+/* the guest reviews carry more weight than a caption */
+.quote p{font-size:clamp(1.16rem,.55vw + 1.02rem,1.32rem);line-height:1.55}
+.quote cite{font-size:.81rem;letter-spacing:.12em}
+
+/* reading matter that was a shade tight */
+.ck__ing{font-size:.9rem;line-height:1.5}
+.ck__note{font-size:1rem}
+.leaders .n em{font-size:.86em}
+.mus__what p,.wrow__blurb{font-size:1rem}
+.note{font-size:.95rem}
+
+/* headings: h1 was set 35px on 32px leading, so two lines would collide */
+.page-hero h1{line-height:1.08}
+.h-display{line-height:1.1}
+
+/* Stragglers: these carried a more specific rule than the block above, so the
+   sizes there never applied. Matched at the same specificity here. */
+.mobile-reserve a{font-size:clamp(.86rem,.16vw + .82rem,.92rem)}
+.menu-cat-head .ea{font-size:.79rem}
+.host__media figcaption,.dinner__feature figcaption{font-size:.79rem}
+.about__stats span{font-size:.8rem}
+.nav__name small{font-size:clamp(.78rem,.18vw + .73rem,.85rem)}
+.hero__scroll-label{font-size:.79rem}
+
+/* The nav runs full-width down to 961px, where it becomes the burger. Between
+   there and about 1300px, "Host Your Event" used to wrap onto a second line
+   and the phone number collapsed into a red disc. Nothing in the bar may wrap;
+   instead the links tighten as the room runs out. */
+.nav__links a,.nav__call,.nav__book,.nav__name{white-space:nowrap}
+/* nowrap text overflows a shrunken flex box, so the wordmark was riding into
+   the first nav link. The brand keeps its width; the links tighten instead. */
+.nav__brand{flex:none}
+.nav__links{min-width:0}
+/* Below ~1000px the full bar can only fit by squeezing the links against the
+   Book button. The burger takes over a little earlier instead. This is the nav
+   only; the 960px breakpoint still governs the rest of the layout. */
+
+/* =========================================================================
+   v9: THE FOOTAGE, MADE VISIBLE
+   The room was being hidden by its own scrim: the page-hero wash ran to 0.9
+   opacity black at the edges and 0.5 dead centre, which left the video as a
+   dark smear. Lifting the video and easing the scrim, then protecting the
+   headline with a text shadow rather than a blanket of black over everything.
+   ========================================================================= */
+.hero__video{filter:brightness(1.16) saturate(1.08) contrast(1.03)}
+.page-hero__video{filter:brightness(1.2) saturate(1.06) contrast(1.02)}
+.reel__video{filter:brightness(1.1) saturate(1.04)}
+
+.page-hero.has-video .page-hero__scrim{
+  background:radial-gradient(72% 70% at 50% 46%,rgba(6,6,7,.26),rgba(6,6,7,.72) 92%),
+             linear-gradient(180deg,rgba(6,6,7,.7) 0%,rgba(6,6,7,.26) 42%,var(--noir) 100%)}
+.hero__scrim{background:
+  radial-gradient(50% 40% at 50% 60%,rgba(6,6,7,.4),transparent 74%),
+  radial-gradient(75% 65% at 50% 42%,rgba(10,10,11,.08),rgba(6,6,7,.58) 94%),
+  linear-gradient(180deg,rgba(6,6,7,.5) 0%,rgba(6,6,7,.1) 34%,rgba(6,6,7,.38) 72%,var(--noir) 100%)}
+
+/* the type keeps its own contrast now that the wash is lighter */
+.page-hero.has-video .page-hero__inner h1{text-shadow:0 2px 26px rgba(0,0,0,.92),0 1px 5px rgba(0,0,0,.75)}
+.page-hero.has-video .page-hero__inner .lead,
+.page-hero.has-video .page-hero__inner .kicker{text-shadow:0 1px 16px rgba(0,0,0,.95),0 1px 4px rgba(0,0,0,.8)}
+.page-hero.has-video .page-hero__ico{filter:drop-shadow(0 2px 10px rgba(0,0,0,.85))}
+
+/* ---- hours on the home page: the question every guest asks first ---- */
+.openhours__inner{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(26px,5vw,64px);align-items:center;
+  padding:clamp(26px,3.4vw,42px) clamp(24px,3.4vw,44px);border-radius:var(--radius);
+  border:1px solid var(--line);background:linear-gradient(120deg,rgba(28,22,10,.6),rgba(13,13,15,.85));
+  box-shadow:var(--shadow)}
+.openhours__now .status{margin:.5rem 0 1rem}
+.openhours__note{color:var(--cream-2);margin:0 0 1.3rem}
+.openhours__cta{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.openhours .hours{max-width:none;width:100%}
+.openhours .hours td{font-size:1.05rem;padding:.62rem 0}
+@media (max-width:820px){.openhours__inner{grid-template-columns:1fr;gap:26px}}
+
+/* ---- past clients: official single-colour marks, inlined ----
+   Each mark is fill="currentColor", so colour comes from here: cream at rest,
+   gold on hover. Heights are per-logo (from the supplied set) so a tall mark
+   like Apple and a wide one like Maison Birks carry the same optical weight. */
+.clients__row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:clamp(22px,3vw,36px) clamp(26px,3.5vw,50px);color:var(--cream);
+  padding:clamp(18px,2.4vw,30px) 0}
+.clients__row svg{width:auto;display:block;opacity:.8;flex:none;
+  transition:opacity .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.clients__row svg:hover{opacity:1;color:var(--gold-hi);transform:translateY(-2px)}
+
+.clients__row .apple{height:44.9px}
+.clients__row .amazon{height:33.4px}
+.clients__row .google{height:36.2px}
+.clients__row .goldman-sachs{height:38.8px}
+.clients__row .rbc{height:43.7px}
+.clients__row .morguard{height:28.1px}
+.clients__row .maison-birks{height:19px}
+
+@media (max-width:720px){
+  .clients__row{gap:22px 30px}
+  .clients__row .apple{height:34px}
+  .clients__row .amazon{height:25px}
+  .clients__row .google{height:27px}
+  .clients__row .goldman-sachs{height:29px}
+  .clients__row .rbc{height:33px}
+  .clients__row .morguard{height:21px}
+  .clients__row .maison-birks{height:14px}
+}
+
+/* ---- EN / FR toggle, first thing in the bar ---- */
+.lang{display:inline-flex;align-items:center;gap:7px;flex:none;padding:5px 11px;border-radius:999px;
+  border:1px solid var(--line-soft);background:rgba(8,8,9,.45)}
+.lang__opt{font-family:var(--f-deco);font-weight:var(--w-deco);font-size:.78rem;letter-spacing:.08em;
+  color:var(--cream-2);padding:2px 3px;border-radius:4px;transition:color .25s;line-height:1.1}
+.lang__opt:hover{color:#fff}
+.lang__opt.is-on{color:var(--gold-hi)}
+.lang__sep{width:1px;height:13px;background:var(--line-soft)}
+@media (max-width:1140px){.lang{padding:4px 9px}.lang__opt{font-size:.74rem}}
+@media (max-width:520px){.lang{padding:3px 8px;gap:5px}.lang__opt{font-size:.72rem}}
+
+/* ---- the bar has to hold: toggle, wordmark, seven links, Book and the phone,
+   in two languages. Measured, French needs about 100px more than English.
+   The container gets more room on wide screens, the links step down through
+   two tiers, and the burger takes over before anything can collide. ---- */
+.nav__inner{max-width:1560px}
+.nav__links{flex:none;margin-left:auto}
+
+@media (min-width:1501px){
+  .nav__links{gap:22px}
+  .nav__links a{font-size:.9rem;letter-spacing:.07em}
+}
+@media (max-width:1500px){
+  .nav__links{gap:15px}
+  .nav__links a{font-size:.83rem;letter-spacing:.025em}
+  .nav__inner{gap:16px}
+  .nav__call{padding:9px 14px}
+}
+@media (max-width:1320px){
+  .nav__links{gap:11px}
+  .nav__links a{font-size:.79rem;letter-spacing:.01em}
+  .nav__name{font-size:1.34rem}
+  .nav__inner{gap:12px}
+  .nav__book{font-size:.78rem;padding:8px 14px}
+  .nav__call{font-size:.79rem;padding:8px 12px}
+}
+/* below this the full bar cannot hold both languages without crowding */
+@media (max-width:1180px){
+  .nav__links,.nav__call{display:none}
+  .nav__toggle{display:flex}
+}
+
+/* The only word set in CSS content, so the text walker cannot reach it. */
+:root[lang="fr-CA"] .hours tr.today td:first-child::after{content:" · aujourd’hui"}

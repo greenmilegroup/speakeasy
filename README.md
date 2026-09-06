@@ -15,7 +15,7 @@ main site. Host the folder anywhere (GitHub Pages, Netlify, any web server) or o
 | File | What it is |
 |------|------------|
 | `index.html` | Home — “shhh” door intro, hero, about, the six **stamps**, house signatures, 3D-tour teaser, gallery |
-| `drinks.html` | The Bar — blue-cocktail hero, 13 signature cocktails, wine, local draught |
+| `drinks.html` | The Bar: blue-cocktail hero, 13 signature cocktails, wine, bottled beer and cider |
 | `menu.html` | The Menu — one page, **toggle** between **Shareables · Dinner · Desserts** (also deep-links: `menu.html#dinner`) |
 | `events.html` | Events — three bands: **Tonight**, **The Main Event** (ticketed) and **Live Music** (this week / this month). Data-driven ([see below](#events-are-data-driven)) |
 | `private.html` | Private Events — phone-call-first hosting page: the room, per-guest package pricing, the Concert Experience, upstairs |
@@ -90,6 +90,11 @@ Everything is hand-editable — no database.
   into `<div class="gallery__grid" id="galleryGrid">` in `index.html` (set `data-full`, `src`, `alt`, `data-caption`,
   `data-cat`); the placeholder hides itself automatically once the grid has children. You may also re-add the
   filter chips above it.
+- **Video** — the menu hero is `assets/video/the-plate.*` (a 360x470 crop of a phone clip, brightened at
+  encode time and silent, since the hero is muted). Footage is lifted in CSS by the `v9` block: the videos
+  carry a `brightness()` filter and the hero scrims are far lighter than they were, with the headline
+  protected by a text shadow instead of a blanket of black. If you add a hero video, keep it landscape and
+  at least 1280px wide; anything narrower is upscaled and goes soft on a desktop.
 - **Photos** — drop a JPG into `assets/img/` and point the matching `<img src>` at it. Current photos: `interior.jpg`,
   `tuna-tartare.jpg`, `rigatoni-bolognese.jpg`, `storefront.jpg`, `blue-lagoon.jpg`, `event-15-first-dates.jpg`.
 - **Fonts** — swap the files in `assets/fonts/` and the `@font-face` rules in `assets/fonts/fonts.css`. Two families
@@ -216,6 +221,35 @@ Deep links: `tour/index.html?layout=cocktail&autoenter`.
 
 ---
 
+## Bilingual (EN / FR)
+
+A toggle sits at the top left of the header. `js/i18n.js` holds a French dictionary keyed on the **exact
+English string**; switching walks the text nodes and swaps what it finds, keeping each node's English
+original so switching back is exact. Anything missing simply stays English, so a gap is never a broken page.
+
+- **Covered today:** the whole chrome (header, footer, mobile menu, buttons) and the entire home page,
+  including the live open/closed badge and the hours table, which convert to 24-hour French (`16 h à 22 h 30`).
+- **Not yet covered:** the interior pages. They fall back to English with the toggle still working.
+- **To translate more:** add entries to `FR` in `js/i18n.js`. Keys must match the rendered text exactly
+  (whitespace collapsed). Runtime-composed strings such as the hours badge go in `PATTERNS` instead.
+- The choice is stored in `localStorage` and sets `<html lang>` to `fr-CA` or `en`.
+- **Before launch, have a native francophone review the copy.** Ottawa is bilingual and the French is
+  currently unreviewed.
+
+## Past clients (Host Your Event)
+
+Seven official single-colour marks (Apple, Amazon, Google, Goldman Sachs, RBC, Morguard, Maison Birks),
+**inlined** into `private.html` rather than loaded through `<img>`. Each is `fill="currentColor"`, and inside
+an `<img>` an SVG is its own document, so `currentColor` would resolve to black and the marks would vanish on
+the dark ground. Inline, they take the cream from CSS and go gold on hover, in one rule, with no extra requests.
+
+Aspect ratios run from 0.82:1 (Apple) to 11.6:1 (Maison Birks), so each carries its own height in
+`css/styles.css` under `.clients__row`, normalised to equal optical weight. Source files and fuller notes are
+in `assets/img/clients/`.
+
+Using a company's logo to advertise them as a client normally needs that company's written permission.
+Confirm each is both a real past client and cleared for use before publishing.
+
 ## House style
 
 - **No long dashes.** The site uses no em dashes and no en dashes, anywhere in copy: rewrite the
@@ -233,7 +267,7 @@ Menu/bar copy follows the supplied inventory, with a few details filled in — p
 
 - **Cocktails** — the 10 named signatures plus three era-appropriate pours (French 75, Boulevardier, Clover Club) to reach
   the stated **13**. Ingredients and prices ($15–18) are placeholders.
-- **Wine & beer** — representative selections with sample prices (local Ottawa draughts named).
+- **Wine & beer** — representative selections with sample prices. **The bar has no draught**: beer and cider are bottles and cans only, so do not reintroduce tap/draught wording.
 - **Dish prices** — chosen inside the given ranges (Dinner $26–48, Desserts $12–18).
 - **Hours** — modelled as Tue–Thu 4–10:30 PM, Fri–Sat 4 PM–Midnight, Sun–Mon closed. Adjust in `SCHEDULE`.
 - **`interior.jpg`** (still used in the About block) is as supplied, including its “AI-generated content”
