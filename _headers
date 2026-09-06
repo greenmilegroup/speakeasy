@@ -1,28 +1,27 @@
 # Cloudflare Pages cache rules.
 #
-# Every path revalidates by default, and only the media directories are allowed
-# a long cache. "no-cache" does not mean "do not cache": the browser keeps its
-# copy and asks with an ETag, so an unchanged file costs a 304 and a changed one
-# is picked up at once.
+# Pages already sends `Cache-Control: public, max-age=0, must-revalidate` plus an
+# ETag on every static asset, which its docs describe as guaranteeing that stale
+# content is never served: the browser keeps its copy and revalidates, so an
+# unchanged file costs a 304 rather than a re-download. That default is correct
+# for this site, and the rule below states it rather than changing it, so the
+# behaviour survives a change of host or of Cloudflare's defaults.
 #
-# The default is /* rather than /*.html because Pages serves extensionless URLs:
-# the page people actually visit is /events, and a /*.html rule never matches it.
-# Later rules override earlier ones, so the media overrides below still win.
+# The default is /* and not /*.html because Pages serves extensionless URLs: the
+# page people visit is /events, which a /*.html rule never matches.
 #
-# This exists because a stale js/events.js was left running against fresh HTML
-# after an element it referenced was deleted. It threw, and took the whole
-# events calendar down with it while the page looked fine above the fold.
+# Deliberately NO long cache on images or video. An earlier version of this file
+# gave assets/img and assets/video a year, on the assumption that changed media
+# would get a new filename. Nothing enforces that, and in practice clips are
+# re-encoded in place under the same name — bar-night.webm was replaced three
+# times in one afternoon. Under a year-long cache a returning visitor would keep
+# the first version they ever loaded. Revalidation costs a 304; being wrong
+# costs a visitor seeing last season's menu.
 
 /*
-  Cache-Control: no-cache
+  Cache-Control: public, max-age=0, must-revalidate
 
-# Media is content-addressed by name in practice: a changed photograph or clip
-# gets a new filename. Long cache, and it never goes stale in a way that breaks.
-/assets/img/*
-  Cache-Control: public, max-age=31536000
-
-/assets/video/*
-  Cache-Control: public, max-age=31536000
-
+# Fonts are the one safe exception: a given file's bytes never change, because a
+# different weight or family means a different filename.
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
