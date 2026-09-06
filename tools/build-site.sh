@@ -11,7 +11,7 @@ rm -rf dist
 mkdir -p dist
 
 cp -r assets css js dist/
-cp ./*.html robots.txt sitemap.xml .nojekyll dist/
+cp ./*.html robots.txt sitemap.xml .nojekyll _headers dist/
 
 # Pages Functions are compiled from functions/ at the repo root, so they are
 # not copied here — dist/ holds static files only.

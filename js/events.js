@@ -94,6 +94,7 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 
 function renderTonight(all) {
   const band = $('#tonightBand');
+  if (!band) return;
   const now = new Date();
   const today = dayKey(now);
   const soon = expand(all, new Date(now - 3 * 3600e3), new Date(now.getTime() + 30 * DAY_MS));
@@ -123,6 +124,7 @@ function renderTonight(all) {
 
 function renderFeature(ev) {
   const feature = $('#whatsonFeature');
+  if (!feature) return;
   if (!ev) { feature.innerHTML = ''; return; }
   const media = ev.imageUrl
     ? `<div class="feature__media"><div class="feature__bg" style="background-image:url('${esc(ev.imageUrl)}')"></div><img src="${esc(ev.imageUrl)}" alt="${esc(ev.title)}"/></div>`
@@ -144,6 +146,7 @@ function renderFeature(ev) {
 
 function renderTicketList(list) {
   const ul = $('#ticketList');
+  if (!ul) return;
   ul.innerHTML = list.map((ev, i) => `
     <li class="wrow" data-cat="${esc(ev.category)}" style="--i:${i}">
       <div class="wrow__date"><span class="wrow__dow">${DAY[vp(ev.date).dow]}</span><strong>${vp(ev.date).d}</strong><span class="wrow__mon">${MON[vp(ev.date).m]}</span></div>
@@ -243,6 +246,7 @@ function renderCalendar(house, selectedDay) {
 
 function renderMusic(house, selectedDay) {
   const list = $('#musList'), empty = $('#musEmpty'), label = $('#musRange');
+  if (!list || !empty || !label) return;
   let nights = nightsIn(house, calMonth);
   if (selectedDay) nights = nights.filter(e => vp(e.date).d === selectedDay);
 
@@ -326,30 +330,46 @@ function schema(list) {
 
 /* ---------- boot ---------- */
 
+/* The three bands are independent, so they fail independently.
+   A cached copy of this file once ran against newer HTML, reached for an
+   element that had since been deleted, threw, and silently took the featured
+   show and the whole calendar down with it. The page looked fine above the
+   fold, which is the worst way for it to break. One band failing must never
+   cost the others. */
+function safely(name, fn) {
+  try { fn(); } catch (err) { console.error(`events: ${name} failed`, err); }
+}
+
+/** Set .hidden only if the element is actually there. */
+const setHidden = (sel, hidden) => { const el = $(sel); if (el) el.hidden = hidden; };
+
 async function start() {
   const all = await loadEvents();
   const ticketed = all.filter(isTicketed);
   const house = all.filter(ev => !isTicketed(ev));
 
-  renderTonight(all);
+  safely('tonight', () => renderTonight(all));
 
   // The Main Event is the Eventbrite board: whatever is still to come, with the
   // soonest featured. A show that has already happened is not news, and the
   // section never announces its own emptiness.
-  const upcomingTickets = expand(ticketed, new Date(), new Date(Date.now() + 400 * DAY_MS));
-  $('#whatsonFeature').hidden = !upcomingTickets.length;
-  $('#ticketList').hidden = upcomingTickets.length < 2;
-  renderFeature(upcomingTickets[0]);
-  renderTicketList(upcomingTickets.slice(1));
+  safely('main event', () => {
+    const upcoming = expand(ticketed, new Date(), new Date(Date.now() + 400 * DAY_MS));
+    setHidden('#whatsonFeature', !upcoming.length);
+    setHidden('#ticketList', upcoming.length < 2);
+    renderFeature(upcoming[0]);
+    renderTicketList(upcoming.slice(1));
+  });
 
-  paintMusic(house);
-
-  $$('#musCal .cal__nav').forEach(btn => btn.addEventListener('click', () => {
-    const to = monthStart(calMonth.getFullYear(), calMonth.getMonth() + Number(btn.dataset.step));
-    if (!inWindow(to)) return;
-    calMonth = to;
+  safely('live music', () => {
     paintMusic(house);
-  }));
+    $$('#musCal .cal__nav').forEach(btn => btn.addEventListener('click', () => {
+      const to = monthStart(calMonth.getFullYear(), calMonth.getMonth() + Number(btn.dataset.step));
+      if (!inWindow(to)) return;
+      calMonth = to;
+      paintMusic(house);
+    }));
+  });
 
-  schema(all);
+  safely('schema', () => schema(all));
 }
