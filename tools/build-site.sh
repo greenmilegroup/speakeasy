@@ -16,7 +16,14 @@ rm -rf dist
 mkdir -p dist
 
 cp -r assets css js dist/
-cp ./*.html robots.txt sitemap.xml .nojekyll _headers dist/
+# admin.html is the in-house event editor. It carries noindex and is absent
+# from the sitemap, but copying it here still puts it on the public web at a
+# guessable URL, and it will be a live editor once Supabase is configured.
+for f in ./*.html; do
+  [ "$(basename "$f")" = "admin.html" ] && continue
+  cp "$f" dist/
+done
+cp robots.txt sitemap.xml .nojekyll _headers dist/
 
 # Pages Functions are compiled from functions/ at the repo root, so they are
 # not copied here — dist/ holds static files only.

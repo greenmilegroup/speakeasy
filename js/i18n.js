@@ -381,6 +381,13 @@ const FR = {
   "Sets most nights, new pours and the odd secret. Come find us.": "Des spectacles presque tous les soirs, de nouveaux services et quelques secrets. Venez nous trouver.",
   "Six nights a week, usually from 7 PM, no cover. Call for tonight's line-up.": "Six soirs par semaine, généralement dès 19 h, sans frais d'entrée. Appelez pour la programmation du soir.",
   "Signature cocktails": "Cocktails signature",
+  "Thu to Sun": "Jeu au dim",
+  "Kitchen and bar, six nights a week. Live music Thursday to Sunday, from 7 PM.": "Cuisine et bar, six soirs par semaine. Musique live du jeudi au dimanche, dès 19 h.",
+  "Sets from Thursday, new pours and the odd secret. Come find us.": "Des spectacles dès le jeudi, de nouveaux services et quelques secrets. Venez nous trouver.",
+  "Thursday to Sunday on the stage": "Du jeudi au dimanche sur scène",
+  "Live, Thursday to Sunday": "En direct, du jeudi au dimanche",
+  "Someone on the stage Thursday to Sunday during dinner service, free to anyone dining with us: no ticket, no cover, no list. Ticketed concerts sit on the same calendar, marked in red.": "Quelqu'un sur scène du jeudi au dimanche pendant le service du souper, gratuit pour toute personne qui soupe avec nous : sans billet, sans frais d'entrée, sans liste. Les concerts à billets figurent au même calendrier, en rouge.",
+  "Thursday to Sunday, usually from 7 PM, no cover. Call for tonight's line-up.": "Du jeudi au dimanche, généralement dès 19 h, sans frais d'entrée. Appelez pour la programmation du soir.",
 };
 
 /* The live open/closed badge and the hours table are composed at runtime from
