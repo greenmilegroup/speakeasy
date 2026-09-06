@@ -10,6 +10,7 @@ export const finePointer  = matchMedia('(pointer: fine)').matches;
 export const $  = (s, c = document) => c.querySelector(s);
 export const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
 import { initLang } from './i18n.js';
+import { SCHEDULE, DAY_NAMES, clock, span, closeLabel, openSession, nightsOpen, hoursSentence } from './hours.js';
 
 const TEL = '+16132416221';
 const OPENTABLE = 'https://www.opentable.com/r/speakeasy-tapas-lounge-ottawa';
@@ -228,24 +229,34 @@ function forms() {
   });
 }
 
-/* ---------- hours / open-now (visit page) ---------- */
-export const SCHEDULE = {
-  0: null, 1: null,
-  2: { open: 16 * 60, close: 22 * 60 + 30 }, 3: { open: 16 * 60, close: 22 * 60 + 30 }, 4: { open: 16 * 60, close: 22 * 60 + 30 },
-  5: { open: 16 * 60, close: 24 * 60 }, 6: { open: 16 * 60, close: 24 * 60 },
-};
+/* ---------- hours ---------- */
+export { SCHEDULE } from './hours.js';
+/* Any element carrying these attributes is filled from SCHEDULE, so the prose
+   on a page cannot contradict the hours table beside it. */
+function hoursCopy() {
+  const n = nightsOpen();
+  const WORD = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven'];
+  $$('[data-hours-nights]').forEach((el) => {
+    el.textContent = el.textContent.replace(/\b(zero|one|two|three|four|five|six|seven) nights?\b/i,
+      `${WORD[n]} night${n === 1 ? '' : 's'}`);
+  });
+  $$('[data-hours-line]').forEach((el) => { el.textContent = hoursSentence(); });
+}
+
 function hours() {
   const status = $('#openStatus'), tbody = $('#hoursTable tbody');
   if (!status && !tbody) return;
-  const NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const fmt = (m) => { m %= 1440; let h = (m / 60) | 0, mm = m % 60, ap = h >= 12 ? 'PM' : 'AM', hh = h % 12 || 12; return mm ? `${hh}:${String(mm).padStart(2, '0')} ${ap}` : `${hh} ${ap}`; };
-  const label = (d) => { const s = SCHEDULE[d]; return s ? `${fmt(s.open)} to ${s.close >= 1440 ? 'Midnight' : fmt(s.close)}` : 'Closed'; };
+  const NAMES = DAY_NAMES;
+  const fmt = clock;
+  const label = (d) => { const s = SCHEDULE[d]; return s ? span(s, true) : 'Closed'; };
   const tor = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' }));
   const day = tor.getDay(), mins = tor.getHours() * 60 + tor.getMinutes(), s = SCHEDULE[day];
-  const isOpen = !!s && mins >= s.open && mins < s.close;
+  // Not simply SCHEDULE[today]: a Friday that runs to 1 AM is still open at
+  // half past midnight on Saturday.
+  const session = openSession(day, mins);
   if (status) {
     const txt = $('.status__text', status);
-    if (isOpen) { status.classList.add('open'); txt.textContent = `Open now · until ${s.close >= 1440 ? 'midnight' : fmt(s.close)}`; }
+    if (session) { status.classList.add('open'); txt.textContent = `Open now · until ${closeLabel(session.until)}`; }
     else {
       status.classList.add('closed');
       let next = (s && mins < s.open) ? { d: day, m: s.open } : null;
@@ -301,7 +312,7 @@ function tabs() {
 /* ---------- boot ---------- */
 injectAmbient();
 injectChrome();
-nav(); reveal(); tilt(); tabs(); forms(); hours(); misc(); packages();
+nav(); reveal(); tilt(); tabs(); forms(); hours(); hoursCopy(); misc(); packages();
 
 /* ---------- language ---------- */
 initLang();

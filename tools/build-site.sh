@@ -7,6 +7,10 @@
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
+
+# Opening hours live in js/hours.js. Refuse to ship pages that contradict them.
+node tools/check-hours.mjs
+
 rm -rf dist
 mkdir -p dist
 
