@@ -33,6 +33,11 @@ node tools/prerender-nav.mjs
 node tools/prerender-events.mjs
 node tools/add-schema.mjs
 
+# The French site, built from the finished English pages so it carries the
+# same board, nav and schema. Before the sitemap is stamped, so its pages
+# are stamped too.
+node tools/build-fr.mjs
+
 # Stamp each sitemap entry with the date that page last actually changed, taken
 # from git. A hand-maintained lastmod goes stale the first time nobody
 # remembers to touch it, and a wrong one is worse than none: it tells search

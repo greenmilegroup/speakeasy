@@ -32,8 +32,16 @@ const TEL = grab(/const TEL = '([^']+)'/, 'TEL constant');
 const flat = NAV.flatMap(n => (n[3] ? n[3] : [n])).filter(n => n[1]);
 const links = flat.map(([, href, label]) => `<a href="${href}">${label}</a>`).join('');
 
-const header = `<div class="nav__inner"><a class="nav__brand" href="index.html">Speakeasy Ottawa</a>`
-  + `<nav class="nav__links" aria-label="Sections">${links}</nav></div>`;
+/* The language control is a pair of links, one per copy of this page, so the
+   French version is reachable by following links and not only by hreflang. */
+const header = page => {
+  const file = page === 'index.html' ? '' : page;
+  return `<div class="nav__inner"><div class="lang" role="group" aria-label="Language / Langue">`
+    + `<a class="lang__opt" href="/${file}" hreflang="en" lang="en">EN</a><span class="lang__sep" aria-hidden="true"></span>`
+    + `<a class="lang__opt" href="/fr/${file}" hreflang="fr" lang="fr">FR</a></div>`
+    + `<a class="nav__brand" href="index.html">Speakeasy Ottawa</a>`
+    + `<nav class="nav__links" aria-label="Sections">${links}</nav></div>`;
+};
 
 const footer = `<div class="footer__inner"><nav class="footer__links" aria-label="Footer">${links}</nav>`
   + `<div class="footer__meta"><p>55 York Street, Ottawa · K1N 9B7</p>`
@@ -44,7 +52,7 @@ for (const page of readdirSync(at('dist')).filter(f => f.endsWith('.html'))) {
   const p = at(`dist/${page}`);
   let html = readFileSync(p, 'utf8');
   const before = html;
-  html = html.replace(/(<header id="nav"[^>]*>)\s*(<\/header>)/, (_, a, b) => a + header + b);
+  html = html.replace(/(<header id="nav"[^>]*>)\s*(<\/header>)/, (_, a, b) => a + header(page) + b);
   html = html.replace(/(<footer class="footer"[^>]*>)\s*(<\/footer>)/, (_, a, b) => a + footer + b);
   if (html === before) continue;
   writeFileSync(p, html);

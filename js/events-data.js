@@ -69,13 +69,14 @@ function normalise(row) {
     date,
     durationMin: Number(row.duration_min ?? 120),
     priceText: row.price_text || '',
-    imageUrl: row.image_url || '',
+    // Root-relative, so the same record renders from / and from /fr/.
+    imageUrl: row.image_url ? row.image_url.replace(/^(?!https?:|\/)/, '/') : '',
     ticketUrl: row.ticket_url || '',
   };
 }
 
 async function fromJson() {
-  const res = await fetch('assets/data/events.json', { cache: 'no-store' });
+  const res = await fetch('/assets/data/events.json', { cache: 'no-store' });
   if (!res.ok) throw new Error('events.json ' + res.status);
   return res.json();
 }

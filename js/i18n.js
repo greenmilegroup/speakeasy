@@ -4,16 +4,21 @@
    Ottawa is bilingual, so the site carries a language toggle in the header.
 
    How it works: rather than tagging every element in every page with a key,
-   the dictionary below is keyed on the exact English string. On switching to
-   French each text node is looked up, and its English original is kept on the
-   node so switching back is exact. Anything not in the dictionary simply
-   stays in English, so a missing translation is a gap, never a broken page.
+   the dictionary below is keyed on the exact English string. Anything not in
+   the dictionary simply stays in English, so a missing translation is a gap,
+   never a broken page.
+
+   Where it runs: twice, on the same dictionary.
+     - At build time, tools/build-fr.mjs walks each finished English page
+       through translateText() and writes a French copy under /fr/. That is
+       what a search engine indexes and what a reader lands on.
+     - In the browser, on a /fr/ page only, initLang() translates what the
+       scripts add after load: the header and footer, the events board, the
+       hours line. The EN | FR control in the header is a pair of links
+       between the two copies of the current page.
 
    To translate more of the site, add entries to FR. Keys must match the
-   rendered text exactly, whitespace collapsed.
-
-   The chrome (header, footer, mobile menu) and the whole home page are
-   covered. The interior pages are not yet, and fall back to English.
+   rendered text exactly, whitespace collapsed, curly quotes folded.
    ========================================================================= */
 
 const FR = {
@@ -284,6 +289,37 @@ const FR = {
   "Saxophonist": "Saxophoniste",
   "Piano + vocals": "Piano et chant",
   "Saxophone; patio": "Saxophone; terrasse",
+
+  /* Page titles and descriptions, used by tools/build-fr.mjs for the /fr/
+     copies. Keyed on the decoded text, so "&" not "&amp;". */
+  "Speakeasy Ottawa · ByWard Market": "Speakeasy Ottawa · Marché By",
+  "The Bar · Speakeasy Ottawa": "Le Bar · Speakeasy Ottawa",
+  "Menu · Speakeasy Ottawa": "Menu · Speakeasy Ottawa",
+  "On Stage · Live Music & Events · Speakeasy Ottawa": "Sur Scène · Musique live et événements · Speakeasy Ottawa",
+  "Host Your Event · Speakeasy Ottawa": "Organisez votre événement · Speakeasy Ottawa",
+  "Reservations · Hours & Location · Speakeasy Ottawa": "Réservations · Heures et adresse · Speakeasy Ottawa",
+  "A hidden destination for food, music & celebrations in Ottawa's ByWard Market. Craft cocktails, tapas & live music Thursday to Sunday. 55 York Street · 613-241-6221.":
+    "Une adresse cachée pour manger, écouter de la musique et célébrer dans le Marché By, à Ottawa. Cocktails maison, tapas et musique live du jeudi au dimanche. 55, rue York · 613-241-6221.",
+  "13 signature cocktails, a curated wine list, and bottled beer and cider at Speakeasy Ottawa.":
+    "13 cocktails signature, une carte des vins choisie, bières et cidres en bouteille au Speakeasy Ottawa.",
+  "Shareables, chef plates and sweets at Speakeasy Ottawa: beef tataki, tuna tartare, seared scallops, NY striploin, duck confit and more.":
+    "À partager, plats du chef et douceurs au Speakeasy Ottawa : tataki de bœuf, tartare de thon, pétoncles poêlés, contre-filet New York, confit de canard et plus.",
+  "Live music Thursday to Sunday plus speed dating, comedy and more at Speakeasy Ottawa. See what's on and book your table.":
+    "Musique live du jeudi au dimanche, plus speed dating, humour et autres soirées au Speakeasy Ottawa. Voyez la programmation et réservez votre table.",
+  "Private events at Speakeasy Ottawa, 55 York Street in the ByWard Market. Full venue buyouts for up to 100 guests. Enjoy your own event; we take care of everything else. It starts with a call: 613-241-6221.":
+    "Événements privés au Speakeasy Ottawa, 55, rue York dans le Marché By. Location complète de la salle jusqu'à 100 invités. Profitez de votre soirée; nous nous occupons du reste. Tout commence par un appel : 613-241-6221.",
+  "Visit Speakeasy Ottawa at 55 York Street, Ottawa. Reservations by phone 613-241-6221. Live hours, map and contact.":
+    "Visitez le Speakeasy Ottawa au 55, rue York, à Ottawa. Réservations par téléphone au 613-241-6221. Heures en direct, carte et coordonnées.",
+  "Speakeasy Ottawa home": "Accueil Speakeasy Ottawa",
+  "Language / Langue": "Langue / Language",
+  "Next up": "À venir",
+  "Keep it between us.": "Ça reste entre nous.",
+  "tap to enter": "touchez pour entrer",
+  "Skip →": "Passer →",
+  "Checking tonight's line-up…": "Vérification de la programmation de ce soir…",
+  "Hours & how to find us →": "Heures et itinéraire →",
+  "Sections": "Sections",
+  "Footer": "Pied de page",
   "Concert & dinner experience": "Concert et souper",
   "Live jazz dinner concert": "Souper-concert jazz",
   "With Woods & Gummeson.": "Avec Woods et Gummeson.",
@@ -491,6 +527,10 @@ const PATTERNS = [
   // "Sun 4 Oct"
   [/^(\w{3}) (\d{1,2}) (\w{3})$/,
     (m) => `${DAY_ABBR_FR[m[1]] || m[1]} ${m[2]} ${MON_ABBR_FR[m[3]] || m[3]}`],
+  // "11 nights on the stage between September and October" (the pre-rendered
+  // board lists every upcoming night; the live one shows a month at a time)
+  [/^(\d+) nights? on the stage between (\w+) and (\w+)$/,
+    (m) => `${m[1]} soir${Number(m[1]) > 1 ? 's' : ''} sur scène de ${MON_FULL_FR[m[2]] || m[2].toLowerCase()} à ${MON_FULL_FR[m[3]] || m[3].toLowerCase()}`],
   // "10 nights on the stage in September"
   [/^(\d+) nights? on the stage in (\w+)$/,
     (m) => `${m[1]} soir${Number(m[1]) > 1 ? 's' : ''} sur scène en ${MON_FULL_FR[m[2]] || m[2].toLowerCase()}`],
@@ -543,6 +583,15 @@ const norm = (s) => s
 
 /** The dictionary, re-keyed the same way, so lookups cannot miss on a quote. */
 const FR_NORM = new Map(Object.entries(FR).map(([k, v]) => [norm(k), v]));
+
+/** French for one English string, or undefined. The dictionary first, then the
+    pattern rules for runtime-composed text. Pure, so tools/build-fr.mjs can
+    use it on the HTML without a DOM. */
+export function translateText(s) {
+  const key = norm(s);
+  if (!key) return undefined;
+  return FR_NORM.get(key) ?? fromPattern(key);
+}
 
 function translateNode(node, toFr) {
   const raw = node.textContent;
@@ -598,31 +647,20 @@ export function applyLang(lang, root = document.body) {
   walk(root, lang === 'fr');
 }
 
-function setLang(lang) {
-  current = lang === 'fr' ? 'fr' : 'en';
-  document.documentElement.lang = current === 'fr' ? 'fr-CA' : 'en';
-  try { localStorage.setItem('speakeasy-lang', current); } catch { /* private mode */ }
-  applyLang(current);
-  document.querySelectorAll('.lang__opt').forEach((b) => {
-    const on = b.dataset.lang === current;
-    b.classList.toggle('is-on', on);
-    b.setAttribute('aria-pressed', String(on));
-  });
-}
+/* The language lives in the URL: /fr/... is French, everything else English,
+   and the header's EN | FR control is a pair of links between the two. Nothing
+   is toggled in place and nothing is remembered, so a page is always the same
+   page for every reader and for a search engine — the reason the French copies
+   exist at all.
 
+   On a French page the HTML arrives translated by the build. What this does is
+   translate the parts the scripts add afterwards: the header and footer, the
+   events board, the hours line. */
 export function initLang() {
-  let saved = 'en';
-  try { saved = localStorage.getItem('speakeasy-lang') || 'en'; } catch { /* private mode */ }
-  setLang(saved);
-
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.lang__opt');
-    if (btn) setLang(btn.dataset.lang);
-  });
-
-  // The events board renders after load, so translate what arrives later too.
+  current = /^fr/i.test(document.documentElement.lang) ? 'fr' : 'en';
+  if (current !== 'fr') return;
+  applyLang('fr');
   new MutationObserver((records) => {
-    if (current !== 'fr') return;
     records.forEach((r) => r.addedNodes.forEach((n) => {
       if (n.nodeType === 1) applyLang('fr', n);
       else if (n.nodeType === 3) translateNode(n, true);

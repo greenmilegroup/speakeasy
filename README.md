@@ -245,16 +245,20 @@ network policy, or run the fetch from GitHub Actions, which is not network-restr
 
 ## Bilingual (EN / FR)
 
-A toggle sits at the top left of the header. `js/i18n.js` holds a French dictionary keyed on the **exact
-English string**; switching walks the text nodes and swaps what it finds, keeping each node's English
-original so switching back is exact. Anything missing simply stays English, so a gap is never a broken page.
+The French site lives at **`/fr/`** — one page per English page, same filenames (`/fr/menu.html`). It is
+generated at build time by `tools/build-fr.mjs`, which walks each finished English page through the
+dictionary in `js/i18n.js` and writes the French copy. Both copies carry `hreflang` links to each other,
+the sitemap lists both, and the **EN | FR** control in the header is a pair of links between the two copies
+of the current page. Nothing is toggled in place and nothing is remembered: a URL is always the same page,
+in the same language, for every reader and for a search engine. That is what makes the French rankable.
 
-- **Covered today:** the whole chrome (header, footer, mobile menu, buttons) and the entire home page,
-  including the live open/closed badge and the hours table, which convert to 24-hour French (`16 h à 22 h 30`).
-- **Not yet covered:** the interior pages. They fall back to English with the toggle still working.
-- **To translate more:** add entries to `FR` in `js/i18n.js`. Keys must match the rendered text exactly
-  (whitespace collapsed). Runtime-composed strings such as the hours badge go in `PATTERNS` instead.
-- The choice is stored in `localStorage` and sets `<html lang>` to `fr-CA` or `en`.
+- **The dictionary** (`FR` in `js/i18n.js`) is keyed on the **exact English string**. Anything missing simply
+  stays English, so a gap is never a broken page. The build prints how many strings it translated and lists
+  what stayed English; proper nouns, wine labels and verbatim reviews are expected there.
+- **In the browser**, on a `/fr/` page only, `initLang()` translates what the scripts add after load — the
+  header and footer, the events board, the live hours line. Same dictionary, same rules.
+- **To translate more:** add entries to `FR`. Keys must match the rendered text exactly (whitespace
+  collapsed, curly quotes folded). Runtime-composed strings such as the hours badge go in `PATTERNS` instead.
 - **Before launch, have a native francophone review the copy.** Ottawa is bilingual and the French is
   currently unreviewed.
 
