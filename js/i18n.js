@@ -91,6 +91,7 @@ const FR = {
   'Word of mouth': 'Bouche à oreille',
   'What People Say': 'Ce Que L’On Dit',
   'on Google': 'sur Google',
+  'reviews on Google': 'avis sur Google',
   'Read our Google reviews': 'Lire nos avis Google',
   'Leave a review': 'Laisser un avis',
 
