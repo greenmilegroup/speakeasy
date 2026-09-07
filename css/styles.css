@@ -975,7 +975,8 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
   background:linear-gradient(168deg,rgba(23,23,25,.72),rgba(12,12,14,.72))}
 .reviews__score{display:flex;flex-direction:column;align-items:center;gap:4px}
 .reviews__score strong{font-family:var(--f-display);font-weight:700;font-size:3rem;color:var(--cream);line-height:1}
-.reviews__score .stars{color:var(--gold-hi);letter-spacing:.16em;font-size:1.05rem}
+.reviews__score .stars{letter-spacing:.16em;font-size:1.05rem;color:transparent;background:linear-gradient(90deg,var(--gold-hi) var(--fill,100%),rgba(255,255,255,.18) var(--fill,100%));-webkit-background-clip:text;background-clip:text}
+.reviews__score small b{font-weight:inherit;color:var(--cream)}
 .reviews__score small{font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.2em;text-transform:uppercase;font-size:.6rem;color:var(--muted)}
 .reviews__actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
