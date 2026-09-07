@@ -20,7 +20,7 @@ main site. Host the folder anywhere (GitHub Pages, Netlify, any web server) or o
 | `events.html` | Events — three bands: **Tonight**, **The Main Event** (ticketed) and **Live Music** (this week / this month). Data-driven ([see below](#events-are-data-driven)) |
 | `private.html` | Private Events — phone-call-first hosting page: the room, per-guest package pricing, the Concert Experience, upstairs |
 | `tour.html` | **3D Venue Tour** — the walkable 3D room. **Currently hidden** (see below) |
-| `visit.html` | Visit & Reserve — live open/closed badge, hours, map, contact + newsletter |
+| `visit.html` | Visit & Reserve — live open/closed badge, hours, map, contact form, the Society sign-up |
 
 The header, footer and ambient layers are injected on every page by `js/site.js`, so there’s one source of truth for nav.
 
@@ -113,9 +113,9 @@ Everything is hand-editable — no database.
 - **Legibility** — the `v6 — READABILITY` block at the foot of `css/styles.css` holds the contrast and weight pass:
   the header carries its own gradient scrim (`.nav::before`) so links stay readable over the hero video, and every
   page passes WCAG AA. If you add a label, use `var(--f-deco)` with `font-weight:var(--w-deco)`.
-- **Contact / newsletter forms** — they validate and confirm in the browser (contact also opens a pre-filled email).
-  To capture submissions, wire each `<form>` in `js/site.js` to Formspree / Netlify Forms / Supabase and update the
-  fallback address.
+- **The forms** post to `/api/contact` (see `DEPLOY.md`). The Speakeasy Society sign-up — one block, built by
+  `js/society.js`, rendered wherever a page carries `<section id="society">` and pre-rendered into `dist/` — stores
+  each member as a Resend contact with their membership interest and feedback, then notifies the venue.
 
 ---
 

@@ -10,6 +10,7 @@ export const finePointer  = matchMedia('(pointer: fine)').matches;
 export const $  = (s, c = document) => c.querySelector(s);
 export const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
 import { initLang } from './i18n.js';
+import { societyHtml } from './society.js';
 import { SCHEDULE, DAY_NAMES, clock, span, closeLabel, openSession, nightsOpen, hoursSentence } from './hours.js';
 
 const TEL = '+16132416221';
@@ -21,6 +22,7 @@ const OPENTABLE = 'https://www.opentable.com/r/speakeasy-tapas-lounge-ottawa';
 const MORE = [
   ['happy', 'happy-hour.html', 'Happy Hour'],
   ['prix', 'prix-fixe.html', 'Prix Fixe'],
+  ['society', 'index.html#society', 'The Society'],
 ];
 
 const NAV = [
@@ -106,6 +108,11 @@ function injectChrome() {
   mr.className = 'mobile-reserve';
   mr.innerHTML = `<a class="mr__book" href="${OPENTABLE}" target="_blank" rel="noopener">Book a table</a><a href="tel:${TEL}"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.2a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.24 1z"/></svg>613-241-6221</a>`;
   document.body.appendChild(mr);
+
+  // The Society block: same markup the build pre-renders, so a page without
+  // JavaScript already shows it and this only replaces like with like.
+  const soc = $('#society');
+  if (soc) soc.innerHTML = societyHtml();
 
   const footer = $('.footer');
   if (footer) footer.innerHTML =
@@ -230,17 +237,27 @@ function forms() {
       company: contact.querySelector('[name="company"]')?.value,
     }, note, 'Thank you, we\u2019ll be in touch soon.');
   });
-  const news = $('#newsForm');
-  news?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = $('#nf-email'), note = $('#nfNote'), v = emailOK(email.value);
-    email.closest('.field').classList.toggle('invalid', !v);
-    if (!v) { note.textContent = 'A valid email, please.'; note.classList.add('err'); return; }
-    send(news, {
-      form: 'newsletter', email: email.value,
-      company: news.querySelector('[name="company"]')?.value,
-    }, note, 'You\u2019re on the list. Welcome to the inner circle.');
-  });
+  const society = $('#societyForm');
+  if (society) {
+    const member = $('#sf-member'), more = $('#sf-more');
+    // The feedback line only appears once someone says they would want in.
+    member.addEventListener('change', () => { more.hidden = !member.checked; if (member.checked) $('#sf-why').focus(); });
+    society.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = $('#sf-email'), note = $('#sfNote'), v = emailOK(email.value);
+      email.closest('.field').classList.toggle('invalid', !v);
+      if (!v) { note.textContent = 'A valid email, please.'; note.classList.add('err'); return; }
+      send(society, {
+        form: 'society', email: email.value, name: $('#sf-name').value,
+        member: member.checked, feedback: $('#sf-why').value,
+        source: document.body.dataset.page || location.pathname,
+        company: society.querySelector('[name="company"]')?.value,
+      }, note, member.checked
+        ? 'You\u2019re in. We will be in touch about the membership.'
+        : 'You\u2019re in the Society. Welcome.');
+      more.hidden = true;
+    });
+  }
 }
 
 /* ---------- hours ---------- */
