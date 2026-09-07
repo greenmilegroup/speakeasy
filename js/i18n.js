@@ -327,6 +327,11 @@ const FR = {
 
   /* private.html enquiry form */
   "Enquire about hosting your event": "Demander à organiser votre événement",
+  "In good company": "En bonne compagnie",
+  "Rooms we have hosted": "Des soirées que nous avons accueillies",
+  "for.": "pour eux.",
+  "Teams from these companies have held their evenings at 55 York Street: launches, client dinners, holiday parties and the nights that needed a stage.":
+    "Des équipes de ces entreprises ont tenu leurs soirées au 55, rue York : lancements, soupers clients, partys des fêtes et les soirées qui avaient besoin d'une scène.",
   "Tell us about your event": "Parlez-nous de votre événement",
   "Four things and we can hold a date. Everything else we work out together.": "Quatre détails et nous pouvons réserver une date. Le reste, nous le réglons ensemble.",
   "Date, or roughly when": "Date, ou à peu près quand",

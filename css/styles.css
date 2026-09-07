@@ -855,9 +855,9 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 
 /* --- the man in the yellow suit --- */
 .host__grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:clamp(28px,5vw,64px);align-items:center}
-.host__media{position:relative;margin:0;border-radius:var(--radius);overflow:hidden;
+.host__media{position:relative;margin:0;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;
   border:1px solid rgba(201,162,39,.26);box-shadow:var(--shadow)}
-.host__media img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 34%;
+.host__media img{width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 34%;
   transition:transform .8s var(--ease)}
 .host__media:hover img{transform:scale(1.04)}
 .host__media figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 18px 15px;
@@ -893,7 +893,9 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 
 @media (max-width:960px){
   .host__grid,.booking__grid{grid-template-columns:1fr}
-  .host__media{max-width:440px;margin-inline:auto}
+  /* width must be definite: with auto margins alone the figure shrinks to its
+     content, and before the lazy photo arrives that content is 0px wide. */
+  .host__media{width:100%;max-width:440px;margin-inline:auto}
   .tour-setups{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:520px){
