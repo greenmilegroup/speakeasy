@@ -315,6 +315,11 @@ function paintMusic(house, selectedDay = null) {
 
 function schema(list) {
   if (!list.length) return;
+  /* tools/prerender-events.mjs writes this into the HTML at build time,
+     where a first-pass crawler can read it without running any script.
+     Only emit it here if that did not happen — a live Supabase feed on an
+     older build being the case that still needs it. */
+  if (document.querySelector('script[type="application/ld+json"][data-events]')) return;
   const ld = list.slice(0, 10).map(ev => ({
     '@context': 'https://schema.org', '@type': 'Event', name: ev.title,
     startDate: ev.date.toISOString(), description: ev.blurb,

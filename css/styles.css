@@ -536,7 +536,11 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
   background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.16),transparent 60%);mix-blend-mode:screen}
 .tilt:hover .tilt__glare{opacity:1}
 
-[data-reveal]{opacity:0;transform:translateY(38px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+/* Gated on .js: the reveal is an enhancement, so a page that never runs the
+   script — or is read before it does — shows its content rather than a black
+   screen. The class is set in <head>, so this still applies before first paint
+   for everyone else and the animation is unchanged. */
+.js [data-reveal]{opacity:0;transform:translateY(38px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 [data-reveal].is-visible{opacity:1;transform:none}
 [data-reveal] .kicker,[data-reveal] .h-display,[data-reveal] .lead,[data-reveal] .btn{transition-delay:.05s}
 
@@ -582,7 +586,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   .hero__bg{animation:none;transform:scale(1.05)}
-  [data-reveal]{opacity:1;transform:none}
+  .js [data-reveal]{opacity:1;transform:none}
   .cocktails .ck,.packages .pkg,.events__nights li,.plates--grid li,.gallery__grid .gcard{opacity:1;transform:none}
   .tilt{transform:none!important}
   #fx{display:none}
@@ -839,7 +843,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .grain{opacity:.03}
 
 /* ---- 6. MOTION: a single, purposeful reveal ---- */
-[data-reveal]{transform:translateY(26px)}
+.js [data-reveal]{transform:translateY(26px)}
 [data-reveal].is-visible{transform:none}
 
 @media (max-width:960px){
