@@ -26,6 +26,13 @@ for f in ./*.html; do
 done
 cp robots.txt sitemap.xml .nojekyll _headers dist/
 
+# The events board and the menus render from data at runtime, which the first
+# crawl of a page never sees. Write them into the copies in dist/, along with
+# the structured data that earns rich results. Source stays script-driven.
+node tools/prerender-nav.mjs
+node tools/prerender-events.mjs
+node tools/add-schema.mjs
+
 # Stamp each sitemap entry with the date that page last actually changed, taken
 # from git. A hand-maintained lastmod goes stale the first time nobody
 # remembers to touch it, and a wrong one is worse than none: it tells search
