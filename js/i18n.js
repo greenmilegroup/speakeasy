@@ -298,27 +298,27 @@ const FR = {
   "On Stage · Live Music & Events · Speakeasy Ottawa": "Sur Scène · Musique live et événements · Speakeasy Ottawa",
   "Host Your Event · Speakeasy Ottawa": "Organisez votre événement · Speakeasy Ottawa",
   "Reservations · Hours & Location · Speakeasy Ottawa": "Réservations · Heures et adresse · Speakeasy Ottawa",
-  "A hidden destination for food, music & celebrations in Ottawa's ByWard Market. Craft cocktails, tapas & live music Thursday to Sunday. 55 York Street · 613-241-6221.":
-    "Une adresse cachée pour manger, écouter de la musique et célébrer dans le Marché By, à Ottawa. Cocktails maison, tapas et musique live du jeudi au dimanche. 55, rue York · 613-241-6221.",
+  "A hidden destination for food, music & celebrations in Ottawa's ByWard Market. Craft cocktails, tapas & live music Thursday to Sunday. 55 York Street.":
+    "Une adresse cachée pour manger, écouter de la musique et célébrer dans le Marché By, à Ottawa. Cocktails maison, tapas et musique live du jeudi au dimanche.",
   "10 signature cocktails, a curated wine list, and bottled beer and cider at Speakeasy Ottawa.":
     "10 cocktails signature, une carte des vins choisie, bières et cidres en bouteille au Speakeasy Ottawa.",
   "Shareables, chef plates and sweets at Speakeasy Ottawa: beef tataki, tuna tartare, seared scallops, NY striploin, duck confit and more.":
     "À partager, plats du chef et douceurs au Speakeasy Ottawa : tataki de bœuf, tartare de thon, pétoncles poêlés, contre-filet New York, confit de canard et plus.",
   "Live music Thursday to Sunday plus speed dating, comedy and more at Speakeasy Ottawa. See what's on and book your table.":
     "Musique live du jeudi au dimanche, plus speed dating, humour et autres soirées au Speakeasy Ottawa. Voyez la programmation et réservez votre table.",
-  "Private events at Speakeasy Ottawa, 55 York Street in the ByWard Market. Full venue buyouts for up to 100 guests. Enjoy your own event; we take care of everything else. It starts with a call: 613-241-6221.":
-    "Événements privés au Speakeasy Ottawa, 55, rue York dans le Marché By. Location complète de la salle jusqu'à 100 invités. Profitez de votre soirée; nous nous occupons du reste. Tout commence par un appel : 613-241-6221.",
+  "Private events at Speakeasy Ottawa, 55 York Street in the ByWard Market. Full buyouts for up to 100 guests. We handle everything; call 613-241-6221.":
+    "Événements privés au Speakeasy Ottawa, 55, rue York dans le Marché By. Location complète jusqu'à 100 invités. Nous nous occupons de tout : 613-241-6221.",
   "Visit Speakeasy Ottawa at 55 York Street, Ottawa. Reservations by phone 613-241-6221. Live hours, map and contact.":
     "Visitez le Speakeasy Ottawa au 55, rue York, à Ottawa. Réservations par téléphone au 613-241-6221. Heures en direct, carte et coordonnées.",
   "Speakeasy Ottawa home": "Accueil Speakeasy Ottawa",
 
   /* happy-hour.html and prix-fixe.html */
   "Happy Hour · Speakeasy Ottawa": "Happy Hour · Speakeasy Ottawa",
-  "Happy hour every day we are open at Speakeasy Ottawa, ByWard Market: 4 to 6 PM and 10 PM to close. $1 oysters, half price cocktail of the week, $5 bar rail drinks.":
-    "Happy hour chaque jour d'ouverture au Speakeasy Ottawa, Marché By : de 16 h à 18 h et de 22 h à la fermeture. Huîtres à 1 $, cocktail de la semaine à moitié prix, alcools de base à 5 $.",
+  "Happy hour at Speakeasy Ottawa, ByWard Market: 4 to 6 PM and 10 PM to close. $1 oysters, half price cocktail of the week, $5 rail drinks. Closed Mondays.":
+    "Happy hour au Speakeasy Ottawa, Marché By : 16 h à 18 h et 22 h à la fermeture. Huîtres à 1 $, cocktail de la semaine à moitié prix, alcools à 5 $.",
   "The Speakeasy Table · Prix Fixe · Speakeasy Ottawa": "La Table Speakeasy · Prix fixe · Speakeasy Ottawa",
-  "The Speakeasy Table: a curated three course evening for $49 per guest at Speakeasy Ottawa, ByWard Market. Starter, main and dessert, Sunday and Tuesday to Thursday from 4 PM. Book on OpenTable.":
-    "La Table Speakeasy : une soirée trois services soigneusement composée, 49 $ par personne, au Speakeasy Ottawa, Marché By. Entrée, plat et dessert, le dimanche et du mardi au jeudi dès 16 h. Réservez sur OpenTable.",
+  "The Speakeasy Table, Speakeasy Ottawa: a curated three course evening for $49 per guest. Sunday and Tuesday to Thursday from 4 PM. Book on OpenTable.":
+    "La Table Speakeasy, Speakeasy Ottawa : une soirée trois services, 49 $ par personne. Dimanche et du mardi au jeudi dès 16 h. Réservez sur OpenTable.",
   "Happy Hour": "Happy Hour",
   "Prix Fixe": "Prix fixe",
   "Two windows a night, early and late. Dollar oysters, the cocktail of the week at half price, and $5 bar rail drinks.":
