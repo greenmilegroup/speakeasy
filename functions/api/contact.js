@@ -1,6 +1,8 @@
 /* Cloudflare Pages Function — POST /api/contact
  *
- * Takes the site's three forms and emails them to the venue through Resend.
+ * Takes the site's forms and emails them to the venue through Resend. A
+ * Society sign-up is also stored as a Resend contact, so the list exists
+ * somewhere a broadcast can be sent to, not only in the inbox.
  * The API key lives in the Pages environment, never in the browser, so the
  * page itself carries no credential.
  *
@@ -8,12 +10,14 @@
  *   RESEND_API_KEY  secret, from resend.com/api-keys
  *   CONTACT_TO      where enquiries land (default info@speakeasyottawa.com)
  *   CONTACT_FROM    a verified Resend sender on the domain
+ *   RESEND_SEGMENT  the Resend segment (audience) new contacts join
  */
 
 const DEFAULT_TO   = 'info@speakeasyottawa.com';
 const DEFAULT_FROM = 'Speakeasy Website <website@send.speakeasyottawa.com>';
+const DEFAULT_SEGMENT = '9adafa40-6d15-4b03-bd25-70fca8c56f6e';   // "General"
 
-const LIMITS = { name: 100, email: 200, message: 5000, short: 200 };
+const LIMITS = { name: 100, email: 200, message: 5000, short: 200, feedback: 1000 };
 
 const json = (status, body) =>
   new Response(JSON.stringify(body), {
@@ -34,6 +38,20 @@ function compose(form, data) {
   if (form === 'newsletter') {
     if (!emailOK(email)) return { error: 'A valid email, please.' };
     return { subject: 'Newsletter signup', replyTo: email, rows: [['Email', email]] };
+  }
+
+  if (form === 'society') {
+    if (!emailOK(email)) return { error: 'A valid email, please.' };
+    const member   = data.member === true || data.member === 'true';
+    const feedback = clean(data.feedback, LIMITS.feedback);
+    const source   = clean(data.source, 40);
+    return {
+      subject: member ? `Society signup · wants the membership — ${name || email}` : `Society signup — ${name || email}`,
+      replyTo: email,
+      rows: [['Name', name], ['Email', email], ['Membership interest', member ? 'Yes' : 'No'],
+             ['What would make it worth it', feedback], ['Signed up from', source]],
+      contact: { email, name, member, feedback, source },
+    };
   }
 
   if (name.length < 2)   return { error: 'Please give us your name.' };
@@ -58,6 +76,40 @@ const render = (rows) => ({
   }</table>`,
 });
 
+/* Add the person to the list. Resend's current contacts API takes the segment
+   and custom properties in one call; the older audiences endpoint takes only
+   the basics. Try the first, fall back to the second, and never let either
+   stop the notification email — a sign-up that reaches the inbox is not lost
+   even if the list is unreachable. */
+async function addContact(env, c) {
+  const headers = { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' };
+  const segment = env.RESEND_SEGMENT || DEFAULT_SEGMENT;
+  const base = { email: c.email, unsubscribed: false, ...(c.name ? { first_name: c.name } : {}) };
+
+  let res = await fetch('https://api.resend.com/contacts', {
+    method: 'POST', headers,
+    body: JSON.stringify({
+      ...base,
+      segments: [segment],
+      properties: {
+        society_interest: c.member ? 'yes' : 'no',
+        ...(c.feedback ? { society_feedback: c.feedback } : {}),
+        ...(c.source ? { signup_source: c.source } : {}),
+      },
+    }),
+  });
+  if (res.ok || res.status === 409) return 'contacts';
+
+  const first = `${res.status} ${await res.text()}`;
+  res = await fetch(`https://api.resend.com/audiences/${segment}/contacts`, {
+    method: 'POST', headers, body: JSON.stringify(base),
+  });
+  if (res.ok || res.status === 409) return 'audiences';
+
+  console.error('Resend would not store the contact', first, '|', res.status, await res.text());
+  return null;
+}
+
 export async function onRequestPost({ request, env }) {
   if (!env.RESEND_API_KEY) {
     console.error('RESEND_API_KEY is not set');
@@ -71,9 +123,12 @@ export async function onRequestPost({ request, env }) {
   // Bots fill in every field they find; people never see this one.
   if (clean(data.company, LIMITS.short)) return json(200, { ok: true });
 
-  const form = ['contact', 'newsletter'].includes(data.form) ? data.form : 'contact';
-  const { error, subject, replyTo, rows } = compose(form, data);
+  const form = ['contact', 'newsletter', 'society'].includes(data.form) ? data.form : 'contact';
+  const { error, subject, replyTo, rows, contact } = compose(form, data);
   if (error) return json(400, { error });
+
+  const stored = contact ? await addContact(env, contact) : null;
+  if (contact) rows.push(['Stored in Resend', stored ? `yes (${stored})` : 'NO — add by hand']);
 
   const { text, html } = render(rows);
   const res = await fetch('https://api.resend.com/emails', {

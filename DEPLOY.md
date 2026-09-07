@@ -73,11 +73,20 @@ all the weight is.
 
 Then open http://localhost:8000.
 
-## The contact forms
+## The forms
 
-The three forms — enquiry and newsletter on `visit.html`, applications on
-`careers.html` — post to `/api/contact`, a Cloudflare Pages Function in
-`functions/api/contact.js` that emails the venue through Resend.
+Two forms post to `/api/contact`, a Cloudflare Pages Function in
+`functions/api/contact.js`:
+
+- **Send a note**, on `visit.html` — emailed to the venue through Resend.
+- **The Speakeasy Society**, on the home, events and visit pages — the mailing
+  list. The function first **stores the person as a Resend contact** in the
+  "General" segment, with `society_interest` (yes/no), `society_feedback` and
+  `signup_source` as contact properties, then emails the venue a notification
+  that says whether the contact was stored. If Resend refuses the contact the
+  notification still goes, marked *"Stored in Resend: NO — add by hand"*, so
+  no sign-up is ever lost. The list lives at https://resend.com/contacts and
+  a broadcast to it is sent from https://resend.com/broadcasts.
 
 They used to open the visitor's mail client with a `mailto:` link, which did
 nothing at all on a phone or a machine with no mail client configured, while
@@ -102,8 +111,9 @@ project → Settings → Environment variables**, for Production *and* Preview:
 | `RESEND_API_KEY` | the key from resend.com/api-keys | **Secret** (Encrypt) |
 | `CONTACT_TO` | `info@speakeasyottawa.com` | Plaintext |
 | `CONTACT_FROM` | `Speakeasy Website <website@send.speakeasyottawa.com>` | Plaintext |
+| `RESEND_SEGMENT` | the id of the Resend segment new members join (default: "General") | Plaintext |
 
-`RESEND_API_KEY` must be added with **Encrypt**. The other two are optional —
+`RESEND_API_KEY` must be added with **Encrypt**. The other three are optional —
 the defaults in the code match the values above.
 
 **3. Redeploy** so the function picks the variables up, then send yourself a

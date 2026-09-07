@@ -312,6 +312,29 @@ const FR = {
     "Visitez le Speakeasy Ottawa au 55, rue York, à Ottawa. Réservations par téléphone au 613-241-6221. Heures en direct, carte et coordonnées.",
   "Speakeasy Ottawa home": "Accueil Speakeasy Ottawa",
 
+  /* The Speakeasy Society sign-up (js/society.js) */
+  "The Speakeasy Society": "La Société Speakeasy",
+  "The Society": "La Société",
+  "Join the": "Joignez la",
+  "Society.": "Société.",
+  "The people on this list hear first, and sometimes get in free.": "Les gens sur cette liste sont les premiers informés, et entrent parfois gratuitement.",
+  "Monthly raffle": "Tirage mensuel",
+  "Free entry for every member, every month.": "Participation gratuite pour chaque membre, chaque mois.",
+  "Free tickets to shows": "Billets de spectacle gratuits",
+  "For the ticketed nights on the stage.": "Pour les soirées à billets sur la scène.",
+  "Prizes": "Des prix",
+  "Announced to the list. You have to be on it.": "Annoncés à la liste. Il faut en faire partie.",
+  "First name": "Prénom",
+  "Optional": "Facultatif",
+  "We are building a paid Society membership for the regulars.": "Nous préparons une adhésion payante à la Société pour les habitués.",
+  "I would want to hear about it.": "Je veux en entendre parler.",
+  "What would make it worth joining?": "Qu'est-ce qui la rendrait intéressante pour vous?",
+  "Tell us what you would want from it.": "Dites-nous ce que vous en attendriez.",
+  "Join the Society": "Joindre la Société",
+  "You will get email from Speakeasy Ottawa: what is on, the raffle, the occasional password. Unsubscribe any time.":
+    "Vous recevrez des courriels du Speakeasy Ottawa : la programmation, le tirage, le mot de passe à l'occasion. Désabonnement en tout temps.",
+  "Company": "Entreprise",
+
   /* happy-hour.html and prix-fixe.html */
   "Happy Hour · Speakeasy Ottawa": "Happy Hour · Speakeasy Ottawa",
   "Happy hour at Speakeasy Ottawa, ByWard Market: 4 to 6 PM and 10 PM to close. $1 oysters, half price cocktail of the week, $5 rail drinks. Closed Mondays.":

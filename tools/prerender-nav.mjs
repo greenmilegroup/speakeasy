@@ -11,6 +11,7 @@
  * exactly what they saw before.
  */
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { societyHtml } from '../js/society.js';
 
 const root = new URL('..', import.meta.url);
 const at = p => new URL(p, root);
@@ -56,6 +57,7 @@ for (const page of readdirSync(at('dist')).filter(f => f.endsWith('.html'))) {
   const before = html;
   html = html.replace(/(<header id="nav"[^>]*>)\s*(<\/header>)/, (_, a, b) => a + header(page) + b);
   html = html.replace(/(<footer class="footer"[^>]*>)\s*(<\/footer>)/, (_, a, b) => a + footer + b);
+  html = html.replace(/(<section id="society"[^>]*>)\s*(<\/section>)/, (_, a, b) => a + societyHtml() + b);
   if (html === before) continue;
   writeFileSync(p, html);
   done++;
