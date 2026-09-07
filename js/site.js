@@ -238,13 +238,16 @@ function forms() {
     }, note, 'Thank you, we\u2019ll be in touch soon.');
   });
   // Private events: the link under "Call" opens the short form in place.
-  const enq = $('#enquire');
-  $('[data-open-enquiry]')?.addEventListener('click', (e) => {
+  const enq = $('#enquire'), opener = $('[data-open-enquiry]');
+  opener?.addEventListener('click', (e) => {
     e.preventDefault();
-    enq.open = true;
+    enq.hidden = false;
+    opener.setAttribute('aria-expanded', 'true');
     enq.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     setTimeout(() => $('#ef-name')?.focus({ preventScroll: true }), 350);
   });
+  // Arriving with #enquire in the address (a link from elsewhere) opens it too.
+  if (enq && location.hash === '#enquire') opener?.click();
   const event = $('#eventForm');
   event?.addEventListener('submit', (e) => {
     e.preventDefault();

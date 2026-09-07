@@ -1932,15 +1932,13 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 @media (max-width:520px){ .field-row{grid-template-columns:1fr} }
 
 /* ==================================================================   v15 · PRIVATE EVENT ENQUIRY
-   A <details> under the call-to-action: opens without any script, and the
-   "or send us the details" link opens it with one.
+   One button beside "Call" opens the form in place. Without any script the
+   form is simply there, so nobody is left with a button that does nothing.
    ========================================================================= */
 .enq{max-width:760px;margin:22px auto 0}
-.enq__summary{list-style:none;cursor:pointer;text-align:center;font-family:var(--f-deco);font-weight:var(--w-deco);
-  letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;color:var(--gold-hi)}
-.enq__summary::-webkit-details-marker{display:none}
-.enq[open] .enq__summary{position:absolute;left:-9999px}   /* the form is the answer; the prompt steps aside */
+html:not(.js) .enq[hidden]{display:block!important}
 .enq__form{margin-top:12px;animation:societyIn .35s var(--ease)}
+.enq__title{text-align:center;margin:0 0 .4rem}
 .enq__form .form__hint{text-align:center}
 .enq__form .btn{width:100%}
 .enq__opt{font-weight:400;letter-spacing:.08em;text-transform:none;color:var(--muted);margin-left:6px}
