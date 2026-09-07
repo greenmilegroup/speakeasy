@@ -1939,6 +1939,10 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
    ========================================================================= */
 .enq{max-width:760px;margin:22px auto 0}
 html:not(.js) .enq[hidden]{display:block!important}
+/* The button is a link to #enquire, so even if the script never runs — an old
+   copy in the browser's cache, an error before it attaches — the browser's own
+   jump to the anchor opens the form. */
+.enq[hidden]:target{display:block!important}
 .enq__form{margin-top:12px;animation:societyIn .35s var(--ease)}
 .enq__title{text-align:center;margin:0 0 .4rem}
 .enq__form .form__hint{text-align:center}
