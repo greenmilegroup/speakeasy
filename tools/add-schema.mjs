@@ -117,9 +117,10 @@ for (const page of ['index.html', 'visit.html']) {
 const TRAIL = {
   'menu.html': 'Menu', 'drinks.html': 'The Bar', 'events.html': 'On Stage',
   'private.html': 'Host Your Event', 'visit.html': 'Visit',
+  'happy-hour.html': 'Happy Hour', 'prix-fixe.html': 'The Speakeasy Table',
 };
 for (const [page, label] of Object.entries(TRAIL)) {
   write(page, inject(read(page), crumbs([['Home', ''], [label, page]])));
 }
 
-console.log(`  schema added (${total} menu items, 2 menus, 5 breadcrumb trails, rating ${rating} from ${count} reviews)`);
+console.log(`  schema added (${total} menu items, 2 menus, ${Object.keys(TRAIL).length} breadcrumb trails, rating ${rating} from ${count} reviews)`);

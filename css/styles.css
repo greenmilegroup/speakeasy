@@ -344,7 +344,7 @@ body.menu-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(
 .plates{list-style:none;margin:0;padding:0;display:grid;gap:4px}
 .plates li{padding:1rem 0;border-bottom:1px solid var(--line-soft)}
 .pl__top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.pl__top h4{font-family:var(--f-serif);font-weight:600;font-size:1.3rem;color:var(--cream);margin:0}
+.pl__top h4,.pl__top h3{font-family:var(--f-serif);font-weight:600;font-size:1.3rem;color:var(--cream);margin:0}
 .plates p{margin:.35rem 0 0;color:var(--cream-2);font-size:1.02rem}
 .plates--grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
 .plates--grid li{padding:20px;border:1px solid var(--line-soft);border-radius:12px;position:overflow;overflow:hidden;
@@ -814,7 +814,7 @@ body.menu-open .mobile-reserve{display:none}
 .price,.leaders .p,.hours td:last-child{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
 /* classic menu leader: name · · · · · price, sitting on the baseline */
 .plates li .pl__top{display:flex;align-items:flex-end;gap:10px}
-.plates li .pl__top h4{order:0;flex:0 1 auto}
+.plates li .pl__top h4,.plates li .pl__top h3{order:0;flex:0 1 auto}
 .plates li .pl__top::after{content:"";order:1;flex:1 1 auto;min-width:24px;height:0;
   border-bottom:1px dotted rgba(201,162,39,.32);margin-bottom:.42em}
 .plates li .pl__top .price{order:2;flex:0 0 auto}
@@ -1064,7 +1064,7 @@ html{scrollbar-color:var(--gold-lo) #0a0a0b;scrollbar-width:thin}
 .section__intro{font-size:1.04em}
 .kicker{font-size:.62rem}
 .menu-cat-head h3{font-size:clamp(1.2rem,2.2vw,1.5rem)}
-.ck__top h4,.pl__top h4{font-size:1.18rem}
+.ck__top h4,.pl__top h4,.pl__top h3{font-size:1.18rem}
 .plates--lg .pl__top h4{font-size:1.28rem}
 .pkg h3{font-size:1.2rem}
 .about__stats strong{font-size:1.28rem}
