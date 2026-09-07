@@ -237,6 +237,28 @@ function forms() {
       company: contact.querySelector('[name="company"]')?.value,
     }, note, 'Thank you, we\u2019ll be in touch soon.');
   });
+  // Private events: the link under "Call" opens the short form in place.
+  const enq = $('#enquire');
+  $('[data-open-enquiry]')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    enq.open = true;
+    enq.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    setTimeout(() => $('#ef-name')?.focus({ preventScroll: true }), 350);
+  });
+  const event = $('#eventForm');
+  event?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = $('#ef-name'), email = $('#ef-email'), date = $('#ef-date'), guests = $('#ef-guests'), note = $('#efNote');
+    const ok = mark([[name, name.value.trim().length > 1], [email, emailOK(email.value)],
+                     [date, date.value.trim().length > 1], [guests, /\d/.test(guests.value)]]);
+    if (!ok) { note.textContent = 'Please complete the highlighted fields.'; note.classList.add('err'); return; }
+    send(event, {
+      form: 'event', name: name.value, email: email.value, date: date.value, guests: guests.value,
+      phone: $('#ef-phone').value, message: $('#ef-note').value,
+      company: event.querySelector('[name="company"]')?.value,
+    }, note, 'Got it. We\u2019ll be in touch to set up a call.');
+  });
+
   const society = $('#societyForm');
   if (society) {
     const member = $('#sf-member'), more = $('#sf-more');

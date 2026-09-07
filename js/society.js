@@ -43,7 +43,7 @@ export function societyHtml() {
         <textarea id="sf-why" name="feedback" rows="3" placeholder="Tell us what you would want from it."></textarea>
       </div>
       <button class="btn btn--gold" type="submit">Join the Society</button>
-      <p class="society__consent">You will get email from Speakeasy Ottawa: what is on, the raffle, the occasional password. Unsubscribe any time.</p>
+      <p class="society__consent">You will get email from Speakeasy Ottawa: what is on, the raffle, the occasional password. Unsubscribe any time. <a class="link-underline" href="society-rules.html">Raffle rules</a></p>
       <p class="form__note" id="sfNote" role="status"></p>
     </form>
   </div>`;

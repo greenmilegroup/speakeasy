@@ -54,6 +54,22 @@ function compose(form, data) {
     };
   }
 
+  if (form === 'event') {
+    const date   = clean(data.date, LIMITS.short);
+    const guests = clean(data.guests, 40);
+    const phone  = clean(data.phone, 40);
+    const note   = clean(data.message, LIMITS.short);
+    if (name.length < 2)     return { error: 'Please give us your name.' };
+    if (!emailOK(email))     return { error: 'That email does not look right.' };
+    if (date.length < 2)     return { error: 'Tell us roughly when.' };
+    if (!/\d/.test(guests))  return { error: 'Roughly how many people?' };
+    return {
+      subject: `Private event enquiry — ${name} · ${guests} people · ${date}`,
+      replyTo: email,
+      rows: [['Name', name], ['Email', email], ['Phone', phone], ['When', date], ['How many', guests], ['Occasion', note]],
+    };
+  }
+
   if (name.length < 2)   return { error: 'Please give us your name.' };
   if (!emailOK(email))   return { error: 'That email does not look right.' };
 
@@ -123,7 +139,7 @@ export async function onRequestPost({ request, env }) {
   // Bots fill in every field they find; people never see this one.
   if (clean(data.company, LIMITS.short)) return json(200, { ok: true });
 
-  const form = ['contact', 'newsletter', 'society'].includes(data.form) ? data.form : 'contact';
+  const form = ['contact', 'newsletter', 'society', 'event'].includes(data.form) ? data.form : 'contact';
   const { error, subject, replyTo, rows, contact } = compose(form, data);
   if (error) return json(400, { error });
 
