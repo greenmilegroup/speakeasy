@@ -27,9 +27,7 @@ const FR = {
   'Home': 'Accueil',
   'Drinks': 'Le Bar',
   'Menu': 'Menu',
-  'On Stage': 'Sur Scène',
   'Host Your Event': 'Événements Privés',
-  'Reservations': 'Réservations',
   'Book': 'Réserver',
   'Book a table': 'Réserver une table',
   'Reserve a table': 'Réserver une table',
@@ -58,7 +56,6 @@ const FR = {
   'This must be the place.': 'Ce doit être ici.',
   'Nightly': 'Chaque soir',
   'Live music from 7 PM': 'Musique live dès 19 h',
-  'Signature cocktails': 'Cocktails signature',
   'ByWard Market': 'Marché By',
   'Food': 'Cuisine',
   'Live Music': 'Musique Live',
@@ -112,7 +109,6 @@ const FR = {
   "Subscribe": "S'abonner",
   "Name": "Nom",
   "Email": "Courriel",
-  "Company": "Entreprise",
   "Message": "Message",
   "Email address": "Adresse courriel",
   "The Bar": "Le Bar",
@@ -207,7 +203,6 @@ const FR = {
   "Dinner served": "Service du souper",
   "Tue to Thu, 4:00 to 10:30 PM": "Mar au jeu, 16 h à 22 h 30",
   "Fri and Sat, 4:00 PM to Midnight": "Ven et sam, 16 h à minuit",
-  "Market Oysters": "Huîtres du marché",
   "Tuna Tartare": "Tartare de thon",
   "Seared Scallops": "Pétoncles poêlés",
   "Gambas al Ajillo": "Gambas al ajillo",
@@ -331,6 +326,60 @@ const FR = {
   "What would make it worth joining?": "Qu'est-ce qui la rendrait intéressante pour vous?",
   "Tell us what you would want from it.": "Dites-nous ce que vous en attendriez.",
   "Join the Society": "Joindre la Société",
+
+  /* private.html enquiry form */
+  "or send us the details →": "ou envoyez-nous les détails →",
+  "Send us the details →": "Envoyez-nous les détails →",
+  "Four things and we can hold a date. Everything else we work out together.": "Quatre détails et nous pouvons réserver une date. Le reste, nous le réglons ensemble.",
+  "Date, or roughly when": "Date, ou à peu près quand",
+  "Sat 14 Nov, or a Friday in December": "Sam 14 nov, ou un vendredi de décembre",
+  "How many people": "Combien de personnes",
+  "Roughly": "Environ",
+  "optional": "facultatif",
+  "The occasion": "L'occasion",
+  "Birthday, launch, the office…": "Anniversaire, lancement, le bureau…",
+  "Send the details": "Envoyer les détails",
+
+  /* society-rules.html */
+  "Speakeasy Society Rules · Speakeasy Ottawa": "Règlement de la Société Speakeasy · Speakeasy Ottawa",
+  "How the Speakeasy Society monthly raffle works: who can enter, how winners are drawn and notified, and what the prizes are. No purchase necessary.":
+    "Comment fonctionne le tirage mensuel de la Société Speakeasy : qui peut participer, comment les gagnants sont tirés et avisés, et quels sont les prix. Aucun achat requis.",
+  "The Rules": "Le Règlement",
+  "How the monthly raffle works, in plain words.": "Comment fonctionne le tirage mensuel, en mots simples.",
+  "No purchase necessary.": "Aucun achat requis.",
+  "The Speakeasy Society is the mailing list of Speakeasy Ottawa, 55 York Street, Ottawa, Ontario. Members are entered into a monthly raffle. These are its rules; by joining the Society you accept them.":
+    "La Société Speakeasy est la liste d'envoi du Speakeasy Ottawa, 55, rue York, Ottawa (Ontario). Les membres participent à un tirage mensuel. En voici le règlement; en joignant la Société, vous l'acceptez.",
+  "Who can enter": "Qui peut participer",
+  "Anyone 19 or older who lives in Ontario. Staff of Speakeasy Ottawa and the people they live with cannot win. The raffle is not open to residents of Quebec.":
+    "Toute personne de 19 ans ou plus qui habite en Ontario. Le personnel du Speakeasy Ottawa et les personnes vivant sous leur toit ne peuvent pas gagner. Le tirage n'est pas ouvert aux résidents du Québec.",
+  "How to enter": "Comment participer",
+  "Join the Society with a valid email address. That is the entry. There is nothing to buy and no purchase or payment improves your chances. One entry per person; duplicate addresses count once.":
+    "Joignez la Société avec une adresse courriel valide. C'est votre participation. Il n'y a rien à acheter, et aucun achat ni paiement n'améliore vos chances. Une participation par personne; les adresses en double ne comptent qu'une fois.",
+  "The draw": "Le tirage",
+  "Once a month, we draw one or more winners at random from every member on the list at the time of the draw. The date of each draw and what is being drawn are announced to the list by email beforehand.":
+    "Une fois par mois, nous tirons au hasard un ou plusieurs gagnants parmi tous les membres inscrits au moment du tirage. La date de chaque tirage et ce qui est tiré sont annoncés à la liste par courriel à l'avance.",
+  "The prizes": "Les prix",
+  "Prizes are what the announcement says they are: free tickets to a show on our stage, a dinner, or something else from the house. They have no cash value, cannot be exchanged for cash, and cannot be transferred or resold. Tickets are for the show named and are subject to availability.":
+    "Les prix sont ceux annoncés : des billets gratuits pour un spectacle sur notre scène, un souper, ou autre chose offert par la maison. Ils n'ont aucune valeur monétaire, ne peuvent être échangés contre de l'argent, ni transférés ou revendus. Les billets valent pour le spectacle nommé, selon les disponibilités.",
+  "Odds": "Les chances",
+  "Your odds depend on how many members are on the list when the draw is made.": "Vos chances dépendent du nombre de membres inscrits au moment du tirage.",
+  "Winning": "Gagner",
+  "Winners are notified at the email address they joined with, within seven days of the draw, and must reply within seven days to claim. Before a prize is awarded, the winner must correctly answer a time-limited, four-part mathematical skill-testing question. A prize that is not claimed, or a question not answered correctly, is forfeited and may be redrawn.":
+    "Les gagnants sont avisés à l'adresse courriel de leur inscription, dans les sept jours suivant le tirage, et doivent répondre dans les sept jours pour réclamer leur prix. Avant l'attribution du prix, le gagnant doit répondre correctement à une question réglementaire d'arithmétique en quatre parties, à durée limitée. Un prix non réclamé, ou une question sans réponse correcte, est perdu et peut être retiré au sort.",
+  "Leaving": "Se retirer",
+  "Unsubscribing from the list removes you from future draws. You can rejoin at any time.": "Se désabonner de la liste vous retire des prochains tirages. Vous pouvez vous réinscrire en tout temps.",
+  "Your email": "Votre courriel",
+  "We use your address to run the Society: what is on, the raffle, and the occasional password. We do not sell it or share it with anyone else. You can unsubscribe from any email we send.":
+    "Nous utilisons votre adresse pour faire vivre la Société : la programmation, le tirage et le mot de passe à l'occasion. Nous ne la vendons pas et ne la partageons avec personne. Vous pouvez vous désabonner de tout courriel que nous envoyons.",
+  "The house": "La maison",
+  "Speakeasy Ottawa may change these rules, pause or end the raffle, or substitute a prize of equal or greater value, and will tell the list by email when it does. Its decisions on the draw are final. This raffle is subject to the laws of Ontario and Canada.":
+    "Le Speakeasy Ottawa peut modifier ce règlement, suspendre ou terminer le tirage, ou substituer un prix de valeur égale ou supérieure, et en avisera la liste par courriel. Ses décisions concernant le tirage sont finales. Ce tirage est régi par les lois de l'Ontario et du Canada.",
+  "Questions": "Questions",
+  "Write to": "Écrivez à",
+  "or call": "ou appelez le",
+  "Rules as of September 2026.": "Règlement en vigueur en septembre 2026.",
+  "Raffle rules": "Règlement du tirage",
+  "Society Rules": "Règlement de la Société",
   "You will get email from Speakeasy Ottawa: what is on, the raffle, the occasional password. Unsubscribe any time.":
     "Vous recevrez des courriels du Speakeasy Ottawa : la programmation, le tirage, le mot de passe à l'occasion. Désabonnement en tout temps.",
   "Company": "Entreprise",
@@ -396,7 +445,6 @@ const FR = {
   "tap to enter": "touchez pour entrer",
   "Skip →": "Passer →",
   "Checking tonight's line-up…": "Vérification de la programmation de ce soir…",
-  "Hours & how to find us →": "Heures et itinéraire →",
   "Sections": "Sections",
   "Footer": "Pied de page",
   "Concert & dinner experience": "Concert et souper",
