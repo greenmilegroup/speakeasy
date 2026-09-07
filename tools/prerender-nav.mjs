@@ -26,6 +26,7 @@ const grab = (re, what) => {
    source rather than restating it, so a page added there appears here too. */
 const NAV = new Function(`return ${grab(/const NAV = (\[[\s\S]*?\n\]);/, 'NAV array')}`)();
 const TEL = grab(/const TEL = '([^']+)'/, 'TEL constant');
+const MORE = new Function(`return ${grab(/const MORE = (\[[\s\S]*?\n\]);/, 'MORE array')}`)();
 
 /* A nested entry carries its children in a fourth slot; the flat list is what
    a crawler should follow. */
@@ -43,7 +44,8 @@ const header = page => {
     + `<nav class="nav__links" aria-label="Sections">${links}</nav></div>`;
 };
 
-const footer = `<div class="footer__inner"><nav class="footer__links" aria-label="Footer">${links}</nav>`
+const footLinks = [...flat, ...MORE].map(([, href, label]) => `<a href="${href}">${label}</a>`).join('');
+const footer = `<div class="footer__inner"><nav class="footer__links" aria-label="Footer">${footLinks}</nav>`
   + `<div class="footer__meta"><p>55 York Street, Ottawa · K1N 9B7</p>`
   + `<p><a href="tel:${TEL}">613-241-6221</a></p></div></div>`;
 

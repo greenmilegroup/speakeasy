@@ -16,6 +16,13 @@ const TEL = '+16132416221';
 const OPENTABLE = 'https://www.opentable.com/r/speakeasy-tapas-lounge-ottawa';
 
 /* pages, in nav order */
+/* Pages linked from the footer but not the header: the offers each have a page
+   of their own for search, while the header stays six items. */
+const MORE = [
+  ['happy', 'happy-hour.html', 'Happy Hour'],
+  ['prix', 'prix-fixe.html', 'Prix Fixe'],
+];
+
 const NAV = [
   ['home', 'index.html', 'Home'],
   ['drinks', 'drinks.html', 'Drinks'],
@@ -108,7 +115,7 @@ function injectChrome() {
         <p class="footer__name">Speakeasy <span>Ottawa</span></p>
         <p class="footer__tag">“ This must be the place ”</p>
       </div>
-      <nav class="footer__links" aria-label="Footer">${flat.map(n => `<a href="${n[1]}">${n[2]}</a>`).join('')}</nav>
+      <nav class="footer__links" aria-label="Footer">${[...flat, ...MORE].map(n => `<a href="${n[1]}">${n[2]}</a>`).join('')}</nav>
       <div class="footer__meta">
         <p>55 York Street, Ottawa · K1N 9B7</p>
         <p><a href="tel:${TEL}">613-241-6221</a></p>
