@@ -326,8 +326,8 @@ const FR = {
   "Join the Society": "Joindre la Société",
 
   /* private.html enquiry form */
-  "or send us the details →": "ou envoyez-nous les détails →",
-  "Send us the details →": "Envoyez-nous les détails →",
+  "Enquire about hosting your event": "Demander à organiser votre événement",
+  "Tell us about your event": "Parlez-nous de votre événement",
   "Four things and we can hold a date. Everything else we work out together.": "Quatre détails et nous pouvons réserver une date. Le reste, nous le réglons ensemble.",
   "Date, or roughly when": "Date, ou à peu près quand",
   "Sat 14 Nov, or a Friday in December": "Sam 14 nov, ou un vendredi de décembre",

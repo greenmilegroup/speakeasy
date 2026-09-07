@@ -44,12 +44,12 @@
   </div>
   <div class="private__cta">
     <a class="btn btn--gold" href="tel:+16132416221">Call 613-241-6221</a>
-    <a class="link-underline" href="#enquire" data-open-enquiry>or send us the details →</a>
+    <a class="btn btn--ghost" href="#enquire" data-open-enquiry aria-controls="enquire" aria-expanded="false">Enquire about hosting your event</a>
   </div>
-  <details class="enq" id="enquire">
-    <summary class="enq__summary"><span class="link-underline">Send us the details →</span></summary>
+  <div class="enq" id="enquire" hidden>
     <form class="form enq__form" id="eventForm" novalidate>
       <div class="hp" aria-hidden="true"><label>Company<input name="company" type="text" tabindex="-1" autocomplete="off"/></label></div>
+      <h3 class="h-sub enq__title">Tell us about your event</h3>
       <p class="form__hint">Four things and we can hold a date. Everything else we work out together.</p>
       <div class="field-row">
         <div class="field"><label for="ef-name">Name</label><input id="ef-name" name="name" type="text" autocomplete="name" required/></div>
@@ -66,7 +66,7 @@
       <button class="btn btn--gold" type="submit">Send the details</button>
       <p class="form__note" id="efNote" role="status"></p>
     </form>
-  </details>
+  </div>
   <div class="know" style="margin-top:clamp(34px,5vw,54px)">
     <div class="know__item"><h3>A phone call</h3><p>Fifteen unhurried minutes. Tell us your date and roughly how many people, and we'll hold it while you think.</p></div>
     <div class="know__item"><h3>We build it together</h3><p>Walk the room, hear the sound system, shape the evening around what you actually want. One clear estimate follows: packages, bar and any additions in a single total. A signed estimate and a deposit secure the date, and the deposit comes off your final bill.</p></div>
