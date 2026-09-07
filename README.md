@@ -15,7 +15,7 @@ main site. Host the folder anywhere (GitHub Pages, Netlify, any web server) or o
 | File | What it is |
 |------|------------|
 | `index.html` | Home — “shhh” door intro, hero, about, the six **stamps**, house signatures, 3D-tour teaser, gallery |
-| `drinks.html` | The Bar: blue-cocktail hero, 13 signature cocktails, wine, bottled beer and cider |
+| `drinks.html` | The Bar: blue-cocktail hero, 10 signature cocktails, wine, bottled beer and cider |
 | `menu.html` | The Menu — one page, **toggle** between **Shareables · Dinner · Desserts** (also deep-links: `menu.html#dinner`) |
 | `events.html` | Events — three bands: **Tonight**, **The Main Event** (ticketed) and **Live Music** (this week / this month). Data-driven ([see below](#events-are-data-driven)) |
 | `private.html` | Private Events — phone-call-first hosting page: the room, per-guest package pricing, the Concert Experience, upstairs |

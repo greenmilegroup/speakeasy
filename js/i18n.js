@@ -300,8 +300,8 @@ const FR = {
   "Reservations · Hours & Location · Speakeasy Ottawa": "Réservations · Heures et adresse · Speakeasy Ottawa",
   "A hidden destination for food, music & celebrations in Ottawa's ByWard Market. Craft cocktails, tapas & live music Thursday to Sunday. 55 York Street · 613-241-6221.":
     "Une adresse cachée pour manger, écouter de la musique et célébrer dans le Marché By, à Ottawa. Cocktails maison, tapas et musique live du jeudi au dimanche. 55, rue York · 613-241-6221.",
-  "13 signature cocktails, a curated wine list, and bottled beer and cider at Speakeasy Ottawa.":
-    "13 cocktails signature, une carte des vins choisie, bières et cidres en bouteille au Speakeasy Ottawa.",
+  "10 signature cocktails, a curated wine list, and bottled beer and cider at Speakeasy Ottawa.":
+    "10 cocktails signature, une carte des vins choisie, bières et cidres en bouteille au Speakeasy Ottawa.",
   "Shareables, chef plates and sweets at Speakeasy Ottawa: beef tataki, tuna tartare, seared scallops, NY striploin, duck confit and more.":
     "À partager, plats du chef et douceurs au Speakeasy Ottawa : tataki de bœuf, tartare de thon, pétoncles poêlés, contre-filet New York, confit de canard et plus.",
   "Live music Thursday to Sunday plus speed dating, comedy and more at Speakeasy Ottawa. See what's on and book your table.":
