@@ -118,7 +118,6 @@ const TRAIL = {
   'menu.html': 'Menu', 'drinks.html': 'The Bar', 'events.html': 'On Stage',
   'private.html': 'Host Your Event', 'visit.html': 'Visit',
   'happy-hour.html': 'Happy Hour', 'prix-fixe.html': 'The Speakeasy Table',
-  'society-rules.html': 'Society Rules',
 };
 for (const [page, label] of Object.entries(TRAIL)) {
   write(page, inject(read(page), crumbs([['Home', ''], [label, page]])));

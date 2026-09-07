@@ -1945,16 +1945,6 @@ body{font-size:clamp(18px,0.29vw + 16.9px,19.5px);line-height:1.65}
 .enq__form .btn{width:100%}
 .enq__opt{font-weight:400;letter-spacing:.08em;text-transform:none;color:var(--muted);margin-left:6px}
 
-/* ==================================================================   v16 · SOCIETY RULES
-   ========================================================================= */
-.rules{max-width:720px;margin:0 auto}
-.rules__intro{font-family:var(--f-serif);font-size:1.12rem;color:var(--cream-2);line-height:1.6;margin:0 0 2rem}
-.rules__list{list-style:none;margin:0;padding:0;counter-reset:rule}
-.rules__list li{counter-increment:rule;display:grid;grid-template-columns:44px 1fr;gap:0 14px;padding:18px 0;border-top:1px solid var(--line-soft)}
-.rules__list li::before{content:counter(rule,decimal-leading-zero);font-family:var(--f-deco);font-weight:var(--w-deco);color:var(--gold);letter-spacing:.1em;font-size:.8rem;padding-top:.35em}
-.rules__list h3{grid-column:2;margin:0 0 .35rem;font-family:var(--f-display);font-weight:600;font-size:1.08rem;color:var(--cream);letter-spacing:.02em}
-.rules__list p{grid-column:2;margin:0;color:var(--cream-2);line-height:1.6}
-.rules__date{margin:1.6rem 0 0;font-size:.85rem;color:var(--muted);text-align:center}
 /* A text page has nothing behind its hero to fill 56vh with. */
 .page-hero--text{min-height:auto;padding:150px 0 28px}
 @media (max-width:900px){.page-hero--text{padding:120px 0 18px}}
