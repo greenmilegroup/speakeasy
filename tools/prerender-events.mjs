@@ -73,7 +73,9 @@ const events = rows
     ticketed: r.ticketed ?? (Boolean(r.ticket_url) || r.category === 'comedy'),
     date: new Date(r.starts_at), startsAt: r.starts_at,
     durationMin: Number(r.duration_min ?? 120),
-    priceText: r.price_text || '', imageUrl: r.image_url || '', ticketUrl: r.ticket_url || '',
+    priceText: r.price_text || '',
+    imageUrl: r.image_url ? r.image_url.replace(/^(?!https?:|\/)/, '/') : '',   // as events-data.js does
+    ticketUrl: r.ticket_url || '',
   }))
   .filter(e => e.date > new Date(now - 3 * 3600e3))
   .sort((a, b) => a.date - b.date);

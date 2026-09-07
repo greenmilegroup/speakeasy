@@ -51,6 +51,13 @@ function injectAmbient() {
 /* ---------- header + footer ---------- */
 function injectChrome() {
   const page = document.body.dataset.page || 'home';
+
+  /* This page in the other language. French copies live under /fr/ with the
+     same filenames, so the link is the same path with the prefix added or
+     removed; the toggle is a real link a crawler can follow. */
+  const isFr = location.pathname.startsWith('/fr/');
+  const file = location.pathname.replace(/^\/(?:fr\/)?/, '') || 'index.html';
+  const langHref = prefix => `/${prefix}${file === 'index.html' ? '' : file}`;
   const link = ([p, href, label, sub]) => {
     if (sub) {
       const active = ['menu', ...sub.map(s => s[0])].includes(page) ? ' active' : '';
@@ -64,12 +71,12 @@ function injectChrome() {
   if (header) header.innerHTML =
     `<div class="nav__inner">
       <div class="lang" role="group" aria-label="Language / Langue">
-        <button class="lang__opt is-on" type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+        <a class="lang__opt${isFr ? '' : ' is-on'}" href="${langHref('')}" hreflang="en" lang="en" aria-current="${isFr ? 'false' : 'page'}">EN</a>
         <span class="lang__sep" aria-hidden="true"></span>
-        <button class="lang__opt" type="button" data-lang="fr" aria-pressed="false" lang="fr">FR</button>
+        <a class="lang__opt${isFr ? ' is-on' : ''}" href="${langHref('fr/')}" hreflang="fr" lang="fr" aria-current="${isFr ? 'page' : 'false'}">FR</a>
       </div>
       <a class="nav__brand" href="index.html" aria-label="Speakeasy Ottawa home">
-        <img src="assets/logo.png" alt="" width="44" height="44" class="nav__logo" />
+        <img src="/assets/logo.png" alt="" width="44" height="44" class="nav__logo" />
         <span class="nav__name">Speakeasy<small>Ottawa</small></span>
       </a>
       <nav class="nav__links" aria-label="Sections">${NAV.map(link).join('')}</nav>
@@ -97,7 +104,7 @@ function injectChrome() {
   if (footer) footer.innerHTML =
     `<div class="footer__inner">
       <div class="footer__brand">
-        <img src="assets/logo.png" alt="" width="72" height="72" id="footLogo" />
+        <img src="/assets/logo.png" alt="" width="72" height="72" id="footLogo" />
         <p class="footer__name">Speakeasy <span>Ottawa</span></p>
         <p class="footer__tag">“ This must be the place ”</p>
       </div>
