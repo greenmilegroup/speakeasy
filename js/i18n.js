@@ -313,12 +313,10 @@ const FR = {
   "Join the": "Joignez la",
   "Society.": "Société.",
   "The people on this list hear first, and sometimes get in free.": "Les gens sur cette liste sont les premiers informés, et entrent parfois gratuitement.",
-  "Monthly raffle": "Tirage mensuel",
-  "Free entry for every member, every month.": "Participation gratuite pour chaque membre, chaque mois.",
   "Free tickets to shows": "Billets de spectacle gratuits",
   "For the ticketed nights on the stage.": "Pour les soirées à billets sur la scène.",
-  "Prizes": "Des prix",
-  "Announced to the list. You have to be on it.": "Annoncés à la liste. Il faut en faire partie.",
+  "Invitations to invite-only events": "Invitations aux soirées sur invitation seulement",
+  "The nights that are never announced. Members hear about them; nobody else does.": "Les soirées jamais annoncées. Les membres en entendent parler; personne d'autre.",
   "First name": "Prénom",
   "Optional": "Facultatif",
   "We are building a paid Society membership for the regulars.": "Nous préparons une adhésion payante à la Société pour les habitués.",
@@ -340,48 +338,8 @@ const FR = {
   "Birthday, launch, the office…": "Anniversaire, lancement, le bureau…",
   "Send the details": "Envoyer les détails",
 
-  /* society-rules.html */
-  "Speakeasy Society Rules · Speakeasy Ottawa": "Règlement de la Société Speakeasy · Speakeasy Ottawa",
-  "How the Speakeasy Society monthly raffle works: who can enter, how winners are drawn and notified, and what the prizes are. No purchase necessary.":
-    "Comment fonctionne le tirage mensuel de la Société Speakeasy : qui peut participer, comment les gagnants sont tirés et avisés, et quels sont les prix. Aucun achat requis.",
-  "The Rules": "Le Règlement",
-  "How the monthly raffle works, in plain words.": "Comment fonctionne le tirage mensuel, en mots simples.",
-  "No purchase necessary.": "Aucun achat requis.",
-  "The Speakeasy Society is the mailing list of Speakeasy Ottawa, 55 York Street, Ottawa, Ontario. Members are entered into a monthly raffle. These are its rules; by joining the Society you accept them.":
-    "La Société Speakeasy est la liste d'envoi du Speakeasy Ottawa, 55, rue York, Ottawa (Ontario). Les membres participent à un tirage mensuel. En voici le règlement; en joignant la Société, vous l'acceptez.",
-  "Who can enter": "Qui peut participer",
-  "Anyone 19 or older who lives in Ontario. Staff of Speakeasy Ottawa and the people they live with cannot win. The raffle is not open to residents of Quebec.":
-    "Toute personne de 19 ans ou plus qui habite en Ontario. Le personnel du Speakeasy Ottawa et les personnes vivant sous leur toit ne peuvent pas gagner. Le tirage n'est pas ouvert aux résidents du Québec.",
-  "How to enter": "Comment participer",
-  "Join the Society with a valid email address. That is the entry. There is nothing to buy and no purchase or payment improves your chances. One entry per person; duplicate addresses count once.":
-    "Joignez la Société avec une adresse courriel valide. C'est votre participation. Il n'y a rien à acheter, et aucun achat ni paiement n'améliore vos chances. Une participation par personne; les adresses en double ne comptent qu'une fois.",
-  "The draw": "Le tirage",
-  "Once a month, we draw one or more winners at random from every member on the list at the time of the draw. The date of each draw and what is being drawn are announced to the list by email beforehand.":
-    "Une fois par mois, nous tirons au hasard un ou plusieurs gagnants parmi tous les membres inscrits au moment du tirage. La date de chaque tirage et ce qui est tiré sont annoncés à la liste par courriel à l'avance.",
-  "The prizes": "Les prix",
-  "Prizes are what the announcement says they are: free tickets to a show on our stage, a dinner, or something else from the house. They have no cash value, cannot be exchanged for cash, and cannot be transferred or resold. Tickets are for the show named and are subject to availability.":
-    "Les prix sont ceux annoncés : des billets gratuits pour un spectacle sur notre scène, un souper, ou autre chose offert par la maison. Ils n'ont aucune valeur monétaire, ne peuvent être échangés contre de l'argent, ni transférés ou revendus. Les billets valent pour le spectacle nommé, selon les disponibilités.",
-  "Odds": "Les chances",
-  "Your odds depend on how many members are on the list when the draw is made.": "Vos chances dépendent du nombre de membres inscrits au moment du tirage.",
-  "Winning": "Gagner",
-  "Winners are notified at the email address they joined with, within seven days of the draw, and must reply within seven days to claim. Before a prize is awarded, the winner must correctly answer a time-limited, four-part mathematical skill-testing question. A prize that is not claimed, or a question not answered correctly, is forfeited and may be redrawn.":
-    "Les gagnants sont avisés à l'adresse courriel de leur inscription, dans les sept jours suivant le tirage, et doivent répondre dans les sept jours pour réclamer leur prix. Avant l'attribution du prix, le gagnant doit répondre correctement à une question réglementaire d'arithmétique en quatre parties, à durée limitée. Un prix non réclamé, ou une question sans réponse correcte, est perdu et peut être retiré au sort.",
-  "Leaving": "Se retirer",
-  "Unsubscribing from the list removes you from future draws. You can rejoin at any time.": "Se désabonner de la liste vous retire des prochains tirages. Vous pouvez vous réinscrire en tout temps.",
-  "Your email": "Votre courriel",
-  "We use your address to run the Society: what is on, the raffle, and the occasional password. We do not sell it or share it with anyone else. You can unsubscribe from any email we send.":
-    "Nous utilisons votre adresse pour faire vivre la Société : la programmation, le tirage et le mot de passe à l'occasion. Nous ne la vendons pas et ne la partageons avec personne. Vous pouvez vous désabonner de tout courriel que nous envoyons.",
-  "The house": "La maison",
-  "Speakeasy Ottawa may change these rules, pause or end the raffle, or substitute a prize of equal or greater value, and will tell the list by email when it does. Its decisions on the draw are final. This raffle is subject to the laws of Ontario and Canada.":
-    "Le Speakeasy Ottawa peut modifier ce règlement, suspendre ou terminer le tirage, ou substituer un prix de valeur égale ou supérieure, et en avisera la liste par courriel. Ses décisions concernant le tirage sont finales. Ce tirage est régi par les lois de l'Ontario et du Canada.",
-  "Questions": "Questions",
-  "Write to": "Écrivez à",
-  "or call": "ou appelez le",
-  "Rules as of September 2026.": "Règlement en vigueur en septembre 2026.",
-  "Raffle rules": "Règlement du tirage",
-  "Society Rules": "Règlement de la Société",
-  "You will get email from Speakeasy Ottawa: what is on, the raffle, the occasional password. Unsubscribe any time.":
-    "Vous recevrez des courriels du Speakeasy Ottawa : la programmation, le tirage, le mot de passe à l'occasion. Désabonnement en tout temps.",
+  "You will get email from Speakeasy Ottawa: what is on, the invitations, the occasional password. Unsubscribe any time.":
+    "Vous recevrez des courriels du Speakeasy Ottawa : la programmation, les invitations, le mot de passe à l'occasion. Désabonnement en tout temps.",
   "Company": "Entreprise",
 
   /* happy-hour.html and prix-fixe.html */
