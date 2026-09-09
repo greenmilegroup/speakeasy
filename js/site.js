@@ -358,12 +358,15 @@ function tabs() {
   const bar = $('.tabs'); if (!bar) return;
   const tabEls = $$('.tab', bar), ink = $('.tabs__ink', bar);
   const moveInk = (t) => { ink.style.width = t.offsetWidth + 'px'; ink.style.transform = `translateX(${t.offsetLeft}px)`; };
-  const activate = (t, focus) => {
+  // `remember` writes the tab into the address so a link to a room works and
+  // the back button behaves. Only a person's choice is remembered: the tab the
+  // page opens on is not, so an address someone copies is the page, not the tab.
+  const activate = (t, focus, remember = true) => {
     tabEls.forEach(x => { x.classList.remove('is-active'); x.setAttribute('aria-selected', 'false'); });
     t.classList.add('is-active'); t.setAttribute('aria-selected', 'true');
     $$('.panel').forEach(pn => (pn.hidden = pn.id !== t.getAttribute('aria-controls')));
     moveInk(t); if (focus) t.focus();
-    history.replaceState(null, '', '#' + t.id.replace('tab-', ''));
+    if (remember) history.replaceState(null, '', '#' + t.id.replace('tab-', ''));
   };
   tabEls.forEach((t, i) => {
     t.addEventListener('click', () => activate(t));
@@ -373,7 +376,7 @@ function tabs() {
   });
   const byHash = () => tabEls.find(t => '#' + t.id.replace('tab-', '') === location.hash);
   const start = byHash() || tabEls.find(t => t.classList.contains('is-active')) || tabEls[0];
-  requestAnimationFrame(() => activate(start));
+  requestAnimationFrame(() => activate(start, false, false));
   addEventListener('hashchange', () => { const t = byHash(); if (t) activate(t, true); });
   addEventListener('resize', () => { const a = $('.tab.is-active', bar); if (a) moveInk(a); });
 }
