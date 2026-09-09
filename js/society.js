@@ -19,29 +19,25 @@ export function societyHtml() {
   <div class="society__inner">
     <div class="society__pitch">
       <p class="kicker">The Speakeasy Society</p>
-      <h2 class="h-display">Join the <em>Society.</em></h2>
-      <p class="society__lead">The people on this list hear first, and sometimes get in free.</p>
+      <h2 class="h-display">Your name <em>on the card.</em></h2>
+      <p class="society__lead">A membership for the people who are already here. $50 a month.</p>
       <ul class="society__perks">
-        <li><span class="society__ico" aria-hidden="true">✦</span><div><strong>Free tickets to shows</strong><p>For the ticketed nights on the stage.</p></div></li>
-        <li><span class="society__ico" aria-hidden="true">✦</span><div><strong>Invitations to invite-only events</strong><p>The nights that are never announced. Members hear about them; nobody else does.</p></div></li>
+        <li><span class="society__ico" aria-hidden="true">✦</span><div><strong>Free admission to shows, you and a guest</strong><p>Every concert and comedy night on our stage.</p></div></li>
+        <li><span class="society__ico" aria-hidden="true">✦</span><div><strong>Priority seating and 10% off your table</strong><p>Your name on the reservation, the better table held.</p></div></li>
+        <li><span class="society__ico" aria-hidden="true">✦</span><div><strong>Invite-only nights</strong><p>The nights that are never announced. Members hear first; only members come.</p></div></li>
       </ul>
+      <a class="btn btn--gold" href="society.html">Request your card</a>
     </div>
     <form class="form society__form" id="societyForm" novalidate>
       <div class="hp" aria-hidden="true"><label>Company<input name="company" type="text" tabindex="-1" autocomplete="off"/></label></div>
+      <p class="kicker">Not ready for the card?</p>
+      <h3 class="h-sub society__form-title">The Guest List</h3>
+      <p class="form__hint">Hear what is on before anyone else. Free.</p>
       <div class="field-row">
         <div class="field"><label for="sf-name">First name</label><input id="sf-name" name="name" type="text" autocomplete="given-name" placeholder="Optional"/></div>
         <div class="field"><label for="sf-email">Email</label><input id="sf-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required/></div>
       </div>
-      <label class="society__check">
-        <input id="sf-member" name="member" type="checkbox"/>
-        <span class="society__box" aria-hidden="true"></span>
-        <span>We are building a paid Society membership for the regulars. <strong>I would want to hear about it.</strong></span>
-      </label>
-      <div class="field society__more" id="sf-more" hidden>
-        <label for="sf-why">What would make it worth joining?</label>
-        <textarea id="sf-why" name="feedback" rows="3" placeholder="Tell us what you would want from it."></textarea>
-      </div>
-      <button class="btn btn--gold" type="submit">Join the Society</button>
+      <button class="btn btn--ghost" type="submit">Join the Guest List</button>
       <p class="society__consent">You will get email from Speakeasy Ottawa: what is on, the invitations, the occasional password. Unsubscribe any time.</p>
       <p class="form__note" id="sfNote" role="status"></p>
     </form>
