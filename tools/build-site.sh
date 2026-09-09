@@ -24,7 +24,7 @@ for f in ./*.html; do
   [ "$(basename "$f")" = "admin.html" ] && continue
   cp "$f" dist/
 done
-cp robots.txt sitemap.xml .nojekyll _headers dist/
+cp robots.txt sitemap.xml .nojekyll _headers _redirects dist/
 
 # The events board and the menus render from data at runtime, which the first
 # crawl of a page never sees. Write them into the copies in dist/, along with

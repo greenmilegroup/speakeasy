@@ -79,7 +79,7 @@ Four forms post to `/api/contact`, a Cloudflare Pages Function in
 `functions/api/contact.js`:
 
 - **Send a note**, on `visit.html` — emailed to the venue through Resend.
-- **Private event enquiry**, on `private.html` — name, email, roughly when and
+- **Private event enquiry**, on `host-your-event.html` — name, email, roughly when and
   how many, plus optional phone and occasion; emailed with a subject that
   carries all three ("Private event enquiry — Ada · 40 people · Sat 14 Nov").
   It replaced a `mailto:` link, which does nothing on a device with no mail

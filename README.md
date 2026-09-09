@@ -18,7 +18,7 @@ main site. Host the folder anywhere (GitHub Pages, Netlify, any web server) or o
 | `drinks.html` | The Bar: blue-cocktail hero, 10 signature cocktails, wine, bottled beer and cider |
 | `menu.html` | The Menu — one page, **toggle** between **Shareables · Dinner · Desserts** (also deep-links: `menu.html#dinner`) |
 | `events.html` | Events — three bands: **Tonight**, **The Main Event** (ticketed) and **Live Music** (this week / this month). Data-driven ([see below](#events-are-data-driven)) |
-| `private.html` | Private Events — phone-call-first hosting page: the room, per-guest package pricing, the Concert Experience, upstairs |
+| `host-your-event.html` | Private Events — phone-call-first hosting page: the room, per-guest package pricing, the Concert Experience, upstairs |
 | `tour.html` | **3D Venue Tour** — the walkable 3D room. **Currently hidden** (see below) |
 | `visit.html` | Visit & Reserve — live open/closed badge, hours, map, contact form, the Society sign-up |
 
@@ -265,7 +265,7 @@ in the same language, for every reader and for a search engine. That is what mak
 ## Past clients (Host Your Event)
 
 Seven official single-colour marks (Apple, Amazon, Google, Goldman Sachs, RBC, Morguard, Maison Birks),
-**inlined** into `private.html` rather than loaded through `<img>`. Each is `fill="currentColor"`, and inside
+**inlined** into `host-your-event.html` rather than loaded through `<img>`. Each is `fill="currentColor"`, and inside
 an `<img>` an SVG is its own document, so `currentColor` would resolve to black and the marks would vanish on
 the dark ground. Inline, they take the cream from CSS and go gold on hover, in one rule, with no extra requests.
 
@@ -298,7 +298,7 @@ Menu/bar copy follows the supplied inventory, with a few details filled in — p
 - **Hours** — modelled as Tue–Thu 4–10:30 PM, Fri–Sat 4 PM–Midnight, Sun–Mon closed. Adjust in `SCHEDULE`.
 - **`interior.jpg`** (still used in the About block) is as supplied, including its “AI-generated content”
   watermark. The hero now uses real video instead.
-- **Private events** — `private.html` is reconciled against the **Speakeasy Event Brochure 2026**: package and bar
+- **Private events** — `host-your-event.html` is reconciled against the **Speakeasy Event Brochure 2026**: package and bar
   pricing, package combinations, venue minimums by day, the $1,000 deposit and the resident artists all come from
   that brochure. Update them together. The page deliberately leads with the phone call and keeps the fine print
   (minimums, 18% gratuity, taxes) quiet rather than absent.
