@@ -21,7 +21,7 @@ import { translateText } from '../js/i18n.js';
 const root = new URL('..', import.meta.url);
 const at = p => new URL(p, root);
 const SITE = 'https://speakeasyottawa.com';
-const PAGES = ['index.html', 'drinks.html', 'menu.html', 'events.html', 'private.html', 'visit.html', 'happy-hour.html', 'prix-fixe.html', 'society.html'];
+const PAGES = ['index.html', 'drinks.html', 'menu.html', 'events.html', 'host-your-event.html', 'visit.html', 'happy-hour.html', 'prix-fixe.html', 'society.html'];
 
 /* ---------- entities ----------
    The dictionary is keyed on what the browser renders, so text is decoded
@@ -107,7 +107,7 @@ function frenchCopy(html, page) {
   s = s.replace(/url\('(assets\/)/g, "url('/$1");
   // Every absolute address of a page on this site now names its French copy:
   // canonical, og:url, breadcrumbs, the events' url, the menu's @id.
-  s = s.replace(/https:\/\/speakeasyottawa\.com\/((?:index|drinks|menu|events|private|visit|happy-hour|prix-fixe|society)\.html)?(?=[#"'\s])/g,
+  s = s.replace(/https:\/\/speakeasyottawa\.com\/((?:index|drinks|menu|events|host-your-event|visit|happy-hour|prix-fixe|society)\.html)?(?=[#"'\s])/g,
     (_, p) => `${SITE}/fr/${p || ''}`);
   s = s.replace(/<meta property="og:locale" content="en_CA"\/>\n<meta property="og:locale:alternate" content="fr_CA"\/>\n/,
     '<meta property="og:locale" content="fr_CA"/>\n<meta property="og:locale:alternate" content="en_CA"/>\n');

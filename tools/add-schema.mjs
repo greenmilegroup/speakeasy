@@ -116,7 +116,7 @@ for (const page of ['index.html', 'visit.html']) {
 
 const TRAIL = {
   'menu.html': 'Menu', 'drinks.html': 'The Bar', 'events.html': 'On Stage',
-  'private.html': 'Host Your Event', 'visit.html': 'Visit',
+  'host-your-event.html': 'Host Your Event', 'visit.html': 'Visit',
   'happy-hour.html': 'Happy Hour', 'prix-fixe.html': 'The Speakeasy Table',
   'society.html': 'The Speakeasy Society',
 };

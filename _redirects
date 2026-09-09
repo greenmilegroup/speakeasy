@@ -1,0 +1,26 @@
+# Old addresses that still get traffic land on the right page.
+# Cloudflare Pages reads this file from the output directory.
+
+# The private-events page was /private; the ad and the old site call it this.
+/private                 /host-your-event        301
+/private.html            /host-your-event        301
+/fr/private              /fr/host-your-event     301
+/fr/private.html         /fr/host-your-event     301
+
+# Addresses the old site used, or people guess.
+/contact                 /visit                  301
+/contact-us              /visit                  301
+/reservations            /visit                  301
+/reserve                 /visit                  301
+/book                    /visit                  301
+/hours                   /visit                  301
+/live-music              /events                 301
+/whats-on                /events                 301
+/cocktails               /drinks                 301
+/bar                     /drinks                 301
+/food                    /menu                   301
+/menus                   /menu                   301
+/private-events          /host-your-event        301
+/events/host-your-event  /host-your-event        301
+/about                   /                       301
+/gallery                 /                       301

@@ -317,7 +317,7 @@ const FR = {
   "First name": "Prénom",
   "Optional": "Facultatif",
 
-  /* private.html enquiry form */
+  /* host-your-event.html enquiry form */
   "Enquire about hosting your event": "Demander à organiser votre événement",
 
   /* society.html and the Society block */

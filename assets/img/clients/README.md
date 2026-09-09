@@ -10,11 +10,11 @@ single-colour SVG drawn with `fill="currentColor"`.
 
 An SVG loaded through `<img>` is its own document, so `currentColor` resolves
 to black there and these marks would be invisible on the site's dark ground.
-Inlined into `private.html` they inherit the page colour instead: cream at
+Inlined into `host-your-event.html` they inherit the page colour instead: cream at
 rest, gold on hover, one hover rule for all seven, and no extra requests.
 
 The files are kept here as the source of truth. If you edit one, paste the new
-markup into the `.clients__row` block in `private.html` as well.
+markup into the `.clients__row` block in `host-your-event.html` as well.
 
 ## Sizing
 

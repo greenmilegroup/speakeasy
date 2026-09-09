@@ -29,7 +29,7 @@ const NAV = [
   ['drinks', 'drinks.html', 'Drinks'],
   ['menu', 'menu.html', 'Menu'],
   ['events', 'events.html', 'On Stage'],
-  ['private', 'private.html', 'Host Your Event'],
+  ['private', 'host-your-event.html', 'Host Your Event'],
   ['visit', 'visit.html', 'Reservations'],
   ['society', 'society.html', 'The Society'],
 ];

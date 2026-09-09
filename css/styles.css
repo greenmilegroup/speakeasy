@@ -1973,7 +1973,7 @@ html:not(.js) .enq[hidden]{display:block!important}
 .mcard__brand em{font-style:italic;font-weight:500;color:var(--gold-hi)}
 .mcard__name{font-family:var(--f-serif);font-size:clamp(1.35rem,4.6vw,1.75rem);letter-spacing:.04em;color:var(--cream);margin:auto 0 0}
 .mcard__foot{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;
-  font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.2em;text-transform:uppercase;font-size:.62rem;color:var(--gold)}
+  font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.18em;text-transform:uppercase;font-size:.72rem;color:var(--gold)}
 .mcard__no{color:var(--gold-hi);letter-spacing:.14em}
 .card-sec__note{margin:22px auto 0;max-width:46ch;color:var(--muted);font-size:.95rem}
 
