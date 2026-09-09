@@ -353,7 +353,7 @@ const FR = {
   "a month.": "par mois.",
   "per month": "par mois",
   "Cancel any time after six months. Plus HST.": "Annulable en tout temps après six mois. Plus TVH.",
-  "Founding Members: the first 100 cards keep $50 for as long as they hold them. After that, $60.": "Membres fondateurs : les 100 premières cartes gardent le tarif de 50 $ tant qu'elles sont détenues. Ensuite, 60 $.",
+  "Founding Members: the first 100 cards keep $50 for as long as they hold them. After that, the price goes up.": "Membres fondateurs : les 100 premières cartes gardent le tarif de 50 $ tant qu'elles sont détenues. Ensuite, le prix augmente.",
   "Request your card": "Demandez votre carte",
   "Tell us": "Dites-nous",
   "who you are.": "qui vous êtes.",
