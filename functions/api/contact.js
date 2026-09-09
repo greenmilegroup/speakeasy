@@ -121,7 +121,7 @@ async function addContact(env, c) {
     method: 'POST', headers,
     body: JSON.stringify({
       ...base,
-      segments: [segment],
+      segments: [{ id: segment }],   // Resend wants objects here, not ids: "expected object, received string"
       properties: {
         society_interest: c.member === 'applied' ? 'applied' : (c.member ? 'yes' : 'no'),
         ...(c.feedback ? { society_feedback: c.feedback } : {}),
