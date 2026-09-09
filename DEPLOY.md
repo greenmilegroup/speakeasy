@@ -75,7 +75,7 @@ Then open http://localhost:8000.
 
 ## The forms
 
-Three forms post to `/api/contact`, a Cloudflare Pages Function in
+Four forms post to `/api/contact`, a Cloudflare Pages Function in
 `functions/api/contact.js`:
 
 - **Send a note**, on `visit.html` — emailed to the venue through Resend.
@@ -84,8 +84,13 @@ Three forms post to `/api/contact`, a Cloudflare Pages Function in
   carries all three ("Private event enquiry — Ada · 40 people · Sat 14 Nov").
   It replaced a `mailto:` link, which does nothing on a device with no mail
   client configured.
-- **The Speakeasy Society**, on the home, events and visit pages — the mailing
-  list. The function first **stores the person as a Resend contact** in the
+- **Society card request**, on `society.html` — name, email, phone and how
+  often they are in. Stored as a Resend contact with `society_interest:
+  applied`, then emailed with the subject "Society card request — Name ·
+  frequency". Nothing is charged by the site: the owner replies with the
+  payment link (Stripe or Square) once they approve.
+- **The Guest List** (the Society block on the home, events and visit pages) —
+  the free mailing list. The function first **stores the person as a Resend contact** in the
   "General" segment, with `society_interest` (yes/no), `society_feedback` and
   `signup_source` as contact properties, then emails the venue a notification
   that says whether the contact was stored. If Resend refuses the contact the

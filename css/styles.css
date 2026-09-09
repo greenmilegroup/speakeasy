@@ -1954,3 +1954,52 @@ html:not(.js) .enq[hidden]{display:block!important}
 @media (max-width:900px){.page-hero--text{padding:120px 0 18px}}
 /* Opened from the link, the form scrolls to the top edge — under the sticky header. */
 .enq{scroll-margin-top:112px}
+
+/* ==================================================================   v17 · THE SPEAKEASY SOCIETY, THE CARD
+   The membership page: a card drawn in CSS, the five perks numbered, the
+   request form. Reuses .offer, .rules, .enq__form.
+   ========================================================================= */
+.card-sec{padding-top:0;text-align:center}
+.mcard{position:relative;width:min(420px,92vw);aspect-ratio:1.586;margin:0 auto;padding:clamp(18px,4.5vw,26px) clamp(20px,5vw,30px);border-radius:16px;
+  display:flex;flex-direction:column;justify-content:space-between;text-align:left;color:var(--cream);
+  background:linear-gradient(135deg,#1a1815 0%,#0c0b0a 45%,#181613 100%);
+  border:1px solid rgba(201,162,39,.55);box-shadow:0 30px 60px -20px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.06)}
+.mcard::before{content:"";position:absolute;inset:8px;border-radius:11px;border:1px solid rgba(201,162,39,.28);pointer-events:none}
+.mcard::after{content:"";position:absolute;inset:0;border-radius:16px;pointer-events:none;
+  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.06) 45%,transparent 60%)}
+.mcard__top{display:flex;align-items:center;gap:12px}
+.mcard__top img{width:34px;height:34px;border-radius:50%;border:1px solid rgba(201,162,39,.5)}
+.mcard__brand{font-family:var(--f-display);font-weight:600;font-size:1.05rem;letter-spacing:.06em;color:var(--cream)}
+.mcard__brand em{font-style:italic;font-weight:500;color:var(--gold-hi)}
+.mcard__name{font-family:var(--f-serif);font-size:clamp(1.35rem,4.6vw,1.75rem);letter-spacing:.04em;color:var(--cream);margin:auto 0 0}
+.mcard__foot{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;
+  font-family:var(--f-deco);font-weight:var(--w-deco);letter-spacing:.2em;text-transform:uppercase;font-size:.62rem;color:var(--gold)}
+.mcard__no{color:var(--gold-hi);letter-spacing:.14em}
+.card-sec__note{margin:22px auto 0;max-width:46ch;color:var(--muted);font-size:.95rem}
+
+.perks{list-style:none;margin:0 auto;padding:0;max-width:760px;counter-reset:none}
+.perks li{display:grid;grid-template-columns:44px 1fr;gap:0 16px;padding:20px 0;border-top:1px solid var(--line-soft)}
+.perks li:last-child{border-bottom:1px solid var(--line-soft)}
+.perks__n{font-family:var(--f-deco);font-weight:var(--w-deco);color:var(--gold);letter-spacing:.1em;font-size:.8rem;padding-top:.4em}
+.perks h3{margin:0 0 .35rem;font-family:var(--f-display);font-weight:600;font-size:1.12rem;color:var(--cream);letter-spacing:.02em}
+.perks p{margin:0;color:var(--cream-2);line-height:1.6}
+
+#memberForm{max-width:760px;margin:0 auto}
+.society__form .kicker{margin-bottom:.3rem}
+.society__form-title{margin:0 0 .4rem;font-size:.98rem}
+.society__form .form__hint{margin-bottom:1rem}
+/* Seven links fit the bar from 1200px up; between that and the menu button the
+   logo already goes home, so Home steps out of the row. It stays in the phone
+   menu and the footer. */
+@media (max-width:1240px) and (min-width:1025px){.nav__links a[data-p="home"]{display:none}}
+.mcard{width:min(420px,100%)}
+
+/* ---- numbered plain-words terms (society.html) ---- */
+.rules{max-width:720px;margin:0 auto}
+.rules__list{list-style:none;margin:0;padding:0;counter-reset:rule}
+.rules__list li{counter-increment:rule;display:grid;grid-template-columns:44px 1fr;gap:0 14px;padding:18px 0;border-top:1px solid var(--line-soft)}
+.rules__list li:last-child{border-bottom:1px solid var(--line-soft)}
+.rules__list li::before{content:counter(rule,decimal-leading-zero);font-family:var(--f-deco);font-weight:var(--w-deco);color:var(--gold);letter-spacing:.1em;font-size:.8rem;padding-top:.35em}
+.rules__list h3{grid-column:2;margin:0 0 .35rem;font-family:var(--f-display);font-weight:600;font-size:1.08rem;color:var(--cream);letter-spacing:.02em}
+.rules__list p{grid-column:2;margin:0;color:var(--cream-2);line-height:1.6}
+.rules__date{margin:1.6rem 0 0;font-size:.85rem;color:var(--muted);text-align:center}

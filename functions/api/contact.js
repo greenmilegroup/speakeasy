@@ -54,6 +54,21 @@ function compose(form, data) {
     };
   }
 
+  if (form === 'membership') {
+    const phone = clean(data.phone, 40);
+    const often = clean(data.often, 60);
+    const first = clean(data.first, LIMITS.name);
+    if (name.length < 3)  return { error: 'Please give us your name.' };
+    if (!emailOK(email))  return { error: 'That email does not look right.' };
+    if (phone.replace(/\D/g, '').length < 10) return { error: 'A phone number we can reach you on, please.' };
+    return {
+      subject: `Society card request — ${name} · ${often || 'frequency not given'}`,
+      replyTo: email,
+      rows: [['Name', name], ['Email', email], ['Phone', phone], ['How often', often]],
+      contact: { email, name: first || name, member: 'applied', feedback: '', source: 'society-request' },
+    };
+  }
+
   if (form === 'event') {
     const date   = clean(data.date, LIMITS.short);
     const guests = clean(data.guests, 40);
@@ -108,7 +123,7 @@ async function addContact(env, c) {
       ...base,
       segments: [segment],
       properties: {
-        society_interest: c.member ? 'yes' : 'no',
+        society_interest: c.member === 'applied' ? 'applied' : (c.member ? 'yes' : 'no'),
         ...(c.feedback ? { society_feedback: c.feedback } : {}),
         ...(c.source ? { signup_source: c.source } : {}),
       },
@@ -139,7 +154,7 @@ export async function onRequestPost({ request, env }) {
   // Bots fill in every field they find; people never see this one.
   if (clean(data.company, LIMITS.short)) return json(200, { ok: true });
 
-  const form = ['contact', 'newsletter', 'society', 'event'].includes(data.form) ? data.form : 'contact';
+  const form = ['contact', 'newsletter', 'society', 'event', 'membership'].includes(data.form) ? data.form : 'contact';
   const { error, subject, replyTo, rows, contact } = compose(form, data);
   if (error) return json(400, { error });
 

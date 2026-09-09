@@ -22,7 +22,6 @@ const OPENTABLE = 'https://www.opentable.com/r/speakeasy-tapas-lounge-ottawa';
 const MORE = [
   ['happy', 'happy-hour.html', 'Happy Hour'],
   ['prix', 'prix-fixe.html', 'Prix Fixe'],
-  ['society', 'index.html#society', 'The Society'],
 ];
 
 const NAV = [
@@ -32,6 +31,7 @@ const NAV = [
   ['events', 'events.html', 'On Stage'],
   ['private', 'private.html', 'Host Your Event'],
   ['visit', 'visit.html', 'Reservations'],
+  ['society', 'society.html', 'The Society'],
 ];
 
 /* ---------- toast (exported) ---------- */
@@ -263,26 +263,33 @@ function forms() {
   });
 
   const society = $('#societyForm');
-  if (society) {
-    const member = $('#sf-member'), more = $('#sf-more');
-    // The feedback line only appears once someone says they would want in.
-    member.addEventListener('change', () => { more.hidden = !member.checked; if (member.checked) $('#sf-why').focus(); });
-    society.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = $('#sf-email'), note = $('#sfNote'), v = emailOK(email.value);
-      email.closest('.field').classList.toggle('invalid', !v);
-      if (!v) { note.textContent = 'A valid email, please.'; note.classList.add('err'); return; }
-      send(society, {
-        form: 'society', email: email.value, name: $('#sf-name').value,
-        member: member.checked, feedback: $('#sf-why').value,
-        source: document.body.dataset.page || location.pathname,
-        company: society.querySelector('[name="company"]')?.value,
-      }, note, member.checked
-        ? 'You\u2019re in. We will be in touch about the membership.'
-        : 'You\u2019re in the Society. Welcome.');
-      more.hidden = true;
-    });
-  }
+  society?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = $('#sf-email'), note = $('#sfNote'), v = emailOK(email.value);
+    email.closest('.field').classList.toggle('invalid', !v);
+    if (!v) { note.textContent = 'A valid email, please.'; note.classList.add('err'); return; }
+    send(society, {
+      form: 'society', email: email.value, name: $('#sf-name').value, member: false,
+      source: document.body.dataset.page || location.pathname,
+      company: society.querySelector('[name="company"]')?.value,
+    }, note, 'You’re on the Guest List. Welcome.');
+  });
+
+  // The Society card request. Nothing is charged here: the owner reads it,
+  // and a yes comes back by email with the link to set the membership up.
+  const member = $('#memberForm');
+  member?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const first = $('#mf-first'), last = $('#mf-last'), email = $('#mf-email'), phone = $('#mf-phone'), often = $('#mf-often'), note = $('#mfNote');
+    const ok = mark([[first, first.value.trim().length > 1], [last, last.value.trim().length > 1], [email, emailOK(email.value)],
+                     [phone, phone.value.replace(/\D/g, '').length >= 10], [often, Boolean(often.value)]]);
+    if (!ok) { note.textContent = 'Please complete the highlighted fields.'; note.classList.add('err'); return; }
+    send(member, {
+      form: 'membership', name: `${first.value.trim()} ${last.value.trim()}`, first: first.value, email: email.value,
+      phone: phone.value, often: often.value,
+      company: member.querySelector('[name="company"]')?.value,
+    }, note, 'Request received. We’ll be in touch within a few days.');
+  });
 }
 
 /* ---------- hours ---------- */
