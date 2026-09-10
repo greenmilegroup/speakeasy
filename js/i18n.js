@@ -320,6 +320,43 @@ const FR = {
   /* host-your-event.html enquiry form */
   "Enquire about hosting your event": "Demander à organiser votre événement",
 
+  /* society-welcome.html — where Stripe sends a new member after paying */
+  "Welcome to the Society · Speakeasy Ottawa": "Bienvenue à la Société · Speakeasy Ottawa",
+  "Your Speakeasy Society membership is active. What happens next, and how to use your card from tonight.":
+    "Votre adhésion à la Société Speakeasy est active. Ce qui suit, et comment utiliser votre carte dès ce soir.",
+  "You're in.": "Vous êtes des nôtres.",
+  "Your membership is active and your card is being made.": "Votre adhésion est active et votre carte est en préparation.",
+  "Welcome to the Society.": "Bienvenue à la Société.",
+  "What happens now": "Ce qui suit",
+  "in order.": "dans l'ordre.",
+  "A receipt, in your inbox": "Un reçu, dans votre boîte de réception",
+  "From Speakeasy Ottawa, with your membership and the date it renews. Keep it; it is also how you manage your card.":
+    "Du Speakeasy Ottawa, avec votre adhésion et sa date de renouvellement. Gardez-le : c'est aussi par là que vous gérez votre carte.",
+  "Your card, with your name on it": "Votre carte, à votre nom",
+  "We make it by hand and tell you when it is ready. Until it arrives, your name at the door is enough — you are already on the list.":
+    "Nous la faisons à la main et vous prévenons quand elle est prête. D'ici là, votre nom à la porte suffit : vous êtes déjà sur la liste.",
+  "The next invitation": "La prochaine invitation",
+  "Members hear about the invite-only nights first, and about every ticketed show before it goes on sale.":
+    "Les membres sont informés des soirées sur invitation en premier, et de chaque spectacle à billets avant sa mise en vente.",
+  "See what's on": "Voir la programmation",
+  "What the card does →": "Ce que fait la carte →",
+  "Good to know": "Bon à savoir",
+  "Using it": "L'utiliser",
+  "from tonight.": "dès ce soir.",
+  "Booking a show": "Réserver un spectacle",
+  "Call 613-241-6221 or reply to any of our emails, by the day before. Your seats are held under your name — yours and a guest's.":
+    "Appelez le 613-241-6221 ou répondez à l'un de nos courriels, la veille au plus tard. Vos places sont gardées à votre nom : la vôtre et celle d'un invité.",
+  "Dining with us": "Souper chez nous",
+  "Tell your server you are a member when you sit down. 10% comes off the table for you and up to three guests.":
+    "Dites à votre serveur que vous êtes membre en vous installant. 10 % sont retirés de la table pour vous et jusqu'à trois invités.",
+  "Your billing": "Votre facturation",
+  "$50 a month plus HST, on the same day each month. Update your card or cancel any time from the link in your receipt — no need to ask us.":
+    "50 $ par mois plus TVH, le même jour chaque mois. Changez de carte ou annulez en tout temps depuis le lien de votre reçu : sans avoir à nous le demander.",
+  "Anything else": "Autre chose",
+  "Write to": "Écrivez à",
+  "or call": "ou appelez le",
+  "We know your name now.": "Nous connaissons votre nom maintenant.",
+
   /* society.html and the Society block */
   "The Speakeasy Society · Membership · Speakeasy Ottawa": "La Société Speakeasy · Adhésion · Speakeasy Ottawa",
   "The Speakeasy Society: a membership card with your name on it. Free shows for you and a guest, priority seating, invite-only nights, 10% off your table.":
