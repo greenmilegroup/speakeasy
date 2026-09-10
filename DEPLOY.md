@@ -122,12 +122,59 @@ project → Settings → Environment variables**, for Production *and* Preview:
 | `CONTACT_TO` | `info@speakeasyottawa.com` | Plaintext |
 | `CONTACT_FROM` | `Speakeasy Website <website@send.speakeasyottawa.com>` | Plaintext |
 | `RESEND_SEGMENT` | the id of the Resend segment new members join (default: "General") | Plaintext |
+| `SOCIETY_JOIN_URL` | the Stripe payment link for the $50/month membership | Plaintext |
+| `STRIPE_WEBHOOK_SECRET` | the `whsec_…` signing secret from the Stripe webhook endpoint | **Secret** (Encrypt) |
+| `STRIPE_SECRET_KEY` | optional; only so a cancellation can name the member | **Secret** (Encrypt) |
 
 `RESEND_API_KEY` must be added with **Encrypt**. The other three are optional —
 the defaults in the code match the values above.
 
 **3. Redeploy** so the function picks the variables up, then send yourself a
 test through the form on `/visit.html`.
+
+## The Society membership
+
+$50 a month, recurring, taken by Stripe. **Stripe does all of the billing and
+the site does none of it** — no card ever touches speakeasyottawa.com, which is
+what keeps the venue's PCI obligation to the lightest kind there is.
+
+### Setting it up in Stripe
+
+1. **Create the product.** Stripe → Product catalogue → add *The Speakeasy
+   Society*, price **$50 CAD, recurring monthly**. Attach a fixed **13% HST
+   (Ontario)** tax rate rather than switching on Stripe Tax — one province, one
+   rate, and Stripe Tax charges per transaction.
+2. **Create a Payment Link** for it. Turn on: collect **name**, collect
+   **phone**, and **Apple Pay / Google Pay** (on by default — this is most of
+   "seamless" on a phone). Set the **after-payment redirect** to
+   `https://speakeasyottawa.com/society-welcome`.
+3. **Turn on the customer portal.** Stripe → Settings → Billing → Customer
+   portal: allow customers to update their payment method and cancel. Stripe puts
+   a link to it in every receipt. This is the single biggest saving of the
+   owner's time — a member with an expiring card fixes it themselves and nobody
+   emails anyone.
+4. **Turn on failed-payment recovery.** Settings → Billing → Revenue recovery:
+   Smart Retries plus the automatic emails. A card that fails is retried on a
+   schedule and the member is asked to fix it, with no work at this end.
+5. **Add the webhook.** Developers → Webhooks → add endpoint
+   `https://speakeasyottawa.com/api/stripe-webhook`, subscribed to
+   **`checkout.session.completed`** and **`customer.subscription.deleted`**.
+   Copy the `whsec_…` secret into `STRIPE_WEBHOOK_SECRET`.
+6. **Paste the payment link into `SOCIETY_JOIN_URL`.** From then on every Society
+   card request arrives with the link in it, so approving somebody is a reply
+   and a paste.
+
+### What happens on its own after that
+
+- Stripe charges $50 + HST every month, forever, and emails the receipt.
+- A member changes their card or cancels from the portal, unaided.
+- `functions/api/stripe-webhook.js` emails the venue when a membership starts or
+  ends, and marks the person `member` or `lapsed` in the Resend list — so the
+  member list maintains itself and the door knows whose card is good.
+- A new member lands on `/society-welcome`, which tells them what happens next.
+
+Test the whole path in Stripe's **test mode** with card `4242 4242 4242 4242`
+before a real card is used.
 
 ### Spam
 

@@ -212,13 +212,10 @@ const FR = {
   "Duck Confit": "Confit de canard",
   "Duck Confit Spring Rolls": "Rouleaux impériaux au confit de canard",
   "Rigatoni Bolognese": "Rigatonis à la bolognaise",
-  "Herb Infused NY Striploin": "Contre-filet aux herbes",
-  "Sous Vide Peri Peri Chicken": "Poulet peri peri sous vide",
   "Eggplant Cannelloni": "Cannellonis à l’aubergine",
   "Honey Halloumi": "Halloumi au miel",
   "Pear & Brie Crostini": "Crostinis poire et brie",
   "Papas Bravas": "Papas bravas",
-  "Speakeasy Tajine Fries": "Frites tajine Speakeasy",
   "Burrata Tomato Bruschetta": "Bruschetta burrata et tomate",
   "Kale & Charred Mango Salad": "Salade de chou frisé et mangue grillée",
   "Earl Grey Crème Brûlée": "Crème brûlée Earl Grey",
@@ -227,24 +224,17 @@ const FR = {
   "Affogato": "Affogato",
   "House sauces, lemon, horseradish.": "Sauces maison, citron, raifort.",
   "Ahi tuna, avocado, sesame, citrus soy, wonton chips.": "Thon ahi, avocat, sésame, soya aux agrumes, croustilles de wonton.",
-  "Flambéed U10 scallops, parsnip purée, beets, lemon, chili oil.": "Pétoncles U10 flambés, purée de panais, betteraves, citron, huile de piment.",
-  "Jumbo tiger shrimp, olive oil, garlic, Thai chilli, lemon juice.": "Crevettes tigrées géantes, huile d'olive, ail, piment thaï, jus de citron.",
   "6 oz sushi grade salmon, lemon risotto, grilled vegetables, citrus glaze, mango salsa.": "Saumon qualité sushi 6 oz, risotto au citron, légumes grillés, glaçage aux agrumes, salsa à la mangue.",
-  "Beef striploin, chilli ponzu, scallions.": "Contre-filet de bœuf, ponzu au piment, oignons verts.",
   "Two brioche sliders, aged cheddar, house sauce, fries.": "Deux mini-burgers sur brioche, cheddar vieilli, sauce maison, frites.",
   "8 oz breast, roasted vegetables, herbed mash.": "Poitrine de 8 oz, légumes rôtis, purée aux herbes.",
   "Asian slaw, sesame, basil, Thai chili.": "Salade de chou asiatique, sésame, basilic, piment thaï.",
   "Braised AAA beef, burrata, basil, chili.": "Bœuf AAA braisé, burrata, basilic, piment.",
-  "10 oz striploin, yukon mash, market vegetables, red wine jus.": "Contre-filet de 10 oz, purée Yukon, légumes du marché, jus au vin rouge.",
   "Butter poached fingerling potatoes, kale pesto, gooseberry gastrique.": "Pommes de terre grelots pochées au beurre, pesto de chou frisé, gastrique aux groseilles.",
   "Vegetable purée, roasted sweet potato, arrabbiata sauce, basil oil.": "Purée de légumes, patate douce rôtie, sauce arrabbiata, huile de basilic.",
-  "Charred halloumi, tomato, mint & honey.": "Halloumi grillé, tomate, menthe et miel.",
   "Bartlett pear, brie, honey mustard glaze, cinnamon walnut.": "Poire Bartlett, brie, glaçage miel et moutarde, noix à la cannelle.",
-  "Yukon gold potatoes, in-house bravas sauce.": "Pommes de terre Yukon Gold, sauce bravas maison.",
   "Tajine spice, lemon garlic aioli.": "Épices à tajine, aïoli citron et ail.",
   "Butter toasted sourdough, basil, aged balsamic.": "Pain au levain grillé au beurre, basilic, balsamique vieilli.",
   "Pine nuts, red cabbage, parmigiano, citrus honey vinaigrette.": "Pignons, chou rouge, parmigiano, vinaigrette miel et agrumes.",
-  "Bergamot-infused custard, crackling caramelised sugar.": "Crème infusée à la bergamote, sucre caramélisé craquant.",
   "Salted caramel, toasted pecan, berry gastrique.": "Caramel salé, pacanes grillées, gastrique aux petits fruits.",
   "Coconut cookie, mango bourbon, caramel.": "Biscuit à la noix de coco, mangue au bourbon, caramel.",
   "Vanilla ice cream, espresso, cookie.": "Crème glacée à la vanille, espresso, biscuit.",
@@ -319,6 +309,76 @@ const FR = {
 
   /* host-your-event.html enquiry form */
   "Enquire about hosting your event": "Demander à organiser votre événement",
+
+  /* Menu 2026 — new dishes, new prices, dietary markers */
+  "Our plates are built for the table. Three to four between two guests, served as they are ready from the kitchen.":
+    "Nos assiettes sont pensées pour la table. Trois ou quatre pour deux personnes, servies au fur et à mesure que la cuisine les envoie.",
+  "vegetarian": "végétarien",
+  "gluten free": "sans gluten",
+  "Items containing raw or undercooked seafood, meat or egg are prepared to order. Consuming raw or undercooked foods may increase your risk of foodborne illness. Please tell your server about any allergy or dietary restriction before ordering.":
+    "Les plats contenant des fruits de mer, des viandes ou des œufs crus ou insuffisamment cuits sont préparés à la commande. La consommation d'aliments crus ou insuffisamment cuits peut augmenter le risque de maladie d'origine alimentaire. Signalez toute allergie ou restriction alimentaire à votre serveur avant de commander.",
+  "Beef striploin, chili ponzu, scallions.": "Contre-filet de bœuf, ponzu au piment, oignons verts.",
+  "Market Oysters": "Huîtres du marché",
+  "House sauces, lemon, horseradish. $25 the half dozen.": "Sauces maison, citron, raifort. 25 $ la demi-douzaine.",
+  "Flambéed U10 scallops, parsnip purée, beets, lemon.": "Pétoncles U10 flambés, purée de panais, betteraves, citron.",
+  "Seafood Chowder": "Chaudrée de fruits de mer",
+  "Scallop, haddock, shrimp, thyme, dill, cream.": "Pétoncle, aiglefin, crevette, thym, aneth, crème.",
+  "Jumbo tiger shrimp, olive oil, garlic, Thai chili, lemon.": "Crevettes tigrées géantes, huile d'olive, ail, piment thaï, citron.",
+  "Charred halloumi, tomato, mint, honey.": "Halloumi grillé, tomate, menthe, miel.",
+  "Caesar Salad": "Salade César",
+  "Romaine, house anchovy dressing, parmigiano, sourdough croutons. Add grilled chicken $10 · tiger shrimp $14.":
+    "Romaine, vinaigrette maison aux anchois, parmigiano, croûtons au levain. Ajoutez poulet grillé 10 $ · crevettes tigrées 14 $.",
+  "Yukon gold potatoes, house bravas sauce.": "Pommes de terre Yukon Gold, sauce bravas maison.",
+  "Tajine Fries": "Frites tajine",
+  "New York Striploin": "Contre-filet New York",
+  "10 oz striploin, herb butter, Yukon mash, market vegetables, red wine jus.":
+    "Contre-filet de 10 oz, beurre aux herbes, purée Yukon, légumes du marché, jus au vin rouge.",
+  "Peri Peri Chicken": "Poulet peri peri",
+  "Spaghetti dello Chef": "Spaghetti dello Chef",
+  "Grilled chicken, cremini mushroom, house pesto, garlic confit, parmigiano.":
+    "Poulet grillé, champignons cremini, pesto maison, ail confit, parmigiano.",
+  "Vegetable purée, roasted sweet potato, arrabbiata, basil oil.":
+    "Purée de légumes, patate douce rôtie, arrabbiata, huile de basilic.",
+  "Spanish Shrimp Risotto": "Risotto aux crevettes espagnoles",
+  "Spanish red shrimp, parmigiano, micro greens.": "Crevettes rouges d'Espagne, parmigiano, micropousses.",
+  "Earl grey custard, torched demerara.": "Crème earl grey, sucre demerara caramélisé.",
+
+  /* society-welcome.html — where Stripe sends a new member after paying */
+  "Welcome to the Society · Speakeasy Ottawa": "Bienvenue à la Société · Speakeasy Ottawa",
+  "Your Speakeasy Society membership is active. What happens next, and how to use your card from tonight.":
+    "Votre adhésion à la Société Speakeasy est active. Ce qui suit, et comment utiliser votre carte dès ce soir.",
+  "You're in.": "Vous êtes des nôtres.",
+  "Your membership is active and your card is being made.": "Votre adhésion est active et votre carte est en préparation.",
+  "Welcome to the Society.": "Bienvenue à la Société.",
+  "What happens now": "Ce qui suit",
+  "in order.": "dans l'ordre.",
+  "A receipt, in your inbox": "Un reçu, dans votre boîte de réception",
+  "From Speakeasy Ottawa, with your membership and the date it renews. Keep it; it is also how you manage your card.":
+    "Du Speakeasy Ottawa, avec votre adhésion et sa date de renouvellement. Gardez-le : c'est aussi par là que vous gérez votre carte.",
+  "Your card, with your name on it": "Votre carte, à votre nom",
+  "We make it by hand and tell you when it is ready. Until it arrives, your name at the door is enough — you are already on the list.":
+    "Nous la faisons à la main et vous prévenons quand elle est prête. D'ici là, votre nom à la porte suffit : vous êtes déjà sur la liste.",
+  "The next invitation": "La prochaine invitation",
+  "Members hear about the invite-only nights first, and about every ticketed show before it goes on sale.":
+    "Les membres sont informés des soirées sur invitation en premier, et de chaque spectacle à billets avant sa mise en vente.",
+  "See what's on": "Voir la programmation",
+  "What the card does →": "Ce que fait la carte →",
+  "Good to know": "Bon à savoir",
+  "Using it": "L'utiliser",
+  "from tonight.": "dès ce soir.",
+  "Booking a show": "Réserver un spectacle",
+  "Call 613-241-6221 or reply to any of our emails, by the day before. Your seats are held under your name — yours and a guest's.":
+    "Appelez le 613-241-6221 ou répondez à l'un de nos courriels, la veille au plus tard. Vos places sont gardées à votre nom : la vôtre et celle d'un invité.",
+  "Dining with us": "Souper chez nous",
+  "Tell your server you are a member when you sit down. 10% comes off the table for you and up to three guests.":
+    "Dites à votre serveur que vous êtes membre en vous installant. 10 % sont retirés de la table pour vous et jusqu'à trois invités.",
+  "Your billing": "Votre facturation",
+  "$50 a month plus HST, on the same day each month. Update your card or cancel any time from the link in your receipt — no need to ask us.":
+    "50 $ par mois plus TVH, le même jour chaque mois. Changez de carte ou annulez en tout temps depuis le lien de votre reçu : sans avoir à nous le demander.",
+  "Anything else": "Autre chose",
+  "Write to": "Écrivez à",
+  "or call": "ou appelez le",
+  "We know your name now.": "Nous connaissons votre nom maintenant.",
 
   /* society.html and the Society block */
   "The Speakeasy Society · Membership · Speakeasy Ottawa": "La Société Speakeasy · Adhésion · Speakeasy Ottawa",
@@ -443,7 +503,6 @@ const FR = {
   "What's on offer": "Au programme",
   "Three things,": "Trois choses,",
   "every night.": "chaque soir.",
-  "Market Oysters": "Huîtres du marché",
   "House sauces, lemon, horseradish. A dollar each during happy hour.": "Sauces maison, citron, raifort. Un dollar chacune pendant le happy hour.",
   "Cocktail of the Week": "Cocktail de la semaine",
   "One of our signatures at half price. Ask your server which one.": "Un de nos cocktails signature à moitié prix. Demandez lequel à votre serveur.",

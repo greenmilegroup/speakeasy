@@ -11,6 +11,12 @@
  *   CONTACT_TO      where enquiries land (default info@speakeasyottawa.com)
  *   CONTACT_FROM    a verified Resend sender on the domain
  *   RESEND_SEGMENT  the Resend segment (audience) new contacts join
+ *   SOCIETY_JOIN_URL  the Stripe payment link for the $50/month membership.
+ *                     Optional. When set, a Society card request arrives with
+ *                     the link in it, so approving is Reply and paste rather
+ *                     than going and finding it. The site never shows this
+ *                     link: membership is approved by a person, not bought
+ *                     off the page.
  */
 
 const DEFAULT_TO   = 'info@speakeasyottawa.com';
@@ -160,6 +166,11 @@ export async function onRequestPost({ request, env }) {
 
   const stored = contact ? await addContact(env, contact) : null;
   if (contact) rows.push(['Stored in Resend', stored ? `yes (${stored})` : 'NO — add by hand']);
+
+  // The owner reads this email and decides. Put the payment link where their
+  // eyes already are; reply_to is the applicant, so approving is one tap.
+  const join = clean(env.SOCIETY_JOIN_URL, LIMITS.short);
+  if (form === 'membership' && join) rows.push(['To approve, send them', join]);
 
   const { text, html } = render(rows);
   const res = await fetch('https://api.resend.com/emails', {

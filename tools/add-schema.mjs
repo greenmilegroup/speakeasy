@@ -30,9 +30,11 @@ const decode = s => String(s)
   .replace(/&eacute;/g, 'é').replace(/&nbsp;/g, ' ')
   .replace(/\s+/g, ' ').trim();
 
-/** Sections and their items, read in document order from the page's own markup. */
+/** Sections and their items, read in document order from the page's own markup.
+    A dish may carry a dietary marker between its name and its price; the menu
+    schema is about the dish, so the marker is skipped rather than captured. */
 function sections(html) {
-  const re = /<h3[^>]*>([\s\S]*?)<\/h3>|<h4[^>]*>([\s\S]*?)<\/h4>\s*<span class="price[^"]*"[^>]*>([\s\S]*?)<\/span>[\s\S]*?<\/div>\s*<p[^>]*>([\s\S]*?)<\/p>/g;
+  const re = /<h3[^>]*>([\s\S]*?)<\/h3>|<h4[^>]*>([\s\S]*?)<\/h4>(?:\s*<span class="diet">[^<]*<\/span>)?\s*<span class="price[^"]*"[^>]*>([\s\S]*?)<\/span>[\s\S]*?<\/div>\s*<p[^>]*>([\s\S]*?)<\/p>/g;
   const out = [];
   let m;
   while ((m = re.exec(html))) {
