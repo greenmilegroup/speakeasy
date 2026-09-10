@@ -2003,3 +2003,19 @@ html:not(.js) .enq[hidden]{display:block!important}
 .rules__list h3{grid-column:2;margin:0 0 .35rem;font-family:var(--f-display);font-weight:600;font-size:1.08rem;color:var(--cream);letter-spacing:.02em}
 .rules__list p{grid-column:2;margin:0;color:var(--cream-2);line-height:1.6}
 .rules__date{margin:1.6rem 0 0;font-size:.85rem;color:var(--muted);text-align:center}
+
+/* ==================================================================   v18 · MENU 2026
+   Dietary markers beside a dish, the legend that explains them, and the
+   allergen note the printed menu carries. The marker sits between the name and
+   the leader dots, so it reads as part of the dish, not of the price.
+   ========================================================================= */
+.diet{order:0;flex:0 0 auto;align-self:center;margin-left:2px;
+  font-family:var(--f-deco);font-weight:var(--w-deco);font-size:.72rem;letter-spacing:.12em;
+  color:var(--gold);opacity:.85;white-space:nowrap}
+.plates--grid .diet{align-self:baseline}
+.menu-intro{max-width:62ch;margin:0 auto clamp(26px,3.4vw,40px);color:var(--cream-2)}
+.menu-legend{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin:clamp(22px,3vw,32px) 0 0;
+  font-family:var(--f-deco);font-weight:var(--w-deco);font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted)}
+.menu-legend b{color:var(--gold);font-weight:inherit;margin-right:6px}
+.menu-note{max-width:74ch;margin:14px auto 0;text-align:center;font-size:.82rem;line-height:1.55;color:var(--muted)}
