@@ -378,7 +378,7 @@ const FR = {
   "Anything else": "Autre chose",
   "Write to": "Écrivez à",
   "or call": "ou appelez le",
-  "We know your name now.": "Nous connaissons votre nom maintenant.",
+  ". We know your name now.": ". Nous connaissons votre nom maintenant.",
 
   /* society.html and the Society block */
   "The Speakeasy Society · Membership · Speakeasy Ottawa": "La Société Speakeasy · Adhésion · Speakeasy Ottawa",

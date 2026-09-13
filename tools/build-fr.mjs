@@ -32,11 +32,19 @@ const NOINDEX = new Set(['society-welcome.html']);
    before lookup and the French re-escaped after. */
 const NAMED = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', middot: '·',
   hellip: '…', ldquo: '“', rdquo: '”', lsquo: '‘', rsquo: '’', lsaquo: '‹', rsaquo: '›',
-  eacute: 'é', egrave: 'è', agrave: 'à', ccedil: 'ç', ecirc: 'ê', ocirc: 'ô', uuml: 'ü', ndash: '–', mdash: '—' };
+  eacute: 'é', egrave: 'è', agrave: 'à', ccedil: 'ç', ecirc: 'ê', ocirc: 'ô', uuml: 'ü', ndash: '–', mdash: '—',
+  rarr: '→', larr: '←', times: '×', deg: '°', bull: '•' };
+/* An entity missing from NAMED survives decoding as its raw &name; text, so the
+   dictionary key never matches and the string ships in English with nothing to
+   show why. Collect the misses and name them at the end of the build. */
+const unknownEntities = new Set();
 const decode = s => s
   .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
   .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(+d))
-  .replace(/&([a-z]+);/gi, (m, n) => NAMED[n] ?? m);
+  .replace(/&([a-z]+);/gi, (m, n) => {
+    if (NAMED[n] === undefined) { unknownEntities.add(m); return m; }
+    return NAMED[n];
+  });
 const escText = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const escAttr = s => escText(s).replace(/"/g, '&quot;');
 
@@ -156,4 +164,7 @@ writeFileSync(sm, readFileSync(sm, 'utf8').replace('</urlset>', sitemapRows + '<
 
 const gaps = [...missed.entries()].sort((a, b) => b[1] - a[1]);
 console.log(`  French site built: ${PAGES.length} pages under /fr/, ${hits} strings translated, ${gaps.length} distinct English strings left`);
+if (unknownEntities.size) {
+  console.log(`      unknown HTML entities, add them to NAMED: ${[...unknownEntities].join(' ')}`);
+}
 for (const [k, n] of gaps.slice(0, 8)) console.log(`      ${n}× ${k.length > 70 ? k.slice(0, 67) + '…' : k}`);
