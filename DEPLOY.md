@@ -235,15 +235,21 @@ means these two fields are empty:
 Setting them does not rebuild anything on its own. **Deployments → ⋯ → Retry
 deployment.**
 
-### The Vercel project
+### One host, not two
 
-`vercel.com/speakeasy6/speakeasy` is also connected to this repository and
-builds on every push — it is the only integration that reports a deployment
-status back to GitHub, which makes it easy to mistake for the live host. It is
-not. Cloudflare Pages serves speakeasyottawa.com.
+Cloudflare Pages serves speakeasyottawa.com, and is the only thing that should.
 
-It has no build command set either, so what it publishes is the raw
-repository. Unless its deployments are access-protected, that is a second
-publicly reachable copy of the site: unstyled, missing `/fr/`, and serving
-`tools/` at an address search engines can index. Worth deleting, or at least
-giving the same two build settings.
+A Vercel project (`speakeasy6/speakeasy`) was also connected to this repository
+and built on every push. It had no build command either, so what it published
+was the raw repository at a second public address. **Deleted in September
+2026.**
+
+Both hosts reported back to GitHub, but by different mechanisms, and that is
+worth knowing before diagnosing anything from them: **Cloudflare Pages posts a
+check run, Vercel posted a commit status.** Asking GitHub for one does not
+return the other. Reading only the commit statuses showed Vercel alone, which
+made it look like the live host and sent a session to the wrong dashboard.
+
+If a deployment check or status from anything other than Cloudflare appears on
+a commit again, a second host is building this repository. Find out why before
+trusting what either one publishes.
