@@ -206,3 +206,32 @@ absolute asset paths, and `functions/` stayed out of `dist/`.
 
 Node is pinned in `.node-version`. Cloudflare Pages reads that file, so the
 build runs on the same version locally, in CI and on the host.
+
+## Deploying from GitHub rather than from Cloudflare's dashboard
+
+Cloudflare Pages can build from Git itself, but its build command and output
+directory live in the dashboard, not in this repository. When they are empty —
+which is how this project ran for a while — Pages publishes the repository
+as-is: no `/fr/`, no pre-rendered events or schema, no `version.txt`, and the
+development folders exposed on the public web. Nothing in the repository can
+say otherwise, and nothing reports it.
+
+`.github/workflows/deploy.yml` runs the build here instead and uploads `dist/`
+with Wrangler, so the build configuration is version-controlled and a failure
+shows on the commit.
+
+It needs two repository secrets (**Settings → Secrets and variables →
+Actions**):
+
+| Secret | Where it comes from |
+| --- | --- |
+| `CLOUDFLARE_API_TOKEN` | Cloudflare **My Profile → API Tokens → Create Token → Edit Cloudflare Workers** template |
+| `CLOUDFLARE_ACCOUNT_ID` | The account ID on the Cloudflare dashboard's right-hand pane |
+
+**Turn off Cloudflare's own Git deploys first**, or the two race each other and
+whichever finishes last wins — which may be the one that publishes nothing.
+Either **Disconnect** the Git repository on the Pages project, or set
+**Branch control → Automatic deployments** to disabled.
+
+The project-level environment variables, `RESEND_API_KEY` among them, belong to
+the Pages project rather than to any one deployment, so they survive the change.
