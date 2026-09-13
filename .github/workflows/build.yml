@@ -1,0 +1,71 @@
+name: Build
+
+# Cloudflare is where the site actually deploys, and its build log lives behind
+# the Cloudflare dashboard. Running the same build here puts a pass or fail on
+# the commit itself, so a broken build is visible in the place the change was
+# made rather than only to whoever thinks to go looking for it.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # tools/build-site.sh stamps each sitemap entry with the date that
+          # page last changed, read from git. A shallow clone has no history to
+          # read, so every entry would go unstamped.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Build the site
+        run: bash tools/build-site.sh
+
+      # The build is happy to produce a site with pages missing — the checks it
+      # runs are about consistency, not completeness. These assert that what
+      # should be there is there, so a page that quietly stops being generated
+      # fails here instead of on the live site.
+      - name: Check the build produced a whole site
+        run: |
+          set -euo pipefail
+          fail() { echo "::error::$1"; exit 1; }
+
+          [ -f dist/index.html ]   || fail "dist/index.html is missing"
+          [ -f dist/version.txt ]  || fail "dist/version.txt is missing"
+          [ -f dist/_redirects ]   || fail "dist/_redirects is missing"
+          if [ -d dist/functions ]; then fail "functions/ must stay at the repo root, not in dist/"; fi
+
+          en=$(ls dist/*.html | wc -l)
+          fr=$(ls dist/fr/*.html 2>/dev/null | wc -l)
+          [ "$fr" -gt 0 ] || fail "no French pages were built under dist/fr/"
+          [ "$en" -eq "$fr" ] || fail "$en English pages but $fr French ones — they should match"
+
+          # A French page that lost its leading slashes loads no CSS and no
+          # JavaScript once it is served from /fr/, which looks like a plain
+          # unstyled English page to a visitor.
+          if grep -qE '(src|href|poster)="(assets|css|js)/' dist/fr/*.html; then
+            grep -lE '(src|href|poster)="(assets|css|js)/' dist/fr/*.html
+            fail "French pages contain relative asset paths; they must be absolute"
+          fi
+
+          grep -q 'lang="fr' dist/fr/index.html || fail "dist/fr/index.html is not marked as French"
+
+          echo "$en English pages, $fr French, $(find dist -type f | wc -l) files total"
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Build"
+            echo
+            if [ -f dist/version.txt ]; then sed 's/^/    /' dist/version.txt; fi
+            echo
+            echo "English: $(ls dist/*.html 2>/dev/null | wc -l) · French: $(ls dist/fr/*.html 2>/dev/null | wc -l)"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -189,3 +189,20 @@ identify traffic lights.
 The application form sends the applicant's details but cannot carry a file. The
 confirmation asks them to email the résumé to `info@speakeasyottawa.com`
 separately. Resend can take attachments if a proper upload is wanted later.
+
+## Is the live site up to date?
+
+`tools/build-site.sh` writes `dist/version.txt` with the commit it built from,
+so **https://speakeasyottawa.com/version.txt** answers the question directly.
+Compare it against the head of `main`. If it is behind, a deploy failed and
+Cloudflare is still serving the last build that worked — the site does not go
+down when a build breaks, it just quietly stops changing.
+
+`.github/workflows/build.yml` runs the same build on every push and pull
+request, so a broken build shows as a failed check on the commit rather than
+only inside the Cloudflare dashboard. It also asserts the build produced a
+whole site: every English page has a French counterpart, French pages carry
+absolute asset paths, and `functions/` stayed out of `dist/`.
+
+Node is pinned in `.node-version`. Cloudflare Pages reads that file, so the
+build runs on the same version locally, in CI and on the host.
