@@ -206,3 +206,44 @@ absolute asset paths, and `functions/` stayed out of `dist/`.
 
 Node is pinned in `.node-version`. Cloudflare Pages reads that file, so the
 build runs on the same version locally, in CI and on the host.
+
+### When the site looks fine but has stopped changing
+
+This has now bitten the project twice, both times for the same reason: **Pages
+keeps the build command and output directory in its dashboard, not in this
+repository.** With those two fields empty, Pages publishes the repository as it
+sits in git instead of `dist/`.
+
+What makes it hard to spot is that the site keeps looking normal. The English
+pages still work — their asset paths are relative and happen to resolve
+correctly at the root — so nothing appears broken. What silently goes missing
+is everything the build produces: all ten `/fr/` pages, the pre-rendered events
+and schema, `version.txt`, and the exclusion of `mcp/`, `supabase/` and
+`tools/` from the public web.
+
+**The giveaway is any `/fr/` address.** It either 404s or falls back to the
+English home page with no styling at all — that page's relative
+`css/styles.css` resolves to `/fr/css/styles.css` from one folder deep, so it
+loads no CSS and no JavaScript. An unstyled English home page at a French URL
+means these two fields are empty:
+
+| Field | Value |
+| --- | --- |
+| Build command | `bash tools/build-site.sh` |
+| Build output directory | `dist` |
+
+Setting them does not rebuild anything on its own. **Deployments → ⋯ → Retry
+deployment.**
+
+### The Vercel project
+
+`vercel.com/speakeasy6/speakeasy` is also connected to this repository and
+builds on every push — it is the only integration that reports a deployment
+status back to GitHub, which makes it easy to mistake for the live host. It is
+not. Cloudflare Pages serves speakeasyottawa.com.
+
+It has no build command set either, so what it publishes is the raw
+repository. Unless its deployments are access-protected, that is a second
+publicly reachable copy of the site: unstyled, missing `/fr/`, and serving
+`tools/` at an address search engines can index. Worth deleting, or at least
+giving the same two build settings.
