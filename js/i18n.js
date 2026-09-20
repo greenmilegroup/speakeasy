@@ -417,8 +417,10 @@ const FR = {
   "Request your card": "Demandez votre carte",
   "Tell us": "Dites-nous",
   "who you are.": "qui vous êtes.",
-  "We read every request and reply within a few days. If it is a yes, you get a link to set up your membership, and your card follows.":
-    "Nous lisons chaque demande et répondons en quelques jours. Si c'est oui, vous recevez un lien pour activer votre adhésion, et votre carte suit.",
+  "Join the Society": "Rejoindre la Société",
+  "Request a card instead": "Plutôt demander une carte",
+  "Rather ask before you join? Tell us who you are and we will reply within a few days with your link and the answer to anything you want to ask.":
+    "Vous préférez poser vos questions avant d'adhérer ? Dites-nous qui vous êtes et nous répondrons en quelques jours, avec votre lien et la réponse à tout ce que vous voulez savoir.",
   "for the card": "pour la carte",
   "How often are you in?": "Vous venez à quelle fréquence?",
   "Choose one": "Choisissez",
