@@ -140,32 +140,42 @@ what keeps the venue's PCI obligation to the lightest kind there is.
 
 ### Setting it up in Stripe
 
-1. **Create the product.** Stripe → Product catalogue → add *The Speakeasy
-   Society*, price **$50 CAD, recurring monthly**. Attach a fixed **13% HST
-   (Ontario)** tax rate rather than switching on Stripe Tax — one province, one
-   rate, and Stripe Tax charges per transaction.
-2. **Create a Payment Link** for it. Turn on: collect **name**, collect
-   **phone**, and **Apple Pay / Google Pay** (on by default — this is most of
-   "seamless" on a phone). Set the **after-payment redirect** to
-   `https://speakeasyottawa.com/society-welcome`.
-3. **Turn on the customer portal.** Stripe → Settings → Billing → Customer
-   portal: allow customers to update their payment method and cancel. Stripe puts
-   a link to it in every receipt. This is the single biggest saving of the
-   owner's time — a member with an expiring card fixes it themselves and nobody
-   emails anyone.
-4. **Turn on failed-payment recovery.** Settings → Billing → Revenue recovery:
-   Smart Retries plus the automatic emails. A card that fails is retried on a
-   schedule and the member is asked to fix it, with no work at this end.
-5. **Add the webhook.** Developers → Webhooks → add endpoint
-   `https://speakeasyottawa.com/api/stripe-webhook`, subscribed to
-   **`checkout.session.completed`** and **`customer.subscription.deleted`**.
-   Copy the `whsec_…` secret into `STRIPE_WEBHOOK_SECRET`.
-6. **Paste the payment link into `SOCIETY_JOIN_URL`.** From then on every Society
-   card request arrives with the link in it, so approving somebody is a reply
-   and a paste.
+This is built and live. What follows is what exists and why, so it can be
+rebuilt or changed without rediscovering the reasoning.
 
-That one variable now feeds both ways in. `society.html` has a **Join the
-Society** button pointing at `/api/join`, a Function that reads
+| | |
+| --- | --- |
+| Product | *The Speakeasy Society* |
+| Price | **$56.50 CAD monthly**, recurring, **tax behaviour `inclusive`** |
+| Payment Link | active, live mode, redirects to `/society-welcome`, collects name and phone |
+| Webhook | `https://speakeasyottawa.com/api/stripe-webhook` → `checkout.session.completed`, `customer.subscription.deleted` |
+| Customer portal | card updates, invoice history, cancel at period end — set as the account default |
+
+**Why $56.50 and not $50 plus tax.** A Payment Link **cannot carry a fixed tax
+rate**. Stripe offers only automatic tax there, which needs a Stripe Tax
+registration and charges per transaction. So HST is built into the price
+instead: $50 plus 13% is $56.50, marked tax-inclusive, which is what the site
+has always promised ("$50 a month, plus HST"). The split is recorded in the
+price's metadata for the bookkeeper.
+
+**The consequence, and it is a real one:** receipts show $56.50 as a single
+figure and do not itemise HST. At remittance, back out 13/113 — **$6.50 per
+member per month**. If a member ever needs an itemised receipt to expense, that
+is the moment to register for Stripe Tax and move to a $50 price with tax added
+on top.
+
+**Failed-payment recovery is a dashboard setting**, not an API one: Settings →
+Billing → Revenue recovery → Smart Retries plus the automatic emails. A card
+that fails is retried on a schedule and the member is asked to fix it, with no
+work at this end. Worth confirming it is on.
+
+Two variables carry it into the site: the payment link into `SOCIETY_JOIN_URL`,
+and the endpoint's `whsec_…` signing secret into `STRIPE_WEBHOOK_SECRET`, as a
+**Secret (Encrypt)**. Neither takes effect until the next deploy.
+
+`SOCIETY_JOIN_URL` feeds both ways in: every Society card request email arrives
+with the link in it, so approving somebody by hand is a reply and a paste, and
+`society.html` has a **Join the Society** button pointing at `/api/join`, a Function that reads
 `SOCIETY_JOIN_URL` and redirects to it — so the link is never copied into the
 markup, and the English and French pages cannot drift apart. It is checked
 before anyone is sent there: the host must be exactly `buy.stripe.com` or
