@@ -168,10 +168,20 @@ That one variable now feeds both ways in. `society.html` has a **Join the
 Society** button pointing at `/api/join`, a Function that reads
 `SOCIETY_JOIN_URL` and redirects to it — so the link is never copied into the
 markup, and the English and French pages cannot drift apart. It is checked
-against Stripe's own hostnames before anyone is sent there; if the variable is
-empty or holds something that is not a Stripe link, the button quietly falls
-back to the request form on the page the visitor came from, in their language,
-rather than erroring or sending them off the site. Changing the payment link is
+before anyone is sent there: the host must be exactly `buy.stripe.com` or
+`checkout.stripe.com`, over https, with a path.
+
+**A test-mode link is rejected too**, and that is the case worth understanding.
+A `buy.stripe.com/test_…` link is a genuine Stripe URL and looks completely
+normal — the visitor reaches a real-looking checkout that silently declines
+every real card, and nothing tells the venue it happened. Live mode and test
+mode are separate worlds in Stripe, and a membership set up in the wrong one
+looks finished from the dashboard.
+
+Anything rejected — empty, mistyped, not Stripe, or test mode — sends the
+visitor to the request form on the page they came from, in their language.
+That is a slower way in but a real one, rather than an error or a dead
+checkout. Changing the payment link is
 a dashboard edit and a redeploy, never a code change.
 
 ### What happens on its own after that
