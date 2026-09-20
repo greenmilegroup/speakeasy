@@ -164,6 +164,16 @@ what keeps the venue's PCI obligation to the lightest kind there is.
    card request arrives with the link in it, so approving somebody is a reply
    and a paste.
 
+That one variable now feeds both ways in. `society.html` has a **Join the
+Society** button pointing at `/api/join`, a Function that reads
+`SOCIETY_JOIN_URL` and redirects to it — so the link is never copied into the
+markup, and the English and French pages cannot drift apart. It is checked
+against Stripe's own hostnames before anyone is sent there; if the variable is
+empty or holds something that is not a Stripe link, the button quietly falls
+back to the request form on the page the visitor came from, in their language,
+rather than erroring or sending them off the site. Changing the payment link is
+a dashboard edit and a redeploy, never a code change.
+
 ### What happens on its own after that
 
 - Stripe charges $50 + HST every month, forever, and emails the receipt.
