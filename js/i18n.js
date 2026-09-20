@@ -676,6 +676,7 @@ const FR = {
   "$1": "1 $",
   "$5": "5 $",
   "$49": "49 $",
+  "$50": "50 $",
   "On offer": "Nos offres",
   "Prix Fixe &": "Prix fixe &",
   "Happy Hour.": "Happy Hour.",
