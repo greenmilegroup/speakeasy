@@ -412,7 +412,7 @@ const FR = {
   "Fifty": "Cinquante",
   "a month.": "par mois.",
   "per month": "par mois",
-  "Cancel any time after six months. Plus HST.": "Annulable en tout temps après six mois. Plus TVH.",
+  "Cancel any time. Plus HST.": "Annulable en tout temps. Plus TVH.",
   "Founding Members: the first 100 cards keep $50 for as long as they hold them. After that, the price goes up.": "Membres fondateurs : les 100 premières cartes gardent le tarif de 50 $ tant qu'elles sont détenues. Ensuite, le prix augmente.",
   "Request your card": "Demandez votre carte",
   "Tell us": "Dites-nous",
@@ -445,8 +445,8 @@ const FR = {
   "10% off food and drink for you and up to three guests when you dine with us, on your bill, before tax and gratuity. Not combined with other offers.":
     "10 % sur la nourriture et les boissons pour vous et jusqu'à trois invités lorsque vous soupez chez nous, sur votre facture, avant taxes et pourboire. Non cumulable avec d'autres offres.",
   "Paying": "Le paiement",
-  "$50 a month, plus HST, charged automatically to the card you set up. You can cancel any time after your first six months; your membership runs to the end of the period you have paid for.":
-    "50 $ par mois, plus TVH, facturés automatiquement à la carte que vous enregistrez. Vous pouvez annuler en tout temps après vos six premiers mois; votre adhésion court jusqu'à la fin de la période payée.",
+  "$50 a month, plus HST, charged automatically to the card you set up. You can cancel any time; your membership runs to the end of the period you have paid for.":
+    "50 $ par mois, plus TVH, facturés automatiquement à la carte que vous enregistrez. Vous pouvez annuler en tout temps; votre adhésion court jusqu'à la fin de la période payée.",
   "Founding Members": "Membres fondateurs",
   "The first 100 members keep the $50 monthly rate for as long as they hold their membership without a break.": "Les 100 premiers membres gardent le tarif mensuel de 50 $ tant qu'ils conservent leur adhésion sans interruption.",
   "Your card": "Votre carte",
