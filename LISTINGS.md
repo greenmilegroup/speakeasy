@@ -27,16 +27,22 @@ changes, and when nothing has, once a quarter.
 | Instagram | https://www.instagram.com/speakeasy_ottawa/ |
 | Facebook | https://www.facebook.com/speakeasyottawa |
 
-**Opening hours**
+**Opening hours** — fall and winter, from 29 September 2026
 
 | | |
 | --- | --- |
-| Monday | **Closed** |
-| Tuesday – Thursday | 4 PM – 11 PM |
+| Sunday – Tuesday | **Closed** to walk-ins — ticketed shows and private events only |
+| Wednesday – Thursday | 5 PM – 11 PM |
 | Friday – Saturday | 4 PM – 1 AM |
-| Sunday | 4 PM – 11 PM |
 
-**Happy hour** — 4 to 6 PM and 10 PM to close, every day we are open.
+Sunday, Monday and Tuesday are listed as **closed** on every listing. The room
+does open those days for a booked show or a private event, but not to anyone
+turning up without a ticket, and a listing has no way to say "sometimes".
+
+**Happy hour** — from doors until 6 PM, and 10 PM to close: Wednesday and
+Thursday from 5 PM, Friday and Saturday from 4 PM.
+
+**The Speakeasy Table** (prix fixe) — $49, Wednesday, seatings 5 to 7 PM.
 
 **Nearby landmarks**, if a description mentions them: **Rogers Centre Ottawa**
 (renamed from the Shaw Centre in October 2024) and the Rideau Centre.

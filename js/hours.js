@@ -20,12 +20,17 @@
    Taken from the Google Business listing, which is the copy the owner keeps
    current and the one most guests actually read. A close past midnight is
    written as minutes beyond 1440: Friday shuts at 1 AM, so 25 * 60. */
+/* Fall and winter, from 29 September 2026. Sunday, Monday and Tuesday are no
+   longer walk-in nights: the room opens those days only for a ticketed show or
+   a private booking, which the events board carries date by date. They are
+   written as closed here because that is what they are to somebody deciding
+   whether to turn up without a ticket. */
 export const SCHEDULE = {
-  0: { open: 16 * 60, close: 23 * 60 },        // Sunday      4 PM - 11 PM
-  1: null,                                      // Monday      closed
-  2: { open: 16 * 60, close: 23 * 60 },        // Tuesday     4 PM - 11 PM
-  3: { open: 16 * 60, close: 23 * 60 },        // Wednesday   4 PM - 11 PM
-  4: { open: 16 * 60, close: 23 * 60 },        // Thursday    4 PM - 11 PM
+  0: null,                                      // Sunday      ticketed shows and private bookings only
+  1: null,                                      // Monday      private events only
+  2: null,                                      // Tuesday     private events only
+  3: { open: 17 * 60, close: 23 * 60 },        // Wednesday   5 PM - 11 PM
+  4: { open: 17 * 60, close: 23 * 60 },        // Thursday    5 PM - 11 PM
   5: { open: 16 * 60, close: 25 * 60 },        // Friday      4 PM - 1 AM
   6: { open: 16 * 60, close: 25 * 60 },        // Saturday    4 PM - 1 AM
 };
