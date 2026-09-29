@@ -283,14 +283,14 @@ const FR = {
   "On Stage · Live Music & Events · Speakeasy Ottawa": "Sur Scène · Musique live et événements · Speakeasy Ottawa",
   "Host Your Event · Speakeasy Ottawa": "Organisez votre événement · Speakeasy Ottawa",
   "Reservations · Hours & Location · Speakeasy Ottawa": "Réservations · Heures et adresse · Speakeasy Ottawa",
-  "A hidden destination for food, music & celebrations in Ottawa's ByWard Market. Craft cocktails, tapas & live music Thursday to Sunday. 55 York Street.":
-    "Une adresse cachée pour manger, écouter de la musique et célébrer dans le Marché By, à Ottawa. Cocktails maison, tapas et musique live du jeudi au dimanche.",
+  "A hidden destination for food, music & celebrations in Ottawa's ByWard Market. Craft cocktails, tapas & live music Thursday to Saturday. 55 York Street.":
+    "Une adresse cachée pour manger, écouter de la musique et célébrer dans le Marché By, à Ottawa. Cocktails maison, tapas et musique live du jeudi au samedi.",
   "10 signature cocktails, a curated wine list, and bottled beer and cider at Speakeasy Ottawa.":
     "10 cocktails signature, une carte des vins choisie, bières et cidres en bouteille au Speakeasy Ottawa.",
   "Shareables, chef plates and sweets at Speakeasy Ottawa: beef tataki, tuna tartare, seared scallops, NY striploin, duck confit and more.":
     "À partager, plats du chef et douceurs au Speakeasy Ottawa : tataki de bœuf, tartare de thon, pétoncles poêlés, contre-filet New York, confit de canard et plus.",
-  "Live music Thursday to Sunday plus speed dating, comedy and more at Speakeasy Ottawa. See what's on and book your table.":
-    "Musique live du jeudi au dimanche, plus speed dating, humour et autres soirées au Speakeasy Ottawa. Voyez la programmation et réservez votre table.",
+  "Live music Thursday to Saturday plus speed dating, comedy and more at Speakeasy Ottawa. See what's on and book your table.":
+    "Musique live du jeudi au samedi, plus speed dating, humour et autres soirées au Speakeasy Ottawa. Voyez la programmation et réservez votre table.",
   "Private events at Speakeasy Ottawa, 55 York Street in the ByWard Market. Full buyouts for up to 100 guests. We handle everything; call 613-241-6221.":
     "Événements privés au Speakeasy Ottawa, 55, rue York dans le Marché By. Location complète jusqu'à 100 invités. Nous nous occupons de tout : 613-241-6221.",
   "Visit Speakeasy Ottawa at 55 York Street, Ottawa. Reservations by phone 613-241-6221. Live hours, map and contact.":
@@ -511,7 +511,7 @@ const FR = {
   "Bar Rail Drinks": "Alcools de base",
   "Rail spirits, five dollars, both windows.": "Spiritueux de base, cinq dollars, aux deux moments.",
   "Staying for dinner?": "Vous restez souper?",
-  "Arrive at four,": "Arrivez à 16 h,",
+  "Arrive at five,": "Arrivez à 17 h,",
   "stay for three courses.": "restez pour trois services.",
   "The Speakeasy Table is $49 for three courses, Wednesday, with seatings from 5 to 7. Happy hour runs until six, so the first drink is on the house's terms.":
     "La Table Speakeasy, c'est trois services pour 49 $, le mercredi, avec des services de 17 h à 19 h. Le happy hour dure jusqu'à 18 h : le premier verre se prend aux conditions de la maison.",
@@ -652,10 +652,10 @@ const FR = {
   "Thu to Sun": "Jeu au dim",
   "Kitchen and bar, four nights a week. Live music Thursday to Saturday, from 7 PM.": "Cuisine et bar, quatre soirs par semaine. Musique live du jeudi au samedi, dès 19 h.",
   "Sets from Thursday, new pours and the odd secret. Come find us.": "Des spectacles dès le jeudi, de nouveaux services et quelques secrets. Venez nous trouver.",
-  "Thursday to Sunday on the stage": "Du jeudi au dimanche sur scène",
-  "Live, Thursday to Sunday": "En direct, du jeudi au dimanche",
-  "Someone on the stage Thursday to Sunday during dinner service, free to anyone dining with us: no ticket, no cover, no list. Ticketed concerts sit on the same calendar, marked in red.": "Quelqu'un sur scène du jeudi au dimanche pendant le service du souper, gratuit pour toute personne qui soupe avec nous : sans billet, sans frais d'entrée, sans liste. Les concerts à billets figurent au même calendrier, en rouge.",
-  "Thursday to Sunday, usually from 7 PM, no cover. Call for tonight's line-up.": "Du jeudi au dimanche, généralement dès 19 h, sans frais d'entrée. Appelez pour la programmation du soir.",
+  "Thursday to Saturday on the stage": "Du jeudi au samedi sur scène",
+  "Live, Thursday to Saturday": "En direct, du jeudi au samedi",
+  "Someone on the stage Thursday to Saturday during dinner service, free to anyone dining with us: no ticket, no cover, no list. Ticketed concerts sit on the same calendar, marked in red.": "Quelqu'un sur scène du jeudi au samedi pendant le service du souper, gratuit pour toute personne qui soupe avec nous : sans billet, sans frais d'entrée, sans liste. Les concerts à billets figurent au même calendrier, en rouge.",
+  "Thursday to Saturday, usually from 7 PM, no cover. Call for tonight's line-up.": "Du jeudi au samedi, généralement dès 19 h, sans frais d'entrée. Appelez pour la programmation du soir.",
   "Worth knowing": "Bon à savoir",
   "Two Ways to": "Deux Façons de",
   "Sit Down.": "S'attabler.",
@@ -667,7 +667,8 @@ const FR = {
   "Starter · Main · Dessert": "Entrée · Plat · Dessert",
   "Wednesday · seatings 5 to 7 PM": "Mercredi · services de 17 h à 19 h",
   "Book the Table": "Réserver la Table",
-  "Every day we are open": "Chaque jour où nous sommes ouverts",
+  "Wednesday to Saturday": "Du mercredi au samedi",
+  "Wed and Thu from 5 PM · Fri and Sat from 4 PM": "Mer et jeu dès 17 h · ven et sam dès 16 h",
   "Happy": "Happy",
   "Hour.": "Hour.",
   "4 to 6 PM": "16 h à 18 h",
