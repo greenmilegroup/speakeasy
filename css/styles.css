@@ -2023,3 +2023,7 @@ html:not(.js) .enq[hidden]{display:block!important}
 /* v19 — the Society's two ways in: join now, or ask first. */
 .offer__cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:0}
 .offer__cta .btn{margin:0}
+
+/* v20 — Sunday to Tuesday the room opens only for shows and private bookings,
+   which the hours table can only render as "closed". */
+.visit__note{margin:14px 0 0;font-size:.86rem;line-height:1.55;color:var(--muted);max-width:44ch}
