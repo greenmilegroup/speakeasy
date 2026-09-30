@@ -273,6 +273,12 @@ const FR = {
   "Saxophone": "Saxophone",
   "Saxophonist": "Saxophoniste",
   "Piano + vocals": "Piano et chant",
+  "Guitar and vocals": "Guitare et chant",
+  "Open Mic": "Micro ouvert",
+  "Open stage": "Scène ouverte",
+  "Private event": "Événement privé",
+  "Full buyout": "Privatisation complète",
+  "Not open to the public": "Fermé au public",
   "Saxophone; patio": "Saxophone; terrasse",
 
   /* Page titles and descriptions, used by tools/build-fr.mjs for the /fr/
