@@ -42,7 +42,7 @@ turning up without a ticket, and a listing has no way to say "sometimes".
 **Happy hour** — from doors until 6 PM, and 10 PM to close: Wednesday and
 Thursday from 5 PM, Friday and Saturday from 4 PM.
 
-**The Speakeasy Table** (prix fixe) — $49, Wednesday, seatings 5 to 7 PM.
+**The Speakeasy Table** (prix fixe) — $49, Wednesday and Thursday, all evening.
 
 **Nearby landmarks**, if a description mentions them: **Rogers Centre Ottawa**
 (renamed from the Shaw Centre in October 2024) and the Rideau Centre.
