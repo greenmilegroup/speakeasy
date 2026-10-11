@@ -496,8 +496,8 @@ const FR = {
   "Happy hour at Speakeasy Ottawa, ByWard Market: from doors until 6 PM, and 10 PM to close. $1 oysters, half price cocktail of the week, $5 rail drinks.":
     "Happy hour au Speakeasy Ottawa, Marché By : de l'ouverture à 18 h et 22 h à la fermeture. Huîtres à 1 $, cocktail de la semaine à moitié prix, alcools à 5 $.",
   "The Speakeasy Table · Prix Fixe · Speakeasy Ottawa": "La Table Speakeasy · Prix fixe · Speakeasy Ottawa",
-  "The Speakeasy Table, Speakeasy Ottawa: a curated three course evening for $49 per guest. Wednesday, seatings 5 to 7 PM. Book on OpenTable.":
-    "La Table Speakeasy, Speakeasy Ottawa : une soirée trois services, 49 $ par personne. Le mercredi, services de 17 h à 19 h. Réservez sur OpenTable.",
+  "The Speakeasy Table, Speakeasy Ottawa: a curated three course evening for $49 per guest. Wednesday and Thursday, all evening. Book on OpenTable.":
+    "La Table Speakeasy, Speakeasy Ottawa : une soirée trois services, 49 $ par personne. Les mercredis et jeudis, toute la soirée. Réservez sur OpenTable.",
   "Happy Hour": "Happy Hour",
   "Prix Fixe": "Prix fixe",
   "Two windows a night, early and late. Dollar oysters, the cocktail of the week at half price, and $5 bar rail drinks.":
@@ -519,8 +519,8 @@ const FR = {
   "Staying for dinner?": "Vous restez souper?",
   "Arrive at five,": "Arrivez à 17 h,",
   "stay for three courses.": "restez pour trois services.",
-  "The Speakeasy Table is $49 for three courses, Wednesday, with seatings from 5 to 7. Happy hour runs until six, so the first drink is on the house's terms.":
-    "La Table Speakeasy, c'est trois services pour 49 $, le mercredi, avec des services de 17 h à 19 h. Le happy hour dure jusqu'à 18 h : le premier verre se prend aux conditions de la maison.",
+  "The Speakeasy Table is $49 for three courses, Wednesday and Thursday, all evening. Happy hour runs until six, so the first drink is on the house's terms.":
+    "La Table Speakeasy, c'est trois services pour 49 $, les mercredis et jeudis, toute la soirée. Le happy hour dure jusqu'à 18 h : le premier verre se prend aux conditions de la maison.",
   "The Speakeasy Table": "La Table Speakeasy",
   "Prix fixe · now on OpenTable": "Prix fixe · maintenant sur OpenTable",
   "A curated three course evening. Starter, main and dessert for one price, with live music on the nights the stage is lit.":
@@ -540,8 +540,8 @@ const FR = {
   "Come early": "Venez tôt",
   "Happy hour": "Happy hour",
   "first.": "d'abord.",
-  "The Table starts at five, and so does happy hour: dollar oysters, the cocktail of the week at half price and $5 bar rail drinks until six. Live music with dinner Thursday to Saturday.":
-    "La Table commence à 17 h, et le happy hour aussi : huîtres à un dollar, cocktail de la semaine à moitié prix et alcools de base à 5 $ jusqu'à 18 h. Musique live avec le souper du jeudi au samedi.",
+  "The Table runs all evening Wednesday and Thursday, and happy hour opens with it: dollar oysters, the cocktail of the week at half price and $5 bar rail drinks until six. Live music with dinner Thursday to Saturday.":
+    "La Table est servie toute la soirée les mercredis et jeudis, et le happy hour commence avec elle : huîtres à un dollar, cocktail de la semaine à moitié prix et alcools de base à 5 $ jusqu'à 18 h. Musique live avec le souper du jeudi au samedi.",
   "What's on stage →": "Sur scène →",
   "Sunday to Tuesday we open for ticketed shows and private events only.":
     "Du dimanche au mardi, nous ouvrons uniquement pour les spectacles sur billet et les événements privés.",
@@ -671,7 +671,7 @@ const FR = {
   "per guest": "par personne",
   "A curated three course evening.": "Une soirée trois services, soigneusement composée.",
   "Starter · Main · Dessert": "Entrée · Plat · Dessert",
-  "Wednesday · seatings 5 to 7 PM": "Mercredi · services de 17 h à 19 h",
+  "Wednesday and Thursday · all evening": "Les mercredis et jeudis · toute la soirée",
   "Book the Table": "Réserver la Table",
   "Wednesday to Saturday": "Du mercredi au samedi",
   "Wed and Thu from 5 PM · Fri and Sat from 4 PM": "Mer et jeu dès 17 h · ven et sam dès 16 h",
