@@ -177,7 +177,7 @@
     "image_url": "",
     "ticket_url": "",
     "ticketed": false,
-    "published": true
+    "published": false
   },
   {
     "id": "chris-jackson-2026-10-02",
@@ -267,7 +267,7 @@
     "image_url": "",
     "ticket_url": "",
     "ticketed": false,
-    "published": true
+    "published": false
   },
   {
     "id": "martin-leblanc-2026-10-08",
@@ -357,7 +357,7 @@
     "image_url": "",
     "ticket_url": "",
     "ticketed": false,
-    "published": true
+    "published": false
   },
   {
     "id": "alyssa-hope-2026-10-16",
@@ -432,7 +432,7 @@
     "image_url": "",
     "ticket_url": "",
     "ticketed": false,
-    "published": true
+    "published": false
   },
   {
     "id": "hayoung-lee-2026-10-22",
@@ -522,7 +522,7 @@
     "image_url": "",
     "ticket_url": "",
     "ticketed": false,
-    "published": true
+    "published": false
   },
   {
     "id": "claudia-caird-2026-10-30",
