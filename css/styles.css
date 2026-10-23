@@ -2004,6 +2004,18 @@ html:not(.js) .enq[hidden]{display:block!important}
 .rules__list p{grid-column:2;margin:0;color:var(--cream-2);line-height:1.6}
 .rules__date{margin:1.6rem 0 0;font-size:.85rem;color:var(--muted);text-align:center}
 
+/* ---- plain legal document (privacy.html) ----
+   A policy is read, not skimmed: one column at a comfortable measure, headings
+   that separate rather than shout. Bulleted points reuse .booking__points. */
+.legal{max-width:720px;margin:0 auto}
+.legal h2{margin:2.6rem 0 .8rem;font-family:var(--f-display);font-weight:600;
+  font-size:clamp(1.25rem,2.4vw,1.5rem);color:var(--cream);letter-spacing:.02em}
+.legal > h2:first-child{margin-top:0}
+.legal p{margin:0 0 1.1rem;color:var(--cream-2);line-height:1.7}
+.legal ul.booking__points{margin:0}
+.legal ul.booking__points + p{margin-top:1.1rem}
+.legal strong{color:var(--cream)}
+
 /* ==================================================================   v18 · MENU 2026
    Dietary markers beside a dish, the legend that explains them, and the
    allergen note the printed menu carries. The marker sits between the name and

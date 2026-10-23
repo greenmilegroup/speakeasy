@@ -684,6 +684,76 @@ const FR = {
   "On offer": "Nos offres",
   "Prix Fixe &": "Prix fixe &",
   "Happy Hour.": "Happy Hour.",
+
+  /* ---- privacy policy ---- */
+  "Privacy Policy · Speakeasy Ottawa": "Politique de confidentialité · Speakeasy Ottawa",
+  "What personal information Speakeasy Ottawa collects, why we collect it, and the choices you have. Written to Canada's privacy law, PIPEDA.":
+    "Quels renseignements personnels Speakeasy Ottawa recueille, pourquoi nous les recueillons et les choix qui s'offrent à vous. Rédigée selon la loi canadienne sur la protection des renseignements personnels, la LPRPDE.",
+  "Last updated: October 23, 2026": "Dernière mise à jour : le 23 octobre 2026",
+  "Privacy Policy": "Politique de confidentialité",
+  "Privacy": "Confidentialité",
+  "Speakeasy Ottawa is operated by 14197852 Canada Inc. at 55 York Street, Ottawa, Ontario K1N 9B8. This policy explains what personal information we collect, why we collect it, and the choices you have. We follow Canada's Personal Information Protection and Electronic Documents Act (PIPEDA).":
+    "Speakeasy Ottawa est exploité par 14197852 Canada Inc., au 55, rue York, Ottawa (Ontario) K1N 9B8. Cette politique explique quels renseignements personnels nous recueillons, pourquoi nous les recueillons et les choix qui s'offrent à vous. Nous nous conformons à la Loi sur la protection des renseignements personnels et les documents électroniques (LPRPDE).",
+
+  "What we collect": "Ce que nous recueillons",
+  "Event inquiries.": "Demandes d'événement.",
+  "When you ask about a private event through our website, a Facebook or Instagram lead form, Google, email or phone, we collect what you give us: your name, email, phone number, company, event date, guest count, budget range and any details about your event.":
+    "Lorsque vous nous écrivez au sujet d'un événement privé par notre site, par un formulaire Facebook ou Instagram, par Google, par courriel ou par téléphone, nous recueillons ce que vous nous donnez : votre nom, votre courriel, votre numéro de téléphone, votre entreprise, la date de l'événement, le nombre d'invités, votre fourchette budgétaire et tout détail concernant votre événement.",
+  "Reservations.": "Réservations.",
+  "Table bookings are handled by OpenTable under": "Les réservations de table sont traitées par OpenTable selon",
+  "its own privacy policy": "sa propre politique de confidentialité",
+  "Payments.": "Paiements.",
+  "Deposits and memberships are processed by": "Les dépôts et les abonnements sont traités par",
+  ". We never see or store your full card number.": ". Nous ne voyons ni ne conservons jamais votre numéro de carte complet.",
+  "Website use.": "Utilisation du site.",
+  "Our website uses cookies and similar tools, including the Meta Pixel and Google tags, to measure visits and how well our ads work. These collect information such as pages viewed, the ad that brought you here, device and browser type, and approximate location.":
+    "Notre site utilise des témoins et des outils semblables, dont le pixel Meta et les balises Google, pour mesurer les visites et l'efficacité de nos annonces. Ils recueillent par exemple les pages consultées, l'annonce qui vous a amené ici, le type d'appareil et de navigateur, ainsi qu'une localisation approximative.",
+
+  "How we use it": "Ce que nous en faisons",
+  "To reply to your inquiry, prepare a quote and plan your event.":
+    "Répondre à votre demande, préparer une soumission et planifier votre événement.",
+  "To follow up about an event you asked about.":
+    "Faire un suivi au sujet d'un événement dont vous nous avez parlé.",
+  "To understand which of our ads and pages are useful, and to show our ads to people likely to be interested, including people who have visited our website.":
+    "Comprendre lesquelles de nos annonces et de nos pages sont utiles, et présenter nos annonces aux personnes susceptibles d'être intéressées, y compris celles qui ont visité notre site.",
+  "To meet our legal, tax and accounting obligations.":
+    "Respecter nos obligations légales, fiscales et comptables.",
+  "We do not sell your personal information.": "Nous ne vendons pas vos renseignements personnels.",
+
+  "Email from us": "Nos courriels",
+  "We only send marketing email with your consent or where Canada's Anti-Spam Legislation (CASL) allows it, for example after you have asked us about an event. Every marketing email includes a way to unsubscribe.":
+    "Nous n'envoyons des courriels de marketing qu'avec votre consentement ou lorsque la Loi canadienne anti-pourriel (LCAP) le permet, par exemple après que vous nous avez écrit au sujet d'un événement. Chaque courriel de marketing comporte un moyen de se désabonner.",
+
+  "Who we share it with": "Avec qui nous les partageons",
+  "We share information only with service providers who help us run the business, and only as needed. These include Meta (Facebook and Instagram), Google, OpenTable, Stripe, and our email and accounting providers. Some of them may store information outside Canada, where it is subject to local law.":
+    "Nous ne partageons des renseignements qu'avec les fournisseurs de services qui nous aident à exploiter l'entreprise, et seulement dans la mesure nécessaire. Il s'agit notamment de Meta (Facebook et Instagram), de Google, d'OpenTable, de Stripe, ainsi que de nos fournisseurs de courriel et de comptabilité. Certains d'entre eux peuvent conserver des renseignements à l'extérieur du Canada, où ils sont soumis au droit local.",
+
+  "Advertising and your choices": "Publicité et vos choix",
+  "You can block or delete cookies in your browser settings.":
+    "Vous pouvez bloquer ou supprimer les témoins dans les réglages de votre navigateur.",
+  "You can manage how Meta uses data for ads in your Facebook or Instagram":
+    "Vous pouvez gérer l'utilisation de vos données par Meta à des fins publicitaires dans vos réglages Facebook ou Instagram, sous",
+  "ad preferences": "préférences publicitaires",
+  "You can manage Google ad personalisation at":
+    "Vous pouvez gérer la personnalisation des annonces Google à",
+  "You can opt out of interest-based ads from participating companies through the":
+    "Vous pouvez refuser les annonces par centres d'intérêt des entreprises participantes auprès de",
+  "Digital Advertising Alliance of Canada": "l'Alliance de la publicité numérique du Canada",
+
+  "How long we keep it": "Combien de temps nous les conservons",
+  "We keep inquiry and event records for as long as we need them to serve you, and financial records for as long as Canadian tax law requires. After that, we delete them or make them anonymous.":
+    "Nous conservons les dossiers de demandes et d'événements aussi longtemps qu'ils nous sont nécessaires pour vous servir, et les dossiers financiers aussi longtemps que la loi fiscale canadienne l'exige. Ensuite, nous les supprimons ou les rendons anonymes.",
+
+  "Your rights": "Vos droits",
+  "You can ask to see the personal information we hold about you, correct it, or ask us to delete it, subject to any legal requirement to keep it. You can withdraw consent at any time.":
+    "Vous pouvez demander à consulter les renseignements personnels que nous détenons à votre sujet, à les faire corriger ou à les faire supprimer, sous réserve de toute obligation légale de les conserver. Vous pouvez retirer votre consentement à tout moment.",
+
+  "Contact": "Nous joindre",
+  "For any privacy question or request, email":
+    "Pour toute question ou demande en matière de confidentialité, écrivez à",
+  ". If you are not satisfied with our answer, you can contact the":
+    ". Si notre réponse ne vous satisfait pas, vous pouvez vous adresser au",
+  "Office of the Privacy Commissioner of Canada": "Commissariat à la protection de la vie privée du Canada",
 };
 
 /* The live open/closed badge and the hours table are composed at runtime from

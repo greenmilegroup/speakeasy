@@ -21,7 +21,7 @@ import { translateText } from '../js/i18n.js';
 const root = new URL('..', import.meta.url);
 const at = p => new URL(p, root);
 const SITE = 'https://speakeasyottawa.com';
-const PAGES = ['index.html', 'drinks.html', 'menu.html', 'events.html', 'host-your-event.html', 'visit.html', 'happy-hour.html', 'prix-fixe.html', 'society.html', 'society-welcome.html'];
+const PAGES = ['index.html', 'drinks.html', 'menu.html', 'events.html', 'host-your-event.html', 'visit.html', 'happy-hour.html', 'prix-fixe.html', 'society.html', 'society-welcome.html', 'privacy.html'];
 
 /* Pages people reach by link, not by search: translated and cross-linked like
    any other, but never listed in the sitemap. */

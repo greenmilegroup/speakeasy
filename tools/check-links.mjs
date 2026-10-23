@@ -17,14 +17,21 @@ const EVENTBRITE = one('js/config.js', /EVENTBRITE_URL\s*=\s*'([^']+)'/,        
 const pages = readdirSync(new URL('..', import.meta.url))
   .filter(f => f.endsWith('.html') && f !== 'admin.html');
 
-let bad = 0, seen = 0;
+/* privacy.html links to these companies' own privacy policies, which are not
+   booking links and must not be held to the booking URL. The exemption is kept
+   to their legal and help sections, so a mistyped Book button still fails. */
+const LEGAL = /^https:\/\/www\.(?:opentable\.com\/legal\/|eventbrite\.[a-z.]+\/(?:help|legal|l)\/)/;
+
+let bad = 0, seen = 0, legal = 0;
 for (const p of pages) {
   const html = read(p);
   for (const [, href] of html.matchAll(/href="(https:\/\/www\.opentable\.com\/[^"]+)"/g)) {
+    if (LEGAL.test(href)) { legal++; continue; }
     seen++;
     if (href !== OPENTABLE) { console.error(`check-links: ${p} books at ${href}, site.js says ${OPENTABLE}`); bad++; }
   }
   for (const [, href] of html.matchAll(/href="(https:\/\/www\.eventbrite\.[^"]+)"/g)) {
+    if (LEGAL.test(href)) { legal++; continue; }
     seen++;
     if (!href.startsWith(EVENTBRITE)) { console.error(`check-links: ${p} links ${href}, config.js says ${EVENTBRITE}`); bad++; }
   }
@@ -38,6 +45,6 @@ for (const p of pages) {
 }
 
 if (bad) process.exit(1);
-console.log(`links consistent (${seen} booking, ticketing and map links across ${pages.length} pages)`);
+console.log(`links consistent (${seen} booking, ticketing and map links across ${pages.length} pages, ${legal} policy links skipped)`);
 console.log(`  OpenTable  ${OPENTABLE}`);
 console.log(`  Eventbrite ${EVENTBRITE}`);
