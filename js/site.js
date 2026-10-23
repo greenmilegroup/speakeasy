@@ -5,6 +5,38 @@
    ========================================================================= */
 'use strict';
 
+/* ---------- Google Ads tracking (Google tag AW-11032368546) ---------- */
+const GTAG_ID = 'AW-11032368546';
+// Conversion labels from Google Ads. Leave '' until a label is supplied.
+const CONVERSION_LABELS = {
+  event_enquiry: '',
+  phone_call: '',
+  contact_form: '',
+};
+window.dataLayer = window.dataLayer || [];
+function gtag() { window.dataLayer.push(arguments); }
+window.gtag = window.gtag || gtag;
+(() => {
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = `https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`;
+  document.head.appendChild(s);
+  window.gtag('js', new Date());
+  window.gtag('config', GTAG_ID);
+})();
+export function track(name, params = {}) {
+  try {
+    window.gtag('event', name, params);
+    const label = CONVERSION_LABELS[name];
+    if (label) window.gtag('event', 'conversion', { send_to: `${GTAG_ID}/${label}`, ...params });
+  } catch (_) { /* tracking must never break the site */ }
+}
+// Phone taps anywhere on the site, including links injected by this script
+document.addEventListener('click', (e) => {
+  const a = e.target.closest && e.target.closest('a[href^="tel:"]');
+  if (a) track('phone_call', { link_url: a.getAttribute('href') });
+});
+
 export const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 export const finePointer  = matchMedia('(pointer: fine)').matches;
 export const $  = (s, c = document) => c.querySelector(s);
@@ -210,6 +242,7 @@ function forms() {
       note.textContent = done;
       toast('Message sent · tell no one');
       form.reset();
+      track(payload.form === 'event' ? 'event_enquiry' : payload.form === 'contact' ? 'contact_form' : `form_${payload.form}`, { form: payload.form });
     } catch (err) {
       note.classList.add('err');
       note.textContent = err.message === 'Failed to fetch'
