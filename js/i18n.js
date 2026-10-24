@@ -689,7 +689,7 @@ const FR = {
   "Privacy Policy · Speakeasy Ottawa": "Politique de confidentialité · Speakeasy Ottawa",
   "What personal information Speakeasy Ottawa collects, why we collect it, and the choices you have. Written to Canada's privacy law, PIPEDA.":
     "Quels renseignements personnels Speakeasy Ottawa recueille, pourquoi nous les recueillons et les choix qui s'offrent à vous. Rédigée selon la loi canadienne sur la protection des renseignements personnels, la LPRPDE.",
-  "Last updated: October 24, 2026": "Dernière mise à jour : le 24 octobre 2026",
+  "Last updated: October 23, 2026": "Dernière mise à jour : le 23 octobre 2026",
   "Privacy Policy": "Politique de confidentialité",
   "Privacy": "Confidentialité",
   "Speakeasy Ottawa is operated by 14197852 Canada Inc. at 55 York Street, Ottawa, Ontario K1N 9B7. This policy explains what personal information we collect, why we collect it, and the choices you have. We follow Canada's Personal Information Protection and Electronic Documents Act (PIPEDA).":
