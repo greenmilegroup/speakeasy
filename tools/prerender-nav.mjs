@@ -28,6 +28,7 @@ const grab = (re, what) => {
 const NAV = new Function(`return ${grab(/const NAV = (\[[\s\S]*?\n\]);/, 'NAV array')}`)();
 const TEL = grab(/const TEL = '([^']+)'/, 'TEL constant');
 const MORE = new Function(`return ${grab(/const MORE = (\[[\s\S]*?\n\]);/, 'MORE array')}`)();
+const FINE = grab(/const FINE = `([\s\S]*?)`;/, 'FINE constant');
 
 /* A nested entry carries its children in a fourth slot; the flat list is what
    a crawler should follow. */
@@ -48,7 +49,8 @@ const header = page => {
 const footLinks = [...flat, ...MORE].map(([, href, label]) => `<a href="${href}">${label}</a>`).join('');
 const footer = `<div class="footer__inner"><nav class="footer__links" aria-label="Footer">${footLinks}</nav>`
   + `<div class="footer__meta"><p>55 York Street, Ottawa · K1N 9B7</p>`
-  + `<p><a href="tel:${TEL}">613-241-6221</a></p></div></div>`;
+  + `<p><a href="tel:${TEL}">613-241-6221</a></p></div></div>`
+  + `<p class="footer__fine">${FINE}</p>`;
 
 let done = 0;
 for (const page of readdirSync(at('dist')).filter(f => f.endsWith('.html'))) {

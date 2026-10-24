@@ -48,6 +48,15 @@ import { SCHEDULE, DAY_NAMES, clock, span, closeLabel, openSession, nightsOpen, 
 const TEL = '+16132416221';
 const OPENTABLE = 'https://www.opentable.com/r/speakeasy-tapas-lounge-ottawa';
 
+/* The footer's last line. tools/prerender-nav.mjs reads this string out of
+   this file, so the no-JS footer carries the same line and the privacy page
+   is reachable by following links, not only by running scripts.
+
+   The copyright sentence keeps its own element. js/i18n.js is keyed on whole
+   text nodes, so appending the link straight onto that sentence would change
+   the key and quietly ship the line in English on the French site. */
+const FINE = `<span>© 2022 Speakeasy Ottawa · ByWard Market · Please enjoy responsibly.</span> · <a href="privacy.html">Privacy</a>`;
+
 /* pages, in nav order */
 /* Pages linked from the footer but not the header: the offers each have a page
    of their own for search, while the header stays six items. */
@@ -161,7 +170,7 @@ function injectChrome() {
         <p class="footer__social"><a href="https://www.instagram.com/speakeasy_ottawa/?hl=en" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a> · <a href="https://www.facebook.com/speakeasyottawa" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a></p>
       </div>
     </div>
-    <p class="footer__fine">© 2022 Speakeasy Ottawa · ByWard Market · Please enjoy responsibly.</p>`;
+    <p class="footer__fine">${FINE}</p>`;
 }
 
 /* ---------- nav behaviour ---------- */
