@@ -9,8 +9,8 @@
 const GTAG_ID = 'AW-11032368546';
 // Conversion labels from Google Ads. Leave '' until a label is supplied.
 const CONVERSION_LABELS = {
-  event_enquiry: '',
-  phone_call: '',
+  event_enquiry: 'XPg5CNGAtqcdEKKr0owp',
+  phone_call: 'Vv3xCNSAtqcdEKKr0owp',
   contact_form: '',
 };
 window.dataLayer = window.dataLayer || [];
