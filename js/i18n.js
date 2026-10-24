@@ -689,11 +689,11 @@ const FR = {
   "Privacy Policy · Speakeasy Ottawa": "Politique de confidentialité · Speakeasy Ottawa",
   "What personal information Speakeasy Ottawa collects, why we collect it, and the choices you have. Written to Canada's privacy law, PIPEDA.":
     "Quels renseignements personnels Speakeasy Ottawa recueille, pourquoi nous les recueillons et les choix qui s'offrent à vous. Rédigée selon la loi canadienne sur la protection des renseignements personnels, la LPRPDE.",
-  "Last updated: October 23, 2026": "Dernière mise à jour : le 23 octobre 2026",
+  "Last updated: October 24, 2026": "Dernière mise à jour : le 24 octobre 2026",
   "Privacy Policy": "Politique de confidentialité",
   "Privacy": "Confidentialité",
-  "Speakeasy Ottawa is operated by 14197852 Canada Inc. at 55 York Street, Ottawa, Ontario K1N 9B8. This policy explains what personal information we collect, why we collect it, and the choices you have. We follow Canada's Personal Information Protection and Electronic Documents Act (PIPEDA).":
-    "Speakeasy Ottawa est exploité par 14197852 Canada Inc., au 55, rue York, Ottawa (Ontario) K1N 9B8. Cette politique explique quels renseignements personnels nous recueillons, pourquoi nous les recueillons et les choix qui s'offrent à vous. Nous nous conformons à la Loi sur la protection des renseignements personnels et les documents électroniques (LPRPDE).",
+  "Speakeasy Ottawa is operated by 14197852 Canada Inc. at 55 York Street, Ottawa, Ontario K1N 9B7. This policy explains what personal information we collect, why we collect it, and the choices you have. We follow Canada's Personal Information Protection and Electronic Documents Act (PIPEDA).":
+    "Speakeasy Ottawa est exploité par 14197852 Canada Inc., au 55, rue York, Ottawa (Ontario) K1N 9B7. Cette politique explique quels renseignements personnels nous recueillons, pourquoi nous les recueillons et les choix qui s'offrent à vous. Nous nous conformons à la Loi sur la protection des renseignements personnels et les documents électroniques (LPRPDE).",
 
   "What we collect": "Ce que nous recueillons",
   "Event inquiries.": "Demandes d'événement.",
@@ -706,8 +706,8 @@ const FR = {
   "Deposits and memberships are processed by": "Les dépôts et les abonnements sont traités par",
   ". We never see or store your full card number.": ". Nous ne voyons ni ne conservons jamais votre numéro de carte complet.",
   "Website use.": "Utilisation du site.",
-  "Our website uses cookies and similar tools, including the Meta Pixel and Google tags, to measure visits and how well our ads work. These collect information such as pages viewed, the ad that brought you here, device and browser type, and approximate location.":
-    "Notre site utilise des témoins et des outils semblables, dont le pixel Meta et les balises Google, pour mesurer les visites et l'efficacité de nos annonces. Ils recueillent par exemple les pages consultées, l'annonce qui vous a amené ici, le type d'appareil et de navigateur, ainsi qu'une localisation approximative.",
+  "Our website uses cookies and similar tools, including Google tags, to measure visits and how well our ads work. These collect information such as pages viewed, the ad that brought you here, device and browser type, and approximate location.":
+    "Notre site utilise des témoins et des outils semblables, dont les balises Google, pour mesurer les visites et l'efficacité de nos annonces. Ils recueillent par exemple les pages consultées, l'annonce qui vous a amené ici, le type d'appareil et de navigateur, ainsi qu'une localisation approximative.",
 
   "How we use it": "Ce que nous en faisons",
   "To reply to your inquiry, prepare a quote and plan your event.":
