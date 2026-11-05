@@ -233,7 +233,7 @@ const FR = {
   "Worth making plans for": "À mettre à votre agenda",
   "The Main": "L'Événement",
   "Event.": "Principal.",
-  "Comedy, speed dating and the nights people book ahead for. Every ticketed event is sold through Eventbrite, so your seat is confirmed before you arrive.": "Humour, rencontres express et les soirées que l'on réserve d'avance. Chaque événement à billets est vendu sur Eventbrite : votre place est confirmée avant même d'arriver.",
+  "Comedy and the nights people book ahead for. Every ticketed event is sold through Eventbrite, so your seat is confirmed before you arrive.": "Humour et les soirées que l'on réserve d'avance. Chaque événement à billets est vendu sur Eventbrite : votre place est confirmée avant même d'arriver.",
   "Free with dinner": "Gratuit avec le souper",
   "Live": "Musique",
   "Music.": "Live.",
@@ -279,8 +279,8 @@ const FR = {
     "10 cocktails signature, une carte des vins choisie, bières et cidres en bouteille au Speakeasy Ottawa.",
   "First plates, chef plates and sweets at Speakeasy Ottawa: beef tataki, tuna tartare, burrata bruschetta, NY striploin, duck confit and more.":
     "Premières assiettes, plats du chef et douceurs au Speakeasy Ottawa : tataki de bœuf, tartare de thon, bruschetta à la burrata, contre-filet New York, confit de canard et plus.",
-  "Live music Friday and Saturday plus speed dating, comedy and more at Speakeasy Ottawa. See what's on and book your table.":
-    "Musique live les vendredis et samedis, plus speed dating, humour et autres soirées au Speakeasy Ottawa. Voyez la programmation et réservez votre table.",
+  "Live music Friday and Saturday plus comedy and more at Speakeasy Ottawa. See what's on and book your table.":
+    "Musique live les vendredis et samedis, plus humour et autres soirées au Speakeasy Ottawa. Voyez la programmation et réservez votre table.",
   "Private events at Speakeasy Ottawa, 55 York Street in the ByWard Market. Full buyouts for up to 100 guests. We handle everything; call 613-241-6221.":
     "Événements privés au Speakeasy Ottawa, 55, rue York dans le Marché By. Location complète jusqu'à 100 invités. Nous nous occupons de tout : 613-241-6221.",
   "Visit Speakeasy Ottawa at 55 York Street, Ottawa. Reservations by phone 613-241-6221. Live hours, map and contact.":
