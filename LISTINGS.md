@@ -6,12 +6,15 @@ control, where a wrong hour shows up in a diff and a build guard catches it.
 The other four are forms somebody typed into once, and nothing tells you when
 one of them goes stale.
 
-Two have already gone wrong this way — Google carried a happy hour starting at
+Two have gone wrong this way before. Google carried a happy hour starting at
 **4 a.m.**, and the private events page named the **Shaw Centre** for nearly two
-years after it was renamed. Both were found by eye, months late.
+years after it was renamed. Both were found by eye, months late. **Both are
+fixed** — they are here as a record of how the drift happens, not as open items.
 
 This file is the thing to check them against. Work down it when anything
-changes, and when nothing has, once a quarter.
+changes, and when nothing has, once a quarter. Put the date in **Last checked**
+at the foot of this file when you do, so the next person knows whether anything
+below is still true.
 
 ## The details
 
@@ -69,7 +72,7 @@ they ever reach the site.
 
 - Name, address, phone
 - Opening hours, and **Closed on Mondays**
-- More hours → Happy hour (this is where the 4 a.m. was)
+- More hours → Happy hour (the 4 a.m. was here; fixed, but worth a glance)
 - The description, for the old venue name or the Shaw Centre
 - Photos and menu link
 
@@ -81,14 +84,14 @@ they ever reach the site.
 
 ## Known to be wrong
 
+Nothing here needs fixing at Google: the happy hour that read 4 a.m. was
+corrected in October, and so was the Shaw Centre line on the site.
+
 - **OpenTable and Eventbrite still carry the retired name**, *Speakeasy Tapas
   Lounge*, in their page titles and in their URLs. Both URLs above are the ones
   the site links to, so they cannot simply be abandoned: renaming on those
   platforms may change the address, and `_redirects`, `js/site.js` and
   `js/events.js` point at them. Change the site's links in the same pass.
-- **Google's happy hour** read 4 a.m. instead of 4 p.m. Fix it in More hours,
-  and check the main opening hours while there — a listing that sends people to
-  a closed door costs more than a wrong happy hour.
 
 ## The one that flows the other way
 
@@ -96,3 +99,12 @@ The rating on the home page — **4.5 from 368 reviews** — is copied *from*
 Google, not published to it. When it drifts far enough to look wrong, update it
 in the markup; `tools/add-schema.mjs` reads it from the visible page and puts it
 in the schema, so the two cannot disagree.
+
+## Last checked
+
+| Listing | Date | By |
+| --- | --- | --- |
+| Google Business Profile | 2026-11 | owner — happy hour confirmed correct |
+| OpenTable | — | |
+| Eventbrite | — | |
+| Instagram / Facebook | — | |
