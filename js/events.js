@@ -116,7 +116,7 @@ function renderTonight(all) {
        <ul class="tonight__list"><li><span class="tonight__time">${fmtShort(next.date)}</span><span class="tonight__name">Next up: ${esc(next.title)}, ${fmtTime(next.date)}</span></li></ul>
        <a class="btn btn--gold-sm" href="tel:+16132416221">Book a table</a>`
     : `<div class="tonight__mark"><span class="tonight__dot tonight__dot--quiet" aria-hidden="true"></span><p class="kicker">Tonight</p></div>
-       <ul class="tonight__list"><li><span class="tonight__name">Call for tonight’s line-up. The stage is rarely empty.</span></li></ul>
+       <ul class="tonight__list"><li><span class="tonight__name">Nothing on the stage tonight. Live music every Friday and Saturday.</span></li></ul>
        <a class="btn btn--gold-sm" href="tel:+16132416221">Call 613-241-6221</a>`;
 }
 
