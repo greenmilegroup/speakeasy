@@ -176,7 +176,7 @@ function describe(ev) {
   const who = ev.kicker ? `${ev.title} — ${ev.kicker}.` : `${ev.title}.`;
   const how = ev.ticketed
     ? 'Ticketed show at Speakeasy Ottawa, 55 York Street in the ByWard Market.'
-    : 'Live music with dinner at Speakeasy Ottawa, 55 York Street in the ByWard Market. No cover.';
+    : 'Live music with dinner at Speakeasy Ottawa, 55 York Street in the ByWard Market. Free.';
   return `${who} ${how}`;
 }
 

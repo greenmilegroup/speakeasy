@@ -51,8 +51,8 @@ const FR = {
   'Seat.': 'place.',
   "Tucked into Ottawa's ByWard Market, Speakeasy is an elegant restaurant and live-music venue where the lights stay low and the night runs long.":
     'Niché dans le Marché By, le Speakeasy est un restaurant élégant et une salle de spectacle où la lumière reste tamisée et la soirée se prolonge.',
-  'Internationally inspired plates, craft cocktails poured with prohibition-era swagger, live music every Friday and Saturday, and a candlelit room that feels like a secret worth keeping. Pull up a chair.':
-    "Des assiettes d'inspiration internationale, des cocktails d'artisan servis avec l'allure de la prohibition, de la musique live tous les vendredis et samedis et une salle aux chandelles qui a tout d'un secret bien gardé. Prenez place.",
+  'Internationally inspired plates, craft cocktails poured with prohibition-era swagger, live music every night we\'re open, and a candlelit room that feels like a secret worth keeping. Pull up a chair.':
+    "Des assiettes d'inspiration internationale, des cocktails d'artisan servis avec l'allure de la prohibition, de la musique live tous les soirs d'ouverture et une salle aux chandelles qui a tout d'un secret bien gardé. Prenez place.",
   'This must be the place.': 'Ce doit être ici.',
   'Live music from 7 PM': 'Musique live dès 19 h',
   'ByWard Market': 'Marché By',
@@ -229,7 +229,8 @@ const FR = {
   /* ---- interior pages: on stage, private events, reservations ---- */
   "Events": "Événements",
   "Here's what's on.": "Voici la programmation.",
-  "Live music with dinner, free to every guest. Plus ticketed nights worth crossing town for.": "De la musique live avec le souper, gratuite pour tous nos convives. Et des soirées à billets qui valent le déplacement.",
+  "Live music every night we're open, and it is free. A few special concerts are ticketed, and those are marked.":
+    "De la musique live tous les soirs d'ouverture, et c'est gratuit. Quelques concerts spéciaux sont à billets : ils sont indiqués.",
   "Worth making plans for": "À mettre à votre agenda",
   "The Main": "L'Événement",
   "Event.": "Principal.",
@@ -243,7 +244,7 @@ const FR = {
   "Tickets": "Billets",
   "Get tickets on Eventbrite": "Billets sur Eventbrite",
   "Add to calendar": "Ajouter au calendrier",
-  "No cover": "Sans frais d'entrée",
+  "Free": "Gratuit",
   "Tonight": "Ce soir",
   "Coming soon": "Bientôt",
   "The line-up for this month is still being booked.": "La programmation de ce mois est encore en préparation.",
@@ -251,7 +252,7 @@ const FR = {
   "Nothing on tonight": "Rien à l'affiche ce soir",
   "On now": "En cours",
   "Tomorrow": "Demain",
-  "Nothing on the stage tonight. Live music every Friday and Saturday.": "Rien sur scène ce soir. De la musique live tous les vendredis et samedis.",
+  "Nothing on the stage tonight. Live music Thursday to Saturday, always free.": "Rien sur scène ce soir. De la musique live du jeudi au samedi, toujours gratuite.",
   "Vocals": "Chant",
   "Piano": "Piano",
   "Saxophone": "Saxophone",
@@ -273,14 +274,14 @@ const FR = {
   "On Stage · Live Music & Events · Speakeasy Ottawa": "Sur Scène · Musique live et événements · Speakeasy Ottawa",
   "Host Your Event · Speakeasy Ottawa": "Organisez votre événement · Speakeasy Ottawa",
   "Reservations · Hours & Location · Speakeasy Ottawa": "Réservations · Heures et adresse · Speakeasy Ottawa",
-  "A hidden destination for food, music & celebrations in Ottawa's ByWard Market. Craft cocktails, tapas & live music Friday and Saturday. 55 York Street.":
-    "Une adresse cachée pour manger, écouter de la musique et célébrer dans le Marché By, à Ottawa. Cocktails maison, tapas et musique live les vendredis et samedis.",
+  "A hidden destination for food, music & celebrations in Ottawa's ByWard Market. Craft cocktails, tapas & live music Thursday to Saturday. 55 York Street.":
+    "Une adresse cachée pour manger, écouter de la musique et célébrer dans le Marché By, à Ottawa. Cocktails maison, tapas et musique live du jeudi au samedi.",
   "10 signature cocktails, a curated wine list, and bottled beer and cider at Speakeasy Ottawa.":
     "10 cocktails signature, une carte des vins choisie, bières et cidres en bouteille au Speakeasy Ottawa.",
   "First plates, chef plates and sweets at Speakeasy Ottawa: beef tataki, tuna tartare, burrata bruschetta, NY striploin, duck confit and more.":
     "Premières assiettes, plats du chef et douceurs au Speakeasy Ottawa : tataki de bœuf, tartare de thon, bruschetta à la burrata, contre-filet New York, confit de canard et plus.",
-  "Live music Friday and Saturday plus comedy and more at Speakeasy Ottawa. See what's on and book your table.":
-    "Musique live les vendredis et samedis, plus humour et autres soirées au Speakeasy Ottawa. Voyez la programmation et réservez votre table.",
+  "Free live music Thursday to Saturday, plus comedy and more at Speakeasy Ottawa. See what's on and book your table.":
+    "Musique live gratuite du jeudi au samedi, plus humour et autres soirées au Speakeasy Ottawa. Voyez la programmation et réservez votre table.",
   "Private events at Speakeasy Ottawa, 55 York Street in the ByWard Market. Full buyouts for up to 100 guests. We handle everything; call 613-241-6221.":
     "Événements privés au Speakeasy Ottawa, 55, rue York dans le Marché By. Location complète jusqu'à 100 invités. Nous nous occupons de tout : 613-241-6221.",
   "Visit Speakeasy Ottawa at 55 York Street, Ottawa. Reservations by phone 613-241-6221. Live hours, map and contact.":
@@ -479,14 +480,14 @@ const FR = {
   "Happy Hour · Speakeasy Ottawa": "Happy Hour · Speakeasy Ottawa",
   "Happy hour at Speakeasy Ottawa, ByWard Market: from doors until 6 PM, and 10 PM to close. $1 oysters, half price cocktail of the week, $5 rail drinks.":
     "Happy hour au Speakeasy Ottawa, Marché By : de l'ouverture à 18 h et 22 h à la fermeture. Huîtres à 1 $, cocktail de la semaine à moitié prix, alcools à 5 $.",
-  "The Speakeasy Table · Prix Fixe · Speakeasy Ottawa": "La Table Speakeasy · Prix fixe · Speakeasy Ottawa",
+  "The Speakeasy Table · Three Courses · Speakeasy Ottawa": "La Table Speakeasy · Trois services · Speakeasy Ottawa",
   "The Speakeasy Table, Speakeasy Ottawa: a curated three course evening for $49 per guest. Thursday, all evening. Book on OpenTable.":
     "La Table Speakeasy, Speakeasy Ottawa : une soirée trois services, 49 $ par personne. Les jeudis, toute la soirée. Réservez sur OpenTable.",
   "Happy Hour": "Happy Hour",
-  "Prix Fixe": "Prix fixe",
-  "Two windows a night, early and late. Dollar oysters, the cocktail of the week at half price, and $5 bar rail drinks.":
-    "Deux moments par soir, tôt et tard. Huîtres à un dollar, cocktail de la semaine à moitié prix et alcools de base à 5 $.",
-  "No ticket, no list, just a seat.": "Sans billet, sans liste, juste une place.",
+  "Three Courses": "Trois services",
+  "Two windows a night, early and late. Dollar oysters, the cocktail of the week at half price, and $5 house spirits.":
+    "Deux moments par soir, tôt et tard. Huîtres à un dollar, cocktail de la semaine à moitié prix et alcools de la maison à 5 $.",
+  "Walk in and take a seat.": "Entrez et prenez place.",
   "The hours": "Les heures",
   "Early,": "Tôt,",
   "and late.": "et tard.",
@@ -506,7 +507,7 @@ const FR = {
   "The Speakeasy Table is $49 for three courses on Thursday, all evening. Happy hour runs until six, so the first drink is on the house's terms.":
     "La Table Speakeasy, c'est trois services pour 49 $, le jeudi, toute la soirée. Le happy hour dure jusqu'à 18 h : le premier verre se prend aux conditions de la maison.",
   "The Speakeasy Table": "La Table Speakeasy",
-  "Prix fixe · now on OpenTable": "Prix fixe · maintenant sur OpenTable",
+  "Three courses · now on OpenTable": "Trois services · maintenant sur OpenTable",
   "A curated three course evening. Starter, main and dessert for one price, with live music on the nights the stage is lit.":
     "Une soirée trois services soigneusement composée. Entrée, plat et dessert pour un seul prix, avec musique live les soirs où la scène s'allume.",
   "$49 per guest.": "49 $ par personne.",
@@ -524,11 +525,11 @@ const FR = {
   "Come early": "Venez tôt",
   "Happy hour": "Happy hour",
   "first.": "d'abord.",
-  "The Table runs all evening on Thursday, and happy hour opens with it: dollar oysters, the cocktail of the week at half price and $5 bar rail drinks until six. Live music with dinner Friday and Saturday.":
-    "La Table est servie toute la soirée le jeudi, et le happy hour commence avec elle : huîtres à un dollar, cocktail de la semaine à moitié prix et alcools de base à 5 $ jusqu'à 18 h. Musique live avec le souper les vendredis et samedis.",
+  "The Table runs all evening on Thursday, and happy hour opens with it: dollar oysters, the cocktail of the week at half price and $5 house spirits until six. Live music with dinner every night we're open.":
+    "La Table est servie toute la soirée le jeudi, et le happy hour commence avec elle : huîtres à un dollar, cocktail de la semaine à moitié prix et alcools de la maison à 5 $ jusqu'à 18 h. Musique live avec le souper tous les soirs d'ouverture.",
   "What's on stage →": "Sur scène →",
-  "Sunday to Wednesday we open for ticketed shows and private events only.":
-    "Du dimanche au mercredi, nous ouvrons uniquement pour les spectacles sur billet et les événements privés.",
+  "Sunday to Wednesday we open for ticketed shows and private events. You can book a private event any day of the week.":
+    "Du dimanche au mercredi, nous ouvrons pour les spectacles sur billet et les événements privés. Vous pouvez réserver un événement privé n'importe quel jour de la semaine.",
   "book the room": "réserver la salle",
   ", or": ", ou",
   "Full details →": "Tous les détails →",
@@ -545,7 +546,7 @@ const FR = {
   "Live jazz dinner concert": "Souper-concert jazz",
   "With Woods & Gummeson.": "Avec Woods et Gummeson.",
   "Emil Khachaturian and Alex Zlotnik play Clapton and Di Meola on acoustic guitar and piano. Doors 6 PM, performance 6:30. General admission $35, with a three-course dinner $120; VIP booth $55, with dinner $140.": "Emil Khachaturian et Alex Zlotnik interprètent Clapton et Di Meola à la guitare acoustique et au piano. Portes 18 h, spectacle 18 h 30. Admission générale 35 $, avec souper trois services 120 $; banquette VIP 55 $, avec souper 140 $.",
-  "Private events · 2026": "Événements privés · 2026",
+  "Private events · any day of the week": "Événements privés · tous les jours de la semaine",
   "Live music, curated dining and the whole room to yourselves.": "Musique live, cuisine soignée et toute la salle rien que pour vous.",
   "It Starts With": "Tout Commence Par",
   "a Phone Call.": "un Appel.",
@@ -618,7 +619,8 @@ const FR = {
   "We're a short walk from Rogers Centre Ottawa, the Rideau Centre and the Market's principal hotels, which is why we see so many": "Nous sommes à quelques pas du Centre Rogers Ottawa, du Centre Rideau et des principaux hôtels du Marché, ce qui explique le nombre de",
   "holiday parties, client appreciation evenings, conference receptions, delegation dinners, product launches and milestone birthdays.": "partys des fêtes, soirées de reconnaissance client, réceptions de congrès, soupers de délégation, lancements de produits et anniversaires marquants.",
   "Menu, timing, run of show, music, staffing: your event lead carries all of it. Walk in, greet your people, enjoy the night. That's the whole point.": "Menu, horaire, déroulement, musique, personnel : votre responsable d'événement s'occupe de tout. Entrez, accueillez vos invités, profitez de la soirée. C'est tout l'intérêt.",
-  "No forms, nothing to figure out first. One easy conversation gets us aligned on your date, your people and what the night should feel like. Everything after that is ours to carry.": "Aucun formulaire, rien à démêler d'avance. Une conversation simple suffit à nous entendre sur votre date, vos invités et l'ambiance souhaitée. Tout le reste nous revient.",
+  "Any day of the week, including the days we are closed to the public. No forms, nothing to figure out first. One easy conversation gets us aligned on your date, your people and what the night should feel like. Everything after that is ours to carry.":
+    "N'importe quel jour de la semaine, y compris les jours où nous sommes fermés au public. Aucun formulaire, rien à démêler d'avance. Une conversation simple suffit à nous entendre sur votre date, vos invités et l'ambiance souhaitée. Tout le reste nous revient.",
   "Walk the room, hear the sound system, shape the evening around what you actually want. One clear estimate follows: packages, bar and any additions in a single total. A signed estimate and a deposit secure the date, and the deposit comes off your final bill.": "Visitez la salle, écoutez la sonorisation, façonnez la soirée selon vos envies. Une estimation claire suit : forfaits, bar et ajouts en un seul total. Une estimation signée et un dépôt confirment la date, et le dépôt est déduit de votre facture finale.",
   "btl 98": "bout. 98",
   "btl 100": "bout. 100",
@@ -629,21 +631,22 @@ const FR = {
   "btl 380": "bout. 380",
   "btl 750": "bout. 750",
   "Night by night": "Soir après soir",
-  "Live music needs no ticket, just a table. The nights marked in red are sold on Eventbrite.": "La musique live ne demande aucun billet, seulement une table. Les soirées en rouge sont vendues sur Eventbrite.",
+  "The nights marked in red are ticketed, sold on Eventbrite.": "Les soirs en rouge sont à billets, vendus sur Eventbrite.",
   "Ticketed": "À billets",
   "On Stage": "Sur Scène",
   "Reservations": "Réservations",
   "Signature cocktails": "Cocktails signature",
-  "Fri and Sat": "Ven. et sam.",
-  "Kitchen and bar, three nights a week. Live music Friday and Saturday, from 7 PM.": "Cuisine et bar, trois soirs par semaine. Musique live les vendredis et samedis, dès 19 h.",
+  "Thu to Sat": "Jeu. au sam.",
+  "Open three nights a week, Thursday to Saturday. Live music every night, free. Private events any day.":
+    "Ouvert trois soirs par semaine, du jeudi au samedi. Musique live tous les soirs, gratuite. Événements privés tous les jours.",
+  "Live music, always free": "Musique live, toujours gratuite",
   "Sets from Thursday, new pours and the odd secret. Come find us.": "Des spectacles dès le jeudi, de nouveaux services et quelques secrets. Venez nous trouver.",
-  "Friday and Saturday on the stage": "Les vendredis et samedis sur scène",
-  "Live, Friday and Saturday": "En direct, vendredi et samedi",
-  "Live music every Friday and Saturday during dinner service, free to anyone dining with us: no ticket, no cover, no list. Some Thursdays too, so check the calendar below for the dates. Sundays are ticketed concerts only, marked in red.":
-    "De la musique live tous les vendredis et samedis pendant le service du souper, gratuite pour toute personne qui soupe avec nous : sans billet, sans frais d'entrée, sans liste. Parfois aussi le jeudi : consultez le calendrier ci-dessous pour les dates. Le dimanche, uniquement des concerts à billets, en rouge.",
-  "Friday and Saturday from 7 PM, no cover. Some Thursdays too —":
-    "Les vendredis et samedis dès 19 h, sans frais d'entrée. Parfois aussi le jeudi —",
-  "see who is on the stage": "voyez qui est sur scène",
+  "Thursday to Saturday on the stage": "Du jeudi au samedi sur scène",
+  "Live, Thursday to Saturday": "En direct, du jeudi au samedi",
+  "Live music Thursday, Friday and Saturday, every night we are open. It is free: book a table and stay for the set. The only nights you need a ticket are the concerts marked in red.":
+    "De la musique live les jeudis, vendredis et samedis, tous les soirs où nous sommes ouverts. C'est gratuit : réservez une table et restez pour le spectacle. Les seuls soirs où il faut un billet sont les concerts en rouge.",
+  "Thursday to Saturday from 7 PM, and it is free.": "Du jeudi au samedi dès 19 h, et c'est gratuit.",
+  "See who is on the stage": "Voyez qui est sur scène",
   "Worth knowing": "Bon à savoir",
   "Two Ways to": "Deux Façons de",
   "Sit Down.": "S'attabler.",
@@ -665,14 +668,14 @@ const FR = {
   "oysters": "huîtres",
   "Half price": "Demi-prix",
   "cocktail of the week": "cocktail de la semaine",
-  "bar rail drinks": "alcools de base",
+  "house spirits": "alcools de la maison",
   "See the bar list": "Voir la carte du bar",
   "$1": "1 $",
   "$5": "5 $",
   "$49": "49 $",
   "$50": "50 $",
   "On offer": "Nos offres",
-  "Prix Fixe &": "Prix fixe &",
+  "The Table &": "La Table &",
   "Happy Hour.": "Happy Hour.",
 
   /* ---- privacy policy ---- */

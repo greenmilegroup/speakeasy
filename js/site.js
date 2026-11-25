@@ -62,7 +62,7 @@ const FINE = `<span>© 2022 Speakeasy Ottawa · ByWard Market · Please enjoy re
    of their own for search, while the header stays six items. */
 const MORE = [
   ['happy', 'happy-hour.html', 'Happy Hour'],
-  ['prix', 'prix-fixe.html', 'Prix Fixe'],
+  ['prix', 'prix-fixe.html', 'Three Courses'],
 ];
 
 const NAV = [
