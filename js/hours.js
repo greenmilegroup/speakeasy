@@ -29,7 +29,7 @@ export const SCHEDULE = {
   0: null,                                      // Sunday      ticketed shows and private bookings only
   1: null,                                      // Monday      private events only
   2: null,                                      // Tuesday     private events only
-  3: { open: 17 * 60, close: 23 * 60 },        // Wednesday   5 PM - 11 PM
+  3: null,                                      // Wednesday   closed for the winter
   4: { open: 17 * 60, close: 23 * 60 },        // Thursday    5 PM - 11 PM
   5: { open: 16 * 60, close: 25 * 60 },        // Friday      4 PM - 1 AM
   6: { open: 16 * 60, close: 25 * 60 },        // Saturday    4 PM - 1 AM
