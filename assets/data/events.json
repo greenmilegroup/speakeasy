@@ -853,5 +853,20 @@
     "ticket_url": "",
     "ticketed": false,
     "published": true
+  },
+  {
+    "id": "martin-leblanc-2026-12-03",
+    "title": "Martin Leblanc",
+    "kicker": "Saxophone",
+    "category": "music",
+    "blurb": "",
+    "starts_at": "2026-12-03T19:00:00-05:00",
+    "recurrence": "none",
+    "duration_min": 60,
+    "price_text": "No cover",
+    "image_url": "",
+    "ticket_url": "",
+    "ticketed": false,
+    "published": true
   }
 ]
